@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redesigned a £9B wealth management platform for UHNW clients — Chun-Chuan Lin</title>
+<meta name="description" content="As the founding designer, I shaped the initial design of a back-office platform supporting £9B in client assets. This case study highlights the redesign of portfolio management for providers and tax wrappers, improving data accessibility and advisor workflows.">
+<meta property="og:title" content="Redesigned a £9B wealth management platform for UHNW clients — Chun-Chuan Lin">
+<meta property="og:description" content="As the founding designer, I shaped the initial design of a back-office platform supporting £9B in client assets. This case study highlights the redesign of portfolio management for providers and tax wrappers, improving data accessibility and advisor workflows.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="../assets/img/YUZRlfmyi6MVquyru4w5qhSXo.png">
+<link rel="apple-touch-icon" href="../assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=3d849f9d">
+</head>
+<body class="cs-page locked">
+<script>try{if(localStorage.getItem("cc_portfolio_unlocked")==="1")document.currentScript.parentElement.classList.remove("locked")}catch(e){}</script>
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <h2 class="serif">This case study is private</h2>
+    <p>Enter the passcode to view it. Ask Chun if you don't have it.</p>
+    <form id="gate-form" autocomplete="off">
+      <input type="password" id="gate-input" placeholder="Passcode" autofocus>
+      <button type="submit">Unlock</button>
+    </form>
+    <p class="err" id="gate-err"></p>
+  </div>
+</div>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="../index.html">
+      <img src="../assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.png" alt="">
+      <span>Chun-Chuan&nbsp;Lin</span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">Menu</button>
+    <nav class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing" target="_blank" rel="noopener">CV</a>
+      <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
+    </nav>
+  </div>
+</header>
+
+<section class="cs-hero">
+  <div class="wrap">
+    <a class="back reveal" href="../index.html#work">&larr; All work</a>
+    <h1 class="serif split hero-title"><span class="w">Redesigned</span> <span class="w">a</span> <span class="w">£9B</span> <span class="w">wealth</span> <span class="w">management</span> <span class="w">platform</span> <span class="w">for</span> <span class="w">UHNW</span> <span class="w">clients</span></h1>
+    <p class="sub reveal">As the founding designer, I shaped the initial design of a back-office platform supporting £9B in client assets. This case study highlights the redesign of portfolio management for providers and tax wrappers, improving data accessibility and advisor workflows.</p>
+    <p class="meta reveal">Nov 2024 - Mar 2025 · Research, UX and UI design</p>
+  </div>
+</section>
+<div class="cs-hero-img reveal wipe"><img src="../assets/img/VFbImBTynQh7F0MmkZp4YDalEAE.png" alt=""></div>
+
+<div class="cs-body">
+  <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-overview-0">Overview</a></li><li><a href="#sec-research-1">Research</a></li><li><a href="#sec-ideation-2">Ideation</a></li><li><a href="#sec-design-iteration-3">Design &amp; Iteration</a></li><li><a href="#sec-user-feedback-4">User Feedback</a></li><li><a href="#sec-2nd-iteraction-feedback-5">2nd Iteraction &amp; Feedback</a></li><li><a href="#sec-3rd-iteraction-6">3rd Iteraction</a></li><li><a href="#sec-design-handover-7">Design handover</a></li><li><a href="#sec-retrospective-8">Retrospective</a></li></ol></nav></aside>
+  <div class="cs-content">
+    <section class="cs-section" id="sec-overview-0">
+  <span class="num">01</span>
+  <h2 class="divider serif split"><span class="w">Overview</span></h2>
+  <p class="lead reveal">Centralise client data, improve navigation, and enhance data accessibility for teams including advisers, analysts, and data specialists.</p>
+<h3 class="sub serif reveal">Background</h3>
+<p class="text reveal">At the time, client data was fragmented across the back-office system and Salesforce, with no centralised location to access key information. This created friction for advisers and analysts who needed to rely on complete and accurate data during client interactions.</p>
+<figure class="reveal wipe full"><img src="../assets/img/41qvNDDTqhN6MRv0aPLEbXUwcos.png" alt="" loading="lazy"></figure>
+<h3 class="sub serif reveal">Key problems</h3>
+<div class="cards  reveal"><div class="mini"><b>Inefficient workflows</b><span>Switching between platforms wastes time and disrupts conversations.</span></div><div class="mini"><b>Incomplete data</b><span>Missing information made it harder to provide high-quality advice.</span></div><div class="mini"><b>UX debts</b><span>Cluttered and unintuitive interface reduces confidence in daily use.</span></div></div>
+<figure class="reveal wipe full"><img src="../assets/img/gJquSMoHW4wAy35ATPg4y0zoMCo.png" alt="" loading="lazy"></figure>
+<h3 class="sub serif reveal">Solution</h3>
+<div class="cards  reveal"><div class="mini"><b>Unified platform</b><span>Centralise key tools and data to reduce context switching.</span></div><div class="mini"><b>Complete data access</b><span>Ensure all essential client data is accurate and up-to-date.</span></div><div class="mini"><b>Improved UI</b><span>Redesign interface to reduce friction and training time.</span></div></div>
+<figure class="reveal wipe full"><img src="../assets/img/KkYssaoKacSBN2MA8vaTQ5EvmJc.png" alt="" loading="lazy"></figure>
+<h3 class="sub serif reveal">Challenges</h3>
+<div class="cards c4 reveal"><div class="mini"><b>Balancing user needs</b><span>Designed for advisers, analysts, and operations staff with distinct workflows.</span></div><div class="mini"><b>Handling heavy data</b><span>Simplified access to large volumes of complex financial information.</span></div><div class="mini"><b>Simplifying interface</b><span>Reduced friction and training time by making the UI more intuitive.</span></div><div class="mini"><b>Parallel Projects</b><span>Balanced design work while supporting three other ongoing projects.</span></div></div>
+<h3 class="sub serif reveal">Outcomes</h3>
+<div class="cards  reveal"><div class="mini"><b>48% faster data access</b><span>Retrieval time dropped after centralising client data.</span></div><div class="mini"><b>36% fewer support tickets</b><span>Internal tickets related to data access decreased.</span></div><div class="mini"><b>29% higher user satisfaction</b><span>Users reported improved confidence and ease of use.</span></div></div>
+</section>
+<section class="cs-section" id="sec-research-1">
+  <span class="num">02</span>
+  <h2 class="divider serif split"><span class="w">Research</span></h2>
+  <p class="lead reveal">Interviews with advisers and analysts revealed inefficient workflows, incomplete data, and confusing interface.</p>
+<h3 class="sub serif reveal">1. Inefficient workflows</h3>
+<div class="persona reveal">
+        <img src="../assets/img/xbWA6GLHlplIZSE9mHFiUOTgXk.jpeg" alt="">
+        <div>
+          <p class="q serif">&ldquo;Key information such as marital status, age, income, and pension details is dispersed across systems like Back Office ALM and Salesforce, making it hard to access.&rdquo;</p>
+          <p class="pain">Financial adviser</p>
+        </div>
+        
+      </div>
+<h3 class="sub serif reveal">Incomplete data</h3>
+<div class="persona reveal">
+        <img src="../assets/img/ak6MuvRznlp0ljN7fPP2cwxYnPQ.jpeg" alt="">
+        <div>
+          <p class="q serif">&ldquo;The current system does not record the origin of transferred funds, complicating the calculation of annual allowances. Advisers frequently sift through old reports and files to find historical data, a process that is both time-consuming and inefficient.&rdquo;</p>
+          <p class="pain">Senior pension adviser</p>
+        </div>
+        
+      </div>
+<h3 class="sub serif reveal">UX debts</h3>
+<div class="persona reveal">
+        <img src="../assets/img/iPe9kl8FOdWc59YDmYCOAvEuo.png" alt="">
+        <div>
+          <p class="q serif">&ldquo;The interface felt cluttered and confusing. Portfolio and account values are in the same row, indicators aren’t clear, and I have to scroll just to see details across different accounts.&rdquo;</p>
+          <p class="pain">Financial analysts</p>
+        </div>
+        
+      </div>
+</section>
+<section class="cs-section" id="sec-ideation-2">
+  <span class="num">03</span>
+  <h2 class="divider serif split"><span class="w">Ideation</span></h2>
+  <p class="lead reveal">Identify and audit missing or incomplete data in the Back Office</p>
+<ul class="bullets reveal"><li>Interview advisers and analysts to identify the key data they rely on for quality advice.</li><li>Map required data vs. current back office data to highlight missing pieces.</li><li>Ask them to rate data importance to help us prioritise what to add now vs. later.</li></ul>
+<figure class="reveal wipe full"><img src="../assets/img/8sIJl0AQ1Ksg1ivK4Fwcpe1jGnY.png" alt="" loading="lazy"></figure>
+<p class="lead reveal">Prioritise and categorise the data based on both data team and adviser needs, as well as its impact on the advice process.</p>
+<ul class="bullets reveal"><li>Collaborate with advisers and the data team to rank and group data by importance and usability.</li><li>Focus on data that directly influences advice quality, ensuring alignment between technical feasibility and business value.</li></ul>
+<figure class="reveal wipe full"><img src="../assets/img/vXNdKM6eBpvXa0YaFXvg1YMGxg.png" alt="" loading="lazy"></figure>
+</section>
+<section class="cs-section" id="sec-design-iteration-3">
+  <span class="num">04</span>
+  <h2 class="divider serif split"><span class="w">Design</span> <span class="w">&amp;</span> <span class="w">Iteration</span></h2>
+  <p class="lead reveal">Translate data requirements into low-fidelity wireframes and test rapidly</p>
+<ul class="bullets reveal"><li>Translated prioritised data into low-fidelity wireframes.</li><li>Proposed new navigation supporting multiple accounts and providers.</li><li>Rapid feedback loops validated structure and clarity.</li></ul>
+<div class="figrow two full reveal wipe"><img src="../assets/img/ROC5QMwbBXOPzGS2CIk9ZJiyCo.png" alt="" loading="lazy"><img src="../assets/img/hPafZDrCFMu69QGhoEU8Yi7l2Is.png" alt="" loading="lazy"></div>
+</section>
+<section class="cs-section" id="sec-user-feedback-4">
+  <span class="num">05</span>
+  <h2 class="divider serif split"><span class="w">User</span> <span class="w">Feedback</span></h2>
+  <p class="lead reveal">Validate designs through feedback</p>
+<ul class="bullets reveal"><li>Does the data grouping make sense?</li><li>Is anything missing?</li><li>Is the navigation clear and intuitive?</li></ul>
+<figure class="reveal wipe full"><img src="../assets/img/LeqjPSiKjamwYm857cG9jOPqQg.png" alt="" loading="lazy"></figure>
+<p class="eyebrow reveal" style="margin:34px 0 0">Key insight 1</p>
+        <p class="lead reveal">Different tax wrappers require distinct datasets</p>
+        <p class="text reveal">With variations even within ISAs that need to be accounted for.</p>
+        <figure class="reveal full"><img src="../assets/img/SuY1kFZfquXHGNEILWycXrooKE.png" alt="" loading="lazy"></figure>
+<p class="eyebrow reveal" style="margin:34px 0 0">Key insight 2</p>
+        <p class="lead reveal">Dialog-style navigation is not optimal</p>
+        <p class="text reveal">As users often need to switch between multiple accounts under different providers.</p>
+        <figure class="reveal full"><img src="../assets/img/1EzJGKmoUnSG45p00RdJQhZjQCY.png" alt="" loading="lazy"></figure>
+<p class="eyebrow reveal" style="margin:34px 0 0">Key insight 3</p>
+        <p class="lead reveal">Most portfolios contain 1–2 accounts</p>
+        <p class="text reveal">But in edge cases may include up to 10. Design must optimise space efficiency across both scenarios.</p>
+        <figure class="reveal full"><img src="../assets/img/WarQw4TZUkBVeojmkJWvvAZ7p0s.png" alt="" loading="lazy"></figure>
+</section>
+<section class="cs-section" id="sec-2nd-iteraction-feedback-5">
+  <span class="num">06</span>
+  <h2 class="divider serif split"><span class="w">2nd</span> <span class="w">Iteraction</span> <span class="w">&amp;</span> <span class="w">Feedback</span></h2>
+  <p class="lead reveal">Map datasets for each tax wrapper, highlighting key differences.</p>
+<div class="figrow three full reveal"><figure style="margin:0"><img src="../assets/img/rqL4vqMHjhovWmhoBnGo7UmvUTc.png" alt="Lifetime Cash ISA" loading="lazy"><figcaption>Lifetime Cash ISA</figcaption></figure><figure style="margin:0"><img src="../assets/img/uxicYvlz5eG02fTYJhcZXzLs3rU.png" alt="Lifetime Stocks &amp; Shares ISA" loading="lazy"><figcaption>Lifetime Stocks &amp; Shares ISA</figcaption></figure><figure style="margin:0"><img src="../assets/img/qjF1RKGuy18STXa75rdKqH4jF8.png" alt="Junior Cash ISA" loading="lazy"><figcaption>Junior Cash ISA</figcaption></figure><figure style="margin:0"><img src="../assets/img/mxK24LCHfwwwPhMJ0t0p6rLvT4.png" alt="Junior Stocks &amp; Shares ISA" loading="lazy"><figcaption>Junior Stocks &amp; Shares ISA</figcaption></figure><figure style="margin:0"><img src="../assets/img/KXALU5QgmfApTtrjM0X2iIgWnRs.png" alt="Cash ISA" loading="lazy"><figcaption>Cash ISA</figcaption></figure><figure style="margin:0"><img src="../assets/img/JkErgewY3LQKb3NlDE3egzobMk.png" alt="Stocks and Shares ISA" loading="lazy"><figcaption>Stocks and Shares ISA</figcaption></figure><figure style="margin:0"><img src="../assets/img/1JV3YmCcPQgAp17E26wLMHLBqg.png" alt="AIM Inheritance Tax ISA" loading="lazy"><figcaption>AIM Inheritance Tax ISA</figcaption></figure></div>
+<p class="lead reveal">Explore 5 alternative navigation options.</p>
+<p class="text reveal">Listing pros and cons.</p>
+<div class="figrow two full reveal wipe"><img src="../assets/img/PHzEznLUnFlyIPwV3e00K0i2ch4.png" alt="" loading="lazy"><img src="../assets/img/E9EocM3YTQMo1DBr4PTLxw8vzQ.png" alt="" loading="lazy"></div>
+<p class="lead reveal">Develop a prototype to test the navigation idea</p>
+<figure class="reveal full">
+          <video src="../assets/video/lVOcdGhr7MmVkcMMa3Co0xegCE.mp4" autoplay muted loop playsinline preload="metadata" poster="../assets/img/poster-lVOcdGhr7MmVkcMMa3Co0xegCE.jpg"></video>
+          
+        </figure>
+<h3 class="sub serif reveal">User Feedback Highlights</h3><p class="lead reveal">The new navigation is intuitive, and portfolios can now be grouped by tax wrapper and new categories.</p>
+<div class="persona reveal">
+          <img src="../assets/img/iPe9kl8FOdWc59YDmYCOAvEuo.png" alt="">
+          <div><p class="q serif">&ldquo;The new navigation is intuitive. Unlike before, where all details were cramped into a single view, I no longer need to scroll up and down to find accounts. I can see all portfolios on the left and view all details on the right.&rdquo;</p><p class="pain">Financial analysts</p></div>
+        </div>
+<div class="persona reveal">
+          <img src="../assets/img/xbWA6GLHlplIZSE9mHFiUOTgXk.jpeg" alt="">
+          <div><p class="q serif">&ldquo;Portfolios could be grouped by tax wrapper and our new categories. Currently, organising by providers only makes it hard to get an overview.&rdquo;</p><p class="pain">Financial adviser</p></div>
+        </div>
+</section>
+<section class="cs-section" id="sec-3rd-iteraction-6">
+  <span class="num">07</span>
+  <h2 class="divider serif split"><span class="w">3rd</span> <span class="w">Iteraction</span></h2>
+  <h3 class="sub serif reveal">Changes</h3>
+<div class="cards  reveal"><div class="mini"><b>Accessibility</b><span>Grouping portfolios by tax wrapper surfaced ISA allowances upfront, giving users quicker access to critical information for decision-making.</span></div><div class="mini"><b>Visualisation</b><span>Visualised allowances so users can understand them at a glance.</span></div><div class="mini"><b>Data quality level</b><span>Building this feature added significant complexity, so we decided to postpone it for the initial release.</span></div></div>
+<div class="compare full reveal">
+        <figure><img src="../assets/img/j1LbeMYvs0SkNOtbjXyfj9832g.png" alt="" loading="lazy"><figcaption>2nd iteration</figcaption></figure>
+        <figure><img src="../assets/img/Y1c05iJdUemjBqh1rFT7xkekg.png" alt="" loading="lazy"><figcaption>New</figcaption></figure>
+      </div>
+</section>
+<section class="cs-section" id="sec-design-handover-7">
+  <span class="num">08</span>
+  <h2 class="divider serif split"><span class="w">Design</span> <span class="w">handover</span></h2>
+  <h3 class="sub serif reveal">Final design</h3>
+<p class="lead reveal">Well-prepared documentation</p>
+<ul class="bullets reveal"><li>Structured designs with titled sections and screen-level rules.</li><li>Documented edge cases and logic for consistent implementation.</li></ul>
+<div class="figrow three full reveal wipe"><img src="../assets/img/CBIlkAbYUAG9r1k2xdROrEg9LHg.png" alt="" loading="lazy"><img src="../assets/img/r7OKF8sbj2zSdi2bmobp6s1NwZU.png" alt="" loading="lazy"><img src="../assets/img/vrJiV4xg9LDlt9Qzv4THwBhks.png" alt="" loading="lazy"></div>
+</section>
+<section class="cs-section" id="sec-retrospective-8">
+  <span class="num">09</span>
+  <h2 class="divider serif split"><span class="w">Retrospective</span></h2>
+  <h3 class="sub serif reveal">What went well</h3><p class="lead reveal">Unified workflows across user types, streamlined data access, and built a scalable foundation for future enhancements.</p>
+        <ul class="bullets reveal"><li>Successfully unified workflows for multiple user types.</li><li>Improved data visibility and navigation, reducing friction and support tickets.</li><li>Delivered a scalable foundation for future features.</li></ul>
+<h3 class="sub serif reveal">Lessons learned</h3><p class="lead reveal">Early alignment with the data team, rapid user testing, and prioritised trade-offs ensured efficient validation and an MVP-focused delivery.</p>
+        <ul class="bullets reveal"><li>Early alignment with the data and advice team is critical when handling heavy and complex datasets.</li><li>Iterative testing with real users accelerates validation and reduces rework.</li><li>Trade-offs (like postponing the data quality level) are necessary for MVP focus.</li></ul>
+<h3 class="sub serif reveal">Impact</h3><p class="lead reveal">Faster access to accurate client data, reduced training time, and a foundation for future UHNW management enhancements.</p>
+        <ul class="bullets reveal"><li>Advisers and analysts can now access accurate client data faster.</li><li>Reduced training time and increased confidence in system use.</li><li>Created a design foundation for further enhancements to support UHNW client management.</li></ul>
+</section>
+  </div>
+</div>
+
+<section class="cs-next">
+  <div class="wrap">
+    <p class="eyebrow">Keep exploring</p>
+    <div class="cs-next-grid">
+      <a class="cs-next-card" href="trip-memories.html">
+        <img class="thumb" src="../assets/img/TrorWvIDo5zv1eS2h04sgSZOtJ8.png" alt="" loading="lazy">
+        <span class="txt">
+          <span class="dir">&larr; Previous</span>
+          <h3 class="serif">Revolut home redesign concept</h3>
+        </span>
+      </a>
+      <a class="cs-next-card next" href="home-redesign.html">
+        <span class="txt">
+          <span class="dir">Next &rarr;</span>
+          <h3 class="serif">Improved mobile app CSAT to 89%</h3>
+        </span>
+        <img class="thumb" src="../assets/img/YumomZDwZKkCPeDbRDVu0XXveg.png" alt="" loading="lazy">
+      </a>
+    </div>
+  </div>
+</section>
+<footer class="foot" id="contact">
+  <div class="foot-in">
+    <h2 class="serif reveal">Let&rsquo;s make something clear.</h2>
+    <a class="mail reveal" href="mailto:designlcc@gmail.com">designlcc@gmail.com</a>
+    <div class="row">
+      <span>&copy; 2026 Chun-Chuan Lin — London</span>
+      <span class="socials">
+        <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
+        <a href="https://www.behance.net/designlcc" target="_blank" rel="noopener">Behance</a>
+        <a href="https://adplist.org/mentors/chun-chuan-lin" target="_blank" rel="noopener">ADPList</a>
+      </span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=0575bfc8" defer></script>
+</body>
+</html>

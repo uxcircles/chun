@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redesigning how high-net-worth clients understand their wealth — Chun-Chuan Lin</title>
+<meta name="description" content="A two-phase product transformation — rebuilding the investment data foundation (v1.0), and then shaping a clearer, more intuitive wealth overview experience (v2.0).">
+<meta property="og:title" content="Redesigning how high-net-worth clients understand their wealth — Chun-Chuan Lin">
+<meta property="og:description" content="A two-phase product transformation — rebuilding the investment data foundation (v1.0), and then shaping a clearer, more intuitive wealth overview experience (v2.0).">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="../assets/img/YUZRlfmyi6MVquyru4w5qhSXo.png">
+<link rel="apple-touch-icon" href="../assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=3d849f9d">
+</head>
+<body class="cs-page locked">
+<script>try{if(localStorage.getItem("cc_portfolio_unlocked")==="1")document.currentScript.parentElement.classList.remove("locked")}catch(e){}</script>
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <h2 class="serif">This case study is private</h2>
+    <p>Enter the passcode to view it. Ask Chun if you don't have it.</p>
+    <form id="gate-form" autocomplete="off">
+      <input type="password" id="gate-input" placeholder="Passcode" autofocus>
+      <button type="submit">Unlock</button>
+    </form>
+    <p class="err" id="gate-err"></p>
+  </div>
+</div>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="../index.html">
+      <img src="../assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.png" alt="">
+      <span>Chun-Chuan&nbsp;Lin</span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">Menu</button>
+    <nav class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing" target="_blank" rel="noopener">CV</a>
+      <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
+    </nav>
+  </div>
+</header>
+
+<section class="cs-hero">
+  <div class="wrap">
+    <a class="back reveal" href="../index.html#work">&larr; All work</a>
+    <h1 class="serif split hero-title"><span class="w">Redesigning</span> <span class="w">how</span> <span class="w">high-net-worth</span> <span class="w">clients</span> <span class="w">understand</span> <span class="w">their</span> <span class="w">wealth</span></h1>
+    <p class="sub reveal">A two-phase product transformation — rebuilding the investment data foundation (v1.0), and then shaping a clearer, more intuitive wealth overview experience (v2.0).</p>
+    <p class="meta reveal">Dec 2024 - Jun 2025 · UX and UI design</p>
+  </div>
+</section>
+<div class="cs-hero-img reveal wipe"><img src="../assets/img/YumomZDwZKkCPeDbRDVu0XXveg.png" alt=""></div>
+
+<div class="cs-body">
+  <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-overview-0">Overview</a></li><li><a href="#sec-fixing-the-foundation-v1-0-1">Fixing the foundation (v1.0)</a></li><li><a href="#sec-correctness-doesn-t-equal-clarity-2">Correctness doesn’t equal clarity</a></li><li><a href="#sec-new-problems-emerging-v2-0-3">New problems emerging (v2.0)</a></li><li><a href="#sec-reflection-4">Reflection</a></li></ol></nav></aside>
+  <div class="cs-content">
+    <section class="cs-section" id="sec-overview-0">
+  <span class="num">01</span>
+  <h2 class="divider serif split"><span class="w">Overview</span></h2>
+  <h3 class="sub serif reveal">Context &amp; Goal</h3>
+<p class="text reveal">High-net-worth clients manage complex, multi-provider and multi-currency portfolios.</p><p class="text reveal">Yet their most fundamental question remained unanswered:</p><p class="text reveal">“What happened to my money?”</p><p class="text reveal">The existing experience showed provider-level performance, inconsistent metrics, and fragmented screens — resulting in confusion, low confidence, and increased advisor dependency.</p><p class="text reveal">Our goal was to create a clear, trustworthy, and unified view of wealth that clients could understand instantly.</p>
+<figure class="reveal wipe full"><img src="../assets/img/2dBmOSROk3Z3aBf2vwUGu5itc7w.jpeg" alt="" loading="lazy"></figure>
+</section>
+<section class="cs-section" id="sec-fixing-the-foundation-v1-0-1">
+  <span class="num">02</span>
+  <h2 class="divider serif split"><span class="w">Fixing</span> <span class="w">the</span> <span class="w">foundation</span> <span class="w">(v1.0)</span></h2>
+  <p class="lead reveal">Before improving the interface, we needed to repair the structure beneath it.</p>
+<h3 class="sub serif reveal">Key problems</h3>
+<div class="cards  reveal"><div class="mini"><b>Client confusion</b><span>Clients saw TWRR and provider performance, not their own true gain/loss.</span></div><div class="mini"><b>No wrapper structure</b><span>ISA / GIA / Pension were scattered across providers with no way to group or compare.</span></div><div class="mini"><b>Fragmented experience</b><span>Provider, account, and portfolio screens used different layouts, fields, and terminology.</span></div></div>
+<h3 class="sub serif reveal">Solution</h3>
+<div class="cards  reveal"><div class="mini"><b>Added client-relevant performance fields</b><span>Kept TWRR for comparability, but supplemented it with clearer GBP gain/loss and consistent field placement.</span></div><div class="mini"><b>Introduced wrapper IA</b><span>Rebuilt the investment hierarchy to group assets by tax wrapper.</span></div><div class="mini"><b>Standardised investment screens</b><span>Rebuilt provider/account/portfolio structures into a consistent, navigable, scalable system.</span></div></div>
+<h3 class="sub serif reveal">Information architecture</h3>
+<p class="text reveal">Rebuilt the information architecture to reduce fragmentation, establish clear mental models, and support long-term scalability.</p>
+<ul class="bullets reveal"><li>Reduced duplicated categories</li><li>Clarified hierarchy between assets, accounts, and providers</li><li>Enabled future product extensions without rework</li></ul>
+<figure class="reveal wipe full"><img src="../assets/img/ouFqGNS2Ug3KwPfHczMVg9Qrlj8.png" alt="" loading="lazy"></figure>
+<h3 class="sub serif reveal">Design workshop</h3>
+<p class="text reveal">Facilitated a cross-functional workshop with PMs and engineers to align on the problem space, surface constraints early, and de-risk key design decisions.</p>
+<ul class="bullets reveal"><li>Shared understanding across Product, Design, and Engineering</li><li>A scalable foundation for future features</li></ul>
+<figure class="reveal wipe full"><img src="../assets/img/l7n7Mk4DEIDBMht1tqrI6bZDDs.png" alt="" loading="lazy"></figure>
+<h3 class="sub serif reveal">Key features</h3>
+<ul class="bullets reveal"><li>Clear gain &amp; loss visibility across portfolios</li><li>Simplified investment account views for faster understanding</li><li>Consistent, scalable layout system supporting future growth</li></ul>
+<div class="figrow three full reveal wipe"><img src="../assets/img/N6bwg80y1yeCog7oOv1LCOVYQ.png" alt="" loading="lazy"><img src="../assets/img/JgabIRiNqHKhVhZZM9cTGVEI4.png" alt="" loading="lazy"><img src="../assets/img/SwRqaQ1KukqKN2cjEryywUXJ51g.png" alt="" loading="lazy"></div>
+<h3 class="sub serif reveal">Before vs After</h3>
+<div class="compare full reveal">
+        <figure><img src="../assets/img/htTSkfoW08TYnGUJJPIMx4p26g.png" alt="" loading="lazy"><figcaption>Before</figcaption></figure>
+        <figure><img src="../assets/img/wrKUTFnC6Fl085DYzNqkKHXtCw.png" alt="" loading="lazy"><figcaption>After</figcaption></figure>
+      </div>
+<h3 class="sub serif reveal">Outcomes</h3>
+<div class="cards  reveal"><div class="mini"><b>Clearer returns</b><span>Clients finally saw both professional metrics and their own personal gain/loss.</span></div><div class="mini"><b>Wrapper clarity</b><span>ISA / GIA / Pension became easy to view, compare, and understand across the entire investment structure.</span></div><div class="mini"><b>Predictable experience</b><span>Consistent screen layouts reduced cognitive load and made navigation more intuitive.</span></div></div>
+<h3 class="sub serif reveal">Onboarding to introduce the redesigned investment model</h3>
+<p class="text reveal">To support the new investment foundation in v1.0, we designed a short onboarding sequence that makes the new structure easy to understand. It explains:</p>
+<ul class="bullets reveal"><li>How we gather and consolidate client data</li><li>How investment accounts are structured</li><li>How insights can be navigated across the new hierarchy</li><li>How messaging and advice approval work</li></ul><p class="after-note reveal">Turning a complex foundation into a simple, intuitive first impression.</p>
+<figure class="reveal full portrait">
+          <video src="../assets/video/QoC70fN2ITOW1Hv1pkexNubY8.mp4" autoplay muted loop playsinline preload="metadata" poster="../assets/img/poster-QoC70fN2ITOW1Hv1pkexNubY8.jpg"></video>
+          
+        </figure>
+</section>
+<section class="cs-section" id="sec-correctness-doesn-t-equal-clarity-2">
+  <span class="num">03</span>
+  <h2 class="divider serif split"><span class="w">Correctness</span> <span class="w">doesn’t</span> <span class="w">equal</span> <span class="w">clarity</span></h2>
+  <p class="lead reveal">Fixing the investment foundation solved the inconsistency problem, but clients still couldn’t understand the story of their wealth from the Home screen. This led us to Phase 2.</p>
+</section>
+<section class="cs-section" id="sec-new-problems-emerging-v2-0-3">
+  <span class="num">04</span>
+  <h2 class="divider serif split"><span class="w">New</span> <span class="w">problems</span> <span class="w">emerging</span> <span class="w">(v2.0)</span></h2>
+  <h3 class="sub serif reveal">Why the Home screen still wasn’t useful</h3>
+<p class="text reveal">Usage data revealed a new reality:</p>
+<ul class="bullets reveal"><li>77% of users only tapped Financial Assets or Asset List</li><li>The Home screen served almost no financial purpose</li><li>Clients couldn’t see how their net worth had changed over time</li><li>Navigation across providers and portfolios remained slow</li></ul><p class="after-note reveal">Even with better investment screens, clients still lacked a clear, top-level storyline about their wealth.</p>
+<h3 class="sub serif reveal">Strategy (v2.0)</h3>
+<p class="lead reveal">Reframing the Home screen as a wealth narrative</p>
+<p class="text reveal">We shifted the Home screen from a passive entry point to a top-level narrative layer that helps clients immediately understand:</p>
+<div class="cards  reveal"><div class="mini"><b>Where they are</b><span>A clear picture of net-worth and performance at a glance.</span></div><div class="mini"><b>What changed</b><span>Surfacing drivers that meaningfully impact wealth.</span></div><div class="mini"><b>Where to go next</b><span>Reducing friction across providers, account types, and portfolios.</span></div></div>
+<h3 class="sub serif reveal">Execution (v2.0)</h3>
+<p class="lead reveal">Turning strategy into a clear wealth overview</p>
+<div class="cards c4 reveal"><div class="mini"><b>Net-worth &amp; PNL chart</b><span>Scrubbable chart showing Balance + PNL across timeframes.</span></div><div class="mini"><b>Asset-class navigation</b><span>Top-level visibility into how wealth is structured.</span></div><div class="mini"><b>Insight modules</b><span>Cash efficiency, risk, exposures, helping clients understand key drivers of their financial position.</span></div><div class="mini"><b>Faster switching</b><span>Improved navigation pathways across providers, account types and portfolios.</span></div></div>
+<figure class="reveal wipe full"><img src="../assets/img/KkOXb7yQ9gE6YXlJ8QljwOd7hcc.png" alt="" loading="lazy"><figcaption>A redesigned Home screen that surfaces net-worth trends, wealth structure, and key financial insights—all in one glance.</figcaption></figure>
+<figure class="reveal wipe full"><img src="../assets/img/ADnPhoEXa4UKg2kojTlDhC1L8.png" alt="" loading="lazy"><figcaption>Redesigned navigation so clients can move across providers, account types, and portfolios instantly, keeping context without jumping layers.</figcaption></figure>
+<h3 class="sub serif reveal" style="font-size:1.1rem">UI Deliverables</h3>
+<h3 class="sub serif reveal">Outcomes</h3>
+<div class="cards  reveal"><div class="mini"><b>Clearer understanding</b><span>Clients could finally reconcile numbers and understand what happened to their money.</span></div><div class="mini"><b>Lower cognitive load</b><span>Reduced drill-down and fewer steps to key insights.</span></div><div class="mini"><b>Raising mobile CSAT to 89%</b><span>Clients felt the app finally reflected their financial reality — boosting trust and confidence.</span></div></div>
+<figure class="reveal wipe full"><img src="../assets/img/nKhuXTx0vsakrVxw3aEHla0uITQ.png" alt="" loading="lazy"></figure>
+</section>
+<section class="cs-section" id="sec-reflection-4">
+  <span class="num">05</span>
+  <h2 class="divider serif split"><span class="w">Reflection</span></h2>
+  <h3 class="sub serif reveal">What this two-phase evolution taught me</h3>
+<ul class="bullets reveal"><li>Complex financial products require a shared language before any UI can succeed.</li><li>A great Home screen is not decorative; it is the narrative of the user’s financial life.</li><li>Long-term product design is layered: from foundation, clarity, experience to trust.</li><li>The most impactful improvements were structural, not cosmetic.</li></ul>
+<p class="lead reveal">We didn’t redesign a screen. We redesigned how wealth is understood.</p>
+</section>
+  </div>
+</div>
+
+<section class="cs-next">
+  <div class="wrap">
+    <p class="eyebrow">Keep exploring</p>
+    <div class="cs-next-grid">
+      <a class="cs-next-card" href="provider-redesign.html">
+        <img class="thumb" src="../assets/img/VFbImBTynQh7F0MmkZp4YDalEAE.png" alt="" loading="lazy">
+        <span class="txt">
+          <span class="dir">&larr; Previous</span>
+          <h3 class="serif">Redesigned a £9B platform for UHNW clients</h3>
+        </span>
+      </a>
+      <a class="cs-next-card next" href="client-portal.html">
+        <span class="txt">
+          <span class="dir">Next &rarr;</span>
+          <h3 class="serif">Simplified onboarding via a client portal</h3>
+        </span>
+        <img class="thumb" src="../assets/img/cqkEi4mZ536VQZQC6X23w6QmEs.png" alt="" loading="lazy">
+      </a>
+    </div>
+  </div>
+</section>
+<footer class="foot" id="contact">
+  <div class="foot-in">
+    <h2 class="serif reveal">Let&rsquo;s make something clear.</h2>
+    <a class="mail reveal" href="mailto:designlcc@gmail.com">designlcc@gmail.com</a>
+    <div class="row">
+      <span>&copy; 2026 Chun-Chuan Lin — London</span>
+      <span class="socials">
+        <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
+        <a href="https://www.behance.net/designlcc" target="_blank" rel="noopener">Behance</a>
+        <a href="https://adplist.org/mentors/chun-chuan-lin" target="_blank" rel="noopener">ADPList</a>
+      </span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=0575bfc8" defer></script>
+</body>
+</html>

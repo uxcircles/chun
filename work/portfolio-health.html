@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From portfolio data to actionable insight: a portfolio health concept for a regulated investment app — Chun-Chuan Lin</title>
+<meta name="description" content="Helping financially inexperienced users understand diversification and concentration risk — without giving financial advice.">
+<meta property="og:title" content="From portfolio data to actionable insight: a portfolio health concept for a regulated investment app — Chun-Chuan Lin">
+<meta property="og:description" content="Helping financially inexperienced users understand diversification and concentration risk — without giving financial advice.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="../assets/img/YUZRlfmyi6MVquyru4w5qhSXo.png">
+<link rel="apple-touch-icon" href="../assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=3d849f9d">
+</head>
+<body class="cs-page locked">
+<script>try{if(localStorage.getItem("cc_portfolio_unlocked")==="1")document.currentScript.parentElement.classList.remove("locked")}catch(e){}</script>
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <h2 class="serif">This case study is private</h2>
+    <p>Enter the passcode to view it. Ask Chun if you don't have it.</p>
+    <form id="gate-form" autocomplete="off">
+      <input type="password" id="gate-input" placeholder="Passcode" autofocus>
+      <button type="submit">Unlock</button>
+    </form>
+    <p class="err" id="gate-err"></p>
+  </div>
+</div>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="../index.html">
+      <img src="../assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.png" alt="">
+      <span>Chun-Chuan&nbsp;Lin</span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">Menu</button>
+    <nav class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing" target="_blank" rel="noopener">CV</a>
+      <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
+    </nav>
+  </div>
+</header>
+
+<section class="cs-hero">
+  <div class="wrap">
+    <a class="back reveal" href="../index.html#work">&larr; All work</a>
+    <h1 class="serif split hero-title"><span class="w">From</span> <span class="w">portfolio</span> <span class="w">data</span> <span class="w">to</span> <span class="w">actionable</span> <span class="w">insight:</span> <span class="w">a</span> <span class="w">portfolio</span> <span class="w">health</span> <span class="w">concept</span> <span class="w">for</span> <span class="w">a</span> <span class="w">regulated</span> <span class="w">investment</span> <span class="w">app</span></h1>
+    <p class="sub reveal">Helping financially inexperienced users understand diversification and concentration risk — without giving financial advice.</p>
+    <p class="meta reveal">Dec 2025 · UX and UI design</p>
+  </div>
+</section>
+<div class="cs-hero-img reveal wipe"><img src="../assets/img/9iO2ZGM4p4TnNoXjsiRvFTovY58.png" alt=""></div>
+
+<div class="cs-body">
+  <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-overview-0">Overview</a></li><li><a href="#sec-framing-1">Framing</a></li><li><a href="#sec-concept-a-holistic-unified-portfolio-vie-2">Concept A — Holistic, unified portfolio view</a></li><li><a href="#sec-concept-b-embedded-portfolio-health-chos-3">Concept B — Embedded portfolio health (chosen)</a></li><li><a href="#sec-reflection-4">Reflection</a></li></ol></nav></aside>
+  <div class="cs-content">
+    <section class="cs-section" id="sec-overview-0">
+  <span class="num">01</span>
+  <h2 class="divider serif split"><span class="w">Overview</span></h2>
+  <h3 class="sub serif reveal">Context</h3>
+<p class="text reveal">As a frequent user of Trading 212, I noticed that while the app provides a lot of data, it doesn’t always help users understand how healthy their portfolio is or what to do next.</p>
+<p class="text reveal">This was a self-initiated design exercise exploring how a self-directed trading app could help users understand portfolio risk without providing financial advice.</p>
+<div class="figrow three full reveal wipe"><img src="../assets/img/mzKL3LttJmvt4tpXNNeyCceodTw.png" alt="" loading="lazy"><img src="../assets/img/D53IdaKE8FNHLqwEcfWCI1I.png" alt="" loading="lazy"><img src="../assets/img/7BGOdlhBDiWTemVSeFkKF7PszM.png" alt="" loading="lazy"></div>
+</section>
+<section class="cs-section" id="sec-framing-1">
+  <span class="num">02</span>
+  <h2 class="divider serif split"><span class="w">Framing</span></h2>
+  <h3 class="sub serif reveal">Key problems</h3>
+<div class="cards  reveal"><div class="mini"><b>Portfolio health isn’t obvious</b><span>Performance metrics don’t reveal true gains, losses, or overall health.</span></div><div class="mini"><b>Risk lacks visibility</b><span>Abstract numbers hide concentration and real exposure.</span></div><div class="mini"><b>Action signals are unclear</b><span>Fragmented views make it hard to know whether to act or wait.</span></div></div>
+<h3 class="sub serif reveal">Hypotheses</h3>
+<ul class="bullets reveal"><li>If users understand risk concentration, they will trade less reactively</li><li>If the system shows status instead of raw metrics, users feel more confident</li></ul>
+<h3 class="sub serif reveal">Design Principles</h3>
+<ul class="bullets reveal"><li>Non-advisory by default</li><li>Explain before act</li><li>Relative signals, not absolute judgement</li><li>User remains in control</li></ul>
+<h3 class="sub serif reveal">Defining success upfront</h3>
+<div class="cards  reveal"><div class="mini"><b>User outcomes</b><span>Clear understanding · Confidence without pressure · Action clarity</span></div><div class="mini"><b>Product success metrics</b><span>Adoption &amp; awareness · Behaviour change · Long-term outcome</span></div><div class="mini"><b>Business impact</b><span>Improved AUM quality · Higher retention · Sustainable revenue growth</span></div></div>
+<h3 class="sub serif reveal">Solution</h3>
+<div class="cards  reveal"><div class="mini"><b>A single, opinionated portfolio health view</b><span>Aggregates performance, risk, and allocation into a clear health status — not just charts.</span></div><div class="mini"><b>Risk framed through exposure, not raw percentages</b><span>Visualises concentration and downside impact so users understand what they’re actually exposed to — and why it matters.</span></div><div class="mini"><b>Clear signals with explicit “do nothing” as a valid outcome</b><span>Provides consistent cues that clarify when action is needed — and when staying put is the right choice.</span></div></div>
+<figure class="reveal wipe full"><img src="../assets/img/kkgpjstoJwF0HPEXEFd0HPTDRT0.png" alt="" loading="lazy"></figure>
+<p class="text reveal">Explored the information architecture and layouts to make it consistent and scalable.</p>
+</section>
+<section class="cs-section" id="sec-concept-a-holistic-unified-portfolio-vie-2">
+  <span class="num">03</span>
+  <h2 class="divider serif split"><span class="w">Concept</span> <span class="w">A</span> <span class="w">—</span> <span class="w">Holistic,</span> <span class="w">unified</span> <span class="w">portfolio</span> <span class="w">view</span></h2>
+  <p class="lead reveal">A consolidated health perspective across accounts</p>
+<h3 class="sub serif reveal">Home</h3>
+<p class="text reveal">The home screen balances emotional reassurance with rational signals, ensuring users feel grounded before engaging with risk-related insights.</p>
+<div class="screen-compare full reveal">
+        <img src="../assets/img/5hNd8FVD07gYXkLzfgDfHx7XWXg.png" alt="" loading="lazy">
+        <div class="callouts"><div class="mini"><b>Total portfolio overview</b><span>Anchors users with a clear total value, while providing light performance context without encouraging reactive behaviour.</span></div><div class="mini"><b>Accounts overview</b><span>Clarifies where funds are held, grounding portfolio changes in familiar account structures before introducing higher-level health signals.</span></div><div class="mini"><b>Portfolio health</b><span>Condenses diversification and risk into a simple signal that invites exploration.</span></div></div>
+      </div>
+<h3 class="sub serif reveal">Health overview</h3>
+<p class="text reveal">The Portfolio Health page is designed to translate complexity into understanding, surfacing risks, balance, and resilience in a way that informs users without telling them what to do.</p>
+<div class="screen-compare full reveal">
+        <img src="../assets/img/M4LIzs0V0VayuORNq4mltvN1SiQ.png" alt="" loading="lazy">
+        <div class="callouts"><div class="mini"><b>Portfolio health overview</b><span>The Portfolio Health score provides a high-level quality signal based on aggregated holdings and the user’s profile, with optional deeper exploration.</span></div><div class="mini"><b>Structured decomposition</b><span>Distribution, Risk, and Stability break the score into clear dimensions, helping users understand what’s driving it. Together, they turn an abstract metric into explainable signals without overwhelming detail.</span></div></div>
+      </div>
+<p class="lead reveal">Visual cues for user empowerment</p>
+<p class="text reveal">Indicators enable fast scanning, with deeper explanations and charts revealed progressively as users choose to explore.</p>
+<div class="screen-compare full reveal">
+        <img src="../assets/img/Bz0aWglfNUW4b3AL3kucq355U.png" alt="" loading="lazy">
+        <div class="callouts"><div class="mini"><b>Score assumptions</b><span>The score reflects user-specific assumptions, not an absolute truth, so making them visible improves transparency and trust.</span></div></div>
+      </div>
+<h3 class="sub serif reveal">Available options</h3>
+<p class="text reveal">This screen turns insights into optional exploration. Users preview example actions across accounts, stay in control, and confirm trades separately.</p>
+<div class="screen-compare full reveal">
+        <img src="../assets/img/FVNShwGpfXumgmcI46lObwUoJc.png" alt="" loading="lazy">
+        <div class="callouts"><div class="mini"><b>Portfolio health overview</b><span>Options update the score in real time, while detailed breakdowns are progressively disclosed to avoid cognitive overload.</span></div><div class="mini"><b>Available options</b><span>Actions are presented as reversible previews, letting users explore potential impact without committing to a trade. Final execution always happens through the standard trading confirmation flow.</span></div><div class="mini"><b>Disclaimer</b><span>Intentionally designed to separate insight from advice, enabling confident self-directed decisions while remaining compliant with FCA guidelines.</span></div></div>
+      </div>
+<h3 class="sub serif reveal">Confirmation</h3>
+<p class="text reveal">The confirmation page acts as a deliberate pause, helping users review their decisions and understand impact before committing to execution.</p>
+<div class="screen-compare full reveal">
+        <img src="../assets/img/G01pGXFSimNCNxkRGKfkhGEFM.png" alt="" loading="lazy">
+        <div class="callouts"><div class="mini"><b>Main actions</b><span>This section clearly lists the trades that will be executed, allowing users to verify buy and sell actions before confirming.</span></div><div class="mini"><b>Financial impact</b><span>This section summarises the resulting cash movement, FX conversion, and fees, making the financial outcome explicit before execution.</span></div></div>
+      </div>
+<h3 class="sub serif reveal">Completion</h3>
+<p class="text reveal">This screen acknowledges completion by shifting focus from execution to outcome. Instead of emphasising individual trades, it reinforces that the portfolio state has been updated, helping users feel closure and confidence before moving on.</p>
+<div class="screen-compare full reveal">
+        <img src="../assets/img/qQEsYxRXHgEOcgjv1z8yJHaGJg.png" alt="" loading="lazy">
+        <div class="callouts"><div class="mini"><b>Illustration</b><span>A neutral illustration provides immediate confirmation and a calm sense of completion, without implying investment outcomes.</span></div><div class="mini"><b>End of story</b><span>Closes the flow by returning users to portfolio health, where they can review the impact of their changes.</span></div></div>
+      </div>
+</section>
+<section class="cs-section" id="sec-concept-b-embedded-portfolio-health-chos-3">
+  <span class="num">04</span>
+  <h2 class="divider serif split"><span class="w">Concept</span> <span class="w">B</span> <span class="w">—</span> <span class="w">Embedded</span> <span class="w">portfolio</span> <span class="w">health</span> <span class="w">(chosen)</span></h2>
+  <p class="lead reveal">Balancing product ambition with structural constraints</p>
+<h3 class="sub serif reveal">Quick wins</h3>
+<p class="text reveal">From a real product perspective, I’d recommend placing portfolio health within the existing portfolio overview to minimise structural changes, align with users’ expectations, and enable incremental rollout.</p>
+<p class="text reveal">This approach focuses on per-account health rather than a consolidated view across ISA, Invest, and CFD, while still creating a clear feedback loop after rebalancing or trading.</p>
+<p class="text reveal">This also leaves room for a future consolidated view, once user understanding and internal data maturity improve.</p>
+<figure class="reveal wipe full"><img src="../assets/img/Q5h4qlKh2TVBvGTAL5gvxZlzx4s.png" alt="" loading="lazy"></figure>
+<h3 class="sub serif reveal">Micro-interactions &amp; motion prototyping</h3>
+<p class="text reveal">Built interactive prototypes in Framer to make abstract portfolio health concepts tangible.</p>
+<p class="text reveal">Motion, state changes, and progressive disclosure were used to guide attention, reinforce cause-and-effect (exposure → impact → options), and reduce cognitive load — without implying recommendations.</p>
+<figure class="reveal full portrait">
+          <video src="../assets/video/G0I9DPuSe25b5KJr6aTmYCKNxM.mp4" autoplay muted loop playsinline preload="metadata" poster="../assets/img/poster-G0I9DPuSe25b5KJr6aTmYCKNxM.jpg"></video>
+          
+        </figure>
+<h3 class="sub serif reveal">Deliverables</h3>
+<p class="lead reveal">Scalable UI foundation for a regulated investment product</p>
+<p class="text reveal">A reusable component library defining layout, typography, colour, and risk indicators, designed to support consistency, accessibility, and regulatory-safe communication across the product.</p>
+</section>
+<section class="cs-section" id="sec-reflection-4">
+  <span class="num">05</span>
+  <h2 class="divider serif split"><span class="w">Reflection</span></h2>
+  <h3 class="sub serif reveal">Next step</h3>
+<p class="text reveal">This prototype explores a direction rather than a final solution.</p>
+<p class="text reveal">It establishes a clear, non-advisory foundation, with future iterations guided by user behaviour, data validation, and regulatory constraints, focusing on validating assumptions before expanding the system.</p>
+</section>
+  </div>
+</div>
+
+<section class="cs-next">
+  <div class="wrap">
+    <p class="eyebrow">Keep exploring</p>
+    <div class="cs-next-grid">
+      <a class="cs-next-card" href="wealth-management-system.html">
+        <img class="thumb" src="../assets/img/E0ivBHq7jXSnA6J9aW9na1RmKs.png" alt="" loading="lazy">
+        <span class="txt">
+          <span class="dir">&larr; Previous</span>
+          <h3 class="serif">A governed rebalancing system for wealth advisors</h3>
+        </span>
+      </a>
+      <a class="cs-next-card next" href="trip-memories.html">
+        <span class="txt">
+          <span class="dir">Next &rarr;</span>
+          <h3 class="serif">Revolut home redesign concept</h3>
+        </span>
+        <img class="thumb" src="../assets/img/TrorWvIDo5zv1eS2h04sgSZOtJ8.png" alt="" loading="lazy">
+      </a>
+    </div>
+  </div>
+</section>
+<footer class="foot" id="contact">
+  <div class="foot-in">
+    <h2 class="serif reveal">Let&rsquo;s make something clear.</h2>
+    <a class="mail reveal" href="mailto:designlcc@gmail.com">designlcc@gmail.com</a>
+    <div class="row">
+      <span>&copy; 2026 Chun-Chuan Lin — London</span>
+      <span class="socials">
+        <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
+        <a href="https://www.behance.net/designlcc" target="_blank" rel="noopener">Behance</a>
+        <a href="https://adplist.org/mentors/chun-chuan-lin" target="_blank" rel="noopener">ADPList</a>
+      </span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=0575bfc8" defer></script>
+</body>
+</html>

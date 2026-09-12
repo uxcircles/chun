@@ -1,0 +1,72 @@
+{
+  "meta": {"fonts": ["Merriweather (serif display)", "Inter (body)"], "bodyBg": "#1A1A26", "note": "hero dark, content sections light/cream"},
+  "nav": {"name": "Chun-Chuan Lin", "logo": "ZoILuZUUzq1dYKgV54Ge7Sz8FY.png", "links": [["My CV","https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing"],["LinkedIn","https://www.linkedin.com/in/chun-chuan-lin/"],["Medium","https://chunchuanlin.medium.com/"]]},
+  "hero": {
+    "heading": "Designing clarity for complex, regulated financial products",
+    "emphasisWord": "clarity",
+    "sub": "Turning complex workflows and data-heavy systems into clear, usable experiences.",
+    "kicker": "14+ yrs designing digital products · Multi-role platforms · Design systems · B2B & B2C · London",
+    "cta": ["Explore case studies", "#featured-work"],
+    "clientLogos": [
+      ["ESG Book", "WaZQpNPN1t4JtiHF8fiXEEZxjs.png"],
+      ["AUO", "OKWbx2ef0NCYC9p3jaQaWuxgcI.png"],
+      ["Acer", "APajQVBZ2jTOIM9JD1r0TgQu3PM.png"],
+      ["Synology", "TvIhIKmN5KiMDOiA3kFlVmtSvu8.png"],
+      ["Rolls-Royce", "MBduI2TKFzYs6vA1w2rtZoNE0E.png"],
+      ["Y TREE", "tlOaLy0I5XkEXebVdQPJUZpZI.png"]
+    ]
+  },
+  "track": {
+    "title": "Proven track record",
+    "intro": "Designing high-impact products used by 100M+ users, improving financial clarity and operational efficiency for enterprise teams.",
+    "stats": [
+      {"icon":"vault","value":"£9B+","label":"Assets on platforms I designed, for UHNW clients"},
+      {"icon":"users","value":"100M+","label":"Users reached — NAS apps, 4.7M+ installs globally"},
+      {"icon":"smile","value":"89%","label":"Mobile app CSAT after the redesign"},
+      {"icon":"book","value":"200K+","label":"Article reads · Top 1% ADPList mentor · 120+ pieces"}
+    ]
+  },
+  "featured": {
+    "title": "Featured projects",
+    "projects": [
+      {"slug":"provider-redesign","size":"lg","img":"VFbImBTynQh7F0MmkZp4YDalEAE.png","title":"Redesigned a £9B platform for UHNW clients","desc":"Improved data interpretation and redesigned multi-role workflows across advisors, analysts, and data operations for a clearer, more efficient platform.","meta":"Fintech · Professional tool · 2025"},
+      {"slug":"home-redesign","img":"YumomZDwZKkCPeDbRDVu0XXveg.png","title":"Improved mobile app CSAT to 89%","desc":"Clarified financial data across navigation, structure, and metrics to create a clearer, more trustworthy experience.","meta":"Fintech · iOS and Android app · 2024-2025"},
+      {"slug":"client-portal","img":"cqkEi4mZ536VQZQC6X23w6QmEs.png","title":"Simplified onboarding to boost efficiency by 40%","desc":"Introduced a client portal with secure uploads significantly reducing onboarding effort.","meta":"Fintech · Responsive web app · 2021"},
+      {"slug":"wealth-management-system","size":"lg","reverse":true,"img":"E0ivBHq7jXSnA6J9aW9na1RmKs.png","title":"Designed a governed rebalancing system for UHNW wealth advisors","desc":"Architected an end-to-end portfolio rebalancing workflow where AI surfaces recommendations, advisors decide, and every action stays auditable and mandate-aligned.","meta":"Fintech · Professional tool · 2026"},
+      {"slug":"portfolio-health","img":"9iO2ZGM4p4TnNoXjsiRvFTovY58.png","title":"Built investor confidence through portfolio health","desc":"Clarified portfolio risk and volatility through neutral framing and contextual explanations, helping users make informed decisions independently.","meta":"Fintech · iOS app · 2025"},
+      {"slug":"trip-memories","img":"TrorWvIDo5zv1eS2h04sgSZOtJ8.png","title":"Revolut redesign concept: trip memories drive engagement","desc":"Reframed transactions as trip memories to create a more emotional, engaging money experience.","meta":"Fintech · Android app · 2025"}
+    ],
+    "earlierNote": "Earlier work spans consumer apps, B2B platforms, and enterprise systems across healthcare, hardware, and sustainability. Available on request. → Get in touch"
+  },
+  "testimonials": {
+    "title": "People love working with me",
+    "intro": "Known for making complexity simple — calm, structured, collaborative, and fast in high-stakes environments.",
+    "items": [
+      ["Working with Chun was a pleasure. He played a key role in shaping several of our most important internal tools and the client-facing app. His ability to translate abstract problems into elegant, user-focused designs made a real difference to our product delivery.","Arik Peretz","Founder, Y TREE"],
+      ["Our product had a lot of moving parts, different user types, evolving requirements, and high expectations. Chun brought calm, clarity, and fast execution. His ability to translate messy ideas into intuitive experiences was exactly what we needed.","Paul Smith","CEO, Global Gains"],
+      ["Chun was a fantastic UX partner – quickly grasping complex data challenges and translating them into clear, interactive design concepts. He played a key role in developing a UX proof of concept that brought our product vision to life, and helped turn dense, technical content into user-friendly visuals to enhance both client engagement and thought leadership. A pleasure to work with.","Ciaran McCale","Chief Marketing & Communications Officer, ESG Book"],
+      ["It's been a pleasure collaborating with Chun for nearly four years. He transformed our design system, bridged Figma with Android APIs, and elevated both iOS and Android experiences. His work enabled a small team to maintain a 100-screen app efficiently. Beyond his skills, he's collaborative, respectful, and positive. Any team would be lucky to have him.","Mykyta Sizyntsev","Principal Android Engineer, Y TREE"],
+      ["I worked with Chun at Y TREE for over 4 years. He's an exceptional UX/UI designer who built design systems for complex financial apps and delivered intuitive web and mobile experiences under tight deadlines. Efficient, detail-oriented, and highly collaborative, Chun is a huge asset to any team.","Isobel Raeside","Head of Product"],
+      ["Chun delivered high-quality, polished design work with a strong sense of aesthetics and interface refinement. His visual direction for PowderSpark aligned seamlessly with our premium brand positioning, and his professionalism and responsiveness made a real impact on the final result.","Alel Fahd","Founder, PowderSpark"]
+    ]
+  },
+  "writing": {
+    "title": "Writing on product & decision-making",
+    "intro": "How I approach uncertainty, trade-offs, and responsibility in product design",
+    "items": [
+      {"img":"40FRjxl0HlhqNvaY4aWb44H30MI.png","title":"When building a product starts asking questions back","desc":"I came in with a dark humour concept. One conversation with Claude made me question what the product was actually asking people to face.","meta":"10 min read · 2 May 2026","url":"https://medium.com/uxcircles/i-set-out-to-build-a-finance-app-i-built-a-mirror-instead-6b107ab2728f?sk=03d0add8374b60059b2eae90fcde20f9"},
+      {"img":"3IVkNVfdKZavRIKq4DdeuCbGA.png","title":"Designing products when ownership and boundaries are unclear","desc":"How I navigated shifting business models, responsibility, and risk in a real-world platform build.","meta":"4 min read · 26 Dec 2025","url":"https://medium.com/uxcircles/when-business-models-shift-product-boundaries-blur-42042c20090c?sk=8a81b0a40e7a114c3df5a43632a78a0f"},
+      {"img":"kXqRFmuqyHqjHzJq8JqkbzVWV4I.png","title":"What changed when I stepped beyond craft into leadership","desc":"A candid reflection on judgement, coordination, and the mistakes I made transitioning into a project lead role.","meta":"4 min read · 1 Oct 2025","url":"https://medium.com/uxcircles/from-designer-to-project-lead-hard-lessons-learned-265f4e794357?sk=2e5d2838e4304d799aafafce5379b13a"}
+    ]
+  },
+  "beyond": {
+    "title": "Beyond Design",
+    "body": "Away from the screen, I run, organise small communities, and make things by hand. It keeps my thinking sharp, my empathy grounded — and reminds me to slow down, especially when my little one is winning the negotiation.",
+    "photos": ["pubfSbG1jti3bcDO1lPi5CjZF64.jpeg","sYfxENBCH0JeVRIsdHM3iYg3I.jpg","0NGZxLJCJaQSqLhbFrQrbKQVUU.png"]
+  },
+  "footer": {
+    "name": "Chun-Chuan Lin",
+    "email": "designlcc@gmail.com",
+    "socials": [["LinkedIn","https://www.linkedin.com/in/chun-chuan-lin/"],["Behance","https://www.behance.net/designlcc"],["Medium","https://chunchuanlin.medium.com/"],["ADPList","https://adplist.org/mentors/chun-chuan-lin"]]
+  }
+}

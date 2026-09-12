@@ -1,0 +1,629 @@
+/* ------------------------------------------------------------------
+   Static site builder for chunchuanlin.design rebuild.
+   Reads content/*.json, writes index.html + work/<slug>.html
+   Run:  node build.mjs
+------------------------------------------------------------------ */
+import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
+
+const ROOT = decodeURIComponent(path.dirname(new URL(import.meta.url).pathname));
+const C = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, "content", p), "utf8"));
+
+// content-hash query param so a redeploy always busts browser caches for CSS/JS
+const fileHash = (relPath) => {
+  const buf = fs.readFileSync(path.join(ROOT, relPath));
+  return crypto.createHash("md5").update(buf).digest("hex").slice(0, 8);
+};
+const CSS_V = fileHash("assets/css/style.css");
+const JS_V = fileHash("assets/js/main.js");
+
+const esc = (s = "") =>
+  String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const IMG = (name, base) => `${base}assets/img/${name}`;
+const ARROW = `<span class="arrow" aria-hidden="true">&rarr;</span>`;
+
+// wrap each word of a heading in <span> for staggered blur-in animation
+const splitWords = (s = "") =>
+  esc(s)
+    .split(/(\s+)/)
+    .map((w) => (/^\s+$/.test(w) ? w : `<span class="w">${w}</span>`))
+    .join("");
+
+const SITE = "Chun-Chuan Lin";
+const EMAIL = "designlcc@gmail.com";
+
+// small line icons (Feather-style, 24×24, inherit stroke colour)
+const ICON = {
+  vault: `<path d="M3 21h18M4 21V8l8-4 8 4v13"/><circle cx="12" cy="12" r="3"/><path d="M12 15v3"/>`,
+  users: `<path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>`,
+  smile: `<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/>`,
+  book: `<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>`,
+  compass: `<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>`,
+  scale: `<path d="M12 3v18M3 7h18M6 7l-3.5 7a3 3 0 0 0 6 0zM18 7l-3.5 7a3 3 0 0 0 6 0z"/>`,
+  folder: `<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>`,
+  shield: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>`,
+  flag: `<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>`,
+  link: `<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>`,
+  target: `<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>`,
+  briefcase: `<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>`,
+  clock: `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`,
+};
+const icon = (name, cls = "stat-icon") =>
+  ICON[name]
+    ? `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[name]}</svg>`
+    : "";
+
+// map a leading emoji marker (as used in the original site's cards) to a line icon
+const EMOJI_ICON = {
+  "🧑‍🤝‍🧑": "users",
+  "🧭": "compass",
+  "⚖️": "scale",
+  "📂": "folder",
+  "🧑‍⚖️": "shield",
+  "🚦": "flag",
+  "🔗": "link",
+  "🎯": "target",
+  "🧳": "briefcase",
+  "🕰️": "clock",
+};
+function stripEmojiIcon(title) {
+  const m = String(title).match(/^(\S+)\s+(.*)$/su);
+  if (m && EMOJI_ICON[m[1]]) return { iconName: EMOJI_ICON[m[1]], text: m[2] };
+  return { iconName: null, text: title };
+}
+
+/* ---------- case study registry (order = prev/next) ---------- */
+const STUDIES = [
+  { slug: "provider-redesign",        file: "cs1-provider-redesign.json",        card: "Redesigned a £9B platform for UHNW clients", img: "VFbImBTynQh7F0MmkZp4YDalEAE.png" },
+  { slug: "home-redesign",            file: "cs2-home-redesign.json",            card: "Improved mobile app CSAT to 89%", img: "YumomZDwZKkCPeDbRDVu0XXveg.png" },
+  { slug: "client-portal",            file: "cs3-client-portal.json",            card: "Simplified onboarding via a client portal", img: "cqkEi4mZ536VQZQC6X23w6QmEs.png" },
+  { slug: "wealth-management-system", file: "cs4-wealth-management-system.json", card: "A governed rebalancing system for wealth advisors", img: "E0ivBHq7jXSnA6J9aW9na1RmKs.png" },
+  { slug: "portfolio-health",         file: "cs5-portfolio-health.json",         card: "Portfolio health for a regulated investment app", img: "9iO2ZGM4p4TnNoXjsiRvFTovY58.png" },
+  { slug: "trip-memories",            file: "cs6-trip-memories.json",            card: "Revolut home redesign concept", img: "TrorWvIDo5zv1eS2h04sgSZOtJ8.png" },
+];
+
+/* =================================================================
+   PAGE SHELL
+================================================================= */
+const GATE_KEY = "cc_portfolio_unlocked";
+const GATE_PASS = "Chun";
+
+function shell({ title, desc, body, base, extraClass = "", progress = false, gated = false }) {
+  const bodyClass = gated ? `${extraClass} locked`.trim() : extraClass;
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(desc)}">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(desc)}">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="${base}assets/img/YUZRlfmyi6MVquyru4w5qhSXo.png">
+<link rel="apple-touch-icon" href="${base}assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="${base}assets/css/style.css?v=${CSS_V}">
+</head>
+<body class="${bodyClass}">
+${gated ? `<script>try{if(localStorage.getItem(${JSON.stringify(GATE_KEY)})==="1")document.currentScript.parentElement.classList.remove("locked")}catch(e){}</script>
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <h2 class="serif">This case study is private</h2>
+    <p>Enter the passcode to view it. Ask Chun if you don't have it.</p>
+    <form id="gate-form" autocomplete="off">
+      <input type="password" id="gate-input" placeholder="Passcode" autofocus>
+      <button type="submit">Unlock</button>
+    </form>
+    <p class="err" id="gate-err"></p>
+  </div>
+</div>` : ""}
+${progress ? `<div class="scroll-progress" aria-hidden="true"><span></span></div>` : ""}
+<div class="cursor-dot" aria-hidden="true"></div>
+${nav(base)}
+${body}
+${footer(base)}
+<script src="${base}assets/js/main.js?v=${JS_V}" defer></script>
+</body>
+</html>`;
+}
+
+function nav(base) {
+  return `<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="${base}index.html">
+      <img src="${base}assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.png" alt="">
+      <span>Chun-Chuan&nbsp;Lin</span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">Menu</button>
+    <nav class="nav-links">
+      <a href="${base}index.html#work">Work</a>
+      <a href="https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing" target="_blank" rel="noopener">CV</a>
+      <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
+    </nav>
+  </div>
+</header>`;
+}
+
+function footer(base) {
+  return `<footer class="foot" id="contact">
+  <div class="foot-in">
+    <h2 class="serif reveal">Let&rsquo;s make something clear.</h2>
+    <a class="mail reveal" href="mailto:${EMAIL}">${EMAIL}</a>
+    <div class="row">
+      <span>&copy; ${new Date().getFullYear()} Chun-Chuan Lin — London</span>
+      <span class="socials">
+        <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
+        <a href="https://www.behance.net/designlcc" target="_blank" rel="noopener">Behance</a>
+        <a href="https://adplist.org/mentors/chun-chuan-lin" target="_blank" rel="noopener">ADPList</a>
+      </span>
+    </div>
+  </div>
+</footer>`;
+}
+
+/* =================================================================
+   HOME
+================================================================= */
+function buildHome() {
+  const d = C("home.json");
+  const base = "";
+  const h = d.hero;
+  // split hero heading into animatable words, italicising the emphasis word
+  const heroHead = esc(h.heading)
+    .split(/(\s+)/)
+    .map((w) => {
+      if (/^\s+$/.test(w)) return w;
+      const inner = w === esc(h.emphasisWord) ? `<em>${w}</em>` : w;
+      return `<span class="w">${inner}</span>`;
+    })
+    .join("");
+
+  const stats = d.track.stats
+    .map(
+      (st) => `<div class="stat reveal">
+      ${icon(st.icon)}
+      <b data-count="${esc(st.value)}">${esc(st.value)}</b>
+      <span>${esc(st.label)}</span>
+    </div>`
+    )
+    .join("");
+
+  const projects = d.featured.projects
+    .map((p) => {
+      const size = p.size === "lg" ? "lg" : "sm";
+      return `<a class="project ${size}${p.reverse ? " reverse" : ""} reveal" href="work/${p.slug}.html">
+      <div class="shot"><img src="${IMG(p.img, base)}" alt="${esc(p.title)}" loading="lazy"></div>
+      <div class="body">
+        <span class="tag">${esc(p.meta)}</span>
+        <h3 class="serif">${esc(p.title)}</h3>
+        <p>${esc(p.desc)}</p>
+        <span class="more">View case study ${ARROW}</span>
+      </div>
+    </a>`;
+    })
+    .join("");
+
+  const quotes = d.testimonials.items
+    .map(
+      ([t, name, role]) => `<figure class="quote-card reveal">
+      <p>&ldquo;${esc(t)}&rdquo;</p>
+      <figcaption class="who"><b>${esc(name)}</b> &middot; <span>${esc(role)}</span></figcaption>
+    </figure>`
+    )
+    .join("");
+
+  const articles = d.writing.items
+    .map(
+      (a) => `<a class="article reveal" href="${a.url}" target="_blank" rel="noopener">
+      <div class="thumb"><img src="${IMG(a.img, base)}" alt="" loading="lazy"></div>
+      <div class="txt">
+        <h3 class="serif">${esc(a.title)}</h3>
+        <p>${esc(a.desc)}</p>
+        <div class="meta">${esc(a.meta)}</div>
+      </div>
+    </a>`
+    )
+    .join("");
+
+  const logoSet = h.clientLogos
+    .map(
+      ([name, file]) =>
+        `<span class="logo logo--${slugify(name)}"><img src="${IMG(file, base)}" alt="${esc(name)}" decoding="async"></span>`
+    )
+    .join("");
+  // repeat the set enough times that half the track always exceeds the widest viewport
+  const logos =
+    `<div class="logo-track"><span class="logo-set">${logoSet}</span>` +
+    `<span class="logo-set" aria-hidden="true">${logoSet}</span>`.repeat(7) +
+    `</div>`;
+
+  const secHead = (n, title, intro) => `<div class="section-head reveal">
+      <h2 class="serif split">${splitWords(title)}</h2>
+      ${intro ? `<p>${esc(intro)}</p>` : ""}
+    </div>`;
+
+  const body = `
+<section class="hero" style="padding:0">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-in">
+    <h1 class="serif split hero-title">${heroHead}</h1>
+    <p class="lede reveal">${esc(h.sub)}</p>
+    <p class="facts reveal">${esc(h.kicker)}</p>
+    <div class="cta reveal">
+      <a class="btn btn-hero" href="#work">Explore case studies ${ARROW}</a>
+      <a class="btn btn-line" href="mailto:${EMAIL}">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-marquee" aria-label="Selected clients">${logos}</div>
+</section>
+
+<section class="alt" id="track">
+  <div class="wrap">
+    ${secHead("01", d.track.title, d.track.intro)}
+    <div class="stats">${stats}</div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    ${secHead("02", d.featured.title, "")}
+    <div class="projects">${projects}</div>
+    <p class="earlier reveal">${esc(d.featured.earlierNote).replace("&rarr; Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`).replace("→ Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`)}</p>
+  </div>
+</section>
+
+<section class="alt" id="praise">
+  <div class="wrap">
+    ${secHead("03", d.testimonials.title, d.testimonials.intro)}
+    <div class="quotes">${quotes}</div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="wrap">
+    ${secHead("04", d.writing.title, d.writing.intro)}
+    <div class="articles">${articles}</div>
+  </div>
+</section>
+
+<section class="alt" id="about">
+  <div class="wrap beyond reveal">
+    <div class="txt">
+      <h2 class="serif split">${splitWords(d.beyond.title)}</h2>
+      <p>${esc(d.beyond.body)}</p>
+    </div>
+    <div class="grid">
+      <img src="${IMG(d.beyond.photos[0], base)}" alt="" loading="lazy">
+      <img src="${IMG(d.beyond.photos[1], base)}" alt="" loading="lazy">
+      <img src="${IMG(d.beyond.photos[2], base)}" alt="" loading="lazy">
+    </div>
+  </div>
+</section>`;
+
+  return shell({
+    title: "Chun-Chuan Lin — Product designer for complex, regulated financial products",
+    desc: h.sub,
+    body,
+    base,
+    extraClass: "theme-dark",
+  });
+}
+
+/* =================================================================
+   CASE STUDY
+================================================================= */
+const isH = (b, ...t) => b && typeof b.tag === "string" && t.includes(b.tag);
+
+function splitHero(blocks) {
+  // drop everything up to the first H1
+  let i = blocks.findIndex((b) => isH(b, "H1"));
+  if (i < 0) i = 0;
+  const rest = blocks.slice(i);
+
+  // title = leading consecutive H1s
+  const titleParts = [];
+  let j = 0;
+  while (isH(rest[j], "H1")) { titleParts.push(rest[j].text); j++; }
+  const title = titleParts.join(" ").replace(/\s+—\s*$/, "");
+
+  // subtitle = following H5s
+  const subParts = [];
+  while (isH(rest[j], "H5")) { subParts.push(rest[j].text); j++; }
+
+  // look ahead a few blocks for meta line + hero image + fallback summary
+  let meta = "", heroImg = "", summary = "";
+  let k = j, scanned = 0;
+  while (k < rest.length && scanned < 5) {
+    const b = rest[k];
+    if (b.img && !heroImg) { heroImg = b.img; rest.splice(k, 1); scanned++; continue; }
+    if (b.tag === "text" && /(\d{4}).*(design|Design|UX|Research)|\|/.test(b.text) && !meta) {
+      meta = b.text; rest.splice(k, 1); scanned++; continue;
+    }
+    if (b.tag === "text" && !summary && subParts.length === 0) {
+      summary = b.text; rest.splice(k, 1); scanned++; continue;
+    }
+    break;
+  }
+  const body = rest.slice(j);
+  const sub = subParts.join(" ") || summary;
+  return { title, sub, meta: meta.replace(/\s*\|\s*/g, " · "), heroImg, body };
+}
+
+function renderBlocks(body, base) {
+  // group into sections by H1
+  const sections = [];
+  let cur = { title: "Overview", blocks: [] };
+  for (const b of body) {
+    if (isH(b, "H1")) {
+      if (cur.blocks.length) sections.push(cur);
+      cur = { title: b.text, blocks: [] };
+    } else {
+      cur.blocks.push(b);
+    }
+  }
+  if (cur.blocks.length) sections.push(cur);
+
+  const toc = [];
+  const out = sections
+    .map((sec, idx) => {
+      const n = String(idx + 1).padStart(2, "0");
+      const id = "sec-" + slugify(sec.title) + "-" + idx;
+      toc.push({ id, title: sec.title });
+      return `<section class="cs-section" id="${id}">
+  <span class="num">${n}</span>
+  <h2 class="divider serif split">${splitWords(sec.title)}</h2>
+  ${renderInner(sec.blocks, base)}
+</section>`;
+    })
+    .join("\n");
+
+  return { html: out, toc };
+}
+
+function slugify(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
+}
+
+function figrow(names, base) {
+  if (names.length === 1)
+    return `<figure class="reveal wipe full"><img src="${IMG(names[0], base)}" alt="" loading="lazy"></figure>`;
+  const cls = names.length === 2 ? "two" : "three";
+  return `<div class="figrow ${cls} full reveal wipe">${names
+    .map((nm) => `<img src="${IMG(nm, base)}" alt="" loading="lazy">`)
+    .join("")}</div>`;
+}
+
+function renderInner(blocks, base) {
+  const parts = [];
+  let i = 0;
+  while (i < blocks.length) {
+    const b = blocks[i];
+
+    // a single portrait screenshot flagged layout:"side", immediately followed
+    // by item cards — screen on the left, cards stacked to its right so they
+    // can be cross-referenced against it
+    if (b.img && !b.cap && b.layout === "side") {
+      i++;
+      const items = [];
+      while (i < blocks.length && Array.isArray(blocks[i].item)) { items.push(blocks[i].item); i++; }
+      parts.push(`<div class="screen-compare full reveal">
+        <img src="${IMG(b.img, base)}" alt="" loading="lazy">
+        <div class="callouts">${items
+          .map(([t, s]) => `<div class="mini"><b>${esc(t)}</b><span>${esc(s)}</span></div>`)
+          .join("")}</div>
+      </div>`);
+      continue;
+    }
+    // run of images
+    if (b.img && !b.cap) {
+      const run = [];
+      while (i < blocks.length && blocks[i].img && !blocks[i].cap) { run.push(blocks[i].img); i++; }
+      parts.push(figrow(run, base));
+      continue;
+    }
+    // run of item cards
+    if (Array.isArray(b.item)) {
+      const items = [];
+      while (i < blocks.length && Array.isArray(blocks[i].item)) { items.push(blocks[i].item); i++; }
+      const cls = items.length === 2 ? "c2" : items.length === 4 ? "c4" : "";
+      parts.push(
+        `<div class="cards ${cls} reveal">${items
+          .map(([t, s]) => {
+            const { iconName, text } = stripEmojiIcon(t);
+            return `<div class="mini">${iconName ? icon(iconName, "mini-icon") : ""}<b>${esc(text)}</b><span>${esc(s)}</span></div>`;
+          })
+          .join("")}</div>`
+      );
+      continue;
+    }
+
+    i++;
+
+    if (b.video) {
+      parts.push(
+        `<figure class="reveal full${b.portrait ? " portrait" : ""}">
+          <video src="${base}assets/video/${b.video}" autoplay muted loop playsinline preload="metadata"${b.poster ? ` poster="${IMG(b.poster, base)}"` : ""}></video>
+          ${b.cap ? `<figcaption>${esc(b.cap)}</figcaption>` : ""}
+        </figure>`
+      );
+      continue;
+    }
+    if (b.cap && b.img) {
+      parts.push(
+        `<figure class="reveal wipe full"><img src="${IMG(b.img, base)}" alt="" loading="lazy"><figcaption>${esc(b.cap)}</figcaption></figure>`
+      );
+      continue;
+    }
+    if (Array.isArray(b.p)) { parts.push(b.p.map((t) => `<p class="text reveal">${esc(t)}</p>`).join("")); continue; }
+    if (Array.isArray(b.bullets)) {
+      parts.push(
+        `<ul class="bullets reveal">${b.bullets.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` +
+          (b.after ? `<p class="after-note reveal">${esc(b.after)}</p>` : "")
+      );
+      continue;
+    }
+    if (b.dd) {
+      parts.push(`<div class="dd reveal"><b>Design decision</b><p>${esc(b.dd)}</p></div>`);
+      continue;
+    }
+    if (Array.isArray(b.persona)) {
+      const [name, img, q, pain] = b.persona;
+      parts.push(`<div class="persona reveal">
+        ${img ? `<img src="${IMG(img, base)}" alt="">` : `<span></span>`}
+        <div><h4>${esc(name)}</h4><p class="q serif">${esc(q)}</p>${pain ? `<p class="pain">${esc(pain)}</p>` : ""}</div>
+      </div>`);
+      continue;
+    }
+    if (Array.isArray(b.quote)) {
+      const [label, img, who, text, evidence] = b.quote;
+      if (label) parts.push(`<h3 class="sub serif reveal">${esc(label)}</h3>`);
+      parts.push(`<div class="persona${evidence ? " has-evidence" : ""} reveal">
+        ${img ? `<img src="${IMG(img, base)}" alt="">` : `<span></span>`}
+        <div>
+          <p class="q serif">&ldquo;${esc(String(text).replace(/^[“"]|[”"]$/g, ""))}&rdquo;</p>
+          <p class="pain">${esc(who)}</p>
+        </div>
+        ${evidence ? `<img class="evidence" src="${IMG(evidence, base)}" alt="">` : ""}
+      </div>`);
+      continue;
+    }
+    if (Array.isArray(b.insight)) {
+      const [label, title, text, img] = b.insight;
+      parts.push(`<p class="eyebrow reveal" style="margin:34px 0 0">${esc(label)}</p>
+        <p class="lead reveal">${esc(title)}</p>
+        ${text ? `<p class="text reveal">${esc(text)}</p>` : ""}
+        ${img ? `<figure class="reveal full"><img src="${IMG(img, base)}" alt="" loading="lazy"></figure>` : ""}`);
+      continue;
+    }
+    if (Array.isArray(b.duo)) {
+      const [wide, narrow] = b.duo;
+      parts.push(`<div class="duo full reveal">
+        <img src="${IMG(wide, base)}" alt="" loading="lazy">
+        <img class="narrow" src="${IMG(narrow, base)}" alt="" loading="lazy">
+      </div>`);
+      continue;
+    }
+    if (Array.isArray(b.compare)) {
+      const [la, lb, ia, ib] = b.compare;
+      parts.push(`<div class="compare full reveal">
+        <figure><img src="${IMG(ia, base)}" alt="" loading="lazy"><figcaption>${esc(la)}</figcaption></figure>
+        <figure><img src="${IMG(ib, base)}" alt="" loading="lazy"><figcaption>${esc(lb)}</figcaption></figure>
+      </div>`);
+      continue;
+    }
+    if (Array.isArray(b.wrappers)) {
+      parts.push(`<div class="figrow three full reveal">${b.wrappers
+        .map(([nm, im]) => `<figure style="margin:0"><img src="${IMG(im, base)}" alt="${esc(nm)}" loading="lazy"><figcaption>${esc(nm)}</figcaption></figure>`)
+        .join("")}</div>`);
+      continue;
+    }
+    if (Array.isArray(b.feedback)) {
+      const [title, lead, ...qs] = b.feedback;
+      parts.push(`<h3 class="sub serif reveal">${esc(title)}</h3><p class="lead reveal">${esc(lead)}</p>`);
+      for (const [img, who, text] of qs) {
+        parts.push(`<div class="persona reveal">
+          ${img ? `<img src="${IMG(img, base)}" alt="">` : `<span></span>`}
+          <div><p class="q serif">&ldquo;${esc(String(text).replace(/^[“"]|[”"]$/g, ""))}&rdquo;</p><p class="pain">${esc(who)}</p></div>
+        </div>`);
+      }
+      continue;
+    }
+    if (Array.isArray(b.section)) {
+      const [title, lead, bl] = b.section;
+      parts.push(`<h3 class="sub serif reveal">${esc(title)}</h3><p class="lead reveal">${esc(lead)}</p>
+        <ul class="bullets reveal">${bl.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>`);
+      continue;
+    }
+
+    // plain typographic blocks
+    if (isH(b, "H2")) { parts.push(`<h3 class="sub serif reveal">${esc(b.text)}</h3>`); continue; }
+    if (isH(b, "H3", "H5")) { parts.push(`<p class="lead reveal">${esc(b.text)}</p>`); continue; }
+    if (isH(b, "H4")) { parts.push(`<h3 class="sub serif reveal" style="font-size:1.1rem">${esc(b.text)}</h3>`); continue; }
+    if (b.tag === "text" || typeof b.text === "string") { parts.push(`<p class="text reveal">${esc(b.text)}</p>`); continue; }
+  }
+  return parts.join("\n");
+}
+
+function buildStudy(study, idx) {
+  const base = "../";
+  const blocks = C(study.file);
+  const { title, sub, meta, heroImg, body } = splitHero(blocks);
+  const { html, toc } = renderBlocks(body, base);
+
+  const prev = STUDIES[(idx - 1 + STUDIES.length) % STUDIES.length];
+  const next = STUDIES[(idx + 1) % STUDIES.length];
+
+  const tocHtml = toc
+    .map((t) => `<li><a href="#${t.id}">${esc(t.title)}</a></li>`)
+    .join("");
+
+  const pageBody = `
+<section class="cs-hero">
+  <div class="wrap">
+    <a class="back reveal" href="${base}index.html#work">${"&larr;"} All work</a>
+    <h1 class="serif split hero-title">${splitWords(title)}</h1>
+    ${sub ? `<p class="sub reveal">${esc(sub)}</p>` : ""}
+    ${meta ? `<p class="meta reveal">${esc(meta)}</p>` : ""}
+  </div>
+</section>
+${heroImg ? `<div class="cs-hero-img reveal wipe"><img src="${IMG(heroImg, base)}" alt=""></div>` : ""}
+
+<div class="cs-body">
+  <aside class="toc"><nav aria-label="Sections"><ol>${tocHtml}</ol></nav></aside>
+  <div class="cs-content">
+    ${html}
+  </div>
+</div>
+
+<section class="cs-next">
+  <div class="wrap">
+    <p class="eyebrow">Keep exploring</p>
+    <div class="cs-next-grid">
+      <a class="cs-next-card" href="${prev.slug}.html">
+        <img class="thumb" src="${IMG(prev.img, base)}" alt="" loading="lazy">
+        <span class="txt">
+          <span class="dir">&larr; Previous</span>
+          <h3 class="serif">${esc(prev.card)}</h3>
+        </span>
+      </a>
+      <a class="cs-next-card next" href="${next.slug}.html">
+        <span class="txt">
+          <span class="dir">Next &rarr;</span>
+          <h3 class="serif">${esc(next.card)}</h3>
+        </span>
+        <img class="thumb" src="${IMG(next.img, base)}" alt="" loading="lazy">
+      </a>
+    </div>
+  </div>
+</section>`;
+
+  return shell({
+    title: `${title} — Chun-Chuan Lin`,
+    desc: sub || title,
+    body: pageBody,
+    base,
+    extraClass: "cs-page",
+    progress: true,
+    gated: true,
+  });
+}
+
+/* =================================================================
+   WRITE
+================================================================= */
+fs.writeFileSync(path.join(ROOT, "index.html"), buildHome());
+console.log("✓ index.html");
+
+const workDir = path.join(ROOT, "work");
+fs.mkdirSync(workDir, { recursive: true });
+STUDIES.forEach((s, i) => {
+  fs.writeFileSync(path.join(workDir, `${s.slug}.html`), buildStudy(s, i));
+  console.log("✓ work/" + s.slug + ".html");
+});
+console.log("done.");
