@@ -274,7 +274,7 @@ section{padding:96px 0;scroll-margin-top:84px}
 .cs-hero .sub{margin:22px 0 0;font-size:clamp(1.02rem,1.7vw,1.18rem);color:var(--ink-soft);max-width:60ch;line-height:1.55}
 .cs-hero .meta{margin:26px 0 0;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--hero-soft)}
 .cs-hero-img{max-width:var(--maxw);margin:-44px auto 0;padding:0 28px;position:relative;z-index:2}
-.cs-hero-img img{width:100%;border-radius:18px;border:1px solid var(--line);background:var(--paper-2);box-shadow:0 40px 80px -40px rgba(20,18,12,.55)}
+.cs-hero-img img{width:100%;border-radius:18px;border:1px solid var(--line);background:var(--paper);box-shadow:0 40px 80px -40px rgba(20,18,12,.55)}
 
 .cs-body{max-width:var(--maxw);margin:0 auto;padding:70px 28px 40px;display:grid;grid-template-columns:200px 1fr;gap:56px;align-items:start}
 @media (max-width:1000px){.cs-body{grid-template-columns:1fr;gap:0;padding-top:52px}}
@@ -303,14 +303,14 @@ section{padding:96px 0;scroll-margin-top:84px}
 .cs-content p.text + p.text{margin-top:14px}
 
 .cs-content figure{margin:34px 0 0}
-.cs-content figure img,.cs-content figure video{width:100%;display:block;border-radius:14px;border:1px solid var(--line);background:var(--paper-2)}
+.cs-content figure img,.cs-content figure video{width:100%;display:block;border-radius:14px;border:1px solid var(--line);background:var(--paper)}
 .cs-content figure.portrait{max-width:360px;margin-left:auto;margin-right:auto}
 .cs-content figure.portrait video{border-radius:24px}
 .cs-content figure figcaption{margin-top:12px;font-size:13.5px;color:var(--muted);text-align:center}
 .figrow{display:grid;gap:16px;margin:34px 0 0}
 .figrow.two{grid-template-columns:1fr 1fr}
 .figrow.three{grid-template-columns:repeat(3,1fr)}
-.figrow img{width:100%;border-radius:14px;border:1px solid var(--line);background:var(--paper-2)}
+.figrow img{width:100%;border-radius:14px;border:1px solid var(--line);background:var(--paper)}
 @media (max-width:720px){.figrow.two,.figrow.three{grid-template-columns:1fr}}
 
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px 0 0}
@@ -340,7 +340,7 @@ ul.bullets li::before{content:"";position:absolute;left:2px;top:11px;width:7px;h
 .persona img.evidence{
   width:auto;max-width:130px;height:auto;max-height:130px;
   border-radius:8px;object-fit:contain;justify-self:end;
-  border:1px solid var(--line);background:var(--paper-2);
+  border:1px solid var(--line);background:var(--card);
 }
 @media (max-width:560px){
   .persona.has-evidence{grid-template-columns:64px 1fr}
@@ -353,7 +353,7 @@ ul.bullets li::before{content:"";position:absolute;left:2px;top:11px;width:7px;h
 
 /* phone screenshot + callout cards, side by side for direct comparison */
 .screen-compare{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start;margin:34px 0 0}
-.screen-compare > img{width:100%;border-radius:16px;border:1px solid var(--line);background:var(--paper-2);position:sticky;top:100px}
+.screen-compare > img{width:100%;border-radius:16px;border:1px solid var(--line);background:var(--paper);position:sticky;top:100px}
 .screen-compare .callouts{display:flex;flex-direction:column;gap:14px}
 .screen-compare .callouts .mini{margin:0}
 @media (max-width:760px){
@@ -362,7 +362,7 @@ ul.bullets li::before{content:"";position:absolute;left:2px;top:11px;width:7px;h
 }
 
 .duo{display:grid;grid-template-columns:2.2fr 1fr;gap:16px;align-items:start;margin:34px 0 0}
-.duo img{width:100%;border-radius:14px;border:1px solid var(--line);background:var(--paper-2)}
+.duo img{width:100%;border-radius:14px;border:1px solid var(--line);background:var(--paper)}
 .duo img.narrow{aspect-ratio:1/4;object-fit:cover;object-position:top center}
 @media (max-width:640px){.duo{grid-template-columns:1fr}.duo img.narrow{aspect-ratio:9/16}}
 
@@ -487,7 +487,7 @@ html.has-cursor,html.has-cursor *{cursor:none!important}
   transition:opacity .25s ease,transform .25s ease;
 }
 .cursor-badge.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
-.cursor-badge svg{
+.cursor-badge > svg{
   width:100%;height:100%;fill:#fff;
   animation:cursor-spin 9s linear infinite;
 }
