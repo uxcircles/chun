@@ -13,12 +13,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=3d849f9d">
+<link rel="stylesheet" href="assets/css/style.css?v=4fe31569">
 </head>
 <body class="theme-dark">
 
 
 <div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-badge" id="cursor-badge-view">
+  <svg viewBox="0 0 140 140">
+    <defs><path id="cursor-badge-view-path" d="M70,70 m-56,0 a56,56 0 1,1 112,0 a56,56 0 1,1 -112,0"/></defs>
+    <text><textPath href="#cursor-badge-view-path">CLICK TO VIEW · CLICK TO VIEW · </textPath></text>
+  </svg>
+  <span class="cursor-badge-center"><svg class="cursor-badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+</div>
 <header class="nav" id="nav">
   <div class="nav-in">
     <a class="brand" href="index.html">
@@ -81,7 +88,7 @@
       <h2 class="serif split"><span class="w">Featured</span> <span class="w">projects</span></h2>
       
     </div>
-    <div class="projects"><a class="project lg reveal" href="work/provider-redesign.html">
+    <div class="projects"><a class="project lg reveal" href="work/provider-redesign.html" data-cursor-badge="cursor-badge-view">
       <div class="shot"><img src="assets/img/VFbImBTynQh7F0MmkZp4YDalEAE.png" alt="Redesigned a £9B platform for UHNW clients" loading="lazy"></div>
       <div class="body">
         <span class="tag">Fintech · Professional tool · 2025</span>
@@ -89,7 +96,7 @@
         <p>Improved data interpretation and redesigned multi-role workflows across advisors, analysts, and data operations for a clearer, more efficient platform.</p>
         <span class="more">View case study <span class="arrow" aria-hidden="true">&rarr;</span></span>
       </div>
-    </a><a class="project sm reveal" href="work/home-redesign.html">
+    </a><a class="project sm reveal" href="work/home-redesign.html" data-cursor-badge="cursor-badge-view">
       <div class="shot"><img src="assets/img/YumomZDwZKkCPeDbRDVu0XXveg.png" alt="Improved mobile app CSAT to 89%" loading="lazy"></div>
       <div class="body">
         <span class="tag">Fintech · iOS and Android app · 2024-2025</span>
@@ -97,7 +104,7 @@
         <p>Clarified financial data across navigation, structure, and metrics to create a clearer, more trustworthy experience.</p>
         <span class="more">View case study <span class="arrow" aria-hidden="true">&rarr;</span></span>
       </div>
-    </a><a class="project sm reveal" href="work/client-portal.html">
+    </a><a class="project sm reveal" href="work/client-portal.html" data-cursor-badge="cursor-badge-view">
       <div class="shot"><img src="assets/img/cqkEi4mZ536VQZQC6X23w6QmEs.png" alt="Simplified onboarding to boost efficiency by 40%" loading="lazy"></div>
       <div class="body">
         <span class="tag">Fintech · Responsive web app · 2021</span>
@@ -105,7 +112,7 @@
         <p>Introduced a client portal with secure uploads significantly reducing onboarding effort.</p>
         <span class="more">View case study <span class="arrow" aria-hidden="true">&rarr;</span></span>
       </div>
-    </a><a class="project lg reverse reveal" href="work/wealth-management-system.html">
+    </a><a class="project lg reverse reveal" href="work/wealth-management-system.html" data-cursor-badge="cursor-badge-view">
       <div class="shot"><img src="assets/img/E0ivBHq7jXSnA6J9aW9na1RmKs.png" alt="Designed a governed rebalancing system for UHNW wealth advisors" loading="lazy"></div>
       <div class="body">
         <span class="tag">Fintech · Professional tool · 2026</span>
@@ -113,7 +120,7 @@
         <p>Architected an end-to-end portfolio rebalancing workflow where AI surfaces recommendations, advisors decide, and every action stays auditable and mandate-aligned.</p>
         <span class="more">View case study <span class="arrow" aria-hidden="true">&rarr;</span></span>
       </div>
-    </a><a class="project sm reveal" href="work/portfolio-health.html">
+    </a><a class="project sm reveal" href="work/portfolio-health.html" data-cursor-badge="cursor-badge-view">
       <div class="shot"><img src="assets/img/9iO2ZGM4p4TnNoXjsiRvFTovY58.png" alt="Built investor confidence through portfolio health" loading="lazy"></div>
       <div class="body">
         <span class="tag">Fintech · iOS app · 2025</span>
@@ -121,7 +128,7 @@
         <p>Clarified portfolio risk and volatility through neutral framing and contextual explanations, helping users make informed decisions independently.</p>
         <span class="more">View case study <span class="arrow" aria-hidden="true">&rarr;</span></span>
       </div>
-    </a><a class="project sm reveal" href="work/trip-memories.html">
+    </a><a class="project sm reveal" href="work/trip-memories.html" data-cursor-badge="cursor-badge-view">
       <div class="shot"><img src="assets/img/TrorWvIDo5zv1eS2h04sgSZOtJ8.png" alt="Revolut redesign concept: trip memories drive engagement" loading="lazy"></div>
       <div class="body">
         <span class="tag">Fintech · Android app · 2025</span>
@@ -221,6 +228,6 @@
     </div>
   </div>
 </footer>
-<script src="assets/js/main.js?v=0575bfc8" defer></script>
+<script src="assets/js/main.js?v=4ab72cd3" defer></script>
 </body>
 </html>

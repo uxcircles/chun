@@ -48,7 +48,65 @@ const ICON = {
   target: `<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>`,
   briefcase: `<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>`,
   clock: `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`,
+  lock: `<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>`,
+  "trending-up": `<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>`,
+  "alert-triangle": `<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>`,
+  "check-circle": `<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>`,
+  layers: `<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>`,
+  eye: `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`,
+  "message-circle": `<path d="M21 11.5a8.38 8.38 0 0 1-8.6 8.5 8.5 8.5 0 0 1-4-.9L3 21l1.9-5.4A8.38 8.38 0 0 1 3.5 11 8.5 8.5 0 0 1 12 3a8.38 8.38 0 0 1 9 8.5z"/>`,
+  smartphone: `<rect x="6" y="2" width="12" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/>`,
+  "bar-chart": `<line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/>`,
+  zap: `<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>`,
+  sliders: `<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>`,
+  map: `<polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>`,
+  image: `<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>`,
+  pound: `<path d="M9 21h9M8 21c1.5 0 2-1 2-2.5V8a3.5 3.5 0 0 1 6.5-1.9M6 13h8"/>`,
+  gauge: `<path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M12 3a9 9 0 0 0-8.75 11.16M12 3a9 9 0 0 1 8.75 11.16M5 19.5a9 9 0 0 0 14 0"/><line x1="12" y1="12" x2="15.5" y2="7.5"/>`,
 };
+
+// keyword → icon fallback for item cards that have no leading emoji marker
+// (checked in order — first match wins), so Challenge/Solution/Outcome cards
+// across every case study get a relevant icon even without hand-authored emoji
+const KEYWORD_ICON = [
+  [/satisfaction|csat|reassur|delight/i, "smile"],
+  [/feedback|user stor|stakeholder|interview/i, "message-circle"],
+  [/discoverab|search/i, "eye"],
+  [/confus|unclear|debts|fragmented|lacks|isn.t obvious|no wrapper|no financial context|flat|problem/i, "alert-triangle"],
+  [/faster|reduced|efficien|speed|quick|streamlin/i, "zap"],
+  [/time|switching|schedul/i, "clock"],
+  [/wrapper|architecture|ia\b|platform|unified|standardis|introduced/i, "layers"],
+  [/accessib|visualisation|visib|clarity|transparent/i, "eye"],
+  [/risk|complian|regulat|governance|mandate|accountab|security/i, "shield"],
+  [/growth|return|higher|improv|trending/i, "trending-up"],
+  [/mobile|app|screen|smartphone/i, "smartphone"],
+  [/business impact|revenue|cost|£|financial/i, "pound"],
+  [/outcome|success|achieve|clearer|complete data|predictable/i, "check-circle"],
+  [/goal|target|action/i, "target"],
+  [/memories|illustration|photo|image/i, "image"],
+  [/option|setting|customi/i, "sliders"],
+  [/journey|trip|navigat|route|where (to|they)/i, "map"],
+  [/overview|transaction|account|data/i, "bar-chart"],
+  [/health|score|gauge/i, "gauge"],
+  [/workflow|complex/i, "compass"],
+];
+function pickCardIcon(title) {
+  for (const [re, name] of KEYWORD_ICON) if (re.test(title)) return name;
+  return "check-circle";
+}
+
+// cursor-follow circular badge: spinning text ring around a centre icon,
+// shown in place of the plain dot while hovering a trigger element
+function spinBadge(id, text, iconName) {
+  const t = `${text} · ${text} · `;
+  return `<div class="cursor-badge" id="${id}">
+  <svg viewBox="0 0 140 140">
+    <defs><path id="${id}-path" d="M70,70 m-56,0 a56,56 0 1,1 112,0 a56,56 0 1,1 -112,0"/></defs>
+    <text><textPath href="#${id}-path">${esc(t)}</textPath></text>
+  </svg>
+  <span class="cursor-badge-center">${icon(iconName, "cursor-badge-icon")}</span>
+</div>`;
+}
 const icon = (name, cls = "stat-icon") =>
   ICON[name]
     ? `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[name]}</svg>`
@@ -123,6 +181,7 @@ ${gated ? `<script>try{if(localStorage.getItem(${JSON.stringify(GATE_KEY)})==="1
 </div>` : ""}
 ${progress ? `<div class="scroll-progress" aria-hidden="true"><span></span></div>` : ""}
 <div class="cursor-dot" aria-hidden="true"></div>
+${spinBadge("cursor-badge-view", "CLICK TO VIEW", "lock")}
 ${nav(base)}
 ${body}
 ${footer(base)}
@@ -197,7 +256,7 @@ function buildHome() {
   const projects = d.featured.projects
     .map((p) => {
       const size = p.size === "lg" ? "lg" : "sm";
-      return `<a class="project ${size}${p.reverse ? " reverse" : ""} reveal" href="work/${p.slug}.html">
+      return `<a class="project ${size}${p.reverse ? " reverse" : ""} reveal" href="work/${p.slug}.html" data-cursor-badge="cursor-badge-view">
       <div class="shot"><img src="${IMG(p.img, base)}" alt="${esc(p.title)}" loading="lazy"></div>
       <div class="body">
         <span class="tag">${esc(p.meta)}</span>
@@ -415,7 +474,7 @@ function renderInner(blocks, base) {
       parts.push(`<div class="screen-compare full reveal">
         <img src="${IMG(b.img, base)}" alt="" loading="lazy">
         <div class="callouts">${items
-          .map(([t, s]) => `<div class="mini"><b>${esc(t)}</b><span>${esc(s)}</span></div>`)
+          .map(([t, s]) => `<div class="mini">${icon(pickCardIcon(t), "mini-icon")}<b>${esc(t)}</b><span>${esc(s)}</span></div>`)
           .join("")}</div>
       </div>`);
       continue;
@@ -435,8 +494,9 @@ function renderInner(blocks, base) {
       parts.push(
         `<div class="cards ${cls} reveal">${items
           .map(([t, s]) => {
-            const { iconName, text } = stripEmojiIcon(t);
-            return `<div class="mini">${iconName ? icon(iconName, "mini-icon") : ""}<b>${esc(text)}</b><span>${esc(s)}</span></div>`;
+            const stripped = stripEmojiIcon(t);
+            const iconName = stripped.iconName || pickCardIcon(stripped.text);
+            return `<div class="mini">${icon(iconName, "mini-icon")}<b>${esc(stripped.text)}</b><span>${esc(s)}</span></div>`;
           })
           .join("")}</div>`
       );

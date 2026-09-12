@@ -24,20 +24,31 @@ if (gateForm) {
 /* ---------- custom cursor (mouse only, replaces the native pointer) ---------- */
 if (!reduce && matchMedia("(pointer:fine)").matches) {
   const dot = document.querySelector(".cursor-dot");
+  const badges = new Map([...document.querySelectorAll(".cursor-badge")].map((b) => [b.id, b]));
   if (dot) {
-    let x = innerWidth / 2, y = innerHeight / 2, tx = x, ty = y, shown = false;
+    let x = innerWidth / 2, y = innerHeight / 2, tx = x, ty = y, shown = false, activeBadge = null;
     addEventListener("mousemove", (e) => {
       tx = e.clientX; ty = e.clientY;
       if (!shown) { x = tx; y = ty; shown = true; document.documentElement.classList.add("has-cursor"); dot.classList.add("visible"); }
     }, { passive: true });
     const tick = () => {
       x += (tx - x) * 0.22; y += (ty - y) * 0.22;
-      dot.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+      const t = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+      dot.style.transform = t;
+      if (activeBadge) activeBadge.style.transform = t;
       requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
     document.addEventListener("pointerover", (e) => {
-      dot.classList.toggle("hover", !!e.target.closest("a, button, .project, .article, input"));
+      const trigger = e.target.closest("[data-cursor-badge]");
+      const badge = trigger && badges.get(trigger.dataset.cursorBadge);
+      if (badge !== activeBadge) {
+        activeBadge?.classList.remove("show");
+        activeBadge = badge || null;
+        activeBadge?.classList.add("show");
+      }
+      dot.classList.toggle("hover", !!e.target.closest("a, button, .article, input") && !badge);
+      dot.style.opacity = badge ? "0" : "";
     });
   }
 }
@@ -71,10 +82,21 @@ if (reduce || !hasIO) {
         if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
       }
     },
-    { rootMargin: "120px 0px 80px 0px", threshold: 0 }
+    // trigger only once an element is meaningfully inside the viewport (not
+    // 80-120px early) so the blur/rise transition is actually visible as
+    // the user scrolls, instead of having already finished off-screen
+    { rootMargin: "0px 0px -10% 0px", threshold: 0 }
   );
   revealEls.forEach((el) => io.observe(el));
-  setTimeout(() => revealEls.forEach((el) => el.classList.add("in")), 3000);
+  // one-time safety net for content already on screen at load (some browsers
+  // don't fire IO for elements intersecting before observe() is called) —
+  // deliberately does NOT touch anything below the fold, so scroll reveals
+  // for later sections are never short-circuited
+  setTimeout(() => {
+    revealEls.forEach((el) => {
+      if (el.getBoundingClientRect().top < innerHeight) el.classList.add("in");
+    });
+  }, 1200);
 }
 
 /* ---------- hero headline: resolve after fonts are ready ---------- */
