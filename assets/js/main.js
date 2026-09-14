@@ -32,7 +32,7 @@ if (!reduce && matchMedia("(pointer:fine)").matches) {
       if (!shown) { x = tx; y = ty; shown = true; document.documentElement.classList.add("has-cursor"); dot.classList.add("visible"); }
     }, { passive: true });
     const tick = () => {
-      x += (tx - x) * 0.22; y += (ty - y) * 0.22;
+      x += (tx - x) * 0.45; y += (ty - y) * 0.45;
       const t = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
       dot.style.transform = t;
       if (activeBadge) activeBadge.style.transform = t;
