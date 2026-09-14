@@ -49,6 +49,7 @@ const ICON = {
   briefcase: `<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>`,
   clock: `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`,
   lock: `<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>`,
+  unlock: `<path d="M16 12h1.4a.6.6 0 01.6.6v6.8a.6.6 0 01-.6.6H6.6a.6.6 0 01-.6-.6v-6.8a.6.6 0 01.6-.6H8m8 0V8c0-1.333-.8-4-4-4S8 6.667 8 8v4m8 0H8"/>`,
   "trending-up": `<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>`,
   "alert-triangle": `<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>`,
   "check-circle": `<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>`,
@@ -98,11 +99,10 @@ function pickCardIcon(title) {
 // cursor-follow circular badge: spinning text ring around a centre icon,
 // shown in place of the plain dot while hovering a trigger element
 function spinBadge(id, text, iconName) {
-  const t = `${text} · ${text} · `;
   return `<div class="cursor-badge" id="${id}">
-  <svg viewBox="0 0 140 140">
-    <defs><path id="${id}-path" d="M70,70 m-56,0 a56,56 0 1,1 112,0 a56,56 0 1,1 -112,0"/></defs>
-    <text><textPath href="#${id}-path">${esc(t)}</textPath></text>
+  <svg viewBox="0 0 100 100">
+    <defs><path id="${id}-path" d="M 0 50 L 0 50 A 1 1 0 1 0 100 50 L 100 50 A 1 1 0 1 0 0 50 L 0 50"/></defs>
+    <text><textPath href="#${id}-path" startOffset="0" textLength="314" lengthAdjust="spacingAndGlyphs">${esc(text)}</textPath></text>
   </svg>
   <span class="cursor-badge-center">${icon(iconName, "cursor-badge-icon")}</span>
 </div>`;
@@ -181,7 +181,7 @@ ${gated ? `<script>try{if(localStorage.getItem(${JSON.stringify(GATE_KEY)})==="1
 </div>` : ""}
 ${progress ? `<div class="scroll-progress" aria-hidden="true"><span></span></div>` : ""}
 <div class="cursor-dot" aria-hidden="true"></div>
-${spinBadge("cursor-badge-view", "CLICK TO VIEW", "lock")}
+${spinBadge("cursor-badge-view", "Password protected · Private content · ", "unlock")}
 ${nav(base)}
 ${body}
 ${footer(base)}
