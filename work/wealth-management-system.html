@@ -13,30 +13,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=6bc6ccce">
+<link rel="stylesheet" href="../assets/css/style.css?v=85f1a1d6">
 </head>
-<body class="cs-page locked">
-<script>try{if(localStorage.getItem("cc_portfolio_unlocked")==="1")document.currentScript.parentElement.classList.remove("locked")}catch(e){}</script>
-<div class="gate" id="gate">
-  <div class="gate-box">
-    <h2 class="serif">This case study is private</h2>
-    <p>Enter the passcode to view it. Ask Chun if you don't have it.</p>
-    <form id="gate-form" autocomplete="off">
-      <input type="password" id="gate-input" placeholder="Passcode" autofocus>
-      <button type="submit">Unlock</button>
-    </form>
-    <p class="err" id="gate-err"></p>
-  </div>
-</div>
+<body class="cs-page">
+
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
 <div class="cursor-dot" aria-hidden="true"></div>
-<div class="cursor-badge" id="cursor-badge-view">
-  <svg viewBox="0 0 100 100">
-    <defs><path id="cursor-badge-view-path" d="M 0 50 L 0 50 A 1 1 0 1 0 100 50 L 100 50 A 1 1 0 1 0 0 50 L 0 50"/></defs>
-    <text><textPath href="#cursor-badge-view-path" startOffset="0" textLength="314" lengthAdjust="spacingAndGlyphs">Password protected · Private content · </textPath></text>
-  </svg>
-  <span class="cursor-badge-center"><svg class="cursor-badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 12h1.4a.6.6 0 01.6.6v6.8a.6.6 0 01-.6.6H6.6a.6.6 0 01-.6-.6v-6.8a.6.6 0 01.6-.6H8m8 0V8c0-1.333-.8-4-4-4S8 6.667 8 8v4m8 0H8"/></svg></span>
-</div>
+
 <header class="nav" id="nav">
   <div class="nav-in">
     <a class="brand" href="../index.html">
@@ -61,7 +44,7 @@
     <p class="meta reveal">Mar 2026 · Research, UX and UI design</p>
   </div>
 </section>
-<div class="cs-hero-img reveal wipe"><img src="../assets/img/E0ivBHq7jXSnA6J9aW9na1RmKs.png" alt=""></div>
+<div class="cs-hero-img reveal"><img src="../assets/img/E0ivBHq7jXSnA6J9aW9na1RmKs.png" alt=""></div>
 
 <div class="cs-body">
   <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-discovery-0">Discovery</a></li><li><a href="#sec-the-architecture-1">The architecture</a></li><li><a href="#sec-key-design-decisions-2">Key design decisions</a></li><li><a href="#sec-reflection-3">Reflection</a></li></ol></nav></aside>
@@ -93,7 +76,7 @@
 <p class="lead reveal">Why rebalancing — and not something else?</p>
 <p class="text reveal">The full wealth management system spans onboarding, reporting, tax structuring, and more. I used a prioritisation matrix to identify the highest-leverage entry point.</p>
 <p class="text reveal">Portfolio rebalancing scored highest across all three dimensions: financial impact, cross-team dependency, and regulatory sensitivity. It was also the workflow where the current process was most fragmented — advisors were managing drift detection and suitability reporting manually in Excel.</p>
-<figure class="reveal wipe full"><img src="../assets/img/x9WH2NC8tBtmjR3SEHw8lYLTRI.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/x9WH2NC8tBtmjR3SEHw8lYLTRI.png" alt="" loading="lazy"></figure>
 </section>
 <section class="cs-section" id="sec-the-architecture-1">
   <span class="num">02</span>
@@ -101,19 +84,19 @@
   <h3 class="sub serif reveal">Workflow</h3>
 <p class="lead reveal">From drift to decision — an 8-step governed workflow</p>
 <p class="text reveal">The architecture maps the full rebalancing journey: from automated drift detection through diagnosis, path planning, compliance validation, advisor review, simulation, client approval, and trade fulfilment. Each step has a defined owner, a clear decision gate, and an audit trail.</p>
-<figure class="reveal wipe full"><img src="../assets/img/rzPCHtE52T68TOkpEXy7BM6eoa8.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/rzPCHtE52T68TOkpEXy7BM6eoa8.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">Drift detection must enable 5-second awareness</h3>
 <p class="text reveal">The risk rebalancing dashboard surfaces portfolio-level alerts with immediate context — mandate breach vs. out-of-range vs. within band, sorted by impact severity. Advisors can see £1.5b AUM at risk across 298 clients at a glance, and act on the highest-priority cases without any manual scanning.</p>
 <div class="dd reveal"><b>Design decision</b><p>Separating &quot;Mandate breach&quot; from &quot;Out of range&quot; wasn't just a labelling choice — it defines two different response protocols. Mandate breach requires immediate action; out of range requires monitoring. The visual hierarchy enforces this distinction.</p></div>
-<figure class="reveal wipe full"><img src="../assets/img/ab4m8nQeq3U3MPOQM1kEe99EDjY.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/ab4m8nQeq3U3MPOQM1kEe99EDjY.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">Risk Intelligence</h3>
 <p class="text reveal">Once a drift is flagged, the advisor needs more than a number. This screen breaks down the risk score into its structural drivers — equity beta, growth concentration, USD exposure — and surfaces the top five contributing assets with their specific drift and impact. The AI rebalance suggestion appears inline, alongside the strategic trigger and expected impact, so the advisor can move from diagnosis to action without switching context.</p>
 <div class="dd reveal"><b>Design decision</b><p>The risk breakdown and the AI suggestion are deliberately placed on the same screen. In the previous workflow, advisors had to cross-reference multiple tools to understand why a portfolio drifted and what to do about it. Collapsing diagnosis and recommendation into a single view reduces the time between detection and action — and makes the advisor's rationale easier to construct when they need to justify the decision to compliance or the client.</p></div>
-<figure class="reveal wipe full"><img src="../assets/img/M6cCxAtRbV26PkRbCSbD3YJ4gk.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/M6cCxAtRbV26PkRbCSbD3YJ4gk.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">AI recommends. Humans decide.</h3>
 <p class="text reveal">The advice tool generates AI-recommended buy/sell adjustments based on the All-Weather model. But advisors retain full discretion — they can amend individual positions, add a counter view, or regenerate the proposal entirely.</p>
 <div class="dd reveal"><b>Design decision</b><p>The AI suggestion is surfaced as a starting point, not a default. The &quot;Counter view&quot; and &quot;Rationale&quot; buttons are primary-level actions — not buried — because overriding the AI should feel supported, not like breaking the system.</p></div>
-<figure class="reveal wipe full"><img src="../assets/img/UWpalTnz342eCAkfl1QRqOcSw.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/UWpalTnz342eCAkfl1QRqOcSw.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">Governance by design — compliance embedded, not bolted on</h3>
 <p class="text reveal">Compliance checks run automatically as the advisor builds the proposal. Rather than a separate approval gate at the end, the system validates mandate alignment, restricted securities, suitability rules, concentration limits, and liquidity requirements inline.</p>
 <div class="dd reveal"><b>Design decision</b><p>Making compliance visible during construction — not just at submission — changes advisor behaviour. It turns compliance from a blocker into a guardrail.</p></div>
@@ -127,7 +110,7 @@
 <h3 class="sub serif reveal">From approved advice to executed trades — closing the governance loop</h3>
 <p class="text reveal">Once the client approves the rebalancing proposal, the system generates the corresponding trade orders and routes them into the trading operations queue. This screen gives the back-office team a real-time view of all in-progress trades across clients — with status tabs for pending approval, awaiting scheduling, scheduled, due for execution, and order submitted. Each trade row carries the full context needed for execution: instrument, ISIN, action, amount, tax wrapper, approval date, and requested execution window.</p>
 <div class="dd reveal"><b>Design decision</b><p>The status pipeline at the top isn't just a summary — it's the primary navigation affordance. Back-office operators work through trades sequentially by status, not by client. Surfacing the count at each stage lets them triage at a glance without opening individual records. This mirrors how trading desks actually operate: by queue priority, not by relationship.</p></div>
-<figure class="reveal wipe full"><img src="../assets/img/ljZqY1W1dbwhdcLBtkpyiuiurM.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/ljZqY1W1dbwhdcLBtkpyiuiurM.png" alt="" loading="lazy"></figure>
 </section>
 <section class="cs-section" id="sec-key-design-decisions-2">
   <span class="num">03</span>

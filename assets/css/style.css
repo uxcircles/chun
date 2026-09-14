@@ -432,11 +432,6 @@ h1.serif,.hero h1,.section-head h2,.cs-hero h1,.cs-section h2.divider,.beyond .t
 .split.in .w:nth-child(n+8){transition-delay:.35s}
 .hero-title .w{filter:blur(16px);transform:translateY(.32em)}
 
-/* ---- clip-path wipe reveal for images ---- */
-.wipe{clip-path:inset(0 100% 0 0);transition:clip-path 1.05s cubic-bezier(.16,1,.3,1),opacity .5s ease}
-.wipe.reveal{opacity:1;transform:none}          /* wipe replaces the fade/translate */
-.wipe.in{clip-path:inset(0 0 0 0)}
-
 /* ---- hero cursor glow ---- */
 .hero{--mx:50%;--my:32%}
 .hero-glow{
@@ -462,7 +457,6 @@ h1.serif,.hero h1,.section-head h2,.cs-hero h1,.cs-section h2.divider,.beyond .t
 
 @media (prefers-reduced-motion:reduce){
   .split .w{filter:none;opacity:1;transform:none;transition:none}
-  .wipe{clip-path:none;transition:none}
   .hero-glow{display:none}
   .scroll-progress span{transition:none}
 }
@@ -485,10 +479,10 @@ html.has-cursor,html.has-cursor *{cursor:none!important}
   position:fixed;top:0;left:0;width:94px;height:94px;z-index:999;
   pointer-events:none;border-radius:50%;background:rgba(0,0,0,.6);
   display:flex;align-items:center;justify-content:center;
-  transform:translate(-50%,-50%) scale(.6);opacity:0;
-  transition:opacity .25s ease,transform .25s ease;
+  transform:translate(-50%,-50%);opacity:0;
+  transition:opacity .25s ease;
 }
-.cursor-badge.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.cursor-badge.show{opacity:1}
 .cursor-badge > svg{
   position:absolute;inset:15px;width:64px;height:64px;fill:none;
   animation:cursor-spin 6s linear infinite;

@@ -13,30 +13,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=6bc6ccce">
+<link rel="stylesheet" href="../assets/css/style.css?v=85f1a1d6">
 </head>
-<body class="cs-page locked">
-<script>try{if(localStorage.getItem("cc_portfolio_unlocked")==="1")document.currentScript.parentElement.classList.remove("locked")}catch(e){}</script>
-<div class="gate" id="gate">
-  <div class="gate-box">
-    <h2 class="serif">This case study is private</h2>
-    <p>Enter the passcode to view it. Ask Chun if you don't have it.</p>
-    <form id="gate-form" autocomplete="off">
-      <input type="password" id="gate-input" placeholder="Passcode" autofocus>
-      <button type="submit">Unlock</button>
-    </form>
-    <p class="err" id="gate-err"></p>
-  </div>
-</div>
+<body class="cs-page">
+
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
 <div class="cursor-dot" aria-hidden="true"></div>
-<div class="cursor-badge" id="cursor-badge-view">
-  <svg viewBox="0 0 100 100">
-    <defs><path id="cursor-badge-view-path" d="M 0 50 L 0 50 A 1 1 0 1 0 100 50 L 100 50 A 1 1 0 1 0 0 50 L 0 50"/></defs>
-    <text><textPath href="#cursor-badge-view-path" startOffset="0" textLength="314" lengthAdjust="spacingAndGlyphs">Password protected · Private content · </textPath></text>
-  </svg>
-  <span class="cursor-badge-center"><svg class="cursor-badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 12h1.4a.6.6 0 01.6.6v6.8a.6.6 0 01-.6.6H6.6a.6.6 0 01-.6-.6v-6.8a.6.6 0 01.6-.6H8m8 0V8c0-1.333-.8-4-4-4S8 6.667 8 8v4m8 0H8"/></svg></span>
-</div>
+
 <header class="nav" id="nav">
   <div class="nav-in">
     <a class="brand" href="../index.html">
@@ -61,7 +44,7 @@
     <p class="meta reveal">Oct 2025 · Research (Heuristic review, desk research, 5 user interviews), UX and UI design</p>
   </div>
 </section>
-<div class="cs-hero-img reveal wipe"><img src="../assets/img/Zd6YJ8oDITVZUEIJeXDYrRijMY.png" alt=""></div>
+<div class="cs-hero-img reveal"><img src="../assets/img/Zd6YJ8oDITVZUEIJeXDYrRijMY.png" alt=""></div>
 
 <div class="cs-body">
   <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-overview-0">Overview</a></li><li><a href="#sec-discovery-1">Discovery</a></li><li><a href="#sec-insight-2">Insight</a></li><li><a href="#sec-design-approach-3">Design approach</a></li><li><a href="#sec-version-3-travel-as-a-life-layer-4">Version 3 - Travel as a life layer</a></li><li><a href="#sec-user-journey-5">User journey</a></li><li><a href="#sec-strategic-value-6">Strategic value</a></li><li><a href="#sec-reflection-7">Reflection</a></li></ol></nav></aside>
@@ -81,11 +64,11 @@
 <p class="text reveal">A heuristic review of the current home screen revealed a consistent pattern: the interface prioritises density over clarity.</p>
 <p class="text reveal">Balance figures lack visual prominence. Income and expenses are rendered in the same colour, making them indistinguishable at a glance. Key actions — including currency exchange — are buried behind a label that simply says &quot;More.&quot; A promotional card sits in the middle of the screen, uninvited.</p>
 <p class="text reveal">The dark tone, which should feel premium, instead feels heavy. The kind of interface you use, but don't enjoy.</p>
-<figure class="reveal wipe full"><img src="../assets/img/lN99x2y37KHawiuTkNTEkr0ffU.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/lN99x2y37KHawiuTkNTEkr0ffU.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">What research confirmed</h3>
 <p class="text reveal">I conducted desk research alongside five user interviews to pressure-test whether these were real frictions or designer sensitivities. They were real. Three themes emerged consistently:</p>
 <div class="cards  reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><b>Feature discoverability is low</b><span>Users frequently miss time-sensitive features like exchange rates.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><b>Visual appeal feels flat</b><span>First impressions are neutral, but the interface fails to sustain engagement.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><b>There's no financial context</b><span>Users want to understand their money in relation to goals or trips — not just as a running total.</span></div></div>
-<figure class="reveal wipe full"><img src="../assets/img/mboe9WnDwfX102F2SP3tNp7I.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/mboe9WnDwfX102F2SP3tNp7I.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">1. Feature discoverability</h3>
 <div class="persona reveal">
         <img src="../assets/img/U1kzFYi7aX51JGptQfi5SJFyw.jpeg" alt="">
@@ -125,7 +108,7 @@
 <h3 class="sub serif reveal">What others get right</h3>
 <p class="text reveal">Competitor analysis reinforced the gap. Leading neobanks are moving toward personalised, goal-oriented home experiences — clear action hierarchies, welcoming visual tones, and light guidance for saving and exchange.</p>
 <ul class="bullets reveal"><li>Clear action hierarchy &amp; personalisation</li><li>Strong brand colour and welcoming tone</li><li>Light guidance for saving &amp; exchange</li></ul>
-<figure class="reveal wipe full"><img src="../assets/img/hHBJJgVaQMd18stv2P2azxhj3TY.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/hHBJJgVaQMd18stv2P2azxhj3TY.png" alt="" loading="lazy"></figure>
 </section>
 <section class="cs-section" id="sec-insight-2">
   <span class="num">03</span>
@@ -133,7 +116,7 @@
   <h3 class="sub serif reveal">The insight that changed the direction</h3>
 <p class="text reveal">Almost every time users described a moment of genuine engagement with their finances, the context was the same: they were travelling.</p>
 <p class="text reveal">Travel is when people spend the most, feel the most, and want to understand their money the most. Yet the current app treats a tea ceremony in Kyoto and a Netflix subscription with identical visual weight. There is no memory. No narrative. No sense that the app knows what the money meant.</p>
-<figure class="reveal wipe full"><img src="../assets/img/iSzRPQRQfrJ6HXk7Swxn3JfUgw.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/iSzRPQRQfrJ6HXk7Swxn3JfUgw.png" alt="" loading="lazy"></figure>
 <p class="lead reveal">That realisation opened up three distinct design directions — each asking a different question about what a home screen is really for.</p>
 </section>
 <section class="cs-section" id="sec-design-approach-3">
@@ -145,11 +128,11 @@
 <h3 class="sub serif reveal">Ready for Real-World Launch</h3>
 <p class="lead reveal">Practical Enhancements</p>
 <p class="text reveal">The first direction asks a deliberately constrained question: what is the minimum set of changes that would make this experience meaningfully better — without requiring a redesign mandate or new engineering infrastructure?</p>
-<figure class="reveal wipe full"><img src="../assets/img/EyIKhe2f76hxMcVEf4INOZa4OI.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/EyIKhe2f76hxMcVEf4INOZa4OI.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">Iterative Version: Clearer Wealth View &amp; Faster Daily Actions</h3>
 <p class="text reveal">The changes are surgical but impactful:</p>
 <ul class="bullets reveal"><li>Clearer hierarchy and button order — primary actions are visually prioritised</li><li>Stronger balance emphasis — the number you open the app to see is now the first thing you see</li><li>Better-organised labels and iconography — 'More' replaced with meaningful, scannable labels</li><li>Reduced disruption from promo card — contextual placement, not interruptive</li></ul>
-<figure class="reveal wipe full"><img src="../assets/img/EtFK5YnKzRuUFY5Ikt8SD2UDrVk.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/EtFK5YnKzRuUFY5Ikt8SD2UDrVk.png" alt="" loading="lazy"></figure>
 <p class="text reveal">An iterative pass on V1 introduced a clearer wealth overview with top-level net worth, key actions surfaced for quicker access, and a light mode to improve contrast and daytime readability.</p>
 </section>
 <section class="cs-section" id="sec-version-3-travel-as-a-life-layer-4">
@@ -181,19 +164,19 @@
   <h2 class="divider serif split"><span class="w">User</span> <span class="w">journey</span></h2>
   <h3 class="sub serif reveal">Lena's Journey</h3>
 <p class="text reveal">To make the concept tangible, I mapped a single user — Lena — across the full lifecycle of a trip. The scenario is not a persona exercise. It is a design stress-test: does each feature earn its place at each stage of the journey?</p>
-<div class="figrow two full reveal wipe"><img src="../assets/img/AsiWYnjdcmSt2nktjFScLilHYS4.png" alt="" loading="lazy"><img src="../assets/img/b6PXmHwH5ryPrKapefnRktMzg.png" alt="" loading="lazy"></div>
+<div class="figrow two full reveal"><img src="../assets/img/AsiWYnjdcmSt2nktjFScLilHYS4.png" alt="" loading="lazy"><img src="../assets/img/b6PXmHwH5ryPrKapefnRktMzg.png" alt="" loading="lazy"></div>
 <h3 class="sub serif reveal">Before the trip</h3>
 <p class="text reveal">Lena is planning her next adventure — 8 days in Japan. She opens the app and sets up a new goal: 🇯🇵 &quot;Japan 2026 · £2,000&quot;. She links her Vault to this goal and turns on Auto Exchange. While browsing flights, she sees a notification: “JPY is 5% cheaper than last month. Want to convert £500 now?” She locks it in with one tap. The app adds it to her Japan Travel.</p>
-<figure class="reveal wipe full"><img src="../assets/img/LliGWZXd4sQ6m4mTtajz8K8vdzA.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/LliGWZXd4sQ6m4mTtajz8K8vdzA.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">During the trip</h3>
 <p class="text reveal">She gets a daily summary every morning: “Yesterday: ¥8,250 spent. You have ¥318,000 left, about ¥53,000/day.” She also adds a note and photo to one large transaction: 🍵 “Kyoto Tea Ceremony - peaceful and unforgettable.” The app saves it as a Memory Moment.</p>
-<figure class="reveal wipe full"><img src="../assets/img/bxja3J30EKtpYBqCXyIOHoz319E.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/bxja3J30EKtpYBqCXyIOHoz319E.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">After the trip</h3>
 <p class="text reveal">Lena arrives back in London. A few days later, the app notifies her: “Your trip to Japan cost £1,983 across 21 transactions. Want to relive it?” She opens a visual report with tagged expenses, photos, and a chart comparing her budget vs actual spend. She shares the summary with her friends when someone asks, “How much did you spend?”</p>
-<figure class="reveal wipe full"><img src="../assets/img/qS6Ux0Hpicftmc4J3Dlp78MxrG4.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/qS6Ux0Hpicftmc4J3Dlp78MxrG4.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">A few months later</h3>
 <p class="text reveal">Later, the app reminds her: “Half a year since Japan. Ready to start your next chapter? Start saving for Korea now while flights are still low.” She taps &quot;Yes&quot;, names it: &quot;Korea 2027&quot;, and begins saving again.</p>
-<figure class="reveal wipe full"><img src="../assets/img/9jorSCUPUqghSKJ74gHGyVK29w.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/9jorSCUPUqghSKJ74gHGyVK29w.png" alt="" loading="lazy"></figure>
 </section>
 <section class="cs-section" id="sec-strategic-value-6">
   <span class="num">07</span>

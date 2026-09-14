@@ -13,30 +13,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=6bc6ccce">
+<link rel="stylesheet" href="../assets/css/style.css?v=85f1a1d6">
 </head>
-<body class="cs-page locked">
-<script>try{if(localStorage.getItem("cc_portfolio_unlocked")==="1")document.currentScript.parentElement.classList.remove("locked")}catch(e){}</script>
-<div class="gate" id="gate">
-  <div class="gate-box">
-    <h2 class="serif">This case study is private</h2>
-    <p>Enter the passcode to view it. Ask Chun if you don't have it.</p>
-    <form id="gate-form" autocomplete="off">
-      <input type="password" id="gate-input" placeholder="Passcode" autofocus>
-      <button type="submit">Unlock</button>
-    </form>
-    <p class="err" id="gate-err"></p>
-  </div>
-</div>
+<body class="cs-page">
+
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
 <div class="cursor-dot" aria-hidden="true"></div>
-<div class="cursor-badge" id="cursor-badge-view">
-  <svg viewBox="0 0 100 100">
-    <defs><path id="cursor-badge-view-path" d="M 0 50 L 0 50 A 1 1 0 1 0 100 50 L 100 50 A 1 1 0 1 0 0 50 L 0 50"/></defs>
-    <text><textPath href="#cursor-badge-view-path" startOffset="0" textLength="314" lengthAdjust="spacingAndGlyphs">Password protected · Private content · </textPath></text>
-  </svg>
-  <span class="cursor-badge-center"><svg class="cursor-badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 12h1.4a.6.6 0 01.6.6v6.8a.6.6 0 01-.6.6H6.6a.6.6 0 01-.6-.6v-6.8a.6.6 0 01.6-.6H8m8 0V8c0-1.333-.8-4-4-4S8 6.667 8 8v4m8 0H8"/></svg></span>
-</div>
+
 <header class="nav" id="nav">
   <div class="nav-in">
     <a class="brand" href="../index.html">
@@ -61,7 +44,7 @@
     <p class="meta reveal">2021 · UX, UI and motion design</p>
   </div>
 </section>
-<div class="cs-hero-img reveal wipe"><img src="../assets/img/OX6nDYRLKhPrMfGOQyfui4C2KuA.png" alt=""></div>
+<div class="cs-hero-img reveal"><img src="../assets/img/OX6nDYRLKhPrMfGOQyfui4C2KuA.png" alt=""></div>
 
 <div class="cs-body">
   <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-overview-0">Overview</a></li><li><a href="#sec-discover-1">Discover</a></li><li><a href="#sec-define-2">Define</a></li><li><a href="#sec-design-iterate-3">Design &amp; Iterate</a></li><li><a href="#sec-deliver-4">Deliver</a></li><li><a href="#sec-outcome-learnings-5">Outcome &amp; Learnings</a></li></ol></nav></aside>
@@ -71,7 +54,7 @@
   <h2 class="divider serif split"><span class="w">Overview</span></h2>
   <h3 class="sub serif reveal">Background</h3>
 <p class="text reveal">Collecting bank statements for personalised financial health check reports lacked a standard process, causing delays and confusion for clients and internal teams.</p>
-<figure class="reveal wipe full"><img src="../assets/img/Nd1UjjotRwBvtaV2dXRynibylKE.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/Nd1UjjotRwBvtaV2dXRynibylKE.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">Key problems</h3>
 <div class="cards  reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><b>Client confusion</b><span>Prospects don’t know how many statements to send or forget to submit them.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>Disorganised submission</b><span>Statements arrive via multiple channels, making it hard to track completeness.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>Internal uncertainty</b><span>Analysts and data input teams cannot tell when data is ready, delaying reports.</span></div></div>
 <h3 class="sub serif reveal">Solution</h3>
@@ -88,7 +71,7 @@
 <p class="text reveal">Statements were submitted via multiple emails or random app chats, leaving client service unsure of completeness.</p>
 <p class="text reveal">Analysts couldn’t determine when they could start preparing reports.</p>
 <p class="text reveal">No standardised process for collecting and verifying statements.</p>
-<figure class="reveal wipe full"><img src="../assets/img/zlVvFxQXumMlN5vUxzWkswkl0E.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/zlVvFxQXumMlN5vUxzWkswkl0E.png" alt="" loading="lazy"></figure>
 </section>
 <section class="cs-section" id="sec-define-2">
   <span class="num">03</span>
@@ -118,10 +101,10 @@
 <p class="text reveal">Extensible Functionality – We can add features tailored to client onboarding, document validation, and workflow tracking.</p>
 <p class="text reveal">Full Control &amp; Security – Sensitive client data remains fully under our control, ensuring compliance and reducing risk.</p>
 <p class="text reveal">Seamless Integration – The portal integrates directly with internal systems, enabling real-time updates for analysts and client service teams.</p>
-<figure class="reveal wipe full"><img src="../assets/img/IfOsOsHYSpRBZmVbsWqd5zSzw.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/IfOsOsHYSpRBZmVbsWqd5zSzw.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">New user journey</h3>
 <p class="text reveal">Mapped the user journey for statement uploads, walking stakeholders through it to uncover missing steps and potential issues.</p>
-<figure class="reveal wipe full"><img src="../assets/img/SfGZpqYeBllbc2cEW9I2oEOqYA.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/SfGZpqYeBllbc2cEW9I2oEOqYA.png" alt="" loading="lazy"></figure>
 <p class="lead reveal">Phase one goal</p>
 <p class="lead reveal">Enable prospects to send their statements securely and effortlessly</p>
 <h3 class="sub serif reveal">Login UX benchmarking</h3>
@@ -133,14 +116,14 @@
 <p class="text reveal">Consistent with our existing mobile login experience</p>
 <p class="text reveal">Leverages existing mechanism, saving resources</p>
 <p class="text reveal">Most familiar and comfortable for elder clients</p>
-<figure class="reveal wipe full"><img src="../assets/img/IdcQwnjVqWBDoCopafCG2rGFE.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/IdcQwnjVqWBDoCopafCG2rGFE.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">User flow</h3>
-<figure class="reveal wipe full"><img src="../assets/img/mdO6Dc7AQNw85tT9lJu32BRwonI.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/mdO6Dc7AQNw85tT9lJu32BRwonI.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">Key screens exploration</h3>
-<div class="figrow three full reveal wipe"><img src="../assets/img/LCabELWFcdEDsrtJhcJS0Vdvek.png" alt="" loading="lazy"><img src="../assets/img/DmFnkPipCCWWGVs4l0RR3t1pUw.png" alt="" loading="lazy"><img src="../assets/img/w4kdVTuXIkt2IQO5o6eFFqbWc.png" alt="" loading="lazy"><img src="../assets/img/XIdd3Ki8qnGQbr4GxeZFvUOs6FQ.png" alt="" loading="lazy"><img src="../assets/img/U2IwR6ppF3HtITTZWGJthte5S7k.png" alt="" loading="lazy"><img src="../assets/img/0fRun8uopap949FgM7d6oDE02gk.png" alt="" loading="lazy"><img src="../assets/img/KMippCfU7jtFEV5aXUaqbHZJPfw.png" alt="" loading="lazy"><img src="../assets/img/LFizSyYQ25baL9gF4l02Xo4fs.png" alt="" loading="lazy"></div>
+<div class="figrow three full reveal"><img src="../assets/img/LCabELWFcdEDsrtJhcJS0Vdvek.png" alt="" loading="lazy"><img src="../assets/img/DmFnkPipCCWWGVs4l0RR3t1pUw.png" alt="" loading="lazy"><img src="../assets/img/w4kdVTuXIkt2IQO5o6eFFqbWc.png" alt="" loading="lazy"><img src="../assets/img/XIdd3Ki8qnGQbr4GxeZFvUOs6FQ.png" alt="" loading="lazy"><img src="../assets/img/U2IwR6ppF3HtITTZWGJthte5S7k.png" alt="" loading="lazy"><img src="../assets/img/0fRun8uopap949FgM7d6oDE02gk.png" alt="" loading="lazy"><img src="../assets/img/KMippCfU7jtFEV5aXUaqbHZJPfw.png" alt="" loading="lazy"><img src="../assets/img/LFizSyYQ25baL9gF4l02Xo4fs.png" alt="" loading="lazy"></div>
 <h3 class="sub serif reveal">Prototype</h3>
 <p class="text reveal">Rapid prototyping enabled quick stakeholder feedback and informed final design.</p>
-<figure class="reveal wipe full"><img src="../assets/img/bOojNFecvwv15x1qtQlhUoY81s.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/bOojNFecvwv15x1qtQlhUoY81s.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">Feedback &amp; revised layouts</h3>
 <p class="text reveal">Key Issues Identified:</p>
 <p class="text reveal">Progress Tracking Unclear – Statements arrive monthly, quarterly, or semi-yearly, making automatic sufficiency detection difficult. Progress bars for quarters needed redesign, and we explored ways to let clients know if enough statements were submitted.</p>
@@ -148,7 +131,7 @@
 <p class="text reveal">Proposed Solution:</p>
 <p class="text reveal">Designed three new layouts using “folder” imagery to indicate drag-and-drop file upload.</p>
 <p class="text reveal">Added animation and instructions to clearly show clients how many statements are needed and how to submit them.</p>
-<div class="figrow three full reveal wipe"><img src="../assets/img/7f7ni4fN0Vx2j6S2LKgfrIDRleY.png" alt="" loading="lazy"><img src="../assets/img/acdRCRaG0C4BRiJxNDyigzNwBRc.png" alt="" loading="lazy"><img src="../assets/img/DdCvDpvjKK4eg9PhC8BlAAUJonk.png" alt="" loading="lazy"></div>
+<div class="figrow three full reveal"><img src="../assets/img/7f7ni4fN0Vx2j6S2LKgfrIDRleY.png" alt="" loading="lazy"><img src="../assets/img/acdRCRaG0C4BRiJxNDyigzNwBRc.png" alt="" loading="lazy"><img src="../assets/img/DdCvDpvjKK4eg9PhC8BlAAUJonk.png" alt="" loading="lazy"></div>
 <h3 class="sub serif reveal">Design Comparison: Initial vs Latest</h3>
 <p class="text reveal">Cleaner Layout – Provider blocks redesigned as folder shapes for clarity and simplicity.</p>
 <p class="text reveal">Luxury UI – Dark theme applied to enhance elegance and friendliness.</p>
@@ -158,7 +141,7 @@
 <p class="text reveal">Future Enhancements – Client-added providers postponed due to limitations; low priority as initial provider list is usually complete.</p>
 <h3 class="sub serif reveal" style="font-size:1.1rem">Old</h3>
 <h3 class="sub serif reveal" style="font-size:1.1rem">New</h3>
-<div class="figrow two full reveal wipe"><img src="../assets/img/OVtpsHtIOYhZQY8EFf1daHdJ3aE.png" alt="" loading="lazy"><img src="../assets/img/gVJ3N1mhVUoq5YqFDLzqJfznzG0.png" alt="" loading="lazy"></div>
+<div class="figrow two full reveal"><img src="../assets/img/OVtpsHtIOYhZQY8EFf1daHdJ3aE.png" alt="" loading="lazy"><img src="../assets/img/gVJ3N1mhVUoq5YqFDLzqJfznzG0.png" alt="" loading="lazy"></div>
 </section>
 <section class="cs-section" id="sec-deliver-4">
   <span class="num">05</span>
@@ -171,10 +154,10 @@
         </figure>
 <h3 class="sub serif reveal">Mobile design</h3>
 <p class="text reveal">Replaced drag-and-drop and hover interactions, updated texts and images for smaller screens.</p>
-<figure class="reveal wipe full"><img src="../assets/img/mN4M9hKGMWKSW5K1nhdYaTwmiU.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/mN4M9hKGMWKSW5K1nhdYaTwmiU.png" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">Design handover</h3>
 <p class="text reveal">Used Figma Auto Layout &amp; Resizing to ensure responsive design and defined upload/loading states for clarity.</p>
-<div class="figrow two full reveal wipe"><img src="../assets/img/iPaUIxTd72ilFw4JvyidMJWOKQ.png" alt="" loading="lazy"><img src="../assets/img/T5MNL2MXvrff89ePnzsmeIi6M0.png" alt="" loading="lazy"></div>
+<div class="figrow two full reveal"><img src="../assets/img/iPaUIxTd72ilFw4JvyidMJWOKQ.png" alt="" loading="lazy"><img src="../assets/img/T5MNL2MXvrff89ePnzsmeIi6M0.png" alt="" loading="lazy"></div>
 </section>
 <section class="cs-section" id="sec-outcome-learnings-5">
   <span class="num">06</span>

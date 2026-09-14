@@ -48,8 +48,7 @@ const ICON = {
   target: `<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>`,
   briefcase: `<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>`,
   clock: `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`,
-  lock: `<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>`,
-  unlock: `<path d="M16 12h1.4a.6.6 0 01.6.6v6.8a.6.6 0 01-.6.6H6.6a.6.6 0 01-.6-.6v-6.8a.6.6 0 01.6-.6H8m8 0V8c0-1.333-.8-4-4-4S8 6.667 8 8v4m8 0H8"/>`,
+  lock: `<path d="M16 12h1.4a.6.6 0 01.6.6v6.8a.6.6 0 01-.6.6H6.6a.6.6 0 01-.6-.6v-6.8a.6.6 0 01.6-.6H8m8 0V8c0-1.333-.8-4-4-4S8 6.667 8 8v4m8 0H8"/>`,
   "trending-up": `<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>`,
   "alert-triangle": `<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>`,
   "check-circle": `<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>`,
@@ -104,7 +103,7 @@ function spinBadge(id, text, iconName) {
     <defs><path id="${id}-path" d="M 0 50 L 0 50 A 1 1 0 1 0 100 50 L 100 50 A 1 1 0 1 0 0 50 L 0 50"/></defs>
     <text><textPath href="#${id}-path" startOffset="0" textLength="314" lengthAdjust="spacingAndGlyphs">${esc(text)}</textPath></text>
   </svg>
-  <span class="cursor-badge-center">${icon(iconName, "cursor-badge-icon")}</span>
+  ${iconName ? `<span class="cursor-badge-center">${icon(iconName, "cursor-badge-icon")}</span>` : ""}
 </div>`;
 }
 const icon = (name, cls = "stat-icon") =>
@@ -133,8 +132,8 @@ function stripEmojiIcon(title) {
 
 /* ---------- case study registry (order = prev/next) ---------- */
 const STUDIES = [
-  { slug: "provider-redesign",        file: "cs1-provider-redesign.json",        card: "Redesigned a £9B platform for UHNW clients", img: "VFbImBTynQh7F0MmkZp4YDalEAE.png" },
-  { slug: "home-redesign",            file: "cs2-home-redesign.json",            card: "Improved mobile app CSAT to 89%", img: "YumomZDwZKkCPeDbRDVu0XXveg.png" },
+  { slug: "provider-redesign",        file: "cs1-provider-redesign.json",        card: "Redesigned a £9B platform for UHNW clients", img: "VFbImBTynQh7F0MmkZp4YDalEAE.png", locked: true },
+  { slug: "home-redesign",            file: "cs2-home-redesign.json",            card: "Improved mobile app CSAT to 89%", img: "YumomZDwZKkCPeDbRDVu0XXveg.png", locked: true },
   { slug: "client-portal",            file: "cs3-client-portal.json",            card: "Simplified onboarding via a client portal", img: "cqkEi4mZ536VQZQC6X23w6QmEs.png" },
   { slug: "wealth-management-system", file: "cs4-wealth-management-system.json", card: "A governed rebalancing system for wealth advisors", img: "E0ivBHq7jXSnA6J9aW9na1RmKs.png" },
   { slug: "portfolio-health",         file: "cs5-portfolio-health.json",         card: "Portfolio health for a regulated investment app", img: "9iO2ZGM4p4TnNoXjsiRvFTovY58.png" },
@@ -147,7 +146,7 @@ const STUDIES = [
 const GATE_KEY = "cc_portfolio_unlocked";
 const GATE_PASS = "Chun";
 
-function shell({ title, desc, body, base, extraClass = "", progress = false, gated = false }) {
+function shell({ title, desc, body, base, extraClass = "", progress = false, gated = false, cursorBadges = "" }) {
   const bodyClass = gated ? `${extraClass} locked`.trim() : extraClass;
   return `<!doctype html>
 <html lang="en">
@@ -181,7 +180,7 @@ ${gated ? `<script>try{if(localStorage.getItem(${JSON.stringify(GATE_KEY)})==="1
 </div>` : ""}
 ${progress ? `<div class="scroll-progress" aria-hidden="true"><span></span></div>` : ""}
 <div class="cursor-dot" aria-hidden="true"></div>
-${spinBadge("cursor-badge-view", "Password protected · Private content · ", "unlock")}
+${cursorBadges}
 ${nav(base)}
 ${body}
 ${footer(base)}
@@ -256,7 +255,9 @@ function buildHome() {
   const projects = d.featured.projects
     .map((p) => {
       const size = p.size === "lg" ? "lg" : "sm";
-      return `<a class="project ${size}${p.reverse ? " reverse" : ""} reveal" href="work/${p.slug}.html" data-cursor-badge="cursor-badge-view">
+      const locked = STUDIES.find((s) => s.slug === p.slug)?.locked;
+      const badgeId = locked ? "cursor-badge-locked" : "cursor-badge-view";
+      return `<a class="project ${size}${p.reverse ? " reverse" : ""} reveal" href="work/${p.slug}.html" data-cursor-badge="${badgeId}">
       <div class="shot"><img src="${IMG(p.img, base)}" alt="${esc(p.title)}" loading="lazy"></div>
       <div class="body">
         <span class="tag">${esc(p.meta)}</span>
@@ -365,12 +366,17 @@ function buildHome() {
   </div>
 </section>`;
 
+  const cursorBadges =
+    spinBadge("cursor-badge-locked", "Password protected · Private content · ", "lock") +
+    spinBadge("cursor-badge-view", "Click to view · Click to view · ", null);
+
   return shell({
     title: "Chun-Chuan Lin — Product designer for complex, regulated financial products",
     desc: h.sub,
     body,
     base,
     extraClass: "theme-dark",
+    cursorBadges,
   });
 }
 
@@ -451,9 +457,9 @@ function slugify(s) {
 
 function figrow(names, base) {
   if (names.length === 1)
-    return `<figure class="reveal wipe full"><img src="${IMG(names[0], base)}" alt="" loading="lazy"></figure>`;
+    return `<figure class="reveal full"><img src="${IMG(names[0], base)}" alt="" loading="lazy"></figure>`;
   const cls = names.length === 2 ? "two" : "three";
-  return `<div class="figrow ${cls} full reveal wipe">${names
+  return `<div class="figrow ${cls} full reveal">${names
     .map((nm) => `<img src="${IMG(nm, base)}" alt="" loading="lazy">`)
     .join("")}</div>`;
 }
@@ -516,7 +522,7 @@ function renderInner(blocks, base) {
     }
     if (b.cap && b.img) {
       parts.push(
-        `<figure class="reveal wipe full"><img src="${IMG(b.img, base)}" alt="" loading="lazy"><figcaption>${esc(b.cap)}</figcaption></figure>`
+        `<figure class="reveal full"><img src="${IMG(b.img, base)}" alt="" loading="lazy"><figcaption>${esc(b.cap)}</figcaption></figure>`
       );
       continue;
     }
@@ -632,7 +638,7 @@ function buildStudy(study, idx) {
     ${meta ? `<p class="meta reveal">${esc(meta)}</p>` : ""}
   </div>
 </section>
-${heroImg ? `<div class="cs-hero-img reveal wipe"><img src="${IMG(heroImg, base)}" alt=""></div>` : ""}
+${heroImg ? `<div class="cs-hero-img reveal"><img src="${IMG(heroImg, base)}" alt=""></div>` : ""}
 
 <div class="cs-body">
   <aside class="toc"><nav aria-label="Sections"><ol>${tocHtml}</ol></nav></aside>
@@ -670,7 +676,7 @@ ${heroImg ? `<div class="cs-hero-img reveal wipe"><img src="${IMG(heroImg, base)
     base,
     extraClass: "cs-page",
     progress: true,
-    gated: true,
+    gated: !!study.locked,
   });
 }
 
