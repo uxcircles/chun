@@ -21,6 +21,26 @@ if (gateForm) {
   });
 }
 
+/* ---------- cursor badge: close the text ring to the circle ----------
+   The build only ever emits fewer characters than the ring can hold, because
+   text running past the end of a closed path can be painted back over the
+   start of the ring. Measuring here lets the gap be taken up with plain
+   letter-spacing instead of textLength/lengthAdjust, which a textPath does
+   not honour reliably. */
+const fitBadgeText = () => {
+  for (const badge of document.querySelectorAll(".cursor-badge")) {
+    const textEl = badge.querySelector("text");
+    const path = badge.querySelector("path");
+    if (!textEl || !path) continue;
+    textEl.style.letterSpacing = "0px";
+    const chars = textEl.textContent.length;
+    const room = path.getTotalLength() * 0.96 - textEl.getComputedTextLength();
+    if (chars > 0 && room > 0) textEl.style.letterSpacing = room / chars + "px";
+  }
+};
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitBadgeText);
+else fitBadgeText();
+
 /* ---------- custom cursor (mouse only, replaces the native pointer) ---------- */
 if (!reduce && matchMedia("(pointer:fine)").matches) {
   const dot = document.querySelector(".cursor-dot");

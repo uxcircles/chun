@@ -98,19 +98,21 @@ function pickCardIcon(title) {
 // cursor-follow circular badge: spinning text ring around a centre icon,
 // shown in place of the plain dot while hovering a trigger element
 function spinBadge(id, text, iconName) {
-  // textLength/lengthAdjust on a textPath renders inconsistently across
-  // engines (garbled/overlapping glyphs in Safari) — instead, repeat the
-  // phrase enough times to safely exceed the ring's circumference; SVG
-  // simply stops painting characters once they run past the end of the
-  // path, so a generous over-repeat is harmless and portable.
-  const circumference = 2 * Math.PI * 50; // path radius is 50 in the 100-unit viewBox
-  const fontSize = 11, avgCharWidth = fontSize * 0.58;
+  // Keep this deliberately plain: no textLength/lengthAdjust (renders
+  // inconsistently on a textPath), an explicit arc radius rather than the
+  // "A 1 1" auto-scaled-radius trick, and never more text than the ring can
+  // hold — text that runs past the end of a closed path can be redrawn over
+  // the start of the ring instead of being dropped, which is what turned the
+  // label into an unreadable overlapping smear.
+  const radius = 44; // within the 100-unit viewBox, leaving a margin at the edge
+  const circumference = 2 * Math.PI * radius;
+  const fontSize = 11, avgCharWidth = fontSize * 0.6;
   const unit = `${text} · `;
-  const reps = Math.max(2, Math.ceil(circumference / (unit.length * avgCharWidth)) + 1);
+  const reps = Math.max(1, Math.floor((circumference * 0.9) / (unit.length * avgCharWidth)));
   const t = unit.repeat(reps);
   return `<div class="cursor-badge" id="${id}">
   <svg viewBox="0 0 100 100">
-    <defs><path id="${id}-path" d="M 0 50 L 0 50 A 1 1 0 1 0 100 50 L 100 50 A 1 1 0 1 0 0 50 L 0 50"/></defs>
+    <defs><path id="${id}-path" d="M 6,50 A 44,44 0 1,1 94,50 A 44,44 0 1,1 6,50"/></defs>
     <text dominant-baseline="hanging"><textPath href="#${id}-path" startOffset="0">${esc(t)}</textPath></text>
   </svg>
   ${iconName ? `<span class="cursor-badge-center">${icon(iconName, "cursor-badge-icon")}</span>` : ""}
@@ -474,8 +476,13 @@ function figrow(names, base) {
     .join("")}</div>`;
 }
 
+// cards sitting under a heading about what went wrong get red icons, so a
+// reader can tell problems from solutions and outcomes at a glance
+const PROBLEM_HEADING = /problem|challenge|pain|issue|debt|risk|friction|barrier|blocker/i;
+
 function renderInner(blocks, base) {
   const parts = [];
+  let heading = "";
   let i = 0;
   while (i < blocks.length) {
     const b = blocks[i];
@@ -487,10 +494,11 @@ function renderInner(blocks, base) {
       i++;
       const items = [];
       while (i < blocks.length && Array.isArray(blocks[i].item)) { items.push(blocks[i].item); i++; }
+      const warn = PROBLEM_HEADING.test(heading) ? " warn" : "";
       parts.push(`<div class="screen-compare full reveal">
         <img src="${IMG(b.img, base)}" alt="" loading="lazy">
         <div class="callouts">${items
-          .map(([t, s]) => `<div class="mini">${icon(pickCardIcon(t), "mini-icon")}<b>${esc(t)}</b><span>${esc(s)}</span></div>`)
+          .map(([t, s]) => `<div class="mini${warn}">${icon(pickCardIcon(t), "mini-icon")}<b>${esc(t)}</b><span>${esc(s)}</span></div>`)
           .join("")}</div>
       </div>`);
       continue;
@@ -507,12 +515,13 @@ function renderInner(blocks, base) {
       const items = [];
       while (i < blocks.length && Array.isArray(blocks[i].item)) { items.push(blocks[i].item); i++; }
       const cls = items.length === 2 ? "c2" : items.length === 4 ? "c4" : "";
+      const warn = PROBLEM_HEADING.test(heading) ? " warn" : "";
       parts.push(
         `<div class="cards ${cls} reveal">${items
           .map(([t, s]) => {
             const stripped = stripEmojiIcon(t);
             const iconName = stripped.iconName || pickCardIcon(stripped.text);
-            return `<div class="mini">${icon(iconName, "mini-icon")}<b>${esc(stripped.text)}</b><span>${esc(s)}</span></div>`;
+            return `<div class="mini${warn}">${icon(iconName, "mini-icon")}<b>${esc(stripped.text)}</b><span>${esc(s)}</span></div>`;
           })
           .join("")}</div>`
       );
@@ -618,7 +627,7 @@ function renderInner(blocks, base) {
     }
 
     // plain typographic blocks
-    if (isH(b, "H2")) { parts.push(`<h3 class="sub serif reveal">${esc(b.text)}</h3>`); continue; }
+    if (isH(b, "H2")) { heading = b.text; parts.push(`<h3 class="sub serif reveal">${esc(b.text)}</h3>`); continue; }
     if (isH(b, "H3", "H5")) { parts.push(`<p class="lead reveal">${esc(b.text)}</p>`); continue; }
     if (isH(b, "H4")) { parts.push(`<h3 class="sub serif reveal" style="font-size:1.1rem">${esc(b.text)}</h3>`); continue; }
     if (b.tag === "text" || typeof b.text === "string") { parts.push(`<p class="text reveal">${esc(b.text)}</p>`); continue; }
