@@ -485,7 +485,7 @@ html.has-cursor,html.has-cursor *{cursor:none!important}
 }
 .cursor-badge.show{opacity:1}
 .cursor-badge > svg{
-  position:absolute;inset:15px;width:64px;height:64px;fill:none;
+  position:absolute;inset:15px;width:64px;height:64px;fill:none;overflow:visible;
   animation:cursor-spin 6s linear infinite;
 }
 .cursor-badge text{font-family:var(--sans);font-size:11px;letter-spacing:0;fill:#fff}

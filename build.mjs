@@ -104,16 +104,16 @@ function spinBadge(id, text, iconName) {
   // hold — text that runs past the end of a closed path can be redrawn over
   // the start of the ring instead of being dropped, which is what turned the
   // label into an unreadable overlapping smear.
-  const radius = 44; // within the 100-unit viewBox, leaving a margin at the edge
+  const radius = 50; // the ring sits at the edge of the viewBox, as on the real site
   const circumference = 2 * Math.PI * radius;
   const fontSize = 11, avgCharWidth = fontSize * 0.6;
   const unit = `${text} · `;
   const reps = Math.max(1, Math.floor((circumference * 0.9) / (unit.length * avgCharWidth)));
   const t = unit.repeat(reps);
   return `<div class="cursor-badge" id="${id}">
-  <svg viewBox="0 0 100 100">
-    <defs><path id="${id}-path" d="M 6,50 A 44,44 0 1,1 94,50 A 44,44 0 1,1 6,50"/></defs>
-    <text dominant-baseline="hanging"><textPath href="#${id}-path" startOffset="0">${esc(t)}</textPath></text>
+  <svg viewBox="0 0 100 100" overflow="visible">
+    <defs><path id="${id}-path" d="M 0,50 A 50,50 0 1,1 100,50 A 50,50 0 1,1 0,50"/></defs>
+    <text><textPath href="#${id}-path" startOffset="0">${esc(t)}</textPath></text>
   </svg>
   ${iconName ? `<span class="cursor-badge-center">${icon(iconName, "cursor-badge-icon")}</span>` : ""}
 </div>`;
@@ -379,7 +379,7 @@ function buildHome() {
 </section>`;
 
   const cursorBadges =
-    spinBadge("cursor-badge-locked", "Password protected | Private content", "lock") +
+    spinBadge("cursor-badge-locked", "Password protected · Private content", "lock") +
     spinBadge("cursor-badge-view", "Click to view", null);
 
   return shell({
