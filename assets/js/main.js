@@ -32,10 +32,21 @@ const fitBadgeText = () => {
     const textEl = badge.querySelector("text");
     const path = badge.querySelector("path");
     if (!textEl || !path) continue;
-    textEl.style.letterSpacing = "0px";
+    const ring = path.getTotalLength();
     const chars = textEl.textContent.length;
-    const room = path.getTotalLength() * 0.96 - textEl.getComputedTextLength();
-    if (chars > 0 && room > 0) textEl.style.letterSpacing = room / chars + "px";
+    if (!chars) continue;
+    textEl.style.letterSpacing = "0px";
+    textEl.style.fontSize = "";
+    // never let the label run past the end of the ring
+    let size = parseFloat(getComputedStyle(textEl).fontSize);
+    while (textEl.getComputedTextLength() > ring && size > 8) {
+      size -= 0.5;
+      textEl.style.fontSize = size + "px";
+    }
+    // close any small remainder with tracking, kept tight — the ring should
+    // read as solid text, not widely spaced letters
+    const room = ring * 0.98 - textEl.getComputedTextLength();
+    if (room > 0) textEl.style.letterSpacing = Math.min(room / chars, 0.9) + "px";
   }
 };
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitBadgeText);

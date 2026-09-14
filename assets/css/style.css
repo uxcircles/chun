@@ -486,9 +486,11 @@ html.has-cursor,html.has-cursor *{cursor:none!important}
 .cursor-badge.show{opacity:1}
 .cursor-badge > svg{
   position:absolute;inset:15px;width:64px;height:64px;fill:none;overflow:visible;
-  animation:cursor-spin 6s linear infinite;
+  animation:cursor-spin 3s linear infinite; /* measured off chunchuanlin.design: 3.02s/rev, clockwise */
 }
-.cursor-badge text{font-family:var(--sans);font-size:11px;letter-spacing:0;fill:#fff}
+/* sized so the label fills the ring on its own; the real site's ring is ~99%
+   full at natural spacing, so the gap is closed with type size, not tracking */
+.cursor-badge text{font-family:var(--sans);font-size:17px;letter-spacing:0;fill:#fff}
 .cursor-badge-center{
   position:relative;width:24px;height:24px;color:#fff;
   display:flex;align-items:center;justify-content:center;

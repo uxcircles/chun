@@ -109,8 +109,8 @@ function spinBadge(id, text, iconName) {
   // path is "A 1 1 0 1 0 ..." with dominant-baseline Hanging on the textPath
   const radius = 50; // the ring sits at the edge of the viewBox, as on the real site
   const circumference = 2 * Math.PI * radius;
-  const fontSize = 11, avgCharWidth = fontSize * 0.6;
-  const unit = `${text} · `;
+  const fontSize = 17, avgCharWidth = fontSize * 0.48;
+  const unit = `${text} | `;
   const reps = Math.max(1, Math.floor((circumference * 0.9) / (unit.length * avgCharWidth)));
   const t = unit.repeat(reps);
   return `<div class="cursor-badge" id="${id}">
@@ -382,8 +382,8 @@ function buildHome() {
 </section>`;
 
   const cursorBadges =
-    spinBadge("cursor-badge-locked", "Password protected · Private content", "lock") +
-    spinBadge("cursor-badge-view", "Click to view", null);
+    spinBadge("cursor-badge-locked", "Password protected | Private content", "lock") +
+    spinBadge("cursor-badge-view", "CLICK TO VIEW", null);
 
   return shell({
     title: "Chun-Chuan Lin — Product designer for complex, regulated financial products",
