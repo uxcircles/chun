@@ -98,10 +98,20 @@ function pickCardIcon(title) {
 // cursor-follow circular badge: spinning text ring around a centre icon,
 // shown in place of the plain dot while hovering a trigger element
 function spinBadge(id, text, iconName) {
+  // textLength/lengthAdjust on a textPath renders inconsistently across
+  // engines (garbled/overlapping glyphs in Safari) — instead, repeat the
+  // phrase enough times to safely exceed the ring's circumference; SVG
+  // simply stops painting characters once they run past the end of the
+  // path, so a generous over-repeat is harmless and portable.
+  const circumference = 2 * Math.PI * 50; // path radius is 50 in the 100-unit viewBox
+  const fontSize = 11, avgCharWidth = fontSize * 0.58;
+  const unit = `${text} · `;
+  const reps = Math.max(2, Math.ceil(circumference / (unit.length * avgCharWidth)) + 1);
+  const t = unit.repeat(reps);
   return `<div class="cursor-badge" id="${id}">
   <svg viewBox="0 0 100 100">
     <defs><path id="${id}-path" d="M 0 50 L 0 50 A 1 1 0 1 0 100 50 L 100 50 A 1 1 0 1 0 0 50 L 0 50"/></defs>
-    <text dominant-baseline="hanging"><textPath href="#${id}-path" startOffset="0" textLength="314" lengthAdjust="spacing">${esc(text)}</textPath></text>
+    <text dominant-baseline="hanging"><textPath href="#${id}-path" startOffset="0">${esc(t)}</textPath></text>
   </svg>
   ${iconName ? `<span class="cursor-badge-center">${icon(iconName, "cursor-badge-icon")}</span>` : ""}
 </div>`;
@@ -367,8 +377,8 @@ function buildHome() {
 </section>`;
 
   const cursorBadges =
-    spinBadge("cursor-badge-locked", "Password protected · Private content · ", "lock") +
-    spinBadge("cursor-badge-view", "Click to view · Click to view · ", null);
+    spinBadge("cursor-badge-locked", "Password protected | Private content", "lock") +
+    spinBadge("cursor-badge-view", "Click to view", null);
 
   return shell({
     title: "Chun-Chuan Lin — Product designer for complex, regulated financial products",

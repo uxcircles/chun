@@ -290,7 +290,7 @@ section{padding:96px 0;scroll-margin-top:84px}
 
 .cs-content{min-width:0}
 /* keep prose in a comfortable measure; let media use the full column */
-.cs-section > :not(figure):not(.figrow):not(.compare):not(h2):not(.num){max-width:760px}
+.cs-section > :not(figure):not(.figrow):not(.screen-compare):not(.duo):not(.cards):not(h2):not(.num){max-width:760px}
 
 .cs-section{padding-top:26px;margin-top:36px;border-top:1px solid var(--line);scroll-margin-top:84px}
 .cs-section:first-child{border-top:0;margin-top:0;padding-top:0}
