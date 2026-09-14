@@ -101,7 +101,7 @@ function spinBadge(id, text, iconName) {
   return `<div class="cursor-badge" id="${id}">
   <svg viewBox="0 0 100 100">
     <defs><path id="${id}-path" d="M 0 50 L 0 50 A 1 1 0 1 0 100 50 L 100 50 A 1 1 0 1 0 0 50 L 0 50"/></defs>
-    <text><textPath href="#${id}-path" startOffset="0" textLength="314" lengthAdjust="spacingAndGlyphs">${esc(text)}</textPath></text>
+    <text dominant-baseline="hanging"><textPath href="#${id}-path" startOffset="0" textLength="314" lengthAdjust="spacing">${esc(text)}</textPath></text>
   </svg>
   ${iconName ? `<span class="cursor-badge-center">${icon(iconName, "cursor-badge-icon")}</span>` : ""}
 </div>`;
