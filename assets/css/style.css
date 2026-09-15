@@ -145,6 +145,7 @@ p{margin:0}
 .hero-marquee .logo--y-tree img{max-height:21px}
 .hero-marquee .logo--auo img{max-height:32px}
 .hero-marquee .logo--rolls-royce img{max-height:30px}
+.hero-marquee .logo--emma img{max-height:29px}
 /* -50% == three of the six sets == always wider than any viewport */
 @keyframes logo-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media (max-width:600px){
@@ -155,6 +156,7 @@ p{margin:0}
   .hero-marquee .logo--y-tree img{max-height:18px}
   .hero-marquee .logo--auo img{max-height:28px}
   .hero-marquee .logo--rolls-royce img{max-height:26px}
+  .hero-marquee .logo--emma img{max-height:25px}
   .hero-marquee .logo-track{animation-duration:26s}
 }
 @media (prefers-reduced-motion:reduce){
