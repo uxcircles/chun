@@ -131,7 +131,7 @@ p{margin:0}
 .hero-marquee .logo-set{display:flex;align-items:center}
 .hero-marquee .logo{
   flex:none;display:flex;align-items:center;justify-content:center;
-  height:46px;margin:0 34px;
+  height:46px;margin:0 42px;
 }
 /* balanced by OPTICAL weight, not raw height — heavy wordmarks sit smaller */
 .hero-marquee .logo img{
@@ -149,7 +149,7 @@ p{margin:0}
 /* -50% == three of the six sets == always wider than any viewport */
 @keyframes logo-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media (max-width:600px){
-  .hero-marquee .logo{margin:0 20px}
+  .hero-marquee .logo{margin:0 26px}
   .hero-marquee .logo img{max-height:21px;max-width:104px}
   .hero-marquee .logo--acer img{max-height:17px}
   .hero-marquee .logo--esg-book img{max-height:18px}
