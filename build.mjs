@@ -211,7 +211,9 @@ function nav(base) {
       <img src="${base}assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.png" alt="">
       <span>Chun-Chuan&nbsp;Lin</span>
     </a>
-    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">Menu</button>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
     <nav class="nav-links">
       <a href="${base}index.html#work">Work</a>
       <a href="https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing" target="_blank" rel="noopener">CV</a>
