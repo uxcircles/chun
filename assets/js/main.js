@@ -92,14 +92,16 @@ addEventListener("scroll", onNavScroll, { passive: true });
 
 const toggle = document.querySelector(".nav-toggle");
 const links = document.querySelector(".nav-links");
+const backdrop = document.querySelector(".nav-backdrop");
 if (toggle && links) {
-  toggle.addEventListener("click", () => {
-    const open = links.classList.toggle("open");
+  const setOpen = (open) => {
+    links.classList.toggle("open", open);
+    backdrop?.classList.toggle("open", open);
     toggle.setAttribute("aria-expanded", String(open));
-  });
-  links.addEventListener("click", (e) => {
-    if (e.target.tagName === "A") { links.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); }
-  });
+  };
+  toggle.addEventListener("click", () => setOpen(!links.classList.contains("open")));
+  links.addEventListener("click", (e) => { if (e.target.tagName === "A") setOpen(false); });
+  backdrop?.addEventListener("click", () => setOpen(false));
 }
 
 /* ---------- reveal + wipe on scroll ---------- */

@@ -112,6 +112,11 @@ p{margin:0}
   .nav-links.open{display:flex}
   .nav-links a{padding:12px 0;width:100%;border-bottom:1px solid var(--line)}
   .nav-toggle{display:block}
+  .nav-backdrop{
+    display:none;position:fixed;inset:0;z-index:59;
+    background:rgba(0,0,0,.4);opacity:0;transition:opacity .25s ease;
+  }
+  .nav-backdrop.open{display:block;opacity:1}
 }
 
 /* ---------- hero ---------- */

@@ -221,6 +221,7 @@ function nav(base) {
       <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
     </nav>
   </div>
+  <div class="nav-backdrop"></div>
 </header>`;
 }
 
