@@ -266,8 +266,8 @@ section{padding:96px 0;scroll-margin-top:84px}
 .foot-in{max-width:var(--maxw);margin:0 auto;padding:0 28px}
 .foot h2{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.2rem)}
 .foot a.mail{
-  display:inline-block;margin-top:18px;font-size:1.02rem;color:#e7d9c4;
-  text-decoration:underline;text-decoration-color:rgba(231,217,196,.35);
+  display:inline-block;margin-top:18px;font-size:1.02rem;color:rgba(255,255,255,.85);
+  text-decoration:underline;text-decoration-color:rgba(255,255,255,.35);
   text-underline-offset:4px;transition:text-decoration-color .25s;
 }
 .foot a.mail:hover{text-decoration-color:var(--accent)}
