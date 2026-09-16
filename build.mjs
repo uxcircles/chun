@@ -331,9 +331,9 @@ function buildHome() {
   <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-in">
     <h1 class="serif split hero-title">${heroHead}</h1>
-    <p class="lede reveal">${esc(h.sub)}</p>
-    <p class="facts reveal">${esc(h.kicker)}</p>
-    <div class="cta reveal">
+    <p class="lede hero-gate">${esc(h.sub)}</p>
+    <p class="facts hero-gate">${esc(h.kicker)}</p>
+    <div class="cta hero-gate">
       <a class="btn btn-hero" href="#work">Explore case studies ${ARROW}</a>
       <a class="btn btn-line" href="mailto:${EMAIL}">Get in touch</a>
     </div>
@@ -657,10 +657,10 @@ function buildStudy(study, idx) {
   const pageBody = `
 <section class="cs-hero">
   <div class="wrap">
-    <a class="back reveal" href="${base}index.html#work">${"&larr;"} All work</a>
+    <a class="back hero-gate" href="${base}index.html#work">${"&larr;"} All work</a>
     <h1 class="serif split hero-title">${splitWords(title)}</h1>
-    ${sub ? `<p class="sub reveal">${esc(sub)}</p>` : ""}
-    ${meta ? `<p class="meta reveal">${esc(meta)}</p>` : ""}
+    ${sub ? `<p class="sub hero-gate">${esc(sub)}</p>` : ""}
+    ${meta ? `<p class="meta hero-gate">${esc(meta)}</p>` : ""}
   </div>
 </section>
 ${heroImg ? `<div class="cs-hero-img reveal"><img src="${IMG(heroImg, base)}" alt=""></div>` : ""}

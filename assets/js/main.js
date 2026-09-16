@@ -132,15 +132,25 @@ if (reduce || !hasIO) {
   }, 1200);
 }
 
-/* ---------- hero headline: resolve after fonts are ready ---------- */
+/* ---------- hero headline + its companion text: resolve together, after
+   fonts are ready — these used to reveal on the generic scroll-IO (which
+   fires almost immediately since the hero sits above the fold) while the
+   heading waited on document.fonts.ready, so the subtitle/meta would
+   visibly appear before the still-loading headline. Gated together now. */
 const heroTitle = document.querySelector(".hero-title");
+const heroGateEls = [...document.querySelectorAll(".hero-gate")];
 if (heroTitle) {
-  const go = () => requestAnimationFrame(() => heroTitle.classList.add("in"));
-  if (reduce) heroTitle.classList.add("in");
+  const go = () => requestAnimationFrame(() => {
+    heroTitle.classList.add("in");
+    heroGateEls.forEach((el) => el.classList.add("in"));
+  });
+  if (reduce) go();
   else if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(go);
     setTimeout(go, 1200); // failsafe
   } else go();
+} else if (reduce || !hasIO) {
+  heroGateEls.forEach((el) => el.classList.add("in"));
 }
 
 /* ---------- count-up stats ---------- */
