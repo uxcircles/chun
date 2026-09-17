@@ -20,7 +20,7 @@
   --maxw:1140px;
   --readw:720px;
   --ease:cubic-bezier(.22,.61,.36,1);
-  --serif:"Fraunces","Merriweather",Georgia,"Times New Roman",serif;
+  --serif:"Merriweather",Georgia,"Times New Roman",serif;
   --sans:"Inter","Inter Placeholder",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,"SF Mono","Menlo",monospace;
 }
@@ -88,7 +88,7 @@ p{margin:0}
 }
 .nav.scrolled{border-color:var(--line)}
 .nav-in{max-width:var(--maxw);margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-weight:500;font-size:17px;letter-spacing:-.005em}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-weight:400;font-size:17px;letter-spacing:-.005em}
 .brand img{width:30px;height:30px}
 .nav-links{display:flex;align-items:center;gap:30px;font-size:14.5px;font-weight:500}
 .nav-links a{color:var(--ink-soft);transition:color .2s}
@@ -416,13 +416,11 @@ ul.bullets li::before{content:"";position:absolute;left:2px;top:11px;width:7px;h
    POLISH — typography, motion, micro-interactions
    ================================================================ */
 
-/* ---- Fraunces display ---- */
-.serif{font-optical-sizing:auto;font-variation-settings:"SOFT" 0,"WONK" 1}
+/* ---- Merriweather display ---- */
 h1.serif,.hero h1,.section-head h2,.cs-hero h1,.cs-section h2.divider,.beyond .txt h2{
-  font-weight:500;letter-spacing:-.02em;
+  font-weight:400;letter-spacing:-.02em;
 }
-.hero h1{font-variation-settings:"SOFT" 0,"WONK" 1;line-height:1.04}
-.hero h1 em,.cs-hero .sub em{font-variation-settings:"SOFT" 40,"WONK" 1}
+.hero h1{line-height:1.04}
 
 /* ---- monospace metadata layer ---- */
 .stat span{font-size:12.5px;line-height:1.6}
@@ -430,7 +428,7 @@ h1.serif,.hero h1,.section-head h2,.cs-hero h1,.cs-section h2.divider,.beyond .t
 /* ---- stats: icon + big number + mono caption ---- */
 .stat{padding:32px 26px 30px;position:relative}
 .stat-icon{width:22px;height:22px;color:var(--accent-ink);margin-bottom:16px;display:block}
-.stat b{font-family:var(--serif);font-weight:500;font-size:clamp(2.4rem,4vw,3.1rem);letter-spacing:-.03em;line-height:1;font-variation-settings:"SOFT" 0,"WONK" 1;display:block}
+.stat b{font-family:var(--serif);font-weight:700;font-size:clamp(2.4rem,4vw,3.1rem);letter-spacing:-.03em;line-height:1;display:block}
 .stat span{margin-top:14px;color:var(--muted)}
 
 /* ---- split-word blur-in headings ---- */

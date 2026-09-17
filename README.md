@@ -64,7 +64,7 @@ It's a static site — deploy the whole folder to any static host:
 - Videos: 4 case studies embed motion-design clips from the original site
   (`assets/video/`), autoplaying muted/looping and only while on screen. Poster
   frames are in `assets/img/poster-*.jpg`.
-- Fonts: Fraunces (variable serif display, SOFT/WONK axes) + IBM Plex Mono
+- Fonts: Merriweather (serif display) + IBM Plex Mono
   (metadata: dates, roles, tags, section indices, stat captions) + Inter (body),
   all from Google Fonts.
 - Motion (all `prefers-reduced-motion` guarded, in `assets/js/main.js` + the
