@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Designing a governed wealth management system — portfolio rebalancing as a decision architecture — Chun-Chuan Lin</title>
 <meta name="description" content="Informed by 7 years of building governed wealth management systems at Y TREE — where I led the design of portfolio rebalancing tools managing over £9b in client assets. This case study presents a portfolio rebalancing system for advisors managing UHNW clients, where every decision must be explainable, auditable, and mandate-aligned. Specific client data and proprietary product details have been abstracted.">
+<meta name="robots" content="noindex, nofollow">
 <meta property="og:title" content="Designing a governed wealth management system — portfolio rebalancing as a decision architecture — Chun-Chuan Lin">
 <meta property="og:description" content="Informed by 7 years of building governed wealth management systems at Y TREE — where I led the design of portfolio rebalancing tools managing over £9b in client assets. This case study presents a portfolio rebalancing system for advisors managing UHNW clients, where every decision must be explainable, auditable, and mandate-aligned. Specific client data and proprietary product details have been abstracted.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://chunchuanlin.design/assets/img/VFbImBTynQh7F0MmkZp4YDalEAE.webp">
 <link rel="icon" type="image/png" href="../assets/img/YUZRlfmyi6MVquyru4w5qhSXo.png">
 <link rel="apple-touch-icon" href="../assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +25,7 @@
 <header class="nav" id="nav">
   <div class="nav-in">
     <a class="brand" href="../index.html">
-      <img src="../assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.png" alt="">
+      <img src="../assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.webp" alt="">
       <span>Chun-Chuan&nbsp;Lin</span>
     </a>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
@@ -47,7 +49,7 @@
     <p class="meta hero-gate">Mar 2026 · Research, UX and UI design</p>
   </div>
 </section>
-<div class="cs-hero-img reveal"><img src="../assets/img/E0ivBHq7jXSnA6J9aW9na1RmKs.png" alt=""></div>
+<div class="cs-hero-img reveal"><img src="../assets/img/E0ivBHq7jXSnA6J9aW9na1RmKs.webp" alt=""></div>
 
 <div class="cs-body">
   <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-discovery-0">Discovery</a></li><li><a href="#sec-the-architecture-1">The architecture</a></li><li><a href="#sec-key-design-decisions-2">Key design decisions</a></li><li><a href="#sec-reflection-3">Reflection</a></li></ol></nav></aside>
@@ -64,22 +66,22 @@
 <p class="lead reveal">Three roles. Three definitions of what &quot;right&quot; looks like.</p>
 <p class="text reveal">Before designing any screen, I mapped the decision ecosystem. The key insight was that decision power, capital ownership, and execution risk sit in entirely different hands — which means the system needs to serve fundamentally different mental models simultaneously.</p>
 <div class="persona reveal">
-        <img src="../assets/img/OgGqkTGH6Dv6mL8EHHQJxx6Oo.png" alt="">
+        <img src="../assets/img/OgGqkTGH6Dv6mL8EHHQJxx6Oo.webp" alt="">
         <div><h4>Advisors — The Decision Architect</h4><p class="q serif">“When allocations shift, I need clarity — not just alerts. Every adjustment must reinforce the long-term strategy.”</p><p class="pain">Pain: Too much time in Excel. No shared tool for tax impact. Hard to justify selling winners.</p></div>
       </div>
 <div class="persona reveal">
-        <img src="../assets/img/aiyMobl4qx06Fa7Ai8jcuyFxBpQ.png" alt="">
+        <img src="../assets/img/aiyMobl4qx06Fa7Ai8jcuyFxBpQ.webp" alt="">
         <div><h4>UHNWIs — The Informed Principal</h4><p class="q serif">“My wealth is a legacy. I need to understand how decisions today protect tomorrow.&quot;</p><p class="pain">Pain: 50-page PDFs that don't answer &quot;Am I still safe?” Fear that rebalancing triggers unexpected tax.</p></div>
       </div>
 <div class="persona reveal">
-        <img src="../assets/img/UAgSflYXQDbMUtiI3ZlWX4yX98.png" alt="">
+        <img src="../assets/img/UAgSflYXQDbMUtiI3ZlWX4yX98.webp" alt="">
         <div><h4>Compliance &amp; Execution — The System</h4><p class="q serif">Every action must remain mandate-aligned, auditable, and traceable. The system is both a safeguard and a bottleneck.</p></div>
       </div>
 <h3 class="sub serif reveal">Strategic scoping</h3>
 <p class="lead reveal">Why rebalancing — and not something else?</p>
 <p class="text reveal">The full wealth management system spans onboarding, reporting, tax structuring, and more. I used a prioritisation matrix to identify the highest-leverage entry point.</p>
 <p class="text reveal">Portfolio rebalancing scored highest across all three dimensions: financial impact, cross-team dependency, and regulatory sensitivity. It was also the workflow where the current process was most fragmented — advisors were managing drift detection and suitability reporting manually in Excel.</p>
-<figure class="reveal full"><img src="../assets/img/x9WH2NC8tBtmjR3SEHw8lYLTRI.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/x9WH2NC8tBtmjR3SEHw8lYLTRI.webp" alt="" loading="lazy"></figure>
 </section>
 <section class="cs-section" id="sec-the-architecture-1">
   <span class="num">02</span>
@@ -87,19 +89,19 @@
   <h3 class="sub serif reveal">Workflow</h3>
 <p class="lead reveal">From drift to decision — an 8-step governed workflow</p>
 <p class="text reveal">The architecture maps the full rebalancing journey: from automated drift detection through diagnosis, path planning, compliance validation, advisor review, simulation, client approval, and trade fulfilment. Each step has a defined owner, a clear decision gate, and an audit trail.</p>
-<figure class="reveal full"><img src="../assets/img/rzPCHtE52T68TOkpEXy7BM6eoa8.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/rzPCHtE52T68TOkpEXy7BM6eoa8.webp" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">Drift detection must enable 5-second awareness</h3>
 <p class="text reveal">The risk rebalancing dashboard surfaces portfolio-level alerts with immediate context — mandate breach vs. out-of-range vs. within band, sorted by impact severity. Advisors can see £1.5b AUM at risk across 298 clients at a glance, and act on the highest-priority cases without any manual scanning.</p>
 <div class="dd reveal"><b>Design decision</b><p>Separating &quot;Mandate breach&quot; from &quot;Out of range&quot; wasn't just a labelling choice — it defines two different response protocols. Mandate breach requires immediate action; out of range requires monitoring. The visual hierarchy enforces this distinction.</p></div>
-<figure class="reveal full"><img src="../assets/img/ab4m8nQeq3U3MPOQM1kEe99EDjY.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/ab4m8nQeq3U3MPOQM1kEe99EDjY.webp" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">Risk Intelligence</h3>
 <p class="text reveal">Once a drift is flagged, the advisor needs more than a number. This screen breaks down the risk score into its structural drivers — equity beta, growth concentration, USD exposure — and surfaces the top five contributing assets with their specific drift and impact. The AI rebalance suggestion appears inline, alongside the strategic trigger and expected impact, so the advisor can move from diagnosis to action without switching context.</p>
 <div class="dd reveal"><b>Design decision</b><p>The risk breakdown and the AI suggestion are deliberately placed on the same screen. In the previous workflow, advisors had to cross-reference multiple tools to understand why a portfolio drifted and what to do about it. Collapsing diagnosis and recommendation into a single view reduces the time between detection and action — and makes the advisor's rationale easier to construct when they need to justify the decision to compliance or the client.</p></div>
-<figure class="reveal full"><img src="../assets/img/M6cCxAtRbV26PkRbCSbD3YJ4gk.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/M6cCxAtRbV26PkRbCSbD3YJ4gk.webp" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">AI recommends. Humans decide.</h3>
 <p class="text reveal">The advice tool generates AI-recommended buy/sell adjustments based on the All-Weather model. But advisors retain full discretion — they can amend individual positions, add a counter view, or regenerate the proposal entirely.</p>
 <div class="dd reveal"><b>Design decision</b><p>The AI suggestion is surfaced as a starting point, not a default. The &quot;Counter view&quot; and &quot;Rationale&quot; buttons are primary-level actions — not buried — because overriding the AI should feel supported, not like breaking the system.</p></div>
-<figure class="reveal full"><img src="../assets/img/UWpalTnz342eCAkfl1QRqOcSw.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/UWpalTnz342eCAkfl1QRqOcSw.webp" alt="" loading="lazy"></figure>
 <h3 class="sub serif reveal">Governance by design — compliance embedded, not bolted on</h3>
 <p class="text reveal">Compliance checks run automatically as the advisor builds the proposal. Rather than a separate approval gate at the end, the system validates mandate alignment, restricted securities, suitability rules, concentration limits, and liquidity requirements inline.</p>
 <div class="dd reveal"><b>Design decision</b><p>Making compliance visible during construction — not just at submission — changes advisor behaviour. It turns compliance from a blocker into a guardrail.</p></div>
@@ -107,13 +109,13 @@
 <p class="text reveal">Once the advisor finalises the proposal, the system generates a client-facing suitability report with AI-drafted rationale. The advisor reviews and edits before sending. The client receives a mobile-optimised view with proposed actions, stress test scenarios, and a clear Approve / Discuss / Decline decision.</p>
 <div class="dd reveal"><b>Design decision</b><p>The suitability report and the internal advice tool share the same data model. This eliminates the manual re-keying that was the biggest source of error and delay in the legacy process.</p></div>
 <div class="duo full reveal">
-        <img src="../assets/img/V770gPtw1gBDELuyv1D3Ur5dwg.png" alt="" loading="lazy">
-        <img class="narrow" src="../assets/img/HCUd3n2oOGwLYfnoba3vRDg2jQ.png" alt="" loading="lazy">
+        <img src="../assets/img/V770gPtw1gBDELuyv1D3Ur5dwg.webp" alt="" loading="lazy">
+        <img class="narrow" src="../assets/img/HCUd3n2oOGwLYfnoba3vRDg2jQ.webp" alt="" loading="lazy">
       </div>
 <h3 class="sub serif reveal">From approved advice to executed trades — closing the governance loop</h3>
 <p class="text reveal">Once the client approves the rebalancing proposal, the system generates the corresponding trade orders and routes them into the trading operations queue. This screen gives the back-office team a real-time view of all in-progress trades across clients — with status tabs for pending approval, awaiting scheduling, scheduled, due for execution, and order submitted. Each trade row carries the full context needed for execution: instrument, ISIN, action, amount, tax wrapper, approval date, and requested execution window.</p>
 <div class="dd reveal"><b>Design decision</b><p>The status pipeline at the top isn't just a summary — it's the primary navigation affordance. Back-office operators work through trades sequentially by status, not by client. Surfacing the count at each stage lets them triage at a glance without opening individual records. This mirrors how trading desks actually operate: by queue priority, not by relationship.</p></div>
-<figure class="reveal full"><img src="../assets/img/ljZqY1W1dbwhdcLBtkpyiuiurM.png" alt="" loading="lazy"></figure>
+<figure class="reveal full"><img src="../assets/img/ljZqY1W1dbwhdcLBtkpyiuiurM.webp" alt="" loading="lazy"></figure>
 </section>
 <section class="cs-section" id="sec-key-design-decisions-2">
   <span class="num">03</span>
@@ -137,7 +139,7 @@
     <p class="eyebrow">Keep exploring</p>
     <div class="cs-next-grid">
       <a class="cs-next-card" href="client-portal.html">
-        <img class="thumb" src="../assets/img/cqkEi4mZ536VQZQC6X23w6QmEs.png" alt="" loading="lazy">
+        <img class="thumb" src="../assets/img/cqkEi4mZ536VQZQC6X23w6QmEs.webp" alt="" loading="lazy">
         <span class="txt">
           <span class="dir">&larr; Previous</span>
           <h3 class="serif">Simplified onboarding via a client portal</h3>
@@ -148,7 +150,7 @@
           <span class="dir">Next &rarr;</span>
           <h3 class="serif">Portfolio health for a regulated investment app</h3>
         </span>
-        <img class="thumb" src="../assets/img/9iO2ZGM4p4TnNoXjsiRvFTovY58.png" alt="" loading="lazy">
+        <img class="thumb" src="../assets/img/9iO2ZGM4p4TnNoXjsiRvFTovY58.webp" alt="" loading="lazy">
       </a>
     </div>
   </div>
