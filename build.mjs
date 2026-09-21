@@ -32,6 +32,8 @@ const splitWords = (s = "") =>
 
 const SITE = "Chun-Chuan Lin";
 const EMAIL = "designlcc@gmail.com";
+const SITE_URL = "https://chunchuanlin.design";
+const OG_IMAGE = "VFbImBTynQh7F0MmkZp4YDalEAE.webp";
 
 // small line icons (Feather-style, 24×24, inherit stroke colour)
 const ICON = {
@@ -147,12 +149,12 @@ function stripEmojiIcon(title) {
 
 /* ---------- case study registry (order = prev/next) ---------- */
 const STUDIES = [
-  { slug: "provider-redesign",        file: "cs1-provider-redesign.json",        card: "Redesigned a £9B platform for UHNW clients", img: "VFbImBTynQh7F0MmkZp4YDalEAE.png", locked: true },
-  { slug: "home-redesign",            file: "cs2-home-redesign.json",            card: "Improved mobile app CSAT to 89%", img: "YumomZDwZKkCPeDbRDVu0XXveg.png", locked: true },
-  { slug: "client-portal",            file: "cs3-client-portal.json",            card: "Simplified onboarding via a client portal", img: "cqkEi4mZ536VQZQC6X23w6QmEs.png" },
-  { slug: "wealth-management-system", file: "cs4-wealth-management-system.json", card: "A governed rebalancing system for wealth advisors", img: "E0ivBHq7jXSnA6J9aW9na1RmKs.png" },
-  { slug: "portfolio-health",         file: "cs5-portfolio-health.json",         card: "Portfolio health for a regulated investment app", img: "9iO2ZGM4p4TnNoXjsiRvFTovY58.png" },
-  { slug: "trip-memories",            file: "cs6-trip-memories.json",            card: "Revolut home redesign concept", img: "TrorWvIDo5zv1eS2h04sgSZOtJ8.png" },
+  { slug: "provider-redesign",        file: "cs1-provider-redesign.json",        card: "Redesigned a £9B platform for UHNW clients", img: "VFbImBTynQh7F0MmkZp4YDalEAE.webp", locked: true },
+  { slug: "home-redesign",            file: "cs2-home-redesign.json",            card: "Improved mobile app CSAT to 89%", img: "YumomZDwZKkCPeDbRDVu0XXveg.webp", locked: true },
+  { slug: "client-portal",            file: "cs3-client-portal.json",            card: "Simplified onboarding via a client portal", img: "cqkEi4mZ536VQZQC6X23w6QmEs.webp" },
+  { slug: "wealth-management-system", file: "cs4-wealth-management-system.json", card: "A governed rebalancing system for wealth advisors", img: "E0ivBHq7jXSnA6J9aW9na1RmKs.webp" },
+  { slug: "portfolio-health",         file: "cs5-portfolio-health.json",         card: "Portfolio health for a regulated investment app", img: "9iO2ZGM4p4TnNoXjsiRvFTovY58.webp" },
+  { slug: "trip-memories",            file: "cs6-trip-memories.json",            card: "Revolut home redesign concept", img: "TrorWvIDo5zv1eS2h04sgSZOtJ8.webp" },
 ];
 
 /* =================================================================
@@ -170,9 +172,11 @@ function shell({ title, desc, body, base, extraClass = "", progress = false, gat
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
+<meta name="robots" content="noindex, nofollow">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:type" content="website">
+<meta property="og:image" content="${SITE_URL}/assets/img/${OG_IMAGE}">
 <link rel="icon" type="image/png" href="${base}assets/img/YUZRlfmyi6MVquyru4w5qhSXo.png">
 <link rel="apple-touch-icon" href="${base}assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -208,7 +212,7 @@ function nav(base) {
   return `<header class="nav" id="nav">
   <div class="nav-in">
     <a class="brand" href="${base}index.html">
-      <img src="${base}assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.png" alt="">
+      <img src="${base}assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.webp" alt="">
       <span>Chun-Chuan&nbsp;Lin</span>
     </a>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
