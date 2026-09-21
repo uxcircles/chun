@@ -8,7 +8,7 @@
   {"img":"cs7-placeholder.svg","cap":"Placeholder — hero visual for the Emma Save journey redesign."},
 
   {"tag":"H1","text":"Summary"},
-  {"tag":"text","text":"A redesign of Emma's Save journey collapsed a two-step, wallet-mediated deposit flow into one action. It reversed a seven-month decline in Autosave engagement and sustained a 5–6× increase in daily Autosave volume over the following month, while cutting a recurring vendor cost by roughly £15,000/month."},
+  {"tag":"text","text":"This redesign reversed a seven-month decline in Autosave engagement, sustaining a 5–6× increase in daily Autosave volume over the following month, while cutting a recurring vendor cost by roughly £15,000/month."},
   {"item":["Steps to fund a pot","2 steps (bank → wallet → pot) reduced to 1 (bank → pot)."]},
   {"item":["Autosave engagement","Reversed a 7-month decline in weekly Autosave setup volume."]},
   {"item":["Daily Autosave volume","5–6× increase, sustained for the month after launch."]},
@@ -39,7 +39,7 @@
   {"tag":"H1","text":"The Solution"},
   {"tag":"H5","text":"One flow, two rails"},
   {"tag":"text","text":"After: bank → pot, directly, in one action. The wallet still exists as internal plumbing behind the scenes, but the user never sees it, funds it, or waits on it as a separate step."},
-  {"tag":"text","text":"Open Banking made a faster default possible, but it doesn't work for every bank, and Autoinvest specifically requires Direct Debit. I designed the deposit flow around a smart default rather than a single blanket rule: onboarding — which sets up Autosave and can lead into Autoinvest — always uses Direct Debit, with no rail choice to make. For a one-off deposit, the default is Open Banking, since it's faster; it falls back to Direct Debit automatically when the user's account balance is lower than the deposit amount, and a user who prefers Direct Debit can choose it directly, regardless of balance."},
+  {"tag":"text","text":"Open Banking made a faster default possible, but it doesn't work for every bank, and Autoinvest specifically requires Direct Debit — so I designed the deposit flow around a smart default rather than a single blanket rule."},
   {"dd":"For onboarding, the payment rail is fully resolved by the system — nothing for the user to choose. For a one-off deposit, the system picks a smart default (Open Banking, or Direct Debit if the balance falls short) but leaves Direct Debit available as an explicit choice for anyone who wants it. Most users' job stays constant — tap one button — while the option to choose stays there for the ones who go looking for it."},
   {"img":"cs7-placeholder.svg","cap":"Placeholder — decision-tree diagram: “Add money” button → onboarding or one-off deposit? → onboarding routes straight to Direct Debit; a one-off deposit defaults to Open Banking, falls back to Direct Debit on insufficient balance, and shows Direct Debit as a visible choice → same destination screen. Render as a flowchart, not a screenshot, alongside the actual deposit/confirmation screens."},
   {"img":"cs7-placeholder.svg","cap":"Placeholder — video: 20–30s side-by-side screen recording, old flow (bank → wallet, wait, wallet → pot) vs new flow (bank → pot, one tap)."},
@@ -58,16 +58,13 @@
   {"img":"cs7-placeholder.svg","cap":"Placeholder — two-panel comparison: (1) a simple two-track diagram showing new/zero-balance users vs existing-balance users, converging once balance hits zero; (2) before/after screenshots of the Save tab home screen showing the new Add money button and the feed-prompt messaging shown to existing wallet holders."},
 
   {"tag":"H1","text":"Results & Economics"},
-  {"tag":"text","text":"Weekly Autosave-setup volume had declined for roughly seven months before launch. In the weeks following the redesign, the metric reversed and daily Autosave volume held at 5–6× its prior baseline for the following month — including a run of days that matched the app's previous busiest week of the year (early January), a signal the team read as evidence the new flow could sustain, not just spike, that level of activity."},
+  {"tag":"text","text":"In the weeks following the redesign, the decline reversed: daily Autosave volume held at 5–6× its prior baseline for the following month — including a run of days that matched the app's previous busiest week of the year (early January), a signal the team read as evidence the new flow could sustain, not just spike, that level of activity."},
   {"tag":"text","text":"The change also had a favourable financial shape: dropping the paid wallet-vendor relationship saves roughly £15,000/month, against a one-time £40,000 for the banking partner to build the direct-funding API that enables Stage 2. The design case for the redesign stood on its own — the economics made the timing easier to justify internally, not the other way around."},
-  {"item":["Recurring cost","−£15,000/month by dropping the paid wallet-vendor relationship."]},
-  {"item":["One-time cost","£40,000 for the banking partner to build the Stage 2 direct-funding API."]},
-  {"item":["Sustained volume","Daily Autosave volume held at 5–6× baseline for the month after launch."]},
   {"img":"cs7-placeholder.svg","cap":"Placeholder — internal analytics chart (daily/weekly Autosave-setup count over time) showing the pre-launch decline and post-launch recovery. Crop out any surrounding Slack thread or colleague names; keep only the chart, axis labels and a caption. A simple before/after cost table works well directly underneath."},
 
   {"tag":"H1","text":"Reflection"},
   {"tag":"H2","text":"What's next"},
-  {"tag":"text","text":"Stage 1 (shipped) solved the user-facing problem immediately: the wallet still exists as internal plumbing, but no user sees, funds, or waits on it. Stage 2 (next) retires the underlying plumbing entirely — once the banking partner finishes building its own funding API, we can fund the pot directly with no internal staging step at all. Stage 1 was the design fix available on our timeline; Stage 2 is the infrastructure fix that becomes possible once the partner's build lands."},
+  {"tag":"text","text":"Stage 1 (shipped) was the design fix available on our timeline — it solved the user-facing problem immediately. Stage 2 (next) is the infrastructure fix: once the banking partner finishes building its own funding API, the wallet's remaining plumbing retires entirely, and we can fund the pot with no internal staging step at all."},
   {"tag":"H2","text":"Why this belongs in the portfolio"},
   {"tag":"text","text":"This project sits at the intersection of regulated financial infrastructure and interaction design: the constraint wasn't aesthetic, it was a payment-rail and KYC/regulatory reality that had to be resolved by the system rather than exposed to the user. The forcing function — a partner cutting off wallet creation with no warning — meant the design had to hold up under a compressed, non-negotiable timeline, and be phased safely against real user balances rather than shipped as a single cutover."}
 ]
