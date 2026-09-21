@@ -140,6 +140,9 @@ const EMOJI_ICON = {
   "🎯": "target",
   "🧳": "briefcase",
   "🕰️": "clock",
+  "📈": "trending-up",
+  "📊": "bar-chart",
+  "🧩": "layers",
 };
 function stripEmojiIcon(title) {
   const m = String(title).match(/^(\S+)\s+(.*)$/su);
