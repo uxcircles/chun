@@ -1,6 +1,6 @@
 # Chun-Chuan Lin — portfolio (rebuilt)
 
-A static rebuild of **chunchuanlin.design** and the six password-protected
+A static rebuild of **chunchuanlin.design** and the password-protected
 Framer case studies, as plain HTML/CSS/JS you fully own. No build tools or
 frameworks required to host it — but there's a tiny Node script to regenerate
 the pages when you edit content.
