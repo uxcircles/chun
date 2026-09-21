@@ -28,6 +28,7 @@
   {"tag":"H2","text":"Hypothesized friction points"},
   {"item":["Upgrade screen forces a mid-flow trade-off","A plan-comparison screen asks users to weigh subscription cost against interest-rate uplift (e.g. Free at 3.46% AER vs Pro at 4.50% AER for £6.99/month) in the middle of an unrelated task — a natural drop-off point."]},
   {"item":["Wallet-first requirement adds real-world delay","Users had to deposit into the wallet, wait for funds to clear, then create a pot and set up Autosave — a day or two, long enough for intent to decay before returning."]},
+  {"compare":["The upgrade screen users hit mid-flow","The wallet-funding step in onboarding","cs7-diag-upgrade-screen.webp","cs7-diag-wallet-step.webp"]},
   {"tag":"text","text":"I treated this as a testable assumption, not a certainty: I couldn't prove step-by-step attribution from the data available, so the design response was chosen to address both hypotheses at once — removing the wait, and, separately, not blocking pot creation behind a plan comparison — rather than betting the whole redesign on one diagnosis being right."},
 
   {"tag":"H1","text":"Alternatives Considered"},
