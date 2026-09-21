@@ -97,6 +97,7 @@ if (toggle && links) {
   const setOpen = (open) => {
     links.classList.toggle("open", open);
     backdrop?.classList.toggle("open", open);
+    nav?.classList.toggle("menu-open", open);
     toggle.setAttribute("aria-expanded", String(open));
   };
   toggle.addEventListener("click", () => setOpen(!links.classList.contains("open")));

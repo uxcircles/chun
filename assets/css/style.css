@@ -105,6 +105,7 @@ p{margin:0}
 .nav-toggle[aria-expanded="true"] .bar:nth-child(2){opacity:0}
 .nav-toggle[aria-expanded="true"] .bar:nth-child(3){top:15px;transform:rotate(-45deg)}
 @media (max-width:720px){
+  .nav.menu-open{background:var(--paper);backdrop-filter:none}
   .nav-in{position:relative;z-index:2}
   .nav-links{
     position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;gap:0;
@@ -115,7 +116,7 @@ p{margin:0}
   .nav-toggle{display:block}
   .nav-backdrop{
     display:none;position:fixed;inset:0;z-index:1;
-    background:rgba(0,0,0,.4);opacity:0;transition:opacity .25s ease;
+    background:rgba(0,0,0,.65);opacity:0;transition:opacity .25s ease;
   }
   .nav-backdrop.open{display:block;opacity:1}
 }
