@@ -52,7 +52,7 @@
 <div class="cs-hero-img reveal"><img src="../assets/img/cs7-placeholder.svg" alt=""></div>
 
 <div class="cs-body">
-  <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-summary-0">Summary</a></li><li><a href="#sec-the-problem-1">The Problem</a></li><li><a href="#sec-the-forcing-function-2">The Forcing Function</a></li><li><a href="#sec-diagnosis-3">Diagnosis</a></li><li><a href="#sec-alternatives-considered-4">Alternatives Considered</a></li><li><a href="#sec-the-solution-5">The Solution</a></li><li><a href="#sec-rollout-6">Rollout</a></li><li><a href="#sec-results-economics-7">Results &amp; Economics</a></li><li><a href="#sec-reflection-8">Reflection</a></li></ol></nav></aside>
+  <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-summary-0">Summary</a></li><li><a href="#sec-the-problem-1">The Problem</a></li><li><a href="#sec-diagnosis-2">Diagnosis</a></li><li><a href="#sec-alternatives-considered-3">Alternatives Considered</a></li><li><a href="#sec-the-solution-4">The Solution</a></li><li><a href="#sec-the-forcing-function-5">The Forcing Function</a></li><li><a href="#sec-rollout-6">Rollout</a></li><li><a href="#sec-results-economics-7">Results &amp; Economics</a></li><li><a href="#sec-reflection-8">Reflection</a></li></ol></nav></aside>
   <div class="cs-content">
     <section class="cs-section" id="sec-summary-0">
   <span class="num">01</span>
@@ -70,26 +70,21 @@
 <p class="text reveal">The wallet existed for the business's operational convenience — it decoupled deposit timing from pot creation — not because the user needed a concept to reason about between “my bank” and “my savings.” Every extra step and every wait is a point where a user with a five-minute window abandons and never returns.</p>
 <figure class="reveal full"><img src="../assets/img/cs7-placeholder.svg" alt="" loading="lazy"><figcaption>Placeholder — from the original-flow screens: the “Deposit” screen listing the wallet as its own account with a balance, and the follow-on step moving funds from wallet into the pot. Annotate the two waits directly on the screenshots.</figcaption></figure>
 </section>
-<section class="cs-section" id="sec-the-forcing-function-2">
+<section class="cs-section" id="sec-diagnosis-2">
   <span class="num">03</span>
-  <h2 class="divider serif split"><span class="w">The</span> <span class="w">Forcing</span> <span class="w">Function</span></h2>
-  <p class="text reveal">This had already been scoped as a planned migration: phase the wallet out gradually, migrate existing balances, retire it on our own schedule. On 30 June, our banking infrastructure partner quietly blocked the creation of new wallet accounts, with no warning. Overnight, “planned migration” became “new users can't onboard the old way, starting now.” The redesign had to ship for new users immediately, while the fade-out for existing balance-holders continued in parallel on the original timeline.</p>
-<p class="text reveal">It would have been easy to treat this purely as an outage to patch around. Instead, the forced timeline became a reason to fix things we already knew were wrong: collapsing two actions into one, giving every user a working funding path regardless of their bank, and replacing an accidental “front door” with deliberate entry points. The constraint didn't lower the bar on the solution — it removed the option of deferring it.</p>
-</section>
-<section class="cs-section" id="sec-diagnosis-3">
-  <span class="num">04</span>
   <h2 class="divider serif split"><span class="w">Diagnosis</span></h2>
-  <p class="text reveal">Not every screen in the original flow had event tracking. I couldn't fully attribute the seven-month decline to a single step, so I worked from a stated hypothesis instead of a complete funnel:</p>
+  <p class="lead reveal">Diagnosis without full instrumentation</p>
+<p class="text reveal">Not every screen in the original flow had event tracking. I couldn't fully attribute the seven-month decline to a single step, so I worked from a stated hypothesis instead of a complete funnel:</p>
 <div class="cards c2 reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg><b>Upgrade screen forces a mid-flow trade-off</b><span>A plan-comparison screen asks users to weigh subscription cost against interest-rate uplift (e.g. Free at 3.46% AER vs Pro at 4.50% AER for £6.99/month) in the middle of an unrelated task — a natural drop-off point.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>Wallet-first requirement adds real-world delay</b><span>Users had to deposit into the wallet, wait for funds to clear, then create a pot and set up Autosave — a day or two, long enough for intent to decay before returning.</span></div></div>
 <p class="text reveal">I treated this as a testable assumption, not a certainty: I couldn't prove step-by-step attribution from the data available, so the design response was chosen to address both hypotheses at once — removing the wait, and, separately, not blocking pot creation behind a plan comparison — rather than betting the whole redesign on one diagnosis being right.</p>
 </section>
-<section class="cs-section" id="sec-alternatives-considered-4">
-  <span class="num">05</span>
+<section class="cs-section" id="sec-alternatives-considered-3">
+  <span class="num">04</span>
   <h2 class="divider serif split"><span class="w">Alternatives</span> <span class="w">Considered</span></h2>
   <div class="cards c2 reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>Auto-sweep from the wallet</b><span>Kept an unnecessary internal account and system state alive for no user-facing benefit — removing the wallet outright cut more steps than smoothing over the ones that remained.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>One payment rail for every deposit</b><span>Routing by bank support alone broke for Autoinvest, which specifically requires Direct Debit — the right rail depends on the transaction, not just the bank.</span></div></div>
 </section>
-<section class="cs-section" id="sec-the-solution-5">
-  <span class="num">06</span>
+<section class="cs-section" id="sec-the-solution-4">
+  <span class="num">05</span>
   <h2 class="divider serif split"><span class="w">The</span> <span class="w">Solution</span></h2>
   <p class="lead reveal">One flow, two rails</p>
 <p class="text reveal">After: bank → pot, directly, in one action. The wallet still exists as internal plumbing behind the scenes, but the user never sees it, funds it, or waits on it as a separate step.</p>
@@ -101,6 +96,17 @@
 <p class="text reveal">Alongside collapsing the deposit step, we also moved KYC (identity verification) later in the flow. Rather than front-loading it before a user could even choose a pot, KYC now runs only after the user has confirmed the pot's deposit amount and Autosave setup — the last step of the Save journey, not the first — and only triggers for users who haven't already passed KYC.</p>
 <p class="text reveal">Two things follow from this. First, it directly addresses the earlier diagnosis: regulatory data collection was one of the heaviest, least reversible steps in the old flow, and pushing it past the point of stated intent means we only run — and pay for — KYC checks on users who have already committed to funding an account. Second, it lets the part of the flow users actually came for — setting the deposit amount and Autosave rules — complete faster, since it's no longer gated behind identity verification.</p>
 <figure class="reveal full"><img src="../assets/img/cs7-placeholder.svg" alt="" loading="lazy"><figcaption>Placeholder — the decision-tree diagram above, updated with the KYC step at its true position (after both the deposit amount and Autosave setup are confirmed). Label the old position (pre-deposit) and new position (post-intent) side by side.</figcaption></figure>
+<h3 class="sub serif reveal">Timeline</h3>
+<p class="text reveal">By mid-June, this direction was already drafted and under review — the core shape of the redesign predates what happened next.</p>
+<ul class="bullets reveal"><li>21 May — first Figma draft (pot onboarding flow)</li><li>18 June — updated draft (Autosave setup included), reviewed by Yukiko</li></ul>
+</section>
+<section class="cs-section" id="sec-the-forcing-function-5">
+  <span class="num">06</span>
+  <h2 class="divider serif split"><span class="w">The</span> <span class="w">Forcing</span> <span class="w">Function</span></h2>
+  <p class="text reveal">This had already been scoped as a planned migration: phase the wallet out gradually, migrate existing balances, retire it on our own schedule. On 30 June, our banking infrastructure partner quietly blocked the creation of new wallet accounts, with no warning. Overnight, “planned migration” became “new users can't onboard the old way, starting now.” The redesign had to ship for new users immediately, while the fade-out for existing balance-holders continued in parallel on the original timeline.</p>
+<p class="text reveal">It would have been easy to treat this purely as an outage to patch around. Instead, the forced timeline became a reason to fix things we already knew were wrong: collapsing two actions into one, giving every user a working funding path regardless of their bank, and replacing an accidental “front door” with deliberate entry points. The constraint didn't lower the bar on the solution — it removed the option of deferring it.</p>
+<p class="text reveal">The plan accelerated:</p>
+<ul class="bullets reveal"><li>6–8 July — further revision covering the initial deposit and Autosave setup flow together, reviewed by Yukiko</li><li>12–13 August — after engineering built the flow, a QA and copy pass on the shipped build, catching UX copy inconsistencies such as “Autosave” capitalization and “Set up” vs. “Setup”</li></ul>
 </section>
 <section class="cs-section" id="sec-rollout-6">
   <span class="num">07</span>
@@ -122,7 +128,7 @@
   <span class="num">09</span>
   <h2 class="divider serif split"><span class="w">Reflection</span></h2>
   <h3 class="sub serif reveal">What's next</h3>
-<p class="text reveal">Stage 1 (shipped) was the design fix available on our timeline — it solved the user-facing problem immediately. Stage 2 (next) is the infrastructure fix: once the banking partner finishes building its own funding API, the wallet's remaining plumbing retires entirely, and we can fund the pot with no internal staging step at all.</p>
+<p class="text reveal">Stage 1 (shipped) was the design fix available on our timeline — it solved the user-facing problem immediately. Stage 2 (next) is the infrastructure fix: once our banking partner, Bondsmith, finishes building its own funding API, the wallet's remaining plumbing retires entirely, and we can fund the pot with no internal staging step at all.</p>
 <h3 class="sub serif reveal">Why this belongs in the portfolio</h3>
 <p class="text reveal">This project sits at the intersection of regulated financial infrastructure and interaction design: the constraint wasn't aesthetic, it was a payment-rail and KYC/regulatory reality that had to be resolved by the system rather than exposed to the user. The forcing function — a partner cutting off wallet creation with no warning — meant the design had to hold up under a compressed, non-negotiable timeline, and be phased safely against real user balances rather than shipped as a single cutover.</p>
 </section>

@@ -1,6 +1,6 @@
 [
   {"tag":"H4","text":"Chun-Chuan Lin"},
-  {"toc":["Summary","The Problem","The Forcing Function","Diagnosis","Alternatives Considered","The Solution","Rollout","Results & Economics","Reflection"]},
+  {"toc":["Summary","The Problem","Diagnosis","Alternatives Considered","The Solution","The Forcing Function","Rollout","Results & Economics","Reflection"]},
 
   {"tag":"H1","text":"Redesigned Emma's Save Journey, reversing a 7-month Autosave decline"},
   {"tag":"H5","text":"Collapsing a two-step, wallet-mediated deposit flow into one action."},
@@ -22,11 +22,8 @@
   {"tag":"text","text":"The wallet existed for the business's operational convenience — it decoupled deposit timing from pot creation — not because the user needed a concept to reason about between “my bank” and “my savings.” Every extra step and every wait is a point where a user with a five-minute window abandons and never returns."},
   {"img":"cs7-placeholder.svg","cap":"Placeholder — from the original-flow screens: the “Deposit” screen listing the wallet as its own account with a balance, and the follow-on step moving funds from wallet into the pot. Annotate the two waits directly on the screenshots."},
 
-  {"tag":"H1","text":"The Forcing Function"},
-  {"tag":"text","text":"This had already been scoped as a planned migration: phase the wallet out gradually, migrate existing balances, retire it on our own schedule. On 30 June, our banking infrastructure partner quietly blocked the creation of new wallet accounts, with no warning. Overnight, “planned migration” became “new users can't onboard the old way, starting now.” The redesign had to ship for new users immediately, while the fade-out for existing balance-holders continued in parallel on the original timeline."},
-  {"tag":"text","text":"It would have been easy to treat this purely as an outage to patch around. Instead, the forced timeline became a reason to fix things we already knew were wrong: collapsing two actions into one, giving every user a working funding path regardless of their bank, and replacing an accidental “front door” with deliberate entry points. The constraint didn't lower the bar on the solution — it removed the option of deferring it."},
-
   {"tag":"H1","text":"Diagnosis"},
+  {"tag":"H5","text":"Diagnosis without full instrumentation"},
   {"tag":"text","text":"Not every screen in the original flow had event tracking. I couldn't fully attribute the seven-month decline to a single step, so I worked from a stated hypothesis instead of a complete funnel:"},
   {"item":["Upgrade screen forces a mid-flow trade-off","A plan-comparison screen asks users to weigh subscription cost against interest-rate uplift (e.g. Free at 3.46% AER vs Pro at 4.50% AER for £6.99/month) in the middle of an unrelated task — a natural drop-off point."]},
   {"item":["Wallet-first requirement adds real-world delay","Users had to deposit into the wallet, wait for funds to clear, then create a pot and set up Autosave — a day or two, long enough for intent to decay before returning."]},
@@ -49,6 +46,16 @@
   {"tag":"text","text":"Two things follow from this. First, it directly addresses the earlier diagnosis: regulatory data collection was one of the heaviest, least reversible steps in the old flow, and pushing it past the point of stated intent means we only run — and pay for — KYC checks on users who have already committed to funding an account. Second, it lets the part of the flow users actually came for — setting the deposit amount and Autosave rules — complete faster, since it's no longer gated behind identity verification."},
   {"img":"cs7-placeholder.svg","cap":"Placeholder — the decision-tree diagram above, updated with the KYC step at its true position (after both the deposit amount and Autosave setup are confirmed). Label the old position (pre-deposit) and new position (post-intent) side by side."},
 
+  {"tag":"H2","text":"Timeline"},
+  {"tag":"text","text":"By mid-June, this direction was already drafted and under review — the core shape of the redesign predates what happened next."},
+  {"bullets":["21 May — first Figma draft (pot onboarding flow)","18 June — updated draft (Autosave setup included), reviewed by Yukiko"]},
+
+  {"tag":"H1","text":"The Forcing Function"},
+  {"tag":"text","text":"This had already been scoped as a planned migration: phase the wallet out gradually, migrate existing balances, retire it on our own schedule. On 30 June, our banking infrastructure partner quietly blocked the creation of new wallet accounts, with no warning. Overnight, “planned migration” became “new users can't onboard the old way, starting now.” The redesign had to ship for new users immediately, while the fade-out for existing balance-holders continued in parallel on the original timeline."},
+  {"tag":"text","text":"It would have been easy to treat this purely as an outage to patch around. Instead, the forced timeline became a reason to fix things we already knew were wrong: collapsing two actions into one, giving every user a working funding path regardless of their bank, and replacing an accidental “front door” with deliberate entry points. The constraint didn't lower the bar on the solution — it removed the option of deferring it."},
+  {"tag":"text","text":"The plan accelerated:"},
+  {"bullets":["6–8 July — further revision covering the initial deposit and Autosave setup flow together, reviewed by Yukiko","12–13 August — after engineering built the flow, a QA and copy pass on the shipped build, catching UX copy inconsistencies such as “Autosave” capitalization and “Set up” vs. “Setup”"]},
+
   {"tag":"H1","text":"Rollout"},
   {"tag":"H5","text":"A fade-out, not a cutover"},
   {"tag":"text","text":"We couldn't delete the wallet for everyone on day one; some users still had real money sitting in it. The rollout split into two tracks running in parallel:"},
@@ -64,7 +71,7 @@
 
   {"tag":"H1","text":"Reflection"},
   {"tag":"H2","text":"What's next"},
-  {"tag":"text","text":"Stage 1 (shipped) was the design fix available on our timeline — it solved the user-facing problem immediately. Stage 2 (next) is the infrastructure fix: once the banking partner finishes building its own funding API, the wallet's remaining plumbing retires entirely, and we can fund the pot with no internal staging step at all."},
+  {"tag":"text","text":"Stage 1 (shipped) was the design fix available on our timeline — it solved the user-facing problem immediately. Stage 2 (next) is the infrastructure fix: once our banking partner, Bondsmith, finishes building its own funding API, the wallet's remaining plumbing retires entirely, and we can fund the pot with no internal staging step at all."},
   {"tag":"H2","text":"Why this belongs in the portfolio"},
   {"tag":"text","text":"This project sits at the intersection of regulated financial infrastructure and interaction design: the constraint wasn't aesthetic, it was a payment-rail and KYC/regulatory reality that had to be resolved by the system rather than exposed to the user. The forcing function — a partner cutting off wallet creation with no warning — meant the design had to hold up under a compressed, non-negotiable timeline, and be phased safely against real user balances rather than shipped as a single cutover."}
 ]
