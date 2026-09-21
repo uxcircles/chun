@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redesigned Emma's Save Journey, reversing a 7-month Autosave decline — Chun-Chuan Lin</title>
+<meta name="description" content="Collapsing a two-step, wallet-mediated deposit flow into one action.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Redesigned Emma's Save Journey, reversing a 7-month Autosave decline — Chun-Chuan Lin">
+<meta property="og:description" content="Collapsing a two-step, wallet-mediated deposit flow into one action.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://chunchuanlin.design/assets/img/VFbImBTynQh7F0MmkZp4YDalEAE.webp">
+<link rel="icon" type="image/png" href="../assets/img/YUZRlfmyi6MVquyru4w5qhSXo.png">
+<link rel="apple-touch-icon" href="../assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=b1b35d04">
+</head>
+<body class="cs-page">
+
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="../index.html">
+      <img src="../assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.webp" alt="">
+      <span>Chun-Chuan&nbsp;Lin</span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+    <nav class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing" target="_blank" rel="noopener">CV</a>
+      <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
+    </nav>
+  </div>
+  <div class="nav-backdrop"></div>
+</header>
+
+<section class="cs-hero">
+  <div class="wrap">
+    <a class="back hero-gate" href="../index.html#work">&larr; All work</a>
+    <h1 class="serif split hero-title"><span class="w">Redesigned</span> <span class="w">Emma's</span> <span class="w">Save</span> <span class="w">Journey,</span> <span class="w">reversing</span> <span class="w">a</span> <span class="w">7-month</span> <span class="w">Autosave</span> <span class="w">decline</span></h1>
+    <p class="sub hero-gate">Collapsing a two-step, wallet-mediated deposit flow into one action.</p>
+    <p class="meta hero-gate">May – Aug 2026 · Product design, research</p>
+  </div>
+</section>
+<div class="cs-hero-img reveal"><img src="../assets/img/cs7-placeholder.svg" alt=""></div>
+
+<div class="cs-body">
+  <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-summary-0">Summary</a></li><li><a href="#sec-the-problem-1">The Problem</a></li><li><a href="#sec-diagnosis-2">Diagnosis</a></li><li><a href="#sec-alternatives-considered-3">Alternatives Considered</a></li><li><a href="#sec-the-solution-4">The Solution</a></li><li><a href="#sec-the-forcing-function-5">The Forcing Function</a></li><li><a href="#sec-rollout-6">Rollout</a></li><li><a href="#sec-results-economics-7">Results &amp; Economics</a></li><li><a href="#sec-reflection-8">Reflection</a></li></ol></nav></aside>
+  <div class="cs-content">
+    <section class="cs-section" id="sec-summary-0">
+  <span class="num">01</span>
+  <h2 class="divider serif split"><span class="w">Summary</span></h2>
+  <p class="text reveal">This redesign reversed a seven-month decline in Autosave engagement, sustaining a 5–6× increase in daily Autosave volume over the following month, while cutting a recurring vendor cost by roughly £15,000/month.</p>
+<div class="cards c4 reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>Steps to fund a pot</b><span>2 steps (bank → wallet → pot) reduced to 1 (bank → pot).</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>Autosave engagement</b><span>Reversed a 7-month decline in weekly Autosave setup volume.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>Daily Autosave volume</b><span>5–6× increase, sustained for the month after launch.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21h9M8 21c1.5 0 2-1 2-2.5V8a3.5 3.5 0 0 1 6.5-1.9M6 13h8"/></svg><b>Recurring cost</b><span>−£15,000/month after dropping the wallet vendor relationship.</span></div></div>
+<p class="text reveal">Role: Senior Product Designer, sole designer on this workstream, reporting directly to the CEO.</p>
+</section>
+<section class="cs-section" id="sec-the-problem-1">
+  <span class="num">02</span>
+  <h2 class="divider serif split"><span class="w">The</span> <span class="w">Problem</span></h2>
+  <p class="text reveal">Weekly Autosave-setup volume had been declining for roughly seven months before this project started. That aggregate trend was the signal that something in the funding path was blocking users — even though, without full event tracking on every screen, we couldn't yet say which step.</p>
+<p class="text reveal">Every deposit and withdrawal in Emma passed through an intermediate holding account — an internal “wallet” — before reaching a user's actual savings pot or investment account. To the user, this wasn't invisible plumbing; it was a real account they had to think about, fund, and wait on before their money reached the account they actually wanted.</p>
+<p class="text reveal">Before: bank → wallet (step 1, wait for funds to land) → pot (step 2, manual action to move funds again).</p>
+<p class="text reveal">The wallet existed for the business's operational convenience — it decoupled deposit timing from pot creation — not because the user needed a concept to reason about between “my bank” and “my savings.” Every extra step and every wait is a point where a user with a five-minute window abandons and never returns.</p>
+<figure class="reveal full"><img src="../assets/img/cs7-placeholder.svg" alt="" loading="lazy"><figcaption>Placeholder — from the original-flow screens: the “Deposit” screen listing the wallet as its own account with a balance, and the follow-on step moving funds from wallet into the pot. Annotate the two waits directly on the screenshots.</figcaption></figure>
+</section>
+<section class="cs-section" id="sec-diagnosis-2">
+  <span class="num">03</span>
+  <h2 class="divider serif split"><span class="w">Diagnosis</span></h2>
+  <p class="lead reveal">Diagnosis without full instrumentation</p>
+<p class="text reveal">Not every screen in the original flow had event tracking. I couldn't fully attribute the seven-month decline to a single step, so I worked from a stated hypothesis instead of a complete funnel:</p>
+<div class="cards c2 reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg><b>Upgrade screen forces a mid-flow trade-off</b><span>A plan-comparison screen asks users to weigh subscription cost against interest-rate uplift (e.g. Free at 3.46% AER vs Pro at 4.50% AER for £6.99/month) in the middle of an unrelated task — a natural drop-off point.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>Wallet-first requirement adds real-world delay</b><span>Users had to deposit into the wallet, wait for funds to clear, then create a pot and set up Autosave — a day or two, long enough for intent to decay before returning.</span></div></div>
+<p class="text reveal">I treated this as a testable assumption, not a certainty: I couldn't prove step-by-step attribution from the data available, so the design response was chosen to address both hypotheses at once — removing the wait, and, separately, not blocking pot creation behind a plan comparison — rather than betting the whole redesign on one diagnosis being right.</p>
+</section>
+<section class="cs-section" id="sec-alternatives-considered-3">
+  <span class="num">04</span>
+  <h2 class="divider serif split"><span class="w">Alternatives</span> <span class="w">Considered</span></h2>
+  <div class="cards c2 reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>Auto-sweep from the wallet</b><span>Kept an unnecessary internal account and system state alive for no user-facing benefit — removing the wallet outright cut more steps than smoothing over the ones that remained.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>One payment rail for every deposit</b><span>Routing by bank support alone broke for Autoinvest, which specifically requires Direct Debit — the right rail depends on the transaction, not just the bank.</span></div></div>
+</section>
+<section class="cs-section" id="sec-the-solution-4">
+  <span class="num">05</span>
+  <h2 class="divider serif split"><span class="w">The</span> <span class="w">Solution</span></h2>
+  <p class="lead reveal">One flow, two rails</p>
+<p class="text reveal">After: bank → pot, directly, in one action. The wallet still exists as internal plumbing behind the scenes, but the user never sees it, funds it, or waits on it as a separate step.</p>
+<p class="text reveal">Open Banking made a faster default possible, but it doesn't work for every bank, and Autoinvest specifically requires Direct Debit — so I designed the deposit flow around a smart default rather than a single blanket rule.</p>
+<div class="dd reveal"><b>Design decision</b><p>For onboarding, the payment rail is fully resolved by the system — nothing for the user to choose. For a one-off deposit, the system picks a smart default (Open Banking, or Direct Debit if the balance falls short) but leaves Direct Debit available as an explicit choice for anyone who wants it. Most users' job stays constant — tap one button — while the option to choose stays there for the ones who go looking for it.</p></div>
+<p class="text reveal">I worked through this branching logic with AI — including edge cases like an in-flight Direct Debit payment landing after the balance check already fired — before handing the fully specified rules to engineering to build.</p>
+<figure class="reveal full"><img src="../assets/img/cs7-placeholder.svg" alt="" loading="lazy"><figcaption>Placeholder — decision-tree diagram: “Add money” button → onboarding or one-off deposit? → onboarding routes straight to Direct Debit; a one-off deposit defaults to Open Banking, falls back to Direct Debit on insufficient balance, and shows Direct Debit as a visible choice → same destination screen. Render as a flowchart, not a screenshot, alongside the actual deposit/confirmation screens.</figcaption></figure>
+<figure class="reveal full"><img src="../assets/img/cs7-placeholder.svg" alt="" loading="lazy"><figcaption>Placeholder — video: 20–30s side-by-side screen recording, old flow (bank → wallet, wait, wallet → pot) vs new flow (bank → pot, one tap).</figcaption></figure>
+<h3 class="sub serif reveal">Deferring KYC Until Intent Is Confirmed</h3>
+<p class="text reveal">Alongside collapsing the deposit step, we also moved KYC (identity verification) later in the flow. Rather than front-loading it before a user could even choose a pot, KYC now runs only after the user has confirmed the pot's deposit amount and Autosave setup — the last step of the Save journey, not the first — and only triggers for users who haven't already passed KYC.</p>
+<p class="text reveal">Two things follow from this. First, it directly addresses the earlier diagnosis: regulatory data collection was one of the heaviest, least reversible steps in the old flow, and pushing it past the point of stated intent means we only run — and pay for — KYC checks on users who have already committed to funding an account. Second, it lets the part of the flow users actually came for — setting the deposit amount and Autosave rules — complete faster, since it's no longer gated behind identity verification.</p>
+<figure class="reveal full"><img src="../assets/img/cs7-placeholder.svg" alt="" loading="lazy"><figcaption>Placeholder — the decision-tree diagram above, updated with the KYC step at its true position (after both the deposit amount and Autosave setup are confirmed). Label the old position (pre-deposit) and new position (post-intent) side by side.</figcaption></figure>
+<h3 class="sub serif reveal">Timeline</h3>
+<p class="text reveal">By mid-June, this direction was already drafted and under review — the core shape of the redesign predates what happened next.</p>
+<ul class="bullets reveal"><li>21 May — first Figma draft (pot onboarding flow)</li><li>18 June — updated draft (Autosave setup included), reviewed by Yukiko</li></ul>
+</section>
+<section class="cs-section" id="sec-the-forcing-function-5">
+  <span class="num">06</span>
+  <h2 class="divider serif split"><span class="w">The</span> <span class="w">Forcing</span> <span class="w">Function</span></h2>
+  <p class="text reveal">This had already been scoped as a planned migration: phase the wallet out gradually, migrate existing balances, retire it on our own schedule. On 30 June, our banking infrastructure partner quietly blocked the creation of new wallet accounts, with no warning. Overnight, “planned migration” became “new users can't onboard the old way, starting now.” The redesign had to ship for new users immediately, while the fade-out for existing balance-holders continued in parallel on the original timeline.</p>
+<p class="text reveal">It would have been easy to treat this purely as an outage to patch around. Instead, the forced timeline became a reason to fix things we already knew were wrong: collapsing two actions into one, giving every user a working funding path regardless of their bank, and replacing an accidental “front door” with deliberate entry points. The constraint didn't lower the bar on the solution — it removed the option of deferring it.</p>
+<p class="text reveal">The plan accelerated:</p>
+<ul class="bullets reveal"><li>6–8 July — further revision covering the initial deposit and Autosave setup flow together, reviewed by Yukiko</li><li>12–13 August — after engineering built the flow, a QA and copy pass on the shipped build, catching UX copy inconsistencies such as “Autosave” capitalization and “Set up” vs. “Setup”</li></ul>
+</section>
+<section class="cs-section" id="sec-rollout-6">
+  <span class="num">07</span>
+  <h2 class="divider serif split"><span class="w">Rollout</span></h2>
+  <p class="lead reveal">A fade-out, not a cutover</p>
+<p class="text reveal">We couldn't delete the wallet for everyone on day one; some users still had real money sitting in it. The rollout split into two tracks running in parallel:</p>
+<div class="cards c2 reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>New users &amp; zero-balance users</b><span>Never saw the wallet at all — went straight into the new one-step flow.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><b>Existing users with a wallet balance</b><span>Kept seeing the wallet, paired with in-context messaging and a feed prompt nudging them to move that money into a pot. As each balance emptied out, the wallet quietly disappeared for them too.</span></div></div>
+<div class="dd reveal"><b>Design decision</b><p>The wallet had quietly doubled as the app's general-purpose “add money” entry point. Removing it removed that entry point along with the friction it caused, so alongside the redesign I added explicit Add money buttons directly on the Save and Invest tab home screens, letting a user fund a pot or investment account in one tap without first drilling into a specific pot.</p></div>
+<figure class="reveal full"><img src="../assets/img/cs7-placeholder.svg" alt="" loading="lazy"><figcaption>Placeholder — two-panel comparison: (1) a simple two-track diagram showing new/zero-balance users vs existing-balance users, converging once balance hits zero; (2) before/after screenshots of the Save tab home screen showing the new Add money button and the feed-prompt messaging shown to existing wallet holders.</figcaption></figure>
+</section>
+<section class="cs-section" id="sec-results-economics-7">
+  <span class="num">08</span>
+  <h2 class="divider serif split"><span class="w">Results</span> <span class="w">&amp;</span> <span class="w">Economics</span></h2>
+  <p class="text reveal">In the weeks following the redesign, the decline reversed: daily Autosave volume held at 5–6× its prior baseline for the following month — including a run of days that matched the app's previous busiest week of the year (early January), a signal the team read as evidence the new flow could sustain, not just spike, that level of activity.</p>
+<p class="text reveal">The change also had a favourable financial shape: dropping the paid wallet-vendor relationship saves roughly £15,000/month, against a one-time £40,000 for the banking partner to build the direct-funding API that enables Stage 2. The design case for the redesign stood on its own — the economics made the timing easier to justify internally, not the other way around.</p>
+<figure class="reveal full"><img src="../assets/img/cs7-placeholder.svg" alt="" loading="lazy"><figcaption>Placeholder — internal analytics chart (daily/weekly Autosave-setup count over time) showing the pre-launch decline and post-launch recovery. Crop out any surrounding Slack thread or colleague names; keep only the chart, axis labels and a caption. A simple before/after cost table works well directly underneath.</figcaption></figure>
+</section>
+<section class="cs-section" id="sec-reflection-8">
+  <span class="num">09</span>
+  <h2 class="divider serif split"><span class="w">Reflection</span></h2>
+  <h3 class="sub serif reveal">What's next</h3>
+<p class="text reveal">Stage 1 (shipped) was the design fix available on our timeline — it solved the user-facing problem immediately. Stage 2 (next) is the infrastructure fix: once our banking partner, Bondsmith, finishes building its own funding API, the wallet's remaining plumbing retires entirely, and we can fund the pot with no internal staging step at all.</p>
+<h3 class="sub serif reveal">Why this belongs in the portfolio</h3>
+<p class="text reveal">This project sits at the intersection of regulated financial infrastructure and interaction design: the constraint wasn't aesthetic, it was a payment-rail and KYC/regulatory reality that had to be resolved by the system rather than exposed to the user. The forcing function — a partner cutting off wallet creation with no warning — meant the design had to hold up under a compressed, non-negotiable timeline, and be phased safely against real user balances rather than shipped as a single cutover.</p>
+</section>
+  </div>
+</div>
+
+<section class="cs-next">
+  <div class="wrap">
+    <p class="eyebrow">Keep exploring</p>
+    <div class="cs-next-grid">
+      <a class="cs-next-card" href="trip-memories.html">
+        <img class="thumb" src="../assets/img/TrorWvIDo5zv1eS2h04sgSZOtJ8.webp" alt="" loading="lazy">
+        <span class="txt">
+          <span class="dir">&larr; Previous</span>
+          <h3 class="serif">Revolut home redesign concept</h3>
+        </span>
+      </a>
+      <a class="cs-next-card next" href="provider-redesign.html">
+        <span class="txt">
+          <span class="dir">Next &rarr;</span>
+          <h3 class="serif">Redesigned a £9B platform for UHNW clients</h3>
+        </span>
+        <img class="thumb" src="../assets/img/VFbImBTynQh7F0MmkZp4YDalEAE.webp" alt="" loading="lazy">
+      </a>
+    </div>
+  </div>
+</section>
+<footer class="foot" id="contact">
+  <div class="foot-in">
+    <h2 class="serif reveal">Let&rsquo;s make something clear.</h2>
+    <a class="mail reveal" href="mailto:designlcc@gmail.com">designlcc@gmail.com</a>
+    <div class="row">
+      <span>&copy; 2026 Chun-Chuan Lin — London</span>
+      <span class="socials">
+        <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
+        <a href="https://www.behance.net/designlcc" target="_blank" rel="noopener">Behance</a>
+        <a href="https://adplist.org/mentors/chun-chuan-lin" target="_blank" rel="noopener">ADPList</a>
+      </span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=9db09d5c" defer></script>
+</body>
+</html>
