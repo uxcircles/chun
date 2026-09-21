@@ -33,8 +33,8 @@
   {"tag":"text","text":"I treated this as a testable assumption, not a certainty: I couldn't prove step-by-step attribution from the data available, so the design response was chosen to address both hypotheses at once — removing the wait, and, separately, not blocking pot creation behind a plan comparison — rather than betting the whole redesign on one diagnosis being right."},
 
   {"tag":"H1","text":"Alternatives Considered"},
-  {"item":["Auto-sweep from the wallet","Kept an unnecessary internal account and system state alive for no user-facing benefit — removing the wallet outright cut more steps than smoothing over the ones that remained."]},
-  {"item":["One payment rail for every deposit","Routing by bank support alone broke for Autoinvest, which specifically requires Direct Debit — the right rail depends on the transaction, not just the bank."]},
+  {"item":["🏦 Auto-sweep from the wallet","Kept an unnecessary internal account and system state alive for no user-facing benefit — removing the wallet outright cut more steps than smoothing over the ones that remained."]},
+  {"item":["🎚️ One payment rail for every deposit","Routing by bank support alone broke for Autoinvest, which specifically requires Direct Debit — the right rail depends on the transaction, not just the bank."]},
 
   {"tag":"H1","text":"The Solution"},
   {"tag":"H5","text":"One flow, two rails"},
@@ -52,19 +52,19 @@
 
   {"tag":"H2","text":"Timeline"},
   {"tag":"text","text":"By mid-June, this direction was already drafted and under review — the core shape of the redesign predates what happened next."},
-  {"bullets":["21 May — first Figma draft (pot onboarding flow)","18 June — updated draft (Autosave setup included), reviewed by Yukiko"]},
+  {"bullets":["21 May — first Figma draft (pot onboarding flow)","18 June — updated draft (Autosave setup included), reviewed by another designer"]},
 
   {"tag":"H1","text":"The Forcing Function"},
   {"tag":"text","text":"This had already been scoped as a planned migration: phase the wallet out gradually, migrate existing balances, retire it on our own schedule. On 30 June, our banking infrastructure partner quietly blocked the creation of new wallet accounts, with no warning. Overnight, “planned migration” became “new users can't onboard the old way, starting now.” The redesign had to ship for new users immediately, while the fade-out for existing balance-holders continued in parallel on the original timeline."},
   {"tag":"text","text":"It would have been easy to treat this purely as an outage to patch around. Instead, the forced timeline became a reason to fix things we already knew were wrong: collapsing two actions into one, giving every user a working funding path regardless of their bank, and replacing an accidental “front door” with deliberate entry points. The constraint didn't lower the bar on the solution — it removed the option of deferring it."},
   {"tag":"text","text":"The plan accelerated:"},
-  {"bullets":["6–8 July — further revision covering the initial deposit and Autosave setup flow together, reviewed by Yukiko","12–13 August — after engineering built the flow, a QA and copy pass on the shipped build, catching UX copy inconsistencies such as “Autosave” capitalization and “Set up” vs. “Setup”"]},
+  {"bullets":["6–8 July — further revision covering the initial deposit and Autosave setup flow together, reviewed by another designer","12–13 August — after engineering built the flow, a QA and copy pass on the shipped build, catching UX copy inconsistencies such as “Autosave” capitalisation and “Set up” vs. “Setup”"]},
 
   {"tag":"H1","text":"Rollout"},
   {"tag":"H5","text":"A fade-out, not a cutover"},
   {"tag":"text","text":"We couldn't delete the wallet for everyone on day one; some users still had real money sitting in it. The rollout split into two tracks running in parallel:"},
-  {"item":["New users & zero-balance users","Never saw the wallet at all — went straight into the new one-step flow."]},
-  {"item":["Existing users with a wallet balance","Kept seeing the wallet, paired with in-context messaging and a feed prompt nudging them to move that money into a pot. As each balance emptied out, the wallet quietly disappeared for them too."]},
+  {"item":["🧑‍🤝‍🧑 New users & zero-balance users","Never saw the wallet at all — went straight into the new one-step flow."]},
+  {"item":["🧩 Existing users with a wallet balance","Kept seeing the wallet, paired with in-context messaging and a feed prompt nudging them to move that money into a pot. As each balance emptied out, the wallet quietly disappeared for them too."]},
   {"dd":"The wallet had quietly doubled as the app's general-purpose “add money” entry point. Removing it removed that entry point along with the friction it caused, so alongside the redesign I added explicit Add money buttons directly on the Save and Invest tab home screens, letting a user fund a pot or investment account in one tap without first drilling into a specific pot."},
   {"img":"cs7-placeholder.svg","cap":"Placeholder — two-panel comparison: (1) a simple two-track diagram showing new/zero-balance users vs existing-balance users, converging once balance hits zero; (2) before/after screenshots of the Save tab home screen showing the new Add money button and the feed-prompt messaging shown to existing wallet holders."},
 
