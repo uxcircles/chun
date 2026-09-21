@@ -52,7 +52,7 @@
 
   {"tag":"H2","text":"Timeline"},
   {"tag":"text","text":"By mid-June, this direction was already drafted and under review — the core shape of the redesign predates what happened next."},
-  {"bullets":["21 May — first Figma draft (pot onboarding flow)","18 June — updated draft (Autosave setup included), reviewed by another designer"]},
+  {"bullets":["21 May — first Figma draft (pot onboarding flow)","18 June — updated draft (Autosave setup included)"]},
 
   {"tag":"H1","text":"The Forcing Function"},
   {"tag":"text","text":"This had already been scoped as a planned migration: phase the wallet out gradually, migrate existing balances, retire it on our own schedule. On 30 June, our banking infrastructure partner quietly blocked the creation of new wallet accounts, with no warning. Overnight, “planned migration” became “new users can't onboard the old way, starting now.” The redesign had to ship for new users immediately, while the fade-out for existing balance-holders continued in parallel on the original timeline."},
