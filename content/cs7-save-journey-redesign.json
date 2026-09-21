@@ -70,7 +70,7 @@
   {"tag":"H1","text":"Results & Economics"},
   {"tag":"text","text":"In the weeks following the redesign, the decline reversed: daily Autosave volume held at 5–6× its prior baseline for the following month — including a run of days that matched the app's previous busiest week of the year (early January), a signal the team read as evidence the new flow could sustain, not just spike, that level of activity."},
   {"tag":"text","text":"The change also had a favourable financial shape: dropping the paid wallet-vendor relationship saves roughly £10,000–20,000/month, against a one-time cost in the tens of thousands for the banking partner to build the direct-funding API that enables Stage 2. The design case for the redesign stood on its own — the economics made the timing easier to justify internally, not the other way around."},
-  {"img":"cs7-placeholder.svg","cap":"Placeholder — internal analytics chart (daily/weekly Autosave-setup count over time) showing the pre-launch decline and post-launch recovery. Crop out any surrounding Slack thread or colleague names; keep only the chart, axis labels and a caption. A simple before/after cost table works well directly underneath."},
+  {"img":"cs7-results-autosave-chart.webp","cap":"Weekly Autosave-setup count, January–August 2026 — the pre-launch decline through spring and summer, then the sharp recovery at launch."},
 
   {"tag":"H1","text":"Reflection"},
   {"tag":"H2","text":"What's next"},
