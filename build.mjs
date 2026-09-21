@@ -155,7 +155,7 @@ const STUDIES = [
   { slug: "wealth-management-system", file: "cs4-wealth-management-system.json", card: "A governed rebalancing system for wealth advisors", img: "E0ivBHq7jXSnA6J9aW9na1RmKs.webp" },
   { slug: "portfolio-health",         file: "cs5-portfolio-health.json",         card: "Portfolio health for a regulated investment app", img: "9iO2ZGM4p4TnNoXjsiRvFTovY58.webp" },
   { slug: "trip-memories",            file: "cs6-trip-memories.json",            card: "Revolut home redesign concept", img: "TrorWvIDo5zv1eS2h04sgSZOtJ8.webp" },
-  { slug: "save-journey-redesign",    file: "cs7-save-journey-redesign.json",    card: "Redesigned Emma's Save journey, reversing a 7-month Autosave decline", img: "cs7-placeholder.svg" },
+  { slug: "save-journey-redesign",    file: "cs7-save-journey-redesign.json",    card: "Redesigned a savings app's Save journey, reversing a 7-month Autosave decline", img: "cs7-placeholder.svg" },
 ];
 
 /* =================================================================
