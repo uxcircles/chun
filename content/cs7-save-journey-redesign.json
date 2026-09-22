@@ -27,7 +27,6 @@
   {"wrappers":[["KYC under review","cs7-placeholder.svg"],["Funding the wallet","cs7-placeholder.svg"],["The plan-comparison screen","cs7-placeholder.svg"],["Waiting for funds before Autosave","cs7-placeholder.svg"]]},
   {"tag":"H2","text":"The two likeliest explanations"},
   {"tag":"text","text":"Two of the four stood out as the likeliest explanations, not because the data proved it, but because of what each one actually blocks."},
-  {"compare":["The upgrade screen users hit mid-flow","The wallet-funding step in onboarding","cs7-diag-upgrade-screen.webp","cs7-diag-wallet-step.webp"]},
   {"tag":"text","text":"The wallet-funding wait was the most direct suspect: the longest real-world delay, and the step most tied to whether a pot ever got finished. The subscription-plan screen was a close second: mid-flow monetisation prompts are a well-known drop-off point, even without a log to prove it here."},
   {"tag":"text","text":"I treated this as a testable assumption, not a certainty; I couldn't prove step-by-step attribution from the data. So the design addressed all four breakpoints at once: removing the wallet, deferring KYC, and clearing pot creation of the plan comparison, rather than betting the redesign on one diagnosis being right."},
 
