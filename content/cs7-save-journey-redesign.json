@@ -1,6 +1,6 @@
 [
   {"tag":"H4","text":"Chun-Chuan Lin"},
-  {"toc":["Summary","The Problem","Diagnosis","Alternatives Considered","The Solution","The Forcing Function","Rollout","Results & Economics","Reflection"]},
+  {"toc":["Summary","The Problem","Diagnosis","The Solution","Alternatives Considered","The Forcing Function","Rollout","Results & Economics","Reflection"]},
 
   {"tag":"H1","text":"Redesigned the Save Journey, reversing a 7-month Autosave decline"},
   {"tag":"H5","text":"For a UK savings & investing app — collapsing a two-step, wallet-mediated deposit flow into one action."},
@@ -33,10 +33,6 @@
   {"tag":"text","text":"The wallet-funding wait was the most direct suspect: it's the step where the most real-world time elapses, and the one most obviously tied to whether a user ever finishes creating an Autosave-linked pot at all. The subscription-plan screen was a close second: mid-flow monetisation prompts are a well-known drop-off point, even without an event log here to prove it."},
   {"tag":"text","text":"I treated this as a testable assumption, not a certainty. I couldn't prove step-by-step attribution from the data available. So the design addressed all four breakpoints at once: removing the wallet, deferring KYC, and keeping pot creation clear of the plan comparison, rather than betting the whole redesign on one diagnosis being right."},
 
-  {"tag":"H1","text":"Alternatives Considered"},
-  {"item":["🏦 Auto-sweep from the wallet","Kept an unnecessary internal account and system state alive for no user-facing benefit. Removing the wallet outright cut more steps than patching around it would have."]},
-  {"item":["🎚️ One payment rail for every deposit","Routing by bank support alone broke for Autoinvest, which specifically requires Direct Debit. The right rail depends on the transaction, not just the bank."]},
-
   {"tag":"H1","text":"The Solution"},
   {"tag":"H5","text":"One flow, two rails"},
   {"tag":"text","text":"After: bank → pot, directly, in one action. The wallet still exists as internal plumbing behind the scenes, but the user never sees it, funds it, or waits on it as a separate step."},
@@ -57,6 +53,10 @@
   {"tag":"H2","text":"Timeline"},
   {"tag":"text","text":"By mid-June, this direction was already drafted and under review. The core shape of the redesign predates what happened next."},
   {"bullets":["21 May — first Figma draft (pot onboarding flow)","18 June — updated draft (Autosave setup included)"]},
+
+  {"tag":"H1","text":"Alternatives Considered"},
+  {"item":["🏦 Auto-sweep from the wallet","Kept an unnecessary internal account and system state alive for no user-facing benefit. Removing the wallet outright cut more steps than patching around it would have."]},
+  {"item":["🎚️ One payment rail for every deposit","Routing by bank support alone broke for Autoinvest, which specifically requires Direct Debit. The right rail depends on the transaction, not just the bank."]},
 
   {"tag":"H1","text":"The Forcing Function"},
   {"tag":"text","text":"We'd already scoped this as a planned migration: phase the wallet out gradually, migrate existing balances, retire it on our own schedule. Then on 30 June, our banking infrastructure partner quietly blocked the creation of new wallet accounts, with no warning. New users could no longer onboard the old way, starting immediately. The redesign had to ship for new users right away, while the fade-out for existing balance-holders continued in parallel on the original timeline."},

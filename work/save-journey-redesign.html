@@ -52,7 +52,7 @@
 <div class="cs-hero-img reveal"><img src="../assets/img/cs7-hero.webp" alt=""></div>
 
 <div class="cs-body">
-  <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-summary-0">Summary</a></li><li><a href="#sec-the-problem-1">The Problem</a></li><li><a href="#sec-diagnosis-2">Diagnosis</a></li><li><a href="#sec-alternatives-considered-3">Alternatives Considered</a></li><li><a href="#sec-the-solution-4">The Solution</a></li><li><a href="#sec-the-forcing-function-5">The Forcing Function</a></li><li><a href="#sec-rollout-6">Rollout</a></li><li><a href="#sec-results-economics-7">Results &amp; Economics</a></li><li><a href="#sec-reflection-8">Reflection</a></li></ol></nav></aside>
+  <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-summary-0">Summary</a></li><li><a href="#sec-the-problem-1">The Problem</a></li><li><a href="#sec-diagnosis-2">Diagnosis</a></li><li><a href="#sec-the-solution-3">The Solution</a></li><li><a href="#sec-alternatives-considered-4">Alternatives Considered</a></li><li><a href="#sec-the-forcing-function-5">The Forcing Function</a></li><li><a href="#sec-rollout-6">Rollout</a></li><li><a href="#sec-results-economics-7">Results &amp; Economics</a></li><li><a href="#sec-reflection-8">Reflection</a></li></ol></nav></aside>
   <div class="cs-content">
     <section class="cs-section" id="sec-summary-0">
   <span class="num">01</span>
@@ -86,13 +86,8 @@
 <p class="text reveal">The wallet-funding wait was the most direct suspect: it's the step where the most real-world time elapses, and the one most obviously tied to whether a user ever finishes creating an Autosave-linked pot at all. The subscription-plan screen was a close second: mid-flow monetisation prompts are a well-known drop-off point, even without an event log here to prove it.</p>
 <p class="text reveal">I treated this as a testable assumption, not a certainty. I couldn't prove step-by-step attribution from the data available. So the design addressed all four breakpoints at once: removing the wallet, deferring KYC, and keeping pot creation clear of the plan comparison, rather than betting the whole redesign on one diagnosis being right.</p>
 </section>
-<section class="cs-section" id="sec-alternatives-considered-3">
+<section class="cs-section" id="sec-the-solution-3">
   <span class="num">04</span>
-  <h2 class="divider serif split"><span class="w">Alternatives</span> <span class="w">Considered</span></h2>
-  <div class="cards c2 reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M4 21V8l8-4 8 4v13"/><circle cx="12" cy="12" r="3"/><path d="M12 15v3"/></svg><b>Auto-sweep from the wallet</b><span>Kept an unnecessary internal account and system state alive for no user-facing benefit. Removing the wallet outright cut more steps than patching around it would have.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg><b>One payment rail for every deposit</b><span>Routing by bank support alone broke for Autoinvest, which specifically requires Direct Debit. The right rail depends on the transaction, not just the bank.</span></div></div>
-</section>
-<section class="cs-section" id="sec-the-solution-4">
-  <span class="num">05</span>
   <h2 class="divider serif split"><span class="w">The</span> <span class="w">Solution</span></h2>
   <p class="lead reveal">One flow, two rails</p>
 <p class="text reveal">After: bank → pot, directly, in one action. The wallet still exists as internal plumbing behind the scenes, but the user never sees it, funds it, or waits on it as a separate step.</p>
@@ -114,6 +109,11 @@
 <h3 class="sub serif reveal">Timeline</h3>
 <p class="text reveal">By mid-June, this direction was already drafted and under review. The core shape of the redesign predates what happened next.</p>
 <ul class="bullets reveal"><li>21 May — first Figma draft (pot onboarding flow)</li><li>18 June — updated draft (Autosave setup included)</li></ul>
+</section>
+<section class="cs-section" id="sec-alternatives-considered-4">
+  <span class="num">05</span>
+  <h2 class="divider serif split"><span class="w">Alternatives</span> <span class="w">Considered</span></h2>
+  <div class="cards c2 reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M4 21V8l8-4 8 4v13"/><circle cx="12" cy="12" r="3"/><path d="M12 15v3"/></svg><b>Auto-sweep from the wallet</b><span>Kept an unnecessary internal account and system state alive for no user-facing benefit. Removing the wallet outright cut more steps than patching around it would have.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg><b>One payment rail for every deposit</b><span>Routing by bank support alone broke for Autoinvest, which specifically requires Direct Debit. The right rail depends on the transaction, not just the bank.</span></div></div>
 </section>
 <section class="cs-section" id="sec-the-forcing-function-5">
   <span class="num">06</span>
