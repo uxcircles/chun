@@ -36,9 +36,9 @@
 
   {"tag":"H1","text":"The Solution"},
   {"tag":"H5","text":"One flow, two rails"},
-  {"tag":"text","text":"After: bank → pot, directly, in one action. The wallet still exists as internal plumbing, but the user never sees it, funds it, or waits on it as a separate step."},
+  {"tag":"text","text":"Bank → pot, directly, in one action. The wallet still exists as internal plumbing, but the user never sees it, funds it, or waits on it as a separate step."},
   {"tag":"text","text":"For onboarding, I also removed the subscription-plan comparison entirely: deposit, then straight into Autosave setup, both via Direct Debit, no wallet and no upgrade prompt in between. Comparing paid tiers is a business goal, not a task goal, and has no place where a user is most likely to give up."},
-  {"tag":"text","text":"Open Banking made a faster default possible, but it doesn't cover every bank, and Autoinvest specifically requires Direct Debit. So the deposit flow uses a smart default rather than one blanket rule."},
+  {"tag":"text","text":"Collapsing bank → wallet → pot into one hop meant deciding, for every deposit — onboarding and one-off Save deposits alike — which rail actually moves the money. Open Banking made a faster default possible, but it doesn't cover every bank, and Autoinvest specifically requires Direct Debit. So the deposit flow uses a smart default rather than one blanket rule."},
   {"dd":"For a one-off deposit, the system defaults to Open Banking, falling back to Direct Debit if the balance falls short, but still shows Direct Debit as an explicit choice for anyone who wants it. Most users just tap one button; the option to choose stays there for the ones who go looking for it."},
   {"tag":"text","text":"I worked through this branching logic with AI, including edge cases like an in-flight Direct Debit payment landing after the balance check fired, before handing the specified rules to engineering."},
   {"img":"cs7-placeholder.svg","cap":"Placeholder — decision-tree diagram: “Add money” button → onboarding or one-off deposit? → onboarding routes straight to Direct Debit; a one-off deposit defaults to Open Banking, falls back to Direct Debit on insufficient balance, and shows Direct Debit as a visible choice → same destination screen. Render as a flowchart, not a screenshot, alongside the actual deposit/confirmation screens."},
