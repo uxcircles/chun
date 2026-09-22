@@ -145,6 +145,7 @@ const EMOJI_ICON = {
   "🧩": "layers",
   "🏦": "vault",
   "🎚️": "sliders",
+  "💷": "pound",
 };
 function stripEmojiIcon(title) {
   const m = String(title).match(/^(\S+)\s+(.*)$/su);

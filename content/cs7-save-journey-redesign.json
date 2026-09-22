@@ -9,10 +9,9 @@
 
   {"tag":"H1","text":"Summary"},
   {"tag":"text","text":"A seven-month decline in Autosave engagement reversed within weeks of launch. Daily Autosave volume held at 5–6× its prior level for the following month, and dropping the wallet vendor cut a recurring cost of roughly £10,000–20,000/month."},
-  {"item":["🧩 Steps to fund a pot","2 steps (bank → wallet → pot) reduced to 1 (bank → pot)."]},
-  {"item":["📈 Autosave engagement","Reversed a 7-month decline in weekly Autosave setup volume."]},
-  {"item":["📊 Daily Autosave volume","5–6× increase, sustained for the month after launch."]},
-  {"item":["Recurring cost","A five-figure monthly saving after dropping the wallet vendor relationship."]},
+  {"item":["🧩 Deposit steps cut in half","2 steps (bank → wallet → pot) reduced to 1 (bank → pot)."]},
+  {"item":["📈 7-month Autosave decline reversed","Daily Autosave volume held at 5–6× its prior level for the month after launch."]},
+  {"item":["💷 Five-figure monthly saving","After dropping the wallet vendor relationship."]},
   {"tag":"text","text":"Role: Senior Product Designer, sole designer on this workstream, reporting directly to the CEO."},
 
   {"tag":"H1","text":"The Problem"},
