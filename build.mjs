@@ -619,7 +619,8 @@ function renderInner(blocks, base) {
       continue;
     }
     if (Array.isArray(b.wrappers)) {
-      parts.push(`<div class="figrow three full reveal">${b.wrappers
+      const cls = b.wrappers.length === 2 ? "two" : b.wrappers.length === 4 ? "four" : "three";
+      parts.push(`<div class="figrow ${cls} full reveal">${b.wrappers
         .map(([nm, im]) => `<figure style="margin:0"><img src="${IMG(im, base)}" alt="${esc(nm)}" loading="lazy"><figcaption>${esc(nm)}</figcaption></figure>`)
         .join("")}</div>`);
       continue;
