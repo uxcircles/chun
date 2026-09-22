@@ -16,7 +16,7 @@
   {"tag":"text","text":"Role: Senior Product Designer, sole designer on this workstream, reporting directly to the CEO."},
 
   {"tag":"H1","text":"The Problem"},
-  {"tag":"text","text":"Weekly Autosave-setup volume had been declining for roughly seven months before this project started. That trend signalled something in the funding path was blocking users — though without full event tracking on every screen, we couldn't yet say which step."},
+  {"tag":"text","text":"Weekly Autosave-setup volume had been declining for roughly seven months before this project started. That trend signalled something in the funding path was blocking users — though without full event tracking on every screen, we couldn't yet say which step: the wallet-funding wait, or the paid-plan comparison screen users hit earlier in the same flow."},
   {"img":"cs7-problem-decline-chart.webp","cap":"Weekly Autosave-setup count, January–August 2026 — the seven-month decline that first signalled something in the funding path was blocking users."},
   {"tag":"text","text":"Every deposit and withdrawal in the app passed through an intermediate holding account — an internal “wallet” — before reaching a user's actual savings pot or investment account. Users saw the wallet as a real account, not invisible plumbing: something they had to notice, fund, and wait on before their money reached where they actually wanted it."},
   {"tag":"text","text":"Before: bank → wallet (step 1, wait for funds to land) → pot (step 2, manual action to move funds again)."},
