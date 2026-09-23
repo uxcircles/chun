@@ -22,6 +22,11 @@ const esc = (s = "") =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const IMG = (name, base) => `${base}assets/img/${name}`;
 const ARROW = `<span class="arrow" aria-hidden="true">&rarr;</span>`;
+const isVideo = (name) => /\.(mp4|webm|mov)$/i.test(name);
+const MEDIA = (name, base) =>
+  isVideo(name)
+    ? `<video src="${base}assets/video/${name}" autoplay muted loop playsinline preload="metadata"></video>`
+    : `<img src="${IMG(name, base)}" alt="" loading="lazy">`;
 
 // wrap each word of a heading in <span> for staggered blur-in animation
 const splitWords = (s = "") =>
@@ -614,8 +619,8 @@ function renderInner(blocks, base) {
     if (Array.isArray(b.compare)) {
       const [la, lb, ia, ib] = b.compare;
       parts.push(`<div class="compare full reveal">
-        <figure><img src="${IMG(ia, base)}" alt="" loading="lazy"><figcaption>${esc(la)}</figcaption></figure>
-        <figure><img src="${IMG(ib, base)}" alt="" loading="lazy"><figcaption>${esc(lb)}</figcaption></figure>
+        <figure>${MEDIA(ia, base)}<figcaption>${esc(la)}</figcaption></figure>
+        <figure>${MEDIA(ib, base)}<figcaption>${esc(lb)}</figcaption></figure>
       </div>`);
       continue;
     }
