@@ -8,9 +8,9 @@
   {"img":"cs7-hero.webp"},
 
   {"tag":"H1","text":"Summary"},
-  {"tag":"text","text":"A seven-month decline in Autosave engagement reversed within weeks of launch. Daily Autosave volume held at 5–6× its prior level for the following month, and dropping the wallet vendor cut a recurring cost of roughly £10,000–20,000/month."},
+  {"tag":"text","text":"A seven-month decline in Autosave engagement reversed within weeks of launch. Daily Autosave volume rose from roughly 10/day pre-launch to 50–60/day for the following month, and dropping the wallet vendor cut a recurring cost of roughly £10,000–20,000/month."},
   {"item":["🧩 Deposit steps cut in half","2 steps (bank → wallet → pot) reduced to 1 (bank → pot)."]},
-  {"item":["📈 7-month Autosave decline reversed","Daily Autosave volume held at 5–6× its prior level for the month after launch."]},
+  {"item":["📈 7-month Autosave decline reversed","Daily Autosave volume rose from ~10/day pre-launch to 50–60/day, sustained for the following month."]},
   {"item":["💷 Five-figure monthly saving","After dropping the wallet vendor relationship."]},
   {"tag":"text","text":"Role: Senior Product Designer, sole designer on this workstream, reporting directly to the CEO."},
 
@@ -77,7 +77,7 @@
   {"img":"cs7-placeholder.svg","cap":"Placeholder — two-panel comparison: (1) a simple two-track diagram showing new/zero-balance users vs existing-balance users, converging once balance hits zero; (2) before/after screenshots of the Save tab home screen showing the new Add money button and the feed-prompt messaging shown to existing wallet holders."},
 
   {"tag":"H1","text":"Results & Economics"},
-  {"tag":"text","text":"In the weeks following the redesign, the decline reversed: daily Autosave volume held at 5–6× its prior baseline for the following month, including a run of days that matched the app's previous busiest week of the year (early January), a signal the team read as evidence the new flow could sustain that level of activity, not just spike it."},
+  {"tag":"text","text":"In the weeks following the redesign, the decline reversed: daily Autosave volume rose from roughly 10/day pre-launch to 50–60/day for the following month, a 5–6× increase that included a run of days matching the app's previous busiest week of the year (early January). This was a strong directional signal, though the available instrumentation didn't allow isolating the contribution of each individual design change."},
   {"tag":"text","text":"The change also had a favourable financial shape: dropping the paid wallet-vendor relationship saves roughly £10,000–20,000/month, against a one-time cost in the tens of thousands for the banking partner to build the direct-funding API that enables Stage 2. The design case for the redesign stood on its own; the economics just made the internal timing easier to justify."},
   {"img":"cs7-results-recovery-chart.webp","cap":"Daily Autosave-setup count, June–September 2026: the pre-launch trough through June and July, then the sharp recovery at launch in mid-August."},
 
