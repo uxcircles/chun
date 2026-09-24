@@ -82,6 +82,10 @@
   {"img":"cs7-results-recovery-chart.webp","cap":"Daily Autosave-setup count, June–September 2026: the pre-launch trough through June and July, then the sharp recovery at launch in mid-August."},
 
   {"tag":"H1","text":"Reflection"},
+  {"tag":"H2","text":"What I learned"},
+  {"item":["🧩 Remove infrastructure from the mental model","The wallet existed for technical reasons, not because users needed it — once that was clear, removing it stopped being a UI simplification and became the real fix."]},
+  {"item":["🧭 Treat incomplete data as a constraint, not a stop sign","When instrumentation couldn't isolate the drop-off, structural analysis was enough to form a testable hypothesis and design against it."]},
+  {"item":["🧑‍🤝‍🧑 Design for migration, not just the new state","Real money was already sitting in the wallet, so the experience needed two journeys running in parallel, not one clean cutover."]},
   {"tag":"H2","text":"What's next"},
   {"tag":"text","text":"Stage 1 (shipped) was the design fix available on our timeline. It solved the user-facing problem immediately. Stage 2 (next) is the infrastructure fix: once our banking partner finishes building its own funding API, the wallet's remaining plumbing retires entirely, and we can fund the pot with no internal staging step at all."},
   {"tag":"H2","text":"Why this belongs in the portfolio"},
