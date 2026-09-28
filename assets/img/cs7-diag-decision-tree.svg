@@ -1,0 +1,61 @@
+<svg viewBox="0 0 760 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Decision tree: Add money routes onboarding deposits straight to Direct Debit, and one-off deposits to Open Banking by default, falling back to Direct Debit on insufficient balance or by manual choice, with every path ending at the same deposit confirmation screen.">
+  <defs>
+    <marker id="cs7dt-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1b1b21"/>
+    </marker>
+  </defs>
+
+  <g font-family="Inter, -apple-system, Helvetica, Arial, sans-serif" fill="#1b1b21">
+
+    <!-- edges (drawn first, under nodes) -->
+    <g fill="none" stroke="#1b1b21" stroke-width="1.5">
+      <path d="M380,65 C380,80 380,80 380,90" marker-end="url(#cs7dt-arrow)"/>
+      <path d="M265,150 C265,202.5 140,202.5 140,253" marker-end="url(#cs7dt-arrow)"/>
+      <path d="M495,150 C495,202.5 610,202.5 610,253" marker-end="url(#cs7dt-arrow)"/>
+      <path d="M495,150 C495,265 400,265 400,378" marker-end="url(#cs7dt-arrow)"/>
+      <path d="M610,310 C610,402.5 460,402.5 460,493" marker-end="url(#cs7dt-arrow)"/>
+      <path d="M560,310 C560,345 500,345 500,378" marker-end="url(#cs7dt-arrow)"/>
+      <path d="M140,310 C140,402.5 300,402.5 300,493" marker-end="url(#cs7dt-arrow)"/>
+      <path d="M455,435 C455,465 380,465 380,493" marker-end="url(#cs7dt-arrow)"/>
+    </g>
+
+    <!-- edge labels -->
+    <g font-size="12" fill="#6c6b64" text-anchor="middle">
+      <text x="178" y="198">Onboarding</text>
+      <text x="178" y="213">always</text>
+      <text x="596" y="198">One-off deposit</text>
+      <text x="596" y="213">default</text>
+      <text x="447" y="262">One-off deposit</text>
+      <text x="447" y="277">manual choice</text>
+      <text x="588" y="398">sufficient</text>
+      <text x="588" y="413">balance</text>
+      <text x="530" y="341">insufficient</text>
+      <text x="530" y="356">balance</text>
+    </g>
+
+    <!-- start pill -->
+    <rect x="300" y="15" width="160" height="50" rx="25" fill="#f5f2ea" stroke="#d3ccbb" stroke-width="1.5"/>
+    <text x="380" y="45" text-anchor="middle" font-size="13" font-weight="600">Add money</text>
+
+    <!-- decision diamond -->
+    <polygon points="380,92 495,150 380,208 265,150" fill="#ffffff" stroke="#1b1b21" stroke-width="1.5"/>
+    <text x="380" y="145" text-anchor="middle" font-size="12" font-weight="600">Onboarding or</text>
+    <text x="380" y="161" text-anchor="middle" font-size="12" font-weight="600">one-off deposit?</text>
+
+    <!-- Direct Debit (onboarding path) -->
+    <rect x="55" y="253" width="170" height="55" rx="10" fill="#ffffff" stroke="#0a7d92" stroke-width="1.5"/>
+    <text x="140" y="286" text-anchor="middle" font-size="13" font-weight="600" fill="#0a7d92">Direct Debit</text>
+
+    <!-- Open Banking -->
+    <rect x="525" y="253" width="170" height="55" rx="10" fill="#ffffff" stroke="#0a7d92" stroke-width="1.5"/>
+    <text x="610" y="286" text-anchor="middle" font-size="13" font-weight="600" fill="#0a7d92">Open Banking</text>
+
+    <!-- Direct Debit (one-off path) -->
+    <rect x="370" y="378" width="170" height="55" rx="10" fill="#ffffff" stroke="#0a7d92" stroke-width="1.5"/>
+    <text x="455" y="411" text-anchor="middle" font-size="13" font-weight="600" fill="#0a7d92">Direct Debit</text>
+
+    <!-- end pill -->
+    <rect x="270" y="493" width="220" height="55" rx="27.5" fill="#f5f2ea" stroke="#d3ccbb" stroke-width="1.5"/>
+    <text x="380" y="524" text-anchor="middle" font-size="13" font-weight="600">Deposit confirmation</text>
+  </g>
+</svg>
