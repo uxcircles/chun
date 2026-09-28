@@ -39,13 +39,14 @@
   {"tag":"text","text":"I treated this as a testable assumption, not a certainty; I couldn't prove step-by-step attribution from the data. So the design addressed all four breakpoints at once: removing the wallet, deferring KYC, and clearing pot creation of the plan comparison, rather than betting the redesign on one diagnosis being right."},
 
   {"tag":"H1","text":"The Solution"},
-  {"tag":"H5","text":"One flow, two rails"},
+  {"tag":"H5","text":"Removing the wallet"},
   {"item":["🕰️ Funding wait + second wait — gone","One hop, bank straight to pot. No wallet to fund, no second deposit to wait on."]},
   {"item":["💷 Subscription pitch — gone","Deposit, then straight into Autosave setup. No plan comparison in onboarding."]},
   {"item":["🕰️ KYC wait — moved","Runs after intent is confirmed — deposit amount and Autosave set — not before it."]},
-  {"tag":"text","text":"Bank → pot, directly, in one action. The wallet still exists as internal plumbing, but the user never sees it, funds it, or waits on it as a separate step. For onboarding specifically, the initial deposit and Autosave setup both route through Direct Debit, so they can run back-to-back in one motion instead of two separate, wallet-dependent steps."},
-  {"tag":"text","text":"For onboarding, I also removed the subscription-plan comparison entirely: deposit, then straight into Autosave setup, one continuous motion — no wallet, no upgrade prompt, no wait in between. Comparing paid tiers is a business goal, not a task goal, and has no place where a user is most likely to give up."},
-  {"tag":"text","text":"Collapsing bank → wallet → pot into one hop meant picking a payment rail for every deposit — no single rail covered every case, since some banks don't support Open Banking and Autoinvest requires Direct Debit. So the flow selects the rail based on deposit type instead of forcing one rule on everyone. I used AI-assisted design exploration to enumerate payment-state edge cases — like an in-flight Direct Debit payment landing after the balance check fired — and challenge the decision tree before handing the specified rules to engineering."},
+  {"tag":"text","text":"Bank → pot, directly, in one action. The wallet still exists as internal plumbing, but the user never sees it, funds it, or waits on it as a separate step."},
+  {"tag":"text","text":"For onboarding specifically, this meant more than skipping the wallet: the initial deposit and Autosave setup both route through Direct Debit, so they run back-to-back in one motion, and the subscription-plan comparison is gone entirely — no upgrade prompt in between. Comparing paid tiers is a business goal, not a task goal, and has no place where a user is most likely to give up."},
+  {"tag":"H5","text":"One flow, two rails"},
+  {"tag":"text","text":"Picking a payment rail for every deposit wasn't trivial elsewhere in the app, though — no single rail covered every case, since some banks don't support Open Banking and Autoinvest requires Direct Debit. So the flow selects the rail based on deposit type instead of forcing one rule on everyone. I used AI-assisted design exploration to enumerate payment-state edge cases — like an in-flight Direct Debit payment landing after the balance check fired — and challenge the decision tree before handing the specified rules to engineering."},
   {"img":"cs7-diag-decision-tree.svg","cap":"How “Add money” picks a rail: onboarding always uses Direct Debit; a one-off deposit defaults to Open Banking, with Direct Debit as a fallback or a manual choice. Every path lands on the same confirmation screen."},
   {"compare":["Old flow: bank → wallet, wait, wallet → pot","New flow: bank → pot, one tap","cs7-sol-flow-old.mp4","cs7-sol-flow-new.mp4"]},
 
