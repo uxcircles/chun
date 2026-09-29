@@ -387,10 +387,11 @@ ul.bullets li::before{content:"";position:absolute;left:2px;top:11px;width:7px;h
 .duo img.narrow{aspect-ratio:1/4;object-fit:cover;object-position:top center}
 @media (max-width:640px){.duo{grid-template-columns:1fr}.duo img.narrow{aspect-ratio:9/16}}
 
-.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:30px 0 0}
-@media (max-width:720px){.compare{grid-template-columns:1fr}}
-.compare figure{margin:0}
-.compare figcaption{margin-top:10px;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left}
+.compare{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:center;gap:16px;margin:30px 0 0}
+.compare figure{margin:0;flex:0 1 auto;max-width:100%}
+.compare figure img,.compare figure video{width:auto;height:auto;max-height:420px;max-width:100%;margin:0 auto}
+@media (max-width:720px){.compare{flex-direction:column;align-items:stretch}.compare figure img,.compare figure video{max-height:none;width:100%}}
+.compare figcaption{margin-top:10px;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
 
 .cs-next{border-top:1px solid var(--line);background:var(--paper-2)}
 .cs-next .wrap{padding:60px 28px}
