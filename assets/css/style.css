@@ -392,6 +392,11 @@ ul.bullets li::before{content:"";position:absolute;left:2px;top:11px;width:7px;h
 .compare figure img,.compare figure video{width:auto;height:auto;max-height:420px;max-width:100%;margin:0 auto}
 @media (max-width:720px){.compare{flex-direction:column;align-items:stretch}.compare figure img,.compare figure video{max-height:none;width:100%}}
 .compare figcaption{width:0;min-width:100%;margin-top:10px;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:center}
+.compare--ratio figure:nth-of-type(1){flex:0 1 calc(var(--r1) - 8px)}
+.compare--ratio figure:nth-of-type(2){flex:0 1 calc(var(--r2) - 8px)}
+.compare--ratio figure img,.compare--ratio figure video{max-height:none;width:100%}
+@media (max-width:720px){.compare--ratio figure{flex-basis:auto}}
+.compare--tall figure img,.compare--tall figure video{max-height:560px}
 
 .cs-next{border-top:1px solid var(--line);background:var(--paper-2)}
 .cs-next .wrap{padding:60px 28px}
