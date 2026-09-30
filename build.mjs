@@ -617,8 +617,10 @@ function renderInner(blocks, base) {
       continue;
     }
     if (Array.isArray(b.compare)) {
-      const [la, lb, ia, ib] = b.compare;
-      parts.push(`<div class="compare full reveal">
+      const [la, lb, ia, ib, ratio] = b.compare;
+      const cls = ratio ? " compare--ratio" : "";
+      const style = ratio ? ` style="--r1:${ratio.split("-")[0]}%;--r2:${ratio.split("-")[1]}%"` : "";
+      parts.push(`<div class="compare full reveal${cls}"${style}>
         <figure>${MEDIA(ia, base)}<figcaption>${esc(la)}</figcaption></figure>
         <figure>${MEDIA(ib, base)}<figcaption>${esc(lb)}</figcaption></figure>
       </div>`);
