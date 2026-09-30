@@ -396,6 +396,7 @@ ul.bullets li::before{content:"";position:absolute;left:2px;top:11px;width:7px;h
 .compare--ratio figure:nth-of-type(2){flex:0 1 calc(var(--r2) - 8px)}
 .compare--ratio figure img,.compare--ratio figure video{max-height:none;width:100%}
 @media (max-width:720px){.compare--ratio figure{flex-basis:auto}}
+.compare--tall figure img,.compare--tall figure video{max-height:560px}
 
 .cs-next{border-top:1px solid var(--line);background:var(--paper-2)}
 .cs-next .wrap{padding:60px 28px}

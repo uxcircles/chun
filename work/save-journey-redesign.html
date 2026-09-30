@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=5b71ec82">
+<link rel="stylesheet" href="../assets/css/style.css?v=d43a6843">
 </head>
 <body class="cs-page">
 
@@ -82,7 +82,7 @@
 <figure class="reveal full"><img src="../assets/img/cs7-diag-flow-autosave-wait.webp" alt="" loading="lazy"><figcaption>A second wait, blocking Autosave.</figcaption></figure>
 <h3 class="sub serif reveal">The two likeliest explanations</h3>
 <p class="text reveal">Two of the four stood out as the likeliest explanations, not because the data proved it, but because of what each one actually blocks.</p>
-<div class="compare full reveal">
+<div class="compare full reveal compare--tall">
         <figure><img src="../assets/img/cs7-diag-upgrade-screen.webp" alt="" loading="lazy"><figcaption>The upgrade screen users hit mid-flow</figcaption></figure>
         <figure><img src="../assets/img/cs7-diag-wallet-step.webp" alt="" loading="lazy"><figcaption>The wallet-funding step in onboarding</figcaption></figure>
       </div>
@@ -99,7 +99,7 @@
 <p class="lead reveal">One flow, two rails</p>
 <p class="text reveal">Picking a payment rail for every deposit wasn't trivial elsewhere in the app, though — no single rail covered every case, since some banks don't support Open Banking and Autoinvest requires Direct Debit. So the flow selects the rail based on deposit type instead of forcing one rule on everyone. I used AI-assisted design exploration to enumerate payment-state edge cases — like an in-flight Direct Debit payment landing after the balance check fired — and challenge the decision tree before handing the specified rules to engineering.</p>
 <figure class="reveal full"><img src="../assets/img/cs7-diag-decision-tree.svg" alt="" loading="lazy"><figcaption>How “Add money” picks a rail: onboarding always uses Direct Debit; a one-off deposit defaults to Open Banking, with Direct Debit as a fallback or a manual choice. Every path lands on the same confirmation screen.</figcaption></figure>
-<div class="compare full reveal">
+<div class="compare full reveal compare--tall">
         <figure><video src="../assets/video/cs7-sol-flow-old.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>Old flow: bank → wallet, wait, wallet → pot</figcaption></figure>
         <figure><video src="../assets/video/cs7-sol-flow-new.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>New flow: bank → pot, one tap</figcaption></figure>
       </div>
@@ -136,7 +136,7 @@
 <p class="text reveal">We couldn't delete the wallet for everyone on day one; some users still had real money sitting in it. The rollout split into two tracks running in parallel:</p>
 <div class="cards c2 reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><b>New users &amp; zero-balance users</b><span>Never saw the wallet at all, going straight into the new one-step flow.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg><b>Existing users with a wallet balance</b><span>Kept seeing the wallet, paired with in-context messaging and a feed prompt nudging them to move that money into a pot. As each balance emptied out, the wallet disappeared for them too.</span></div></div>
 <div class="dd reveal"><b>Design decision</b><p>The wallet had also doubled as the app's general-purpose “add money” entry point. Removing it removed that entry point along with the friction it caused, so alongside the redesign I added explicit Add money buttons directly on the Save and Invest tab home screens, letting a user fund a pot or investment account in one tap without first drilling into a specific pot.</p></div>
-<div class="compare full reveal">
+<div class="compare full reveal compare--tall">
         <figure><img src="../assets/img/cs7-rollout-new-users.webp" alt="" loading="lazy"><figcaption>New users &amp; zero-balance users — straight to Add money, no wallet</figcaption></figure>
         <figure><img src="../assets/img/cs7-rollout-existing-wallet.webp" alt="" loading="lazy"><figcaption>Existing users with a wallet balance — nudged to move it before closing</figcaption></figure>
       </div>

@@ -617,9 +617,14 @@ function renderInner(blocks, base) {
       continue;
     }
     if (Array.isArray(b.compare)) {
-      const [la, lb, ia, ib, ratio] = b.compare;
-      const cls = ratio ? " compare--ratio" : "";
-      const style = ratio ? ` style="--r1:${ratio.split("-")[0]}%;--r2:${ratio.split("-")[1]}%"` : "";
+      const [la, lb, ia, ib, mod] = b.compare;
+      let cls = "", style = "";
+      if (mod === "tall") {
+        cls = " compare--tall";
+      } else if (mod) {
+        cls = " compare--ratio";
+        style = ` style="--r1:${mod.split("-")[0]}%;--r2:${mod.split("-")[1]}%"`;
+      }
       parts.push(`<div class="compare full reveal${cls}"${style}>
         <figure>${MEDIA(ia, base)}<figcaption>${esc(la)}</figcaption></figure>
         <figure>${MEDIA(ib, base)}<figcaption>${esc(lb)}</figcaption></figure>
