@@ -9,16 +9,28 @@
 <meta property="og:title" content="Redesigned the Save Journey, reversing a 7-month Autosave decline — Chun-Chuan Lin">
 <meta property="og:description" content="For a UK savings &amp; investing app — collapsing a two-step, wallet-mediated deposit flow into one action.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://chunchuanlin.design/assets/img/VFbImBTynQh7F0MmkZp4YDalEAE.webp">
+<meta property="og:image" content="https://chunchuanlin.design/assets/img/cs7-hero.webp">
 <link rel="icon" type="image/png" href="../assets/img/YUZRlfmyi6MVquyru4w5qhSXo.png">
 <link rel="apple-touch-icon" href="../assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css?v=f2773acb">
+<link rel="stylesheet" href="../assets/css/style.css?v=ab4d3c94">
 </head>
-<body class="cs-page">
-
+<body class="cs-page locked">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<script>try{if(localStorage.getItem("cc_portfolio_unlocked")==="1")document.currentScript.parentElement.classList.remove("locked")}catch(e){}</script>
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <h2 class="serif">This case study is private</h2>
+    <p>Enter the passcode to view it. Ask Chun if you don't have it.</p>
+    <form id="gate-form" autocomplete="off">
+      <input type="password" id="gate-input" placeholder="Passcode" autofocus>
+      <button type="submit">Unlock</button>
+    </form>
+    <p class="err" id="gate-err"></p>
+  </div>
+</div>
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
 <div class="cursor-dot" aria-hidden="true"></div>
 
@@ -40,6 +52,7 @@
   </div>
   <div class="nav-backdrop"></div>
 </header>
+<main id="main-content">
 
 <section class="cs-hero">
   <div class="wrap">
@@ -100,8 +113,8 @@
 <p class="text reveal">Picking a payment rail for every deposit wasn't trivial elsewhere in the app, though — no single rail covered every case, since some banks don't support Open Banking and Autoinvest requires Direct Debit. So the flow selects the rail based on deposit type instead of forcing one rule on everyone. I used AI-assisted design exploration to enumerate payment-state edge cases — like an in-flight Direct Debit payment landing after the balance check fired — and challenge the decision tree before handing the specified rules to engineering.</p>
 <figure class="reveal full"><img src="../assets/img/cs7-diag-decision-tree.svg" alt="" loading="lazy"><figcaption>How “Add money” picks a rail: onboarding always uses Direct Debit; a one-off deposit defaults to Open Banking, with Direct Debit as a fallback or a manual choice. Every path lands on the same confirmation screen.</figcaption></figure>
 <div class="compare full reveal compare--tall">
-        <figure><div class="compare-label">Old</div><video src="../assets/video/cs7-sol-flow-old.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>bank → wallet, wait, wallet → pot</figcaption></figure>
-        <figure><div class="compare-label">New</div><video src="../assets/video/cs7-sol-flow-new.mp4" autoplay muted loop playsinline preload="metadata"></video><figcaption>bank → pot, one tap</figcaption></figure>
+        <figure><div class="compare-label">Old</div><video src="../assets/video/cs7-sol-flow-old.mp4" autoplay muted loop playsinline preload="metadata" poster="../assets/img/poster-cs7-sol-flow-old.webp"></video><figcaption>bank → wallet, wait, wallet → pot</figcaption></figure>
+        <figure><div class="compare-label">New</div><video src="../assets/video/cs7-sol-flow-new.mp4" autoplay muted loop playsinline preload="metadata" poster="../assets/img/poster-cs7-sol-flow-new.webp"></video><figcaption>bank → pot, one tap</figcaption></figure>
       </div>
 <h3 class="sub serif reveal">Deferring KYC Until Intent Is Confirmed</h3>
 <p class="text reveal">Alongside collapsing the deposit step, we also moved KYC later in the flow: it now runs only after the user has confirmed the pot's deposit amount and Autosave setup, the last step of the Save journey rather than the first, and only for users who haven't already passed it. This removes the uncertain wait users used to hit right after account creation, and means we only run (and pay for) checks on users who've already committed to funding an account, letting the part they actually came for, the deposit amount and Autosave rules, complete faster.</p>
@@ -182,6 +195,7 @@
     </div>
   </div>
 </section>
+</main>
 <footer class="foot" id="contact">
   <div class="foot-in">
     <h2 class="serif reveal">Let&rsquo;s make something clear.</h2>
@@ -197,6 +211,6 @@
     </div>
   </div>
 </footer>
-<script src="../assets/js/main.js?v=9db09d5c" defer></script>
+<script src="../assets/js/main.js?v=11b02167" defer></script>
 </body>
 </html>
