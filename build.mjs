@@ -625,9 +625,17 @@ function renderInner(blocks, base) {
         cls = " compare--ratio";
         style = ` style="--r1:${mod.split("-")[0]}fr;--r2:${mod.split("-")[1]}fr"`;
       }
+      const splitCap = (s) => {
+        const m = s.match(/^([^:]{1,24}):\s*(.+)$/s);
+        return m ? { label: m[1], desc: m[2] } : { label: null, desc: s };
+      };
+      const fig = (img, raw) => {
+        const { label, desc } = splitCap(raw);
+        return `<figure>${label ? `<div class="compare-label">${esc(label)}</div>` : ""}${MEDIA(img, base)}<figcaption>${esc(desc)}</figcaption></figure>`;
+      };
       parts.push(`<div class="compare full reveal${cls}"${style}>
-        <figure>${MEDIA(ia, base)}<figcaption>${esc(la)}</figcaption></figure>
-        <figure>${MEDIA(ib, base)}<figcaption>${esc(lb)}</figcaption></figure>
+        ${fig(ia, la)}
+        ${fig(ib, lb)}
       </div>`);
       continue;
     }
