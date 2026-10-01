@@ -623,7 +623,7 @@ function renderInner(blocks, base) {
         cls = " compare--tall";
       } else if (mod) {
         cls = " compare--ratio";
-        style = ` style="--r1:${mod.split("-")[0]}%;--r2:${mod.split("-")[1]}%"`;
+        style = ` style="--r1:${mod.split("-")[0]}fr;--r2:${mod.split("-")[1]}fr"`;
       }
       parts.push(`<div class="compare full reveal${cls}"${style}>
         <figure>${MEDIA(ia, base)}<figcaption>${esc(la)}</figcaption></figure>
