@@ -23,10 +23,12 @@ const esc = (s = "") =>
 const IMG = (name, base) => `${base}assets/img/${name}`;
 const ARROW = `<span class="arrow" aria-hidden="true">&rarr;</span>`;
 const isVideo = (name) => /\.(mp4|webm|mov)$/i.test(name);
-const MEDIA = (name, base) =>
-  isVideo(name)
-    ? `<video src="${base}assets/video/${name}" autoplay muted loop playsinline preload="metadata"></video>`
-    : `<img src="${IMG(name, base)}" alt="" loading="lazy">`;
+const MEDIA = (name, base) => {
+  if (!isVideo(name)) return `<img src="${IMG(name, base)}" alt="" loading="lazy">`;
+  const posterName = `poster-${name.replace(/\.(mp4|webm|mov)$/i, "")}.webp`;
+  const poster = fs.existsSync(path.join(ROOT, "assets/img", posterName)) ? ` poster="${IMG(posterName, base)}"` : "";
+  return `<video src="${base}assets/video/${name}" autoplay muted loop playsinline preload="metadata"${poster}></video>`;
+};
 
 // wrap each word of a heading in <span> for staggered blur-in animation
 const splitWords = (s = "") =>
@@ -166,7 +168,7 @@ const STUDIES = [
   { slug: "wealth-management-system", file: "cs4-wealth-management-system.json", card: "A governed rebalancing system for wealth advisors", img: "E0ivBHq7jXSnA6J9aW9na1RmKs.webp" },
   { slug: "portfolio-health",         file: "cs5-portfolio-health.json",         card: "Portfolio health for a regulated investment app", img: "9iO2ZGM4p4TnNoXjsiRvFTovY58.webp" },
   { slug: "trip-memories",            file: "cs6-trip-memories.json",            card: "Revolut home redesign concept", img: "TrorWvIDo5zv1eS2h04sgSZOtJ8.webp" },
-  { slug: "save-journey-redesign",    file: "cs7-save-journey-redesign.json",    card: "Redesigned a savings app's Save journey, reversing a 7-month Autosave decline", img: "cs7-placeholder.svg" },
+  { slug: "save-journey-redesign",    file: "cs7-save-journey-redesign.json",    card: "Redesigned a savings app's Save journey, reversing a 7-month Autosave decline", img: "cs7-hero.webp", locked: true },
 ];
 
 /* =================================================================
@@ -175,7 +177,7 @@ const STUDIES = [
 const GATE_KEY = "cc_portfolio_unlocked";
 const GATE_PASS = "Chun";
 
-function shell({ title, desc, body, base, extraClass = "", progress = false, gated = false, cursorBadges = "" }) {
+function shell({ title, desc, body, base, extraClass = "", progress = false, gated = false, cursorBadges = "", ogImage = OG_IMAGE }) {
   const bodyClass = gated ? `${extraClass} locked`.trim() : extraClass;
   return `<!doctype html>
 <html lang="en">
@@ -188,7 +190,7 @@ function shell({ title, desc, body, base, extraClass = "", progress = false, gat
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:type" content="website">
-<meta property="og:image" content="${SITE_URL}/assets/img/${OG_IMAGE}">
+<meta property="og:image" content="${SITE_URL}/assets/img/${ogImage}">
 <link rel="icon" type="image/png" href="${base}assets/img/YUZRlfmyi6MVquyru4w5qhSXo.png">
 <link rel="apple-touch-icon" href="${base}assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -197,6 +199,7 @@ function shell({ title, desc, body, base, extraClass = "", progress = false, gat
 <link rel="stylesheet" href="${base}assets/css/style.css?v=${CSS_V}">
 </head>
 <body class="${bodyClass}">
+<a class="skip-link" href="#main-content">Skip to content</a>
 ${gated ? `<script>try{if(localStorage.getItem(${JSON.stringify(GATE_KEY)})==="1")document.currentScript.parentElement.classList.remove("locked")}catch(e){}</script>
 <div class="gate" id="gate">
   <div class="gate-box">
@@ -213,7 +216,9 @@ ${progress ? `<div class="scroll-progress" aria-hidden="true"><span></span></div
 <div class="cursor-dot" aria-hidden="true"></div>
 ${cursorBadges}
 ${nav(base)}
+<main id="main-content">
 ${body}
+</main>
 ${footer(base)}
 <script src="${base}assets/js/main.js?v=${JS_V}" defer></script>
 </body>
@@ -734,6 +739,7 @@ ${heroImg ? `<div class="cs-hero-img reveal"><img src="${IMG(heroImg, base)}" al
     extraClass: "cs-page",
     progress: true,
     gated: !!study.locked,
+    ogImage: study.img,
   });
 }
 
