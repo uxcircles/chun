@@ -185,7 +185,11 @@ if (stats.length && !reduce && hasIO) {
 
 /* ---------- video play only while visible ---------- */
 const vids = document.querySelectorAll("video");
-if (vids.length && hasIO) {
+if (vids.length && reduce) {
+  // autoplay is a static HTML attribute, so reduced-motion users need an
+  // explicit pause here rather than just skipping the play-on-visibility logic
+  vids.forEach((v) => v.pause());
+} else if (vids.length && hasIO) {
   const vio = new IntersectionObserver(
     (entries) => entries.forEach((e) => {
       if (e.isIntersecting) e.target.play?.().catch(() => {});
