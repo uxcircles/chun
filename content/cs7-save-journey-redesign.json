@@ -15,8 +15,8 @@
   {"tag":"text","text":"Role: Senior Product Designer, sole designer on this workstream, reporting directly to the CEO."},
 
   {"tag":"H1","text":"The Problem"},
-  {"tag":"text","text":"Weekly Autosave-setup volume had been declining for roughly seven months before this project started. That trend signalled something in the funding path was blocking users."},
-  {"img":"cs7-problem-decline-chart.webp","cap":"Weekly Autosave-setup count, January–August 2026: the seven-month decline that first signalled something in the funding path was blocking users."},
+  {"tag":"text","text":"Weekly Autosave-setup volume had been declining for roughly seven months before this project started. That trend signalled something in the Save setup journey was blocking users — which step wasn't yet clear."},
+  {"img":"cs7-problem-decline-chart.webp","cap":"Weekly Autosave-setup count, January–August 2026: the seven-month decline that first signalled something in the Save setup journey was blocking users."},
 
   {"tag":"H1","text":"Diagnosis"},
   {"tag":"H5","text":"Diagnosis without full instrumentation"},
