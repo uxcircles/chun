@@ -526,7 +526,11 @@ function renderInner(blocks, base) {
       parts.push(`<div class="screen-compare full reveal">
         <img src="${IMG(b.img, base)}" alt="" loading="lazy">
         <div class="callouts">${items
-          .map(([t, s]) => `<div class="mini${warn}">${icon(pickCardIcon(t), "mini-icon")}<b>${esc(t)}</b><span>${esc(s)}</span></div>`)
+          .map(([t, s]) => {
+            const stripped = stripEmojiIcon(t);
+            const iconName = stripped.iconName || pickCardIcon(stripped.text);
+            return `<div class="mini${warn}">${icon(iconName, "mini-icon")}<b>${esc(stripped.text)}</b><span>${esc(s)}</span></div>`;
+          })
           .join("")}</div>
       </div>`);
       continue;
