@@ -169,6 +169,7 @@ const STUDIES = [
   { slug: "portfolio-health",         file: "cs5-portfolio-health.json",         card: "Portfolio health for a regulated investment app", img: "9iO2ZGM4p4TnNoXjsiRvFTovY58.webp" },
   { slug: "trip-memories",            file: "cs6-trip-memories.json",            card: "Revolut home redesign concept", img: "TrorWvIDo5zv1eS2h04sgSZOtJ8.webp" },
   { slug: "save-journey-redesign",    file: "cs7-save-journey-redesign.json",    card: "Redesigned the Save journey, boosting Autosave volume 5–6×", img: "cs7-hero.webp", locked: true },
+  { slug: "rightmove-partners",       file: "cs8-rightmove-partners.json",       card: "Designed a trust layer for a two-sided marketplace", img: "cs8-hero.webp" },
 ];
 
 /* =================================================================
