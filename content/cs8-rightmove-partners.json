@@ -2,21 +2,21 @@
 {"tag":"H4","text":"Chun-Chuan Lin"},
 {"toc":["Summary","The Problem","Alternatives Considered","The Approach","Concept","Leading This","Reflection"]},
 {"tag":"H1","text":"Designed a trust layer for how Rightmove matches agents with consumers"},
-{"tag":"H5","text":"A self-directed concept — replacing black-box agent assignment and pay-to-win visibility with a transparent, two-sided ranking system, without breaking the business model underneath it."},
+{"tag":"H5","text":"A self-directed concept — replacing a checklist where every option is already paid for with a transparent, two-sided ranking system, without breaking the business model underneath it."},
 {"tag":"text","text":"Nov 2026 | Self-directed concept — competitive teardown, UX and product strategy"},
 {"img":"cs8-hero.webp"},
 
 {"tag":"H1","text":"Summary"},
-{"tag":"text","text":"Rightmove's agent-valuation flow promises “your chosen agent”, then never lets you choose. I used that gap to explore what a Lead role on Rightmove's Partners domain actually requires."},
+{"tag":"text","text":"Rightmove's agent-valuation flow promises “your chosen agent”, then hands you a checklist where every box is already ticked and every name on it paid to be there. I used that gap to explore what a Lead role on Rightmove's Partners domain actually requires."},
 {"item":["🔗 Diagnosed from both sides","Consumers get no trust signal. Agents get no way to differentiate beyond ad spend."]},
 {"item":["⚖️ Three directions weighed","Compared against two rejected alternatives, for stated reasons, before committing."]},
 {"item":["💷 Commercial model preserved","Paid placement stays. It just stops pretending to be a trust signal."]},
 {"tag":"text","text":"Role: self-directed, solo. Based on Rightmove's public pages — no internal data, no claim that this is what Rightmove is building."},
 
 {"tag":"H1","text":"The Problem"},
-{"item":["🔗 Consumer side — a black box","rightmove.co.uk/agent-valuation assigns an agent with no reviews, ratings, or comparison."]},
-{"item":["💷 Agent side — pay or disappear","rightmove.co.uk/advertise-with-us: the only differentiation on offer is paid placement."]},
-{"compare":["Today: a black box, no visible signal","Proposed: two visible signals, clearly labelled","cs8-flow-today.webp","cs8-flow-proposed.webp"]},
+{"item":["🔗 Consumer side — a false choice","rightmove.co.uk/agent-valuation shows a checklist before you submit — every agent pre-ticked, every one Sponsored, nothing to tell them apart."]},
+{"item":["💷 Agent side — pay or disappear","rightmove.co.uk/advertise-with-us: the only differentiation on offer is paid placement. The checklist confirms it — there's no non-paid tier to fall back on."]},
+{"compare":["Today: every box pre-ticked, every name paid","Proposed: two visible signals, clearly labelled","cs8-flow-today.webp","cs8-flow-proposed.webp"]},
 {"tag":"text","text":"Neither side gets a real trust mechanism — precisely the gap the job description names: “helping consumers feel more confident when choosing an estate agent, while helping agents demonstrate the value they offer.”"},
 
 {"tag":"H1","text":"Alternatives Considered"},
@@ -26,7 +26,7 @@
 
 {"tag":"H1","text":"The Approach"},
 {"tag":"text","text":"Paid decides where you're seen. It shouldn't decide why you're trusted — so the fix ships in phases, not one release."},
-{"item":["🚦 Phase 1 — Make paid honest","Agents keep priority placement, now labelled Sponsored. No change to the business model."]},
+{"item":["🚦 Phase 1 — Stop the list being 100% paid","Rightmove already labels this Sponsored. What's missing is a non-paid tier to label it against — and boxes that aren't pre-ticked by default."]},
 {"item":["📈 Phase 2 — Add a second, earned axis","Non-paid performance signals — time-to-sale, accuracy, response time — give agents without ad budget somewhere to compete."]},
 {"item":["🎯 Phase 3 — Let the two axes reward each other","Agents above a quality threshold get a lower cost-per-lead — both sides now have a reason to perform."]},
 
@@ -49,7 +49,7 @@
 
 {"tag":"H1","text":"Reflection"},
 {"tag":"text","text":"This is a concept, not a validated design. The problem is real; the solution hasn't been in front of a single consumer or agent."},
-{"bullets":["Usability-test Compare Agents against the current black-box flow, on completion rate, not preference","Validate the Quality Score formula against real agent performance before trusting it to rank anyone","Pressure-test the pricing model with the team that owns Premium Listing revenue","Check whether “performance over reviews” holds once agents optimise for the metric itself"]},
+{"bullets":["Usability-test Compare Agents against the current pre-ticked checklist, on completion rate, not preference","Validate the Quality Score formula against real agent performance before trusting it to rank anyone","Pressure-test the pricing model with the team that owns Premium Listing revenue","Check whether “performance over reviews” holds once agents optimise for the metric itself"]},
 {"tag":"H2","text":"Why this belongs in the portfolio"},
 {"tag":"text","text":"Every other case study here is proof of execution on a real team. This one is proof of something else: given a problem I don't have internal access to, can I diagnose it accurately, generate real alternatives, and argue for a direction while being honest about where it could still go wrong."}
 ]
