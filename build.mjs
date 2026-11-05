@@ -169,6 +169,7 @@ const STUDIES = [
   { slug: "portfolio-health",         file: "cs5-portfolio-health.json",         card: "Portfolio health for a regulated investment app", img: "9iO2ZGM4p4TnNoXjsiRvFTovY58.webp" },
   { slug: "trip-memories",            file: "cs6-trip-memories.json",            card: "Revolut home redesign concept", img: "TrorWvIDo5zv1eS2h04sgSZOtJ8.webp" },
   { slug: "save-journey-redesign",    file: "cs7-save-journey-redesign.json",    card: "Redesigned the Save journey, boosting Autosave volume 5–6×", img: "cs7-hero.webp", locked: true },
+  { slug: "rightmove-partners",       file: "cs8-rightmove-partners.json",       card: "Designed a trust layer for a two-sided marketplace", img: "cs8-hero.webp" },
 ];
 
 /* =================================================================
@@ -525,7 +526,11 @@ function renderInner(blocks, base) {
       parts.push(`<div class="screen-compare full reveal">
         <img src="${IMG(b.img, base)}" alt="" loading="lazy">
         <div class="callouts">${items
-          .map(([t, s]) => `<div class="mini${warn}">${icon(pickCardIcon(t), "mini-icon")}<b>${esc(t)}</b><span>${esc(s)}</span></div>`)
+          .map(([t, s]) => {
+            const stripped = stripEmojiIcon(t);
+            const iconName = stripped.iconName || pickCardIcon(stripped.text);
+            return `<div class="mini${warn}">${icon(iconName, "mini-icon")}<b>${esc(stripped.text)}</b><span>${esc(s)}</span></div>`;
+          })
           .join("")}</div>
       </div>`);
       continue;

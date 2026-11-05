@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Designed a trust layer for how Rightmove matches agents with consumers — Chun-Chuan Lin</title>
+<meta name="description" content="A self-directed concept — replacing black-box agent assignment and pay-to-win visibility with a transparent, two-sided ranking system, without breaking the business model underneath it.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Designed a trust layer for how Rightmove matches agents with consumers — Chun-Chuan Lin">
+<meta property="og:description" content="A self-directed concept — replacing black-box agent assignment and pay-to-win visibility with a transparent, two-sided ranking system, without breaking the business model underneath it.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://chunchuanlin.design/assets/img/cs8-hero.webp">
+<link rel="icon" type="image/png" href="../assets/img/YUZRlfmyi6MVquyru4w5qhSXo.png">
+<link rel="apple-touch-icon" href="../assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=ab4d3c94">
+</head>
+<body class="cs-page">
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="../index.html">
+      <img src="../assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.webp" alt="">
+      <span>Chun-Chuan&nbsp;Lin</span>
+    </a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+    <nav class="nav-links">
+      <a href="../index.html#work">Work</a>
+      <a href="https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing" target="_blank" rel="noopener">CV</a>
+      <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
+    </nav>
+  </div>
+  <div class="nav-backdrop"></div>
+</header>
+<main id="main-content">
+
+<section class="cs-hero">
+  <div class="wrap">
+    <a class="back hero-gate" href="../index.html#work">&larr; All work</a>
+    <h1 class="serif split hero-title"><span class="w">Designed</span> <span class="w">a</span> <span class="w">trust</span> <span class="w">layer</span> <span class="w">for</span> <span class="w">how</span> <span class="w">Rightmove</span> <span class="w">matches</span> <span class="w">agents</span> <span class="w">with</span> <span class="w">consumers</span></h1>
+    <p class="sub hero-gate">A self-directed concept — replacing black-box agent assignment and pay-to-win visibility with a transparent, two-sided ranking system, without breaking the business model underneath it.</p>
+    <p class="meta hero-gate">Nov 2026 · Self-directed concept — competitive teardown, UX and product strategy</p>
+  </div>
+</section>
+<div class="cs-hero-img reveal"><img src="../assets/img/cs8-hero.webp" alt=""></div>
+
+<div class="cs-body">
+  <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-summary-0">Summary</a></li><li><a href="#sec-the-problem-1">The Problem</a></li><li><a href="#sec-alternatives-considered-2">Alternatives Considered</a></li><li><a href="#sec-the-approach-3">The Approach</a></li><li><a href="#sec-concept-4">Concept</a></li><li><a href="#sec-leading-this-5">Leading This</a></li><li><a href="#sec-reflection-6">Reflection</a></li></ol></nav></aside>
+  <div class="cs-content">
+    <section class="cs-section" id="sec-summary-0">
+  <span class="num">01</span>
+  <h2 class="divider serif split"><span class="w">Summary</span></h2>
+  <p class="text reveal">Rightmove's agent-valuation flow promises “your chosen agent”, then never lets you choose. I used that gap to explore what a Lead role on Rightmove's Partners domain actually requires.</p>
+<div class="cards  reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><b>Diagnosed from both sides</b><span>Consumers get no trust signal. Agents get no way to differentiate beyond ad spend.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 7h18M6 7l-3.5 7a3 3 0 0 0 6 0zM18 7l-3.5 7a3 3 0 0 0 6 0z"/></svg><b>Three directions weighed</b><span>Compared against two rejected alternatives, for stated reasons, before committing.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21h9M8 21c1.5 0 2-1 2-2.5V8a3.5 3.5 0 0 1 6.5-1.9M6 13h8"/></svg><b>Commercial model preserved</b><span>Paid placement stays. It just stops pretending to be a trust signal.</span></div></div>
+<p class="text reveal">Role: self-directed, solo. Based on Rightmove's public pages — no internal data, no claim that this is what Rightmove is building.</p>
+</section>
+<section class="cs-section" id="sec-the-problem-1">
+  <span class="num">02</span>
+  <h2 class="divider serif split"><span class="w">The</span> <span class="w">Problem</span></h2>
+  <div class="cards c2 reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><b>Consumer side — a black box</b><span>rightmove.co.uk/agent-valuation assigns an agent with no reviews, ratings, or comparison.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21h9M8 21c1.5 0 2-1 2-2.5V8a3.5 3.5 0 0 1 6.5-1.9M6 13h8"/></svg><b>Agent side — pay or disappear</b><span>rightmove.co.uk/advertise-with-us: the only differentiation on offer is paid placement.</span></div></div>
+<div class="compare full reveal">
+        <figure><div class="compare-label">Today</div><img src="../assets/img/cs8-flow-today.webp" alt="" loading="lazy"><figcaption>a black box, no visible signal</figcaption></figure>
+        <figure><div class="compare-label">Proposed</div><img src="../assets/img/cs8-flow-proposed.webp" alt="" loading="lazy"><figcaption>two visible signals, clearly labelled</figcaption></figure>
+      </div>
+<p class="text reveal">Neither side gets a real trust mechanism — precisely the gap the job description names: “helping consumers feel more confident when choosing an estate agent, while helping agents demonstrate the value they offer.”</p>
+</section>
+<section class="cs-section" id="sec-alternatives-considered-2">
+  <span class="num">03</span>
+  <h2 class="divider serif split"><span class="w">Alternatives</span> <span class="w">Considered</span></h2>
+  <p class="text reveal">Two genuinely different directions, not variations on one idea — so the choice would be a real trade-off.</p>
+<figure class="reveal full"><img src="../assets/img/cs8-tradeoff.webp" alt="" loading="lazy"><figcaption>Three directionally different concepts, mapped against the same four questions.</figcaption></figure>
+<div class="dd reveal"><b>Design decision</b><p>I chose the hybrid ranking — not because it scored best on every axis, but because it's the only one of the three that ships in phases and can be validated at low risk. Transparency-first's best property got folded in anyway: the Quality Score's methodology is published and queryable by agents.</p></div>
+</section>
+<section class="cs-section" id="sec-the-approach-3">
+  <span class="num">04</span>
+  <h2 class="divider serif split"><span class="w">The</span> <span class="w">Approach</span></h2>
+  <p class="text reveal">Paid decides where you're seen. It shouldn't decide why you're trusted — so the fix ships in phases, not one release.</p>
+<div class="cards  reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg><b>Phase 1 — Make paid honest</b><span>Agents keep priority placement, now labelled Sponsored. No change to the business model.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><b>Phase 2 — Add a second, earned axis</b><span>Non-paid performance signals — time-to-sale, accuracy, response time — give agents without ad budget somewhere to compete.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><b>Phase 3 — Let the two axes reward each other</b><span>Agents above a quality threshold get a lower cost-per-lead — both sides now have a reason to perform.</span></div></div>
+</section>
+<section class="cs-section" id="sec-concept-4">
+  <span class="num">05</span>
+  <h2 class="divider serif split"><span class="w">Concept</span></h2>
+  <p class="lead reveal">Compare agents near you — the consumer side</p>
+<p class="text reveal">The craft problem: make Sponsored feel honest, not deceptive, without losing its commercial pull.</p>
+<div class="screen-compare full reveal">
+        <img src="../assets/img/cs8-phone-a.webp" alt="" loading="lazy">
+        <div class="callouts"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21h9M8 21c1.5 0 2-1 2-2.5V8a3.5 3.5 0 0 1 6.5-1.9M6 13h8"/></svg><b>Sponsored, not disguised</b><span>One paid slot, visually distinct — the same convention as Google Search ads.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg><b>Earned results, ranked on signal</b><span>Time-to-sale and accuracy, not star ratings — harder to fake than a review.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><b>A score you can question</b><span>Every Quality Score links to its own methodology.</span></div></div>
+      </div>
+<p class="lead reveal">Why you rank where you do — the agent side</p>
+<p class="text reveal">A two-sided redesign that only shows the consumer screen hasn't solved the two-sided problem.</p>
+<figure class="reveal full"><img src="../assets/img/cs8-value-profile.webp" alt="" loading="lazy"></figure>
+</section>
+<section class="cs-section" id="sec-leading-this-5">
+  <span class="num">06</span>
+  <h2 class="divider serif split"><span class="w">Leading</span> <span class="w">This</span></h2>
+  <p class="text reveal">What I'd put on the table with the team before anyone built anything:</p>
+<div class="cards  reveal"><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg><b>With Research &amp; Data</b><span>Rewarding valuation accuracy could reward conservative estimates over flattering ones. A history-based score also disadvantages the new, small agents the job is meant to help.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M3 7h18M6 7l-3.5 7a3 3 0 0 0 6 0zM18 7l-3.5 7a3 3 0 0 0 6 0z"/></svg><b>With Commercial &amp; Legal</b><span>Ranking agents makes Rightmove an active endorser, not a neutral directory. Discounting placement cost by Quality Score is a negotiation with Revenue, not a line in a deck.</span></div><div class="mini"><svg class="mini-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg><b>My own call to defend</b><span>Not building this as a Yelp-style comparison page — the valuation flow is a lead-gen funnel. One clear recommendation by default; comparison stays opt-in.</span></div></div>
+</section>
+<section class="cs-section" id="sec-reflection-6">
+  <span class="num">07</span>
+  <h2 class="divider serif split"><span class="w">Reflection</span></h2>
+  <p class="text reveal">This is a concept, not a validated design. The problem is real; the solution hasn't been in front of a single consumer or agent.</p>
+<ul class="bullets reveal"><li>Usability-test Compare Agents against the current black-box flow, on completion rate, not preference</li><li>Validate the Quality Score formula against real agent performance before trusting it to rank anyone</li><li>Pressure-test the pricing model with the team that owns Premium Listing revenue</li><li>Check whether “performance over reviews” holds once agents optimise for the metric itself</li></ul>
+<h3 class="sub serif reveal">Why this belongs in the portfolio</h3>
+<p class="text reveal">Every other case study here is proof of execution on a real team. This one is proof of something else: given a problem I don't have internal access to, can I diagnose it accurately, generate real alternatives, and argue for a direction while being honest about where it could still go wrong.</p>
+</section>
+  </div>
+</div>
+
+<section class="cs-next">
+  <div class="wrap">
+    <p class="eyebrow">Keep exploring</p>
+    <div class="cs-next-grid">
+      <a class="cs-next-card" href="save-journey-redesign.html">
+        <img class="thumb" src="../assets/img/cs7-hero.webp" alt="" loading="lazy">
+        <span class="txt">
+          <span class="dir">&larr; Previous</span>
+          <h3 class="serif">Redesigned the Save journey, boosting Autosave volume 5–6×</h3>
+        </span>
+      </a>
+      <a class="cs-next-card next" href="provider-redesign.html">
+        <span class="txt">
+          <span class="dir">Next &rarr;</span>
+          <h3 class="serif">Redesigned a £9B platform for UHNW clients</h3>
+        </span>
+        <img class="thumb" src="../assets/img/VFbImBTynQh7F0MmkZp4YDalEAE.webp" alt="" loading="lazy">
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="foot" id="contact">
+  <div class="foot-in">
+    <h2 class="serif reveal">Let&rsquo;s make something clear.</h2>
+    <a class="mail reveal" href="mailto:designlcc@gmail.com">designlcc@gmail.com</a>
+    <div class="row">
+      <span>&copy; 2026 Chun-Chuan Lin — London</span>
+      <span class="socials">
+        <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
+        <a href="https://www.behance.net/designlcc" target="_blank" rel="noopener">Behance</a>
+        <a href="https://adplist.org/mentors/chun-chuan-lin" target="_blank" rel="noopener">ADPList</a>
+      </span>
+    </div>
+  </div>
+</footer>
+<script src="../assets/js/main.js?v=11b02167" defer></script>
+</body>
+</html>

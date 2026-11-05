@@ -1,0 +1,55 @@
+[
+{"tag":"H4","text":"Chun-Chuan Lin"},
+{"toc":["Summary","The Problem","Alternatives Considered","The Approach","Concept","Leading This","Reflection"]},
+{"tag":"H1","text":"Designed a trust layer for how Rightmove matches agents with consumers"},
+{"tag":"H5","text":"A self-directed concept — replacing black-box agent assignment and pay-to-win visibility with a transparent, two-sided ranking system, without breaking the business model underneath it."},
+{"tag":"text","text":"Nov 2026 | Self-directed concept — competitive teardown, UX and product strategy"},
+{"img":"cs8-hero.webp"},
+
+{"tag":"H1","text":"Summary"},
+{"tag":"text","text":"Rightmove's agent-valuation flow promises “your chosen agent”, then never lets you choose. I used that gap to explore what a Lead role on Rightmove's Partners domain actually requires."},
+{"item":["🔗 Diagnosed from both sides","Consumers get no trust signal. Agents get no way to differentiate beyond ad spend."]},
+{"item":["⚖️ Three directions weighed","Compared against two rejected alternatives, for stated reasons, before committing."]},
+{"item":["💷 Commercial model preserved","Paid placement stays. It just stops pretending to be a trust signal."]},
+{"tag":"text","text":"Role: self-directed, solo. Based on Rightmove's public pages — no internal data, no claim that this is what Rightmove is building."},
+
+{"tag":"H1","text":"The Problem"},
+{"item":["🔗 Consumer side — a black box","rightmove.co.uk/agent-valuation assigns an agent with no reviews, ratings, or comparison."]},
+{"item":["💷 Agent side — pay or disappear","rightmove.co.uk/advertise-with-us: the only differentiation on offer is paid placement."]},
+{"compare":["Today: a black box, no visible signal","Proposed: two visible signals, clearly labelled","cs8-flow-today.webp","cs8-flow-proposed.webp"]},
+{"tag":"text","text":"Neither side gets a real trust mechanism — precisely the gap the job description names: “helping consumers feel more confident when choosing an estate agent, while helping agents demonstrate the value they offer.”"},
+
+{"tag":"H1","text":"Alternatives Considered"},
+{"tag":"text","text":"Two genuinely different directions, not variations on one idea — so the choice would be a real trade-off."},
+{"img":"cs8-tradeoff.webp","cap":"Three directionally different concepts, mapped against the same four questions."},
+{"dd":"I chose the hybrid ranking — not because it scored best on every axis, but because it's the only one of the three that ships in phases and can be validated at low risk. Transparency-first's best property got folded in anyway: the Quality Score's methodology is published and queryable by agents."},
+
+{"tag":"H1","text":"The Approach"},
+{"tag":"text","text":"Paid decides where you're seen. It shouldn't decide why you're trusted — so the fix ships in phases, not one release."},
+{"item":["🚦 Phase 1 — Make paid honest","Agents keep priority placement, now labelled Sponsored. No change to the business model."]},
+{"item":["📈 Phase 2 — Add a second, earned axis","Non-paid performance signals — time-to-sale, accuracy, response time — give agents without ad budget somewhere to compete."]},
+{"item":["🎯 Phase 3 — Let the two axes reward each other","Agents above a quality threshold get a lower cost-per-lead — both sides now have a reason to perform."]},
+
+{"tag":"H1","text":"Concept"},
+{"tag":"H5","text":"Compare agents near you — the consumer side"},
+{"tag":"text","text":"The craft problem: make Sponsored feel honest, not deceptive, without losing its commercial pull."},
+{"img":"cs8-phone-a.webp","layout":"side"},
+{"item":["💷 Sponsored, not disguised","One paid slot, visually distinct — the same convention as Google Search ads."]},
+{"item":["📊 Earned results, ranked on signal","Time-to-sale and accuracy, not star ratings — harder to fake than a review."]},
+{"item":["🔗 A score you can question","Every Quality Score links to its own methodology."]},
+{"tag":"H5","text":"Why you rank where you do — the agent side"},
+{"tag":"text","text":"A two-sided redesign that only shows the consumer screen hasn't solved the two-sided problem."},
+{"img":"cs8-value-profile.webp"},
+
+{"tag":"H1","text":"Leading This"},
+{"tag":"text","text":"What I'd put on the table with the team before anyone built anything:"},
+{"item":["🧭 With Research & Data","Rewarding valuation accuracy could reward conservative estimates over flattering ones. A history-based score also disadvantages the new, small agents the job is meant to help."]},
+{"item":["⚖️ With Commercial & Legal","Ranking agents makes Rightmove an active endorser, not a neutral directory. Discounting placement cost by Quality Score is a negotiation with Revenue, not a line in a deck."]},
+{"item":["🎯 My own call to defend","Not building this as a Yelp-style comparison page — the valuation flow is a lead-gen funnel. One clear recommendation by default; comparison stays opt-in."]},
+
+{"tag":"H1","text":"Reflection"},
+{"tag":"text","text":"This is a concept, not a validated design. The problem is real; the solution hasn't been in front of a single consumer or agent."},
+{"bullets":["Usability-test Compare Agents against the current black-box flow, on completion rate, not preference","Validate the Quality Score formula against real agent performance before trusting it to rank anyone","Pressure-test the pricing model with the team that owns Premium Listing revenue","Check whether “performance over reviews” holds once agents optimise for the metric itself"]},
+{"tag":"H2","text":"Why this belongs in the portfolio"},
+{"tag":"text","text":"Every other case study here is proof of execution on a real team. This one is proof of something else: given a problem I don't have internal access to, can I diagnose it accurately, generate real alternatives, and argue for a direction while being honest about where it could still go wrong."}
+]
