@@ -573,7 +573,7 @@ function renderInner(blocks, base) {
     }
     if (b.cap && b.img) {
       parts.push(
-        `<figure class="reveal full"><img src="${IMG(b.img, base)}" alt="" loading="lazy"><figcaption>${esc(b.cap)}</figcaption></figure>`
+        `<figure class="reveal full${b.portrait ? " portrait" : ""}"><img src="${IMG(b.img, base)}" alt="" loading="lazy"><figcaption>${esc(b.cap)}</figcaption></figure>`
       );
       continue;
     }
