@@ -16,6 +16,7 @@
 {"tag":"H1","text":"The Problem"},
 {"item":["🔗 Consumer side — a false choice","rightmove.co.uk/agent-valuation shows a checklist before you submit — every agent pre-ticked, every one Sponsored, nothing to tell them apart."]},
 {"item":["💷 Agent side — pay or disappear","rightmove.co.uk/advertise-with-us: the only differentiation on offer is paid placement. The checklist confirms it — there's no non-paid tier to fall back on."]},
+{"img":"cs8-real-checklist.webp","cap":"Not a mockup — the live rightmove.co.uk/agent-valuation flow, captured Nov 2026. Six agents, all Sponsored, all pre-ticked before you've read a single name.","portrait":true},
 {"compare":["Today: every box pre-ticked, every name paid","Proposed: two visible signals, clearly labelled","cs8-flow-today.webp","cs8-flow-proposed.webp"]},
 {"tag":"text","text":"Neither side gets a real trust mechanism — precisely the gap the job description names: “helping consumers feel more confident when choosing an estate agent, while helping agents demonstrate the value they offer.”"},
 
