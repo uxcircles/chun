@@ -226,7 +226,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
   <main>
     <!-- VALUE PROFILE -->
     <section class="page on" id="p-profile">
-      <div class="head"><div><div class="eyebrow">Value Profile · BR1 flats</div><h1>Why you rank where you do</h1><p>This is exactly what sellers see when they tap your score. None of it can be bought.</p></div></div>
+      <div class="head"><div><div class="eyebrow">Value Profile · BR1 flats</div><h1>Why you rank where you do</h1></div></div>
       <div class="grid g-top">
         <div class="card scorecard"><h3>Your quality score</h3>
           <div class="big"><span class="ring"><svg width="104" height="104"><circle cx="52" cy="52" r="47" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="7"/><circle id="ringArc" cx="52" cy="52" r="47" fill="none" stroke="#00deb6" stroke-width="7" stroke-linecap="round" stroke-dasharray="295.300"/></svg><b class="num" id="scoreBig">82</b></span>
@@ -234,7 +234,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
           <div class="trend"><span><b>▲ 4 points</b> in 12 weeks</span><svg width="96" height="28" viewBox="0 0 96 28" fill="none"><path d="M2 24 10 24 19 20 27 20 36 16 44 16 53 16 61 11 70 11 78 6 86 6 94 6" stroke="#00deb6" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/><circle cx="94" cy="6" r="3" fill="#00deb6"/></svg></div>
         </div>
         <div class="card whatif">
-          <div><h3>The one thing to fix</h3><h2>Reply faster, move up</h2><p>Drag to see what answering new sellers sooner does to your rank.</p>
+          <div><h3>The one thing to fix</h3><h2>Reply faster, move up</h2>
             <div class="slider"><div class="lab"><span>You reply in about</span><b class="num" id="hrsLab">5 hrs</b></div>
               <input type="range" id="hrs" min="1" max="8" step="0.500" value="5" aria-label="Typical reply time in hours">
               <div class="ends"><span>1 hr</span><span>8 hrs</span></div></div></div>
@@ -246,7 +246,7 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 
     <!-- LEADS -->
     <section class="page" id="p-leads">
-      <div class="head"><div><div class="eyebrow">Leads</div><h1>Sellers who chose you</h1><p>Every lead says how the seller found you — and how many other agents they contacted.</p></div></div>
+      <div class="head"><div><div class="eyebrow">Leads</div><h1>Sellers who chose you</h1></div></div>
       <div class="leads">
         <div class="card inbox" id="inbox"></div>
         <div class="card detail" id="detail"></div>
@@ -255,12 +255,12 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
 
     <!-- PLACEMENT -->
     <section class="page" id="p-placement">
-      <div class="head"><div><div class="eyebrow">Placement</div><h1>What the sponsored slot costs you</h1><p>Paying buys the top position. It never changes your score — but your score changes what you pay.</p></div></div>
+      <div class="head"><div><div class="eyebrow">Placement</div><h1>Sponsored placement</h1></div></div>
       <div class="grid g-place">
         <div class="card"><h3>Your price per sponsored lead</h3>
           <div class="price"><b class="num">£34.00</b><s class="num">£40.00</s><em>−15% quality discount</em></div>
           <div class="tiers"><div class="tier"><b>—</b>Score under 70</div><div class="tier"><b>−5%</b>70 – 79</div><div class="tier on"><b>−15%</b>80 – 89 · you</div><div class="tier"><b>−25%</b>90 and above</div></div>
-          <p class="hint"><b>8 more points</b> takes you to −25%. Replying within 2 hours gets you 5 of them.</p>
+          <p class="hint"><b>8 more points</b> to reach −25%.</p>
         </div>
         <div class="card"><h3>Leads · last 4 weeks</h3>
           <div class="bars"><div class="wk"><i class="p" style="height:22%"></i><i class="e" style="height:28%"></i><span>13 Oct</span></div><div class="wk"><i class="p" style="height:16%"></i><i class="e" style="height:34%"></i><span>20 Oct</span></div><div class="wk"><i class="p" style="height:22%"></i><i class="e" style="height:40%"></i><span>27 Oct</span></div><div class="wk"><i class="p" style="height:11%"></i><i class="e" style="height:52%"></i><span>3 Nov</span></div></div>
@@ -268,12 +268,11 @@ input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;bac
         </div>
       </div>
       <div class="card preview">
-        <div><h3>How sellers see it</h3><h2>Labelled as paid, scored like everyone else</h2><p>Your slot shows the same score and stats as your earned listing, plus where you’d rank without paying.</p>
+        <div><h3>How sellers see your slot</h3>
           <div class="switch"><button id="slotSw" aria-pressed="true" aria-label="Sponsored slot"></button><span id="slotLab">Sponsored slot is on in BR1</span></div></div>
-        <div class="slot" id="slot"><div class="in"><div class="lab"><span>Sponsored</span>Paid to appear here · ranks #3 on performance</div>
+        <div class="slot" id="slot"><div class="in"><div class="lab"><span>Sponsored</span>ranks #3</div>
           <div class="r"><span class="tile" style="background:#2f4a86">Pf</span><div><b>Pennyfield</b><small>95% of valuation · 29 days · ~5h reply</small></div><span class="s num">82</span></div></div></div>
       </div>
-      <p class="illus">Illustrative pricing for the concept — the discount curve is a negotiation with Revenue, not a design decision.</p>
     </section>
   </main>
 </div>
@@ -308,7 +307,7 @@ function drawResult(h){
   r.classList.toggle('up',rank<BASERANK);
   const sc=m.total!==BASE.total?`<s>${BASE.total}</s>${m.total}`:m.total, rk=rank!==BASERANK?`<s>#${BASERANK}</s>#${rank}`:'#'+rank;
   r.innerHTML=`<div><span>Score</span><b class="num">${sc}</b></div><div><span>Rank</span><b class="num">${rk}</b></div>
-    <div class="msg">${rank<BASERANK?`You’d pass ${others.filter(o=>o.score>BASE.total&&o.score<=m.total).map(o=>o.n).join(' and ')||'the agent above'} — and show above them to every seller.`:up?`${others.filter(o=>o.score>m.total).pop().score-m.total} more point${others.filter(o=>o.score>m.total).pop().score-m.total>1?'s':''} to move up a place.`:m.total<BASE.total?'Slower replies cost you points — and eventually places.':'This is where you are today.'}</div>`;
+    <div class="msg">${rank<BASERANK?`You’d pass ${others.filter(o=>o.score>BASE.total&&o.score<=m.total).map(o=>o.n).join(' and ')||'the agent above'}.`:up?`${others.filter(o=>o.score>m.total).pop().score-m.total} more point${others.filter(o=>o.score>m.total).pop().score-m.total>1?'s':''} to move up a place.`:m.total<BASE.total?'Slower replies cost you points — and eventually places.':'This is where you are today.'}</div>`;
 }
 function update(){
   const el=$('#hrs'), h=+el.value, m=mine(h);
@@ -332,7 +331,7 @@ function drawLeads(){
   const l=LEADS[cur];
   $('#detail').innerHTML=`<span class="src ${l.src}">${l.src==='earned'?'Earned · no charge':'Sponsored · £34.00'}</span>
     <h2 style="margin-top:8px">${l.who} wants a valuation</h2><p class="sub">${l.prop} · ${l.t} ago</p>
-    <div class="banner"><div class="n num">1<small> of ${l.n}</small></div><p><b>${l.n===1?'You’re the only agent they contacted.':'They picked you and '+l.other+'.'}</b>By default, today’s flow sends the same request to all 6 sponsored agents.</p></div>
+    <div class="banner"><div class="n num">1<small> of ${l.n}</small></div><p><b>${l.n===1?'You’re the only agent they contacted.':'They picked you and '+l.other+'.'}</b></p></div>
     <div class="cols"><div><h3 style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">How they found you</h3>
       <ol class="path"><li><b>Saw you ${l.src==='earned'?'ranked #'+l.rank+' on performance':'in the sponsored slot'}</b>Search: ${l.prop.split(' · ')[0]}s near ${l.prop.slice(-3)}</li><li><b>Opened your score breakdown</b>Spent longest on valuation accuracy</li><li><b>Chose you</b>${l.n===1?'No other agent has their details':'Alongside '+l.other}</li></ol>
 </div>
