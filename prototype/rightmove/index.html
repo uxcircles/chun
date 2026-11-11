@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Choosing an agent — concept prototype · Chun-Chuan Lin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#000433; --navy-2:#1b2057; --mint:#00deb6; --mint-ink:#00806a; --mint-soft:#e2faf4;
+  --bg:#f4f4f5; --card:#fff; --ink:#000433; --muted:#5d607c; --faint:#8b8ea6; --line:#e4e5ec;
+  --tag:#eeeef4; --warn:#b4532f;
+  --font:"Figtree",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;font-family:var(--font);color:var(--ink);background:#f1eee7;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+b,strong{font-weight:700}
+
+/* ---------- stage (desktop) ---------- */
+.stage{min-height:100%;display:flex;align-items:center;justify-content:center;gap:72px;padding:24px}
+.note{width:300px;flex:none}
+.note .eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.note h1{font-size:30px;line-height:1.12;margin:14px 0 12px;letter-spacing:-.02em}
+.note p{font-size:15px;line-height:1.55;color:var(--muted);margin:0 0 22px}
+.note ol{list-style:none;margin:0 0 26px;padding:0;display:flex;flex-direction:column;gap:2px}
+.note li{display:flex;gap:12px;align-items:center;font-size:14.5px;color:var(--faint);padding:9px 12px;border-radius:10px;transition:background .3s,color .3s}
+.note li i{font-style:normal;width:22px;height:22px;border-radius:50%;border:1.5px solid currentColor;display:grid;place-items:center;font-size:11.5px;font-weight:700;flex:none}
+.note li.on{background:#fff;color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,4,51,.06)}
+.note li.on i{background:var(--navy);border-color:var(--navy);color:#fff}
+.note li.done{color:var(--muted)}
+.note li.done i{background:var(--mint);border-color:var(--mint);color:var(--navy)}
+.note .links{display:flex;flex-direction:column;gap:10px;font-size:14px;font-weight:600}
+.note .links a{color:var(--ink);text-decoration:none;border-bottom:1.5px solid rgba(0,4,51,.2);align-self:flex-start;padding-bottom:1px}
+.note .links a:hover{border-color:var(--ink)}
+.note .fine{font-size:12px;color:var(--faint);margin:22px 0 0;line-height:1.5;text-align:left}
+
+.device{position:relative;flex:none;width:412px;height:866px;border-radius:58px;background:#0c0c14;padding:11px;
+  box-shadow:0 0 0 1.5px #2b2b36 inset,0 50px 90px -40px rgba(0,4,51,.45),0 18px 36px -18px rgba(0,4,51,.3);transform-origin:center}
+.island{pointer-events:none;position:absolute;top:22px;left:50%;transform:translateX(-50%);width:112px;height:32px;border-radius:20px;background:#0c0c14;z-index:30}
+.screen{position:relative;width:390px;height:844px;border-radius:47px;overflow:hidden;overflow:clip;background:var(--bg);display:flex;flex-direction:column}
+.statusbar{height:54px;flex:none;background:#fff;display:flex;align-items:flex-end;justify-content:space-between;padding:0 34px 9px 40px;font-weight:700;font-size:16px;letter-spacing:-.01em;z-index:5}
+.statusbar .ic{display:flex;gap:6px;align-items:center}
+.homebar{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:var(--navy);opacity:.9;z-index:40;pointer-events:none}
+
+/* ---------- app shell ---------- */
+.topbar{height:52px;flex:none;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px;border-bottom:1px solid var(--line);z-index:4}
+.wordmark{display:flex;align-items:flex-start;gap:2px;font-weight:800;font-size:21px;letter-spacing:-.035em}
+.wordmark svg{margin-top:1px}
+.concept-pill{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:20px;padding:3px 8px;margin-left:8px;align-self:center}
+.views{position:relative;flex:1;min-height:0;overflow:hidden;overflow:clip}
+.view{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;padding-bottom:28px;
+  transform:translateX(100%);opacity:0;pointer-events:none;transition:transform .42s var(--ease),opacity .3s;scrollbar-width:none}
+.view::-webkit-scrollbar{display:none}
+.view.active{transform:none;opacity:1;pointer-events:auto}
+.view.left{transform:translateX(-28%);opacity:0}
+
+/* progress */
+.steps{display:flex;gap:6px;margin-bottom:8px}
+.steps span{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.22)}
+.steps span.on{background:var(--mint)}
+.steps.light span{background:#dcdde6}
+.steps.light span.on{background:var(--navy)}
+.stepline{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600;opacity:.8}
+
+/* match view */
+.hero{background:var(--navy);color:#fff;padding:18px 20px 76px;border-radius:0 0 26px 26px}
+.hero h2{font-size:27px;line-height:1.12;letter-spacing:-.02em;margin:20px 0 10px;font-weight:700}
+.hero h2 em{font-style:normal;color:var(--mint)}
+.hero p{margin:0;font-size:14.5px;line-height:1.5;color:rgba(255,255,255,.78)}
+.hero p b{color:#fff}
+.basis{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.basis span{font-size:12px;font-weight:600;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:20px;padding:5px 10px;display:flex;align-items:center;gap:5px}
+
+.card{background:var(--card);border-radius:18px;margin:0 16px;box-shadow:0 1px 2px rgba(0,4,51,.05),0 10px 26px -14px rgba(0,4,51,.22)}
+.match{margin-top:-58px;position:relative;overflow:hidden}
+.match-tag{position:absolute;top:0;left:18px;background:var(--mint);color:var(--navy);font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:5px 10px;border-radius:0 0 8px 8px}
+.ahead{display:flex;align-items:center;gap:12px;padding:38px 18px 14px}
+.tile{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:15px;letter-spacing:-.02em;flex:none}
+.tile.serif{font-family:Georgia,"Times New Roman",serif;font-weight:700}
+.tile.sm{width:40px;height:40px;border-radius:10px;font-size:13px}
+.ahead .who{flex:1;min-width:0}
+.ahead .who b{display:block;font-size:19px;letter-spacing:-.015em;line-height:1.2}
+.ahead .who small{font-size:13px;color:var(--muted)}
+.ring{position:relative;width:54px;height:54px;flex:none;display:grid;place-items:center;border-radius:50%}
+.ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.ring b{font-size:18px;font-weight:800;letter-spacing:-.02em;position:relative}
+.ring.sm{width:40px;height:40px}.ring.sm b{font-size:14px}
+.ring.lg{width:84px;height:84px}.ring.lg b{font-size:29px}
+
+.map{position:relative;margin:0 18px;border-radius:12px;overflow:hidden;height:148px;background:#eef0f3}
+.map svg{display:block;width:100%;height:100%}
+.map .cap{position:absolute;left:8px;bottom:8px;background:#fff;border-radius:8px;padding:6px 9px;font-size:12px;font-weight:600;box-shadow:0 2px 8px rgba(0,4,51,.14);display:flex;align-items:center;gap:6px}
+.map .cap i{width:8px;height:8px;border-radius:50%;background:var(--navy);box-shadow:0 0 0 2px #fff,0 0 0 3px var(--navy)}
+.pulse{animation:pulse 2.2s ease-out infinite;transform-origin:163px 76px}
+@keyframes pulse{0%{transform:scale(.6);opacity:.7}100%{transform:scale(2.3);opacity:0}}
+
+.trio{display:grid;grid-template-columns:repeat(3,1fr);padding:14px 10px 4px}
+.trio div{padding:0 8px;border-left:1px solid var(--line)}
+.trio div:first-child{border-left:0}
+.trio b{display:block;font-size:21px;letter-spacing:-.02em;font-weight:800}
+.trio b small{font-size:12.5px;font-weight:700;margin-left:2px}
+.trio span{display:block;font-size:11.5px;line-height:1.3;color:var(--muted);margin-top:2px}
+.actions{display:flex;gap:10px;padding:14px 18px 18px}
+.btn{height:50px;border-radius:12px;font-weight:700;font-size:15.5px;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 18px;transition:background .2s,transform .15s,box-shadow .2s,color .2s}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:var(--mint);color:var(--navy);flex:1}
+.btn.ghost{box-shadow:0 0 0 1.5px var(--navy) inset}
+.btn.chosen{background:var(--navy);color:#fff}
+.btn[disabled]{background:#e4e5ec;color:#9b9db3;cursor:default}
+
+.sponsored{margin-top:14px;padding:14px 16px 16px;box-shadow:0 0 0 1px var(--line) inset}
+.sp-label{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin-bottom:12px}
+.sp-tag{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--tag);border-radius:5px;padding:3px 7px;flex:none}
+.sp-row{display:flex;align-items:center;gap:12px}
+.sp-row .who{flex:1;min-width:0}
+.sp-row .who b{display:block;font-size:16px;letter-spacing:-.01em}
+.sp-row .who small{font-size:12.5px;color:var(--muted)}
+.pick{width:30px;height:30px;border-radius:8px;box-shadow:0 0 0 2px var(--navy) inset;display:grid;place-items:center;flex:none;transition:background .18s}
+.pick svg{opacity:0;transform:scale(.5);transition:.2s var(--ease)}
+.pick[aria-pressed="true"]{background:var(--navy)}
+.pick[aria-pressed="true"] svg{opacity:1;transform:none}
+
+.linkrow{display:flex;align-items:center;justify-content:space-between;width:calc(100% - 32px);margin:14px 16px 0;padding:16px 18px;background:#fff;border-radius:14px;font-weight:700;font-size:15px;box-shadow:0 0 0 1px var(--line) inset}
+.linkrow small{display:block;font-weight:500;font-size:12.5px;color:var(--muted);margin-top:2px;text-align:left}
+.fine{font-size:11.5px;color:var(--faint);text-align:center;margin:18px 28px 0;line-height:1.5}
+
+/* loading */
+.loading{position:absolute;inset:0;background:var(--navy);color:#fff;z-index:3;display:flex;flex-direction:column;justify-content:center;padding:0 34px;transition:opacity .5s,visibility .5s}
+.loading.gone{opacity:0;visibility:hidden}
+.loading h3{font-size:24px;line-height:1.2;letter-spacing:-.02em;margin:0 0 26px}
+.loading li{list-style:none;display:flex;align-items:center;gap:12px;font-size:15px;padding:9px 0;color:rgba(255,255,255,.45);transition:color .3s}
+.loading ul{margin:0;padding:0}
+.loading li i{width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,.3);display:grid;place-items:center;flex:none;transition:.3s}
+.loading li i svg{opacity:0}
+.loading li.ok{color:#fff}
+.loading li.ok i{background:var(--mint);border-color:var(--mint)}
+.loading li.ok i svg{opacity:1}
+
+/* compare view */
+.pad{padding:16px 16px 0}
+.back{display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:600;color:var(--muted);padding:4px 0}
+.pad h2{font-size:25px;letter-spacing:-.02em;margin:10px 0 4px;line-height:1.15}
+.pad .sub{font-size:13.5px;color:var(--muted);margin:0}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:14px 16px 12px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;height:36px;padding:0 14px;border-radius:20px;font-size:13.5px;font-weight:600;background:#fff;box-shadow:0 0 0 1px var(--line) inset;transition:.2s}
+.chip.on{background:var(--navy);color:#fff;box-shadow:none}
+.list{margin:0 16px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 2px rgba(0,4,51,.05)}
+.row{display:grid;grid-template-columns:20px 40px 1fr auto auto;column-gap:10px;align-items:center;padding:13px 14px;border-top:1px solid var(--line);position:relative;background:#fff;cursor:pointer}
+.row:first-child{border-top:0}
+.row .rank{font-size:13px;font-weight:700;color:var(--faint);text-align:center}
+.row .name b{display:block;font-size:15.5px;letter-spacing:-.01em;line-height:1.25}
+.row .name small{font-size:12px;color:var(--muted)}
+.row .metrics{grid-column:3 / -1;display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.row .metrics span{font-size:11.5px;color:var(--muted);background:var(--bg);border-radius:6px;padding:3px 7px;white-space:nowrap;transition:.25s}
+.row .metrics span.hot{background:var(--mint-soft);color:var(--mint-ink);font-weight:700}
+.row.sp{background:#fafafc}
+.row.sp .rank{font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);font-weight:800}
+.row .spnote{grid-column:3 / -1;font-size:11.5px;color:var(--muted);margin-top:6px}
+.row .spnote b{color:var(--ink)}
+.row.sel::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--mint)}
+
+/* dock */
+.dock{flex:none;background:#fff;border-top:1px solid var(--line);padding:11px 16px 26px;z-index:6;transition:transform .35s var(--ease)}
+.dock.hide{transform:translateY(110%);position:absolute;bottom:0;left:0;right:0}
+.dock .status{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);margin-bottom:9px;min-height:22px}
+.dock .stack{display:flex}
+.dock .stack .tile{width:22px;height:22px;border-radius:6px;font-size:0;margin-left:-5px;box-shadow:0 0 0 2px #fff}
+.dock .stack .tile:first-child{margin-left:0}
+.dock .btn{width:100%}
+
+/* sheet */
+.scrim{position:absolute;inset:0;background:rgba(0,4,51,.45);opacity:0;pointer-events:none;transition:opacity .3s;z-index:10}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:88%;background:#fff;border-radius:24px 24px 0 0;z-index:11;transform:translateY(105%);visibility:hidden;transition:transform .45s var(--ease),visibility 0s .45s;overflow-y:auto;padding:10px 20px 34px;scrollbar-width:none}
+.sheet::-webkit-scrollbar{display:none}
+.sheet.on{transform:none;visibility:visible;transition:transform .45s var(--ease),visibility 0s}
+.grab{width:38px;height:4px;border-radius:2px;background:#d5d6e0;margin:0 auto 16px}
+.sh-head{display:flex;align-items:center;gap:14px}
+.sh-head .who{flex:1}
+.sh-head .who small{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.sh-head .who b{display:block;font-size:22px;letter-spacing:-.02em;line-height:1.2;margin-top:2px}
+.sh-basis{font-size:13.5px;line-height:1.5;color:var(--muted);margin:14px 0 18px;padding:11px 13px;background:var(--bg);border-radius:10px}
+.sh-basis b{color:var(--ink)}
+.part{padding:13px 0;border-top:1px solid var(--line)}
+.part .top{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;font-weight:700}
+.part .top span{font-size:13px;font-weight:700;color:var(--muted)}
+.part .top span b{color:var(--ink);font-size:15px}
+.part .bar{height:6px;border-radius:3px;background:var(--line);margin:9px 0 7px;overflow:hidden}
+.part .bar i{display:block;height:100%;border-radius:3px;background:var(--mint);width:0;transition:width .8s var(--ease) .15s}
+.part p{margin:0;font-size:13px;color:var(--muted);line-height:1.45}
+.never{border-top:1px solid var(--line);padding-top:14px;margin-top:2px}
+.never h4{margin:0 0 9px;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.never div{display:flex;gap:7px;flex-wrap:wrap}
+.never span{font-size:12.5px;font-weight:600;color:var(--muted);box-shadow:0 0 0 1px var(--line) inset;border-radius:20px;padding:5px 10px;display:flex;align-items:center;gap:6px}
+.src{font-size:12px;color:var(--faint);line-height:1.5;margin:14px 0 16px}
+.sheet .btn{width:100%}
+
+/* details */
+.sendto{margin:16px 16px 0;padding:14px 16px;background:#fff;border-radius:16px;box-shadow:0 0 0 1px var(--line) inset}
+.sendto h4{margin:0 0 10px;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
+.sendto h4 button{font-size:13px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.sendto .a{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:15px;font-weight:700}
+.sendto .a small{margin-left:auto;font-weight:500;font-size:12.5px;color:var(--muted)}
+.form{margin:14px 16px 0}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.field .in{height:50px;border-radius:10px;background:#fff;box-shadow:0 0 0 1.5px #c9cbd9 inset;display:flex;align-items:center;padding:0 14px;font-size:15.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seg{display:flex;gap:8px}
+.seg button{flex:1;height:44px;border-radius:10px;font-size:14px;font-weight:600;background:#fff;box-shadow:0 0 0 1.5px #c9cbd9 inset;transition:.2s}
+.seg button.on{background:var(--navy);color:#fff;box-shadow:none}
+.consent{margin:6px 16px 0;padding:14px 14px 14px 46px;position:relative;background:var(--mint-soft);border-radius:14px;font-size:13.5px;line-height:1.5}
+.consent svg{position:absolute;left:14px;top:15px}
+.consent b{display:block;margin-bottom:2px}
+.consent span{color:#27566a}
+
+/* sent */
+.sent{padding:38px 22px 0;text-align:center}
+.tick{width:76px;height:76px;border-radius:50%;background:var(--mint);margin:0 auto 20px;display:grid;place-items:center;transform:scale(.4);opacity:0;transition:.5s var(--ease) .15s}
+.view.active .tick{transform:none;opacity:1}
+.tick path{stroke-dasharray:40;stroke-dashoffset:40;transition:stroke-dashoffset .45s ease .5s}
+.view.active .tick path{stroke-dashoffset:0}
+.sent h2{font-size:26px;letter-spacing:-.02em;line-height:1.15;margin:0 0 8px}
+.sent > p{font-size:14.5px;color:var(--muted);margin:0 0 20px;line-height:1.5}
+.box{background:#fff;border-radius:16px;text-align:left;padding:6px 16px;box-shadow:0 0 0 1px var(--line) inset}
+.box .a{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line)}
+.box .a:first-child{border-top:0}
+.box .a b{display:block;font-size:15.5px}
+.box .a small{font-size:12.5px;color:var(--muted)}
+.box .a em{margin-left:auto;font-style:normal;font-size:11.5px;font-weight:700;color:var(--mint-ink);background:var(--mint-soft);border-radius:20px;padding:4px 9px;white-space:nowrap}
+.notsent{margin-top:12px;font-size:13.5px;line-height:1.5;text-align:left;padding:13px 14px;border-radius:14px;background:var(--navy);color:rgba(255,255,255,.8)}
+.notsent b{color:#fff}
+.next{text-align:left;margin-top:20px}
+.next h4{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.next ol{list-style:none;margin:0;padding:0}
+.next li{position:relative;padding:0 0 16px 28px;font-size:14px;line-height:1.45;color:var(--muted)}
+.next li b{display:block;color:var(--ink);font-size:14.5px}
+.next li::before{content:"";position:absolute;left:5px;top:5px;width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px var(--navy)}
+.next li:first-child::before{background:var(--navy)}
+.next li::after{content:"";position:absolute;left:9px;top:18px;bottom:-2px;width:1.5px;background:#cfd0dc}
+.next li:last-child::after{display:none}
+.restart{margin:6px auto 0;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px;padding:10px}
+
+.toast{position:absolute;left:16px;right:16px;bottom:118px;background:var(--navy);color:#fff;font-size:13.5px;line-height:1.4;padding:12px 14px;border-radius:12px;z-index:9;opacity:0;transform:translateY(10px);pointer-events:none;transition:.3s var(--ease)}
+.toast.on{opacity:1;transform:none}
+
+/* tap ripple (demo recording + touch feedback) */
+.tap{position:fixed;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:rgba(0,4,51,.22);box-shadow:0 0 0 2px rgba(255,255,255,.7);pointer-events:none;z-index:99;animation:tap .55s ease-out forwards}
+@keyframes tap{0%{transform:scale(.5);opacity:1}100%{transform:scale(1.25);opacity:0}}
+
+/* ---------- real phones: drop the frame ---------- */
+@media (max-width:760px){
+  body{background:var(--bg)}
+  .stage{display:block;padding:0;height:100%}
+  .note,.island,.statusbar,.homebar{display:none}
+  .device{width:100%;height:100%;border-radius:0;padding:0;box-shadow:none;background:none;transform:none!important}
+  .screen{width:100%;height:100%;border-radius:0}
+  .dock{padding-bottom:max(16px,env(safe-area-inset-bottom))}
+}
+/* ---------- simplified layer ---------- */
+.hero{padding-bottom:72px}
+.hero h2{margin:14px 0 8px}
+.map{height:122px}
+.card.match{margin-top:-58px}
+.hero p{font-size:15px}
+.ahead{padding:34px 18px 12px}
+.ahead .who small{font-size:13.5px}
+.why{list-style:none;margin:0;padding:14px 18px 2px;display:flex;flex-direction:column;gap:11px}
+.why li{display:flex;align-items:center;gap:11px;font-size:16px}
+.why svg{flex:none}
+.scorerow{display:flex;justify-content:space-between;align-items:center;width:calc(100% - 36px);margin:11px 18px 0;padding:11px 0 0;border-top:1px solid var(--line);font-size:14.5px;color:var(--muted)}
+.scorerow b{color:var(--ink);font-size:18px;font-weight:800;margin-left:5px}
+.scorerow small{font-size:12.5px}
+.scorerow .see{display:flex;align-items:center;gap:7px;font-weight:700;color:var(--ink)}
+.actions{padding:12px 18px 16px}
+.card.sponsored{display:flex;align-items:center;gap:12px;width:calc(100% - 32px);text-align:left;margin:10px 16px 0;padding:11px 16px;box-shadow:0 0 0 1px var(--line) inset;color:var(--muted)}
+.card.sponsored .who{flex:1;min-width:0;color:var(--ink)}
+.card.sponsored .who b{display:block;font-size:15.5px}
+.card.sponsored .who small,.row .name small{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted);margin-top:3px;flex-wrap:wrap}
+.mini{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;color:var(--ink);box-shadow:0 0 0 3px var(--mint) inset;flex:none}
+.linkrow{padding:15px 18px;margin-top:10px}
+.row .name small{white-space:nowrap;flex-wrap:nowrap}
+.row{grid-template-columns:20px 40px 1fr auto auto;padding:14px 14px}
+.row .name small{gap:4px}
+.row .name small .hot{color:var(--mint-ink);font-weight:700}
+.part{padding:14px 0 15px}
+.part .top{display:block;font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.part p{font-size:16px;color:var(--ink);margin:4px 0 0}
+.part .bar{margin:10px 0 0}
+.never{display:flex;align-items:center;gap:10px;border-top:0;margin:4px 0 0;padding:13px 14px;background:var(--mint-soft);border-radius:12px;font-size:14.5px;font-weight:600;color:#0b4d42}
+.never svg{flex:none}
+.src{margin:12px 0 16px}
+.sh-basis{margin:16px 0 4px}
+.sh-head{padding-bottom:6px}
+.sendto .a{padding:5px 0}
+.box .a em{background:var(--mint-soft)}
+.restart{margin-top:18px}
+/* capture mode: just the 390x844 screen */
+body.bare{background:var(--bg)}
+body.bare .stage{display:block;padding:0;height:auto;min-height:0}
+body.bare .note,body.bare .island{display:none}
+body.bare .device{width:390px;height:844px;border-radius:0;padding:0;box-shadow:none;background:none;transform:none!important;margin:0!important}
+body.bare .screen{width:390px;height:844px;border-radius:0}
+body.bare .statusbar{display:flex}
+body.bare .homebar{display:block}
+body.bare .dock{padding-bottom:26px}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <aside class="note">
+    <div class="eyebrow">Concept prototype · Consumer</div>
+    <h1>Choosing an agent, when nothing is pre-ticked</h1>
+    <p>A clickable walk through the redesigned agent-valuation flow. Tap through it like a seller would.</p>
+    <ol id="guide">
+      <li data-step="match"><i>1</i>See your best match</li>
+      <li data-step="sheet"><i>2</i>Tap “See why”</li>
+      <li data-step="compare"><i>3</i>Or compare all 9</li>
+      <li data-step="details"><i>4</i>Check who gets your details</li>
+      <li data-step="sent"><i>5</i>Send</li>
+    </ol>
+    <div class="links">
+      <a href="agent.html">Switch to the agent view →</a>
+      <a href="../../work/rightmove-partners.html">← Back to the case study</a>
+    </div>
+    <p class="fine">Self-directed concept by Chun-Chuan Lin. Not affiliated with or endorsed by Rightmove. Agents and figures are fictional.</p>
+  </aside>
+
+  <div class="device" id="device">
+    <div class="island"></div>
+    <div class="screen" id="screen">
+      <div class="statusbar"><span>9:41</span>
+        <span class="ic">
+          <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="#000433"/><rect x="5" y="5.5" width="3" height="6.5" rx="1" fill="#000433"/><rect x="10" y="3" width="3" height="9" rx="1" fill="#000433"/><rect x="15" y="0" width="3" height="12" rx="1" fill="#000433"/></svg>
+          <svg width="17" height="12" viewBox="0 0 17 12" fill="none" stroke="#000433" stroke-width="1.8" stroke-linecap="round"><path d="M1.2 4.2a10.5 10.5 0 0 1 14.6 0M3.9 6.9a6.6 6.6 0 0 1 9.2 0"/><circle cx="8.5" cy="10" r="1.2" fill="#000433" stroke="none"/></svg>
+          <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.5" fill="none" stroke="#000433" opacity=".4"/><rect x="2" y="2" width="20" height="9" rx="2" fill="#000433"/><rect x="25" y="4" width="2" height="5" rx="1" fill="#000433" opacity=".4"/></svg>
+        </span>
+      </div>
+      <div class="topbar">
+        <svg width="22" height="16" viewBox="0 0 22 16" stroke="#000433" stroke-width="2" stroke-linecap="round"><path d="M1 2h20M1 8h20M1 14h20"/></svg>
+        <div class="wordmark">rightmove<svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="#00deb6" stroke-width="2.2" stroke-linejoin="round"><path d="M1.5 6.2 6.5 1.6l5 4.6v5.3h-10z"/></svg><span class="concept-pill">Concept</span></div>
+        <svg width="20" height="22" viewBox="0 0 20 22" fill="#000433"><circle cx="10" cy="6" r="5"/><path d="M1 22c0-6 3.5-9 9-9s9 3 9 9z"/></svg>
+      </div>
+
+      <div class="views">
+        <section class="view active" data-view="match" id="v-match"></section>
+        <section class="view" data-view="compare" id="v-compare"></section>
+        <section class="view" data-view="details" id="v-details"></section>
+        <section class="view" data-view="sent" id="v-sent"></section>
+        <div class="loading" id="loading">
+          <h3>Matching agents to your 2-bed flat in BR1…</h3>
+          <ul>
+            <li><i><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#000433" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.6 2.6L9 1.2"/></svg></i>Sold prices for flats within ½ mile</li>
+            <li><i><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#000433" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.6 2.6L9 1.2"/></svg></i>How long each agent took to sell</li>
+            <li><i><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#000433" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4l2.6 2.6L9 1.2"/></svg></i>How quickly they reply to sellers</li>
+          </ul>
+        </div>
+        <div class="toast" id="toast"></div>
+      </div>
+
+      <div class="dock" id="dock"></div>
+      <div class="scrim" id="scrim"></div>
+      <div class="sheet" id="sheet"></div>
+      <div class="homebar"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const AREA='BR1', TOTAL=9;
+const AGENTS=[
+  {id:'em',name:'Elm & Mason',branch:'Bromley',ini:'E&M',color:'#3d5a45',serif:1,pct:98,days:27,hrs:2,sold:14},
+  {id:'hr',name:'Harlow Reed',branch:'Bromley',ini:'HR',color:'#b4532f',pct:97,days:31,hrs:3,sold:11},
+  {id:'pf',name:'Pennyfield',branch:'Beckenham',ini:'Pf',color:'#2f4a86',serif:1,pct:95,days:29,hrs:5,sold:9},
+  {id:'kc',name:'Kestrel & Co',branch:'Bromley',ini:'K',color:'#23232e',pct:96,days:42,hrs:4,sold:12},
+  {id:'tw',name:'Tallow & Wren',branch:'Beckenham',ini:'T&W',color:'#5b2a4e',serif:1,pct:94,days:45,hrs:3,sold:8,sponsored:1},
+  {id:'qe',name:'Quill Estates',branch:'Bromley',ini:'Q',color:'#1f6f5c',serif:1,pct:92,days:36,hrs:9,sold:7},
+  {id:'jr',name:'Juniper Row',branch:'Bickley',ini:'JR',color:'#7a2433',pct:93,days:44,hrs:6,sold:6},
+  {id:'al',name:'Abbot Lane',branch:'Shortlands',ini:'AL',color:'#6a6430',pct:91,days:47,hrs:8,sold:5},
+  {id:'mf',name:'Marsh & Field',branch:'Bromley',ini:'M&F',color:'#4a4f63',serif:1,pct:89,days:52,hrs:12,sold:4},
+];
+AGENTS.forEach(a=>{
+  a.acc=Math.round(45-(100-a.pct)*1.3); a.spd=Math.round(30-(a.days-20)*0.4); a.rsp=Math.round(25-3.5*Math.log2(a.hrs));
+  a.score=a.acc+a.spd+a.rsp;
+});
+const byId=id=>AGENTS.find(a=>a.id===id);
+const SORTS={
+  score:{label:'Best match',cmp:(a,b)=>b.score-a.score},
+  days:{label:'Fastest sale',cmp:(a,b)=>a.days-b.days||b.score-a.score},
+  pct:{label:'Best price',cmp:(a,b)=>b.pct-a.pct||b.score-a.score},
+};
+const state={view:'match',sort:'score',chosen:new Set(),sheet:null,contact:'Phone',seen:new Set(['match'])};
+const ranked=()=>[...AGENTS].sort(SORTS[state.sort].cmp);
+const best=()=>[...AGENTS].sort(SORTS.score.cmp)[0];
+
+const tile=(a,cls='')=>`<span class="tile ${cls} ${a.serif?'serif':''}" style="background:${a.color}">${a.ini.replace('&','&amp;')}</span>`;
+const ring=(v,cls='')=>{const s=cls==='lg'?84:cls==='sm'?40:54,w=cls==='lg'?6:4,r=(s-w)/2,c=2*Math.PI*r;
+  return `<span class="ring ${cls}"><svg width="${s}" height="${s}"><circle cx="${s/2}" cy="${s/2}" r="${r}" fill="none" stroke="#e4e5ec" stroke-width="${w}"/><circle cx="${s/2}" cy="${s/2}" r="${r}" fill="none" stroke="#00deb6" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-v/100)}"/></svg><b>${v}</b></span>`};
+const CHECK='<svg width="14" height="11" viewBox="0 0 14 11" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 5.5 5 9l7.5-7.5"/></svg>';
+const ARROW='<svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h13M9.5 1.5 14 6l-4.500 4.500"/></svg>';
+const pick=a=>`<button class="pick" data-toggle="${a.id}" aria-pressed="${state.chosen.has(a.id)}" aria-label="Choose ${a.name}">${CHECK}</button>`;
+const esc=s=>s.replace(/&/g,'&amp;');
+
+const MAP=`<svg viewBox="0 0 326 148" preserveAspectRatio="xMidYMid slice">
+<rect width="326" height="148" fill="#eceef2"/>
+<path d="M-10 100C36 80 80 92 106 122l-8 40H-10z" fill="#d3f0e5"/><path d="M238-10h110v52c-42 10-82-4-110-52z" fill="#d3f0e5"/>
+<g stroke="#fff" stroke-linecap="round" fill="none">
+<path d="M-10 52C70 40 150 70 340 58" stroke-width="11"/><path d="M120-10c8 60 30 110 50 170" stroke-width="9"/>
+<path d="M-10 118 110 96l120 24 110-16" stroke-width="6"/><path d="m40-10 30 170" stroke-width="5"/>
+<path d="m214-10 12 70 34 100" stroke-width="6"/><path d="m286 30 14 130" stroke-width="4"/><path d="M-10 20 120 14" stroke-width="4"/><path d="m170 90 170-8" stroke-width="4"/>
+<path d="M76 54 96 100" stroke-width="3.500"/><path d="m236 62 60-6" stroke-width="3.500"/>
+</g>
+<path d="M-10 142C90 112 200 22 340 10" stroke="#c4c7d3" stroke-width="2.500" stroke-dasharray="7 5" fill="none"/>
+<text x="232" y="20" font-size="8" font-weight="600" fill="#6fae99" letter-spacing=".04em">QUEENS MEAD</text>
+<text x="22" y="47" font-size="7.500" font-weight="600" fill="#9fa3b6" letter-spacing=".04em" transform="rotate(-6 22 47)">HIGH STREET</text>
+<circle cx="163" cy="76" r="60" fill="rgba(0,222,182,.09)" stroke="#00a88a" stroke-dasharray="3 4"/>
+<g fill="#000433" stroke="#fff" stroke-width="2">
+${[[128,40],[150,30],[186,34],[205,52],[214,84],[196,112],[170,126],[140,120],[118,98],[112,68],[145,60],[184,68],[178,100],[146,94]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5"/>`).join('')}
+</g>
+<circle class="pulse" cx="163" cy="76" r="8" fill="#00deb6"/>
+<circle cx="163" cy="76" r="8" fill="#00deb6" stroke="#000433" stroke-width="2.500"/>
+<path d="m159 77 4-4 4 4v4h-8z" fill="#000433"/>
+</svg>`;
+
+const TICK='<svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="#e2faf4"/><path d="M5.800 10.300 8.800 13.200 14.300 7.200" fill="none" stroke="#00806a" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const CHEV='<svg width="8" height="13" viewBox="0 0 8 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m1.500 1.500 5 5-5 5"/></svg>';
+const BACK='<svg width="8" height="13" viewBox="0 0 8 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.500 1.500 1.500 6.500l5 5"/></svg>';
+const spRank=()=>[...AGENTS].sort(SORTS.score.cmp).indexOf(AGENTS.find(x=>x.sponsored))+1;
+
+function renderMatch(){
+  const a=best(), sp=AGENTS.find(x=>x.sponsored);
+  $('#v-match').innerHTML=`
+  <div class="hero">
+    <div class="steps"><span class="on"></span><span class="on"></span><span></span></div>
+    <div class="stepline"><span>Choose your agent</span><span>2 of 3</span></div>
+    <h2>Your best match in <em>${AREA}</em></h2>
+    <p>Picked on how agents really sold flats like yours — never on who paid.</p>
+  </div>
+  <article class="card match">
+    <span class="match-tag">Best match</span>
+    <div class="ahead">${tile(a)}<div class="who"><b>${esc(a.name)}</b><small>Estate agent · ${a.branch}</small></div></div>
+    <div class="map">${MAP}<div class="cap"><i></i>${a.sold} flats like yours sold nearby</div></div>
+    <ul class="why">
+      <li>${TICK}<span>Gets <b>${a.pct}%</b> of the price they quote</span></li>
+      <li>${TICK}<span>Sells in about <b>${a.days} days</b></span></li>
+    </ul>
+    <button class="scorerow" data-sheet="${a.id}"><span>Quality score <b>${a.score}</b><small>/100</small></span><span class="see">See why ${CHEV}</span></button>
+    <div class="actions"><button class="btn primary" data-choose="${a.id}">Choose ${esc(a.name)}</button></div>
+  </article>
+  <button class="card sponsored" data-sheet="${sp.id}">${tile(sp,'sm')}<span class="who"><b>${esc(sp.name)}</b><small><span class="sp-tag">Sponsored</span>Paid to appear here</small></span><span class="mini">${sp.score}</span>${CHEV}</button>
+  <button class="linkrow" data-go="compare"><span>Compare all ${TOTAL} agents</span>${ARROW}</button>
+  <p class="fine">Concept prototype by Chun-Chuan Lin — not affiliated with Rightmove. Agents and figures are fictional.</p>`;
+}
+
+function renderCompare(){
+  const list=ranked(), sp=AGENTS.find(x=>x.sponsored), hot=state.sort;
+  const facts=a=>`<small><span class="${hot==='days'?'hot':''}">${a.days} days</span> · <span class="${hot==='pct'?'hot':''}">${a.pct}% of price</span></small>`;
+  const row=(a,i,spSlot)=>`<div class="row ${spSlot?'sp':''} ${state.chosen.has(a.id)?'sel':''}" data-key="${spSlot?'sp-':''}${a.id}" data-sheet="${a.id}">
+    <span class="rank">${spSlot?'Ad':i+1}</span>${tile(a,'sm')}
+    <span class="name"><b>${esc(a.name)}</b>${spSlot?`<small><span class="sp-tag">Sponsored</span>ranks #${spRank()}</small>`:facts(a)}</span>
+    <span class="mini">${a.score}</span>${pick(a)}
+  </div>`;
+  $('#v-compare').innerHTML=`
+  <div class="pad"><button class="back" data-go="match">${BACK}Best match</button>
+    <h2>Compare ${TOTAL} agents</h2><p class="sub">Days to sell · share of quoted price · score out of 100.</p></div>
+  <div class="chips">${Object.entries(SORTS).map(([k,s])=>`<button class="chip ${k===state.sort?'on':''}" data-sort="${k}">${s.label}</button>`).join('')}</div>
+  <div class="list" id="list">${row(sp,0,true)}${list.map((a,i)=>row(a,i)).join('')}</div>
+  <p class="fine">Concept prototype. Agents and figures are fictional.</p>`;
+}
+
+function renderDetails(){
+  const ch=[...state.chosen].map(byId), n=ch.length;
+  $('#v-details').innerHTML=`
+  <div class="pad"><button class="back" data-go="back">${BACK}Agents</button>
+    <div class="steps light" style="margin-top:12px"><span class="on"></span><span class="on"></span><span class="on"></span></div>
+    <div class="stepline" style="color:var(--muted)"><span>Your details</span><span>3 of 3</span></div>
+    <h2 style="margin-top:14px">Where should ${n===1?'they':'they'} reach you?</h2></div>
+  <div class="sendto"><h4>Sending to<button data-go="compare">Change</button></h4>
+    ${ch.map(a=>`<div class="a">${tile(a,'sm')}${esc(a.name)}</div>`).join('')}</div>
+  <div class="form">
+    <div class="two"><div class="field"><label>First name</label><div class="in">Alex</div></div><div class="field"><label>Last name</label><div class="in">Morgan</div></div></div>
+    <div class="field"><label>Email</label><div class="in">alex.morgan@example.com</div></div>
+    <div class="field"><label>Phone</label><div class="in">07700 900123</div></div>
+  </div>
+  <div class="consent"><svg width="20" height="22" viewBox="0 0 20 22" fill="none" stroke="#000433" stroke-width="2" stroke-linejoin="round"><rect x="2" y="9" width="16" height="11" rx="2.500"/><path d="M5.500 9V6.500a4.500 4.500 0 0 1 9 0V9"/></svg>
+    <b>Only ${n===1?esc(ch[0].name)+' gets':'these '+n+' agents get'} your details.</b><span>No other agent in ${AREA} will see them.</span></div>`;
+}
+
+function renderSent(){
+  const ch=[...state.chosen].map(byId), n=ch.length;
+  $('#v-sent').innerHTML=`<div class="sent">
+    <div class="tick"><svg width="34" height="26" viewBox="0 0 34 26" fill="none" stroke="#000433" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13.500 12 22.500 31 3.500"/></svg></div>
+    <h2>Sent to ${n===1?esc(ch[0].name):'the '+n+' agents you chose'}</h2>
+    <p>${n===1?'They’ll':'Each one will'} call or email to book your valuation.</p>
+    <div class="box">${ch.map(a=>`<div class="a">${tile(a,'sm')}<span><b>${esc(a.name)}</b><small>Usually replies within ${a.hrs} hours</small></span><em>Sent</em></div>`).join('')}</div>
+    <div class="notsent"><b>No other agent has your details.</b> You can add one later if you change your mind.</div>
+    <button class="restart" data-restart>Restart the prototype</button></div>`;
+}
+
+function renderDock(){
+  const d=$('#dock'), n=state.chosen.size, ch=[...state.chosen].map(byId);
+  d.classList.toggle('hide',state.view==='sent'||state.view==='match');
+  if(state.view==='details') d.innerHTML=`<button class="btn primary" data-go="sent">Send to ${n===1?esc(ch[0].name):n+' agents'}</button>`;
+  else if(state.view==='compare') d.innerHTML=`<button class="btn primary" data-go="details" ${n?'':'disabled'}>${n?'Continue with '+n+' agent'+(n>1?'s':''):'Pick up to 3 agents'}</button>`;
+}
+
+function renderSheet(id){
+  const a=byId(id), on=state.chosen.has(id), fromMatch=state.view==='match';
+  const part=(t,desc,w)=>`<div class="part"><div class="top">${t}</div><p>${desc}</p><div class="bar"><i data-w="${w}"></i></div></div>`;
+  $('#sheet').innerHTML=`<div class="grab"></div>
+    <div class="sh-head">${tile(a)}<div class="who"><small>Quality score</small><b>${esc(a.name)}</b></div>${ring(a.score,'lg')}</div>
+    ${a.sponsored?`<p class="sh-basis"><b>Sponsored.</b> Paid to appear first — on performance it ranks #${spRank()} of ${TOTAL}.</p>`:''}
+    ${part('Price',`Gets <b>${a.pct}%</b> of the price they first quote`,a.acc/45*100)}
+    ${part('Speed',`Sells in about <b>${a.days} days</b>`,a.spd/30*100)}
+    ${part('Replies',`Answers new sellers in about <b>${a.hrs} hours</b>`,a.rsp/25*100)}
+    <p class="never"><svg width="18" height="20" viewBox="0 0 20 22" fill="none" stroke="#0b4d42" stroke-width="2.200" stroke-linejoin="round"><rect x="2" y="9" width="16" height="11" rx="2.500"/><path d="M5.500 9V6.500a4.500 4.500 0 0 1 9 0V9"/></svg>Paying to advertise never changes this score.</p>
+    <p class="src">Based on ${a.sold} flats sold near you in the last 12 months.</p>
+    ${fromMatch?`<button class="btn primary" data-choose="${id}">Choose ${esc(a.name)}</button>`:`<button class="btn ${on?'ghost':'primary'}" data-toggle="${id}" data-close>${on?'Remove '+esc(a.name):'Add '+esc(a.name)}</button>`}`;
+}
+function openSheet(id){state.sheet=id;renderSheet(id);$('#scrim').classList.add('on');$('#sheet').classList.add('on');$('#sheet').scrollTop=0;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>$$('#sheet .bar i').forEach(i=>i.style.width=i.dataset.w+'%')));mark('sheet');}
+function closeSheet(){state.sheet=null;$('#scrim').classList.remove('on');$('#sheet').classList.remove('on');}
+
+const ORDER=['match','compare','details','sent'];
+let prevView='match';
+function go(v){
+  if(v==='back') v=prevView==='compare'?'compare':'match';
+  if(v===state.view) return;
+  if(v==='details'||v==='sent'){ if(!state.chosen.size) return; }
+  const from=state.view; if(v==='details') prevView=from;
+  state.view=v; render();
+  $$('.view').forEach(el=>{const k=el.dataset.view;el.classList.toggle('active',k===v);el.classList.toggle('left',k!==v&&ORDER.indexOf(k)<ORDER.indexOf(v));});
+  $(`#v-${v}`).scrollTop=0; mark(v);
+}
+function mark(step){state.seen.add(step);const cur=state.sheet?'sheet':state.view;
+  $$('#guide li').forEach(li=>{const s=li.dataset.step;li.classList.toggle('on',s===cur);li.classList.toggle('done',s!==cur&&state.seen.has(s));});}
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('on'),2600);}
+function toggle(id){
+  if(state.chosen.has(id)) state.chosen.delete(id);
+  else if(state.chosen.size>=3){toast('Up to 3 — so every agent you pick knows you’re serious.');return;}
+  else state.chosen.add(id);
+  render();
+}
+function flip(fn){
+  const before=new Map($$('#list .row').map(r=>[r.dataset.key,r.getBoundingClientRect().top]));
+  fn();
+  $$('#list .row').forEach(r=>{const b=before.get(r.dataset.key);if(b==null)return;const d=(b-r.getBoundingClientRect().top)/(r.currentCSSZoom||1);if(!d)return;
+    r.style.transition='none';r.style.transform=`translateY(${d}px)`;r.style.zIndex=d>0?2:1;
+    requestAnimationFrame(()=>{r.style.transition='transform .5s cubic-bezier(.2,.8,.2,1)';r.style.transform='';});});
+}
+function render(){
+  const st=$('#v-compare').scrollTop, sm=$('#v-match').scrollTop;
+  renderMatch();renderCompare();renderDock();
+  if(state.view==='details')renderDetails(); if(state.view==='sent')renderSent();
+  $('#v-compare').scrollTop=st;$('#v-match').scrollTop=sm;
+}
+
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-toggle],[data-choose],[data-sheet],[data-go],[data-sort],[data-restart],#scrim');
+  if(!t) return;
+  if(t.id==='scrim'){closeSheet();mark(state.view);return;}
+  if(t.dataset.choose){state.chosen=new Set([t.dataset.choose]);closeSheet();go('details');return;}
+  if(t.dataset.toggle){e.stopPropagation();toggle(t.dataset.toggle);if(t.hasAttribute('data-close')){closeSheet();mark(state.view);}return;}
+  if(t.dataset.sheet){openSheet(t.dataset.sheet);return;}
+  if(t.dataset.sort){flip(()=>{state.sort=t.dataset.sort;renderCompare();});return;}
+  if(t.hasAttribute('data-restart')){state.chosen.clear();state.sort='score';state.seen=new Set();go('match');return;}
+  if(t.dataset.go&&!t.disabled){go(t.dataset.go);}
+});
+document.addEventListener('pointerdown',e=>{if(!e.target.closest('#screen'))return;const d=document.createElement('span');d.className='tap';d.style.left=e.clientX+'px';d.style.top=e.clientY+'px';document.body.appendChild(d);setTimeout(()=>d.remove(),600);});
+
+// fit the device to short viewports
+if(new URLSearchParams(location.search).has('bare'))document.body.classList.add('bare');
+function fit(){const d=$('#device');if(innerWidth<=760||document.body.classList.contains('bare')){d.style.transform='';return;}const s=Math.min(1,(innerHeight-32)/866);d.style.transform=s<1?`scale(${s})`:'';d.style.margin=s<1?`${-(866*(1-s))/2}px ${-(412*(1-s))/2}px`:'';}
+addEventListener('resize',fit);fit();
+
+render();mark('match');
+// matching moment
+const q=new URLSearchParams(location.search), L=$('#loading');
+if(q.has('skip')) L.classList.add('gone');
+else{ $$('li',L).forEach((li,i)=>setTimeout(()=>li.classList.add('ok'),450+i*480)); setTimeout(()=>L.classList.add('gone'),2100); }
+</script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Value Profile — agent concept prototype · Chun-Chuan Lin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#000433; --navy-2:#1b2057; --mint:#00deb6; --mint-ink:#00806a; --mint-soft:#e2faf4;
+  --bg:#f4f4f5; --card:#fff; --ink:#000433; --muted:#5d607c; --faint:#8b8ea6; --line:#e4e5ec; --tag:#eeeef4; --amber:#b86b00; --amber-soft:#fdf1dc;
+  --font:"Figtree",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:var(--font);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.45}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+h1,h2,h3,p{margin:0}
+.num{font-variant-numeric:tabular-nums}
+
+.conceptbar{background:#f1eee7;border-bottom:1px solid #e2ddd0;font-size:13px;color:var(--muted);display:flex;gap:18px;align-items:center;padding:9px 20px;flex-wrap:wrap}
+.conceptbar b{color:var(--ink)}
+.conceptbar a{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.conceptbar .sp{flex:1}
+.shot .conceptbar{display:none}
+
+.app{display:grid;grid-template-columns:228px 1fr;min-height:calc(100% - 39px)}
+.shot .app{min-height:100%}
+.rail{background:var(--navy);color:#fff;padding:22px 14px;display:flex;flex-direction:column}
+.brand{display:flex;align-items:flex-start;gap:2px;font-weight:800;font-size:20px;letter-spacing:-.035em;padding:0 10px}
+.brand small{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mint);margin:7px 0 0 8px}
+.rail nav{display:flex;flex-direction:column;gap:3px;margin-top:30px}
+.rail nav button{display:flex;align-items:center;gap:11px;text-align:left;font-size:14.5px;font-weight:500;color:rgba(255,255,255,.66);padding:11px 12px;border-radius:10px;transition:.2s}
+.rail nav button:hover{color:#fff;background:rgba(255,255,255,.06)}
+.rail nav button.on{background:rgba(255,255,255,.12);color:#fff;font-weight:700}
+.rail nav button svg{flex:none;opacity:.9}
+.rail nav button em{margin-left:auto;font-style:normal;font-size:11.5px;font-weight:800;background:var(--mint);color:var(--navy);border-radius:10px;padding:1px 7px}
+.rail .who{margin-top:auto;display:flex;align-items:center;gap:10px;padding:14px 10px 0;border-top:1px solid rgba(255,255,255,.14);font-size:13.5px;font-weight:600}
+.rail .who small{display:block;font-weight:400;color:rgba(255,255,255,.55);font-size:12px}
+.tile{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px;flex:none;font-family:Georgia,serif}
+.tile.sans{font-family:var(--font);font-weight:800}
+
+main{padding:30px 40px 44px;min-width:0}
+.page{display:none;max-width:1000px}
+.page.on{display:block;animation:in .35s var(--ease)}
+@keyframes in{from{opacity:0;transform:translateY(8px)}}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:22px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-size:30px;letter-spacing:-.025em;line-height:1.12;margin-top:6px}
+.head p{color:var(--muted);margin-top:6px;font-size:15px}
+.seg{display:flex;background:#e6e7ee;border-radius:10px;padding:3px;flex:none}
+.seg span{padding:7px 14px;border-radius:8px;font-size:13.5px;font-weight:600;color:var(--muted)}
+.seg span.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,4,51,.12)}
+
+.card{background:#fff;border-radius:16px;padding:20px 22px;box-shadow:0 1px 2px rgba(0,4,51,.05)}
+.card h3{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.grid{display:grid;gap:16px}
+.g-top{grid-template-columns:320px 1fr}
+.g-3{grid-template-columns:repeat(3,1fr);margin-top:16px}
+
+.scorecard{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.scorecard h3{color:rgba(255,255,255,.6)}
+.scorecard .big{display:flex;align-items:center;gap:18px;margin:14px 0 14px}
+.ring{position:relative;width:104px;height:104px;display:grid;place-items:center;flex:none}
+.ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.ring circle{transition:stroke-dashoffset .5s var(--ease)}
+.ring b{font-size:38px;font-weight:800;letter-spacing:-.03em;position:relative}
+.scorecard .rank b{display:block;font-size:22px;letter-spacing:-.02em}
+.scorecard .rank span{font-size:14px;color:rgba(255,255,255,.7);display:block;margin-top:2px}
+.trend{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,.7);border-top:1px solid rgba(255,255,255,.14);padding-top:12px}
+.trend b{color:var(--mint)}
+.trend svg{margin-left:auto}
+
+.ladder .axis{position:relative;height:124px;margin:22px 8px 10px}
+.ladder .line{position:absolute;left:0;right:0;top:56px;height:2px;background:var(--line)}
+.ladder .tick{position:absolute;top:104px;font-size:11.5px;color:var(--faint);transform:translateX(-50%)}
+.dot{position:absolute;top:57px;width:14px;height:14px;border-radius:50%;background:#c9cbd9;border:2.5px solid #fff;transform:translate(-50%,-50%);transition:left .5s var(--ease)}
+.dot.top{background:var(--navy)}
+.dot.you{width:22px;height:22px;background:var(--mint);border-color:var(--navy);z-index:2}
+.flag{position:absolute;top:0;transform:translateX(-50%);font-size:12px;font-weight:700;white-space:nowrap;text-align:center;transition:left .5s var(--ease);line-height:1.25}
+.flag small{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
+.flag.you{background:var(--navy);color:#fff;border-radius:8px;padding:4px 9px}
+.flag.you small{color:rgba(255,255,255,.7)}
+.ladder .gap{font-size:14px;color:var(--muted);margin-top:4px}
+.ladder .gap b{color:var(--ink)}
+
+.metric .v{display:flex;align-items:baseline;gap:8px;margin:10px 0 2px}
+.metric .v b{font-size:34px;font-weight:800;letter-spacing:-.025em}
+.metric .v span{font-size:13px;color:var(--muted)}
+.metric .pts{font-size:13px;font-weight:700;color:var(--muted)}
+.metric .pts b{color:var(--ink)}
+.bar{height:6px;border-radius:3px;background:var(--line);margin:10px 0 10px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--mint);border-radius:3px;transition:width .5s var(--ease)}
+.metric p{font-size:14px;color:var(--muted)}
+.metric .place{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-weight:700;color:var(--ink);font-size:14px}
+.metric p b{color:var(--ink)}
+.lever{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);background:var(--amber-soft);border-radius:5px;padding:2px 7px;margin-left:8px;vertical-align:1px}
+
+.whatif{display:grid;grid-template-columns:1fr 250px;gap:26px;align-items:center}
+.whatif h2{font-size:20px;letter-spacing:-.015em;margin:6px 0 4px}
+.whatif p{color:var(--muted);font-size:14px}
+.slider{margin-top:18px}
+.slider .lab{display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:8px}
+.slider .lab b{font-size:15px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin:0;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(to right,var(--navy) var(--p,50%),var(--line) var(--p,50%))}
+input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:var(--line)}
+input[type=range]::-moz-range-progress{height:6px;border-radius:3px;background:var(--navy)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:2.5px solid var(--navy);margin-top:-10px;box-shadow:0 2px 6px rgba(0,4,51,.25)}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:2.5px solid var(--navy);box-shadow:0 2px 6px rgba(0,4,51,.25)}
+.slider .ends{display:flex;justify-content:space-between;font-size:11.5px;color:var(--faint);margin-top:2px}
+.result{background:var(--bg);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.result div span{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.result div b{font-size:26px;font-weight:800;letter-spacing:-.02em}
+.result div b s{font-weight:600;color:var(--faint);font-size:17px;margin-right:6px}
+.result .msg{grid-column:1/-1;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+.result.up{background:var(--mint-soft)}
+.result.up .msg{color:var(--mint-ink);font-weight:600;border-color:rgba(0,128,106,.2)}
+.link{color:var(--ink);font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px;margin-top:16px;display:inline-block}
+
+/* leads */
+.leads{display:grid;grid-template-columns:330px 1fr;gap:16px;align-items:start}
+.inbox{padding:6px}
+.lead{display:block;width:100%;text-align:left;padding:13px 14px;border-radius:12px;position:relative}
+.lead + .lead{margin-top:2px}
+.lead.on{background:var(--bg)}
+.lead b{display:block;font-size:15px}
+.lead small{display:block;color:var(--muted);font-size:13px;margin-top:1px}
+.lead time{position:absolute;right:14px;top:14px;font-size:12px;color:var(--faint)}
+.src{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;border-radius:5px;padding:2px 7px;margin-top:8px}
+.src.earned{background:var(--mint-soft);color:var(--mint-ink)}
+.src.paid{background:var(--tag);color:var(--ink)}
+.detail .banner{background:var(--navy);color:#fff;border-radius:14px;padding:16px 18px;display:flex;gap:16px;align-items:center;margin:14px 0 18px}
+.detail .banner .n{font-size:34px;font-weight:800;letter-spacing:-.03em;color:var(--mint);flex:none;line-height:1}
+.detail .banner .n small{font-size:15px;color:#fff;font-weight:700}
+.detail .banner p{font-size:14px;color:rgba(255,255,255,.75)}
+.detail .banner p b{color:#fff;display:block;font-size:16px}
+.detail h2{font-size:23px;letter-spacing:-.02em}
+.detail .sub{color:var(--muted);font-size:14px}
+.cols{display:grid;grid-template-columns:1fr 250px;gap:26px}
+.path{list-style:none;margin:12px 0 0;padding:0}
+.path li{position:relative;padding:0 0 15px 28px;font-size:14px;color:var(--muted)}
+.path li b{display:block;color:var(--ink);font-size:14.5px}
+.path li::before{content:"";position:absolute;left:4px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--navy)}
+.path li::after{content:"";position:absolute;left:8.5px;top:17px;bottom:-3px;width:1.500px;background:#cfd0dc}
+.path li:last-child::after{display:none}
+.path li:last-child::before{background:var(--mint);box-shadow:0 0 0 2px var(--navy)}
+.timer{background:var(--amber-soft);border-radius:14px;padding:16px;text-align:center}
+.timer span{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber)}
+.timer b{display:block;font-size:34px;font-weight:800;letter-spacing:-.02em;margin:2px 0}
+.timer p{font-size:12.5px;color:#7a5a1d}
+.btn{height:46px;border-radius:11px;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 18px;width:100%;margin-top:10px}
+.btn.primary{background:var(--mint);color:var(--navy)}
+.btn.ghost{box-shadow:0 0 0 1.500px var(--navy) inset}
+.facts{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.facts span{font-size:12.5px;font-weight:600;background:var(--bg);border-radius:20px;padding:5px 11px}
+
+/* placement */
+.g-place{grid-template-columns:1.1fr 1fr}
+.price{display:flex;align-items:baseline;gap:12px;margin:12px 0 4px}
+.price b{font-size:44px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.price s{font-size:20px;color:var(--faint);font-weight:600}
+.price em{font-style:normal;font-size:12.5px;font-weight:800;background:var(--mint-soft);color:var(--mint-ink);border-radius:6px;padding:3px 8px}
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:20px}
+.tier{border-radius:10px;padding:10px 10px;background:var(--bg);font-size:12.5px;color:var(--muted);transition:.3s}
+.tier b{display:block;font-size:17px;color:var(--ink);letter-spacing:-.01em}
+.tier.on{background:var(--navy);color:rgba(255,255,255,.7)}
+.tier.on b{color:var(--mint)}
+.card .hint{font-size:13.5px;color:var(--muted);margin-top:14px}
+.card .hint b{color:var(--ink)}
+.bars{display:flex;align-items:flex-end;gap:14px;height:120px;margin:18px 0 8px}
+.bars .wk{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:3px;height:100%;position:relative}
+.bars .wk i{display:block;border-radius:5px;transition:height .4s var(--ease)}
+.bars .wk i.e{background:var(--mint)}
+.bars .wk i.p{background:var(--navy)}
+.bars .wk span{position:absolute;bottom:-22px;left:0;right:0;text-align:center;font-size:11.5px;color:var(--faint)}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--muted);margin-top:30px;flex-wrap:wrap}
+.legend b{color:var(--ink)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
+.preview{margin-top:16px;display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:center}
+.preview h2{font-size:20px;letter-spacing:-.015em;margin:6px 0 6px}
+.preview p{font-size:14px;color:var(--muted)}
+.switch{display:flex;align-items:center;gap:12px;margin-top:16px;font-weight:700;font-size:14.5px}
+.switch button{width:50px;height:30px;border-radius:15px;background:#c9cbd9;position:relative;transition:.25s}
+.switch button::after{content:"";position:absolute;left:3px;top:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.25s var(--ease);box-shadow:0 1px 3px rgba(0,4,51,.3)}
+.switch button[aria-pressed=true]{background:var(--navy)}
+.switch button[aria-pressed=true]::after{transform:translateX(20px)}
+.slot{background:var(--bg);border-radius:16px;padding:14px;transition:opacity .3s}
+.slot.off{opacity:.35}
+.slot .in{background:#fff;border-radius:14px;padding:13px 14px;box-shadow:0 0 0 1px var(--line) inset}
+.slot .lab{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--muted);margin-bottom:10px}
+.slot .lab span{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--tag);border-radius:5px;padding:3px 7px}
+.slot .r{display:flex;align-items:center;gap:11px}
+.slot .r b{display:block;font-size:15px}
+.slot .r small{font-size:12px;color:var(--muted)}
+.slot .r .s{margin-left:auto;width:38px;height:38px;border-radius:50%;border:4px solid var(--mint);display:grid;place-items:center;font-weight:800;font-size:13.5px}
+.illus{font-size:12px;color:var(--faint);margin-top:18px}
+
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .rail{padding:12px 12px;flex-direction:row;align-items:center;gap:8px;overflow-x:auto}
+  .rail nav{flex-direction:row;margin:0}.rail nav button{white-space:nowrap;padding:8px 10px}.rail .who,.brand small{display:none}
+  main{padding:20px 16px 32px}
+  .head{flex-direction:column;align-items:flex-start}
+  .g-top,.g-3,.whatif,.leads,.cols,.g-place,.preview{grid-template-columns:1fr}
+  h1{font-size:25px}
+}
+</style>
+</head>
+<body>
+<div class="conceptbar"><span><b>Concept prototype · Agent view.</b> Not affiliated with Rightmove. Figures are fictional.</span><span class="sp"></span><a href="index.html">Switch to the consumer view</a><a href="../../work/rightmove-partners.html">Back to the case study</a></div>
+<div class="app">
+  <aside class="rail">
+    <div class="brand">rightmove<svg width="12" height="12" viewBox="0 0 13 13" fill="none" stroke="#00deb6" stroke-width="2.200" stroke-linejoin="round"><path d="M1.500 6.200 6.500 1.600l5 4.600v5.300h-10z"/></svg><small>Partners</small></div>
+    <nav id="nav">
+      <button data-page="profile" class="on"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linecap="round"><path d="M2 15V9M7 15V3M12 15V7M16.500 15v-4"/></svg>Value Profile</button>
+      <button data-page="leads"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linejoin="round"><path d="M2 4.500h14v9H2z"/><path d="m2 5 7 5 7-5"/></svg>Leads<em>3</em></button>
+      <button data-page="placement"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.800" stroke-linejoin="round" stroke-linecap="round"><path d="M9 1.800 11.200 6.400l5 .700-3.600 3.500.900 5-4.500-2.400-4.500 2.400.900-5L1.800 7.100l5-.700z"/></svg>Placement</button>
+    </nav>
+    <div class="who"><span class="tile" style="background:#2f4a86">Pf</span><span>Pennyfield<small>Beckenham · BR1, BR3</small></span></div>
+  </aside>
+
+  <main>
+    <!-- VALUE PROFILE -->
+    <section class="page on" id="p-profile">
+      <div class="head"><div><div class="eyebrow">Value Profile · BR1 flats</div><h1>Why you rank where you do</h1><p>This is exactly what sellers see when they tap your score. None of it can be bought.</p></div></div>
+      <div class="grid g-top">
+        <div class="card scorecard"><h3>Your quality score</h3>
+          <div class="big"><span class="ring"><svg width="104" height="104"><circle cx="52" cy="52" r="47" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="7"/><circle id="ringArc" cx="52" cy="52" r="47" fill="none" stroke="#00deb6" stroke-width="7" stroke-linecap="round" stroke-dasharray="295.300"/></svg><b class="num" id="scoreBig">82</b></span>
+            <div class="rank"><b id="rankBig">#3 of 9</b><span id="gap"></span></div></div>
+          <div class="trend"><span><b>▲ 4 points</b> in 12 weeks</span><svg width="96" height="28" viewBox="0 0 96 28" fill="none"><path d="M2 24 10 24 19 20 27 20 36 16 44 16 53 16 61 11 70 11 78 6 86 6 94 6" stroke="#00deb6" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/><circle cx="94" cy="6" r="3" fill="#00deb6"/></svg></div>
+        </div>
+        <div class="card whatif">
+          <div><h3>The one thing to fix</h3><h2>Reply faster, move up</h2><p>Drag to see what answering new sellers sooner does to your rank.</p>
+            <div class="slider"><div class="lab"><span>You reply in about</span><b class="num" id="hrsLab">5 hrs</b></div>
+              <input type="range" id="hrs" min="1" max="8" step="0.500" value="5" aria-label="Typical reply time in hours">
+              <div class="ends"><span>1 hr</span><span>8 hrs</span></div></div></div>
+          <div class="result" id="result"></div>
+        </div>
+      </div>
+      <div class="grid g-3" id="metrics"></div>
+    </section>
+
+    <!-- LEADS -->
+    <section class="page" id="p-leads">
+      <div class="head"><div><div class="eyebrow">Leads</div><h1>Sellers who chose you</h1><p>Every lead says how the seller found you — and how many other agents they contacted.</p></div></div>
+      <div class="leads">
+        <div class="card inbox" id="inbox"></div>
+        <div class="card detail" id="detail"></div>
+      </div>
+    </section>
+
+    <!-- PLACEMENT -->
+    <section class="page" id="p-placement">
+      <div class="head"><div><div class="eyebrow">Placement</div><h1>What the sponsored slot costs you</h1><p>Paying buys the top position. It never changes your score — but your score changes what you pay.</p></div></div>
+      <div class="grid g-place">
+        <div class="card"><h3>Your price per sponsored lead</h3>
+          <div class="price"><b class="num">£34.00</b><s class="num">£40.00</s><em>−15% quality discount</em></div>
+          <div class="tiers"><div class="tier"><b>—</b>Score under 70</div><div class="tier"><b>−5%</b>70 – 79</div><div class="tier on"><b>−15%</b>80 – 89 · you</div><div class="tier"><b>−25%</b>90 and above</div></div>
+          <p class="hint"><b>8 more points</b> takes you to −25%. Replying within 2 hours gets you 5 of them.</p>
+        </div>
+        <div class="card"><h3>Leads · last 4 weeks</h3>
+          <div class="bars"><div class="wk"><i class="p" style="height:22%"></i><i class="e" style="height:28%"></i><span>13 Oct</span></div><div class="wk"><i class="p" style="height:16%"></i><i class="e" style="height:34%"></i><span>20 Oct</span></div><div class="wk"><i class="p" style="height:22%"></i><i class="e" style="height:40%"></i><span>27 Oct</span></div><div class="wk"><i class="p" style="height:11%"></i><i class="e" style="height:52%"></i><span>3 Nov</span></div></div>
+          <div class="legend"><span><i style="background:var(--mint)"></i><b class="num">14</b> earned · free</span><span><i style="background:var(--navy)"></i><b class="num">7</b> sponsored · <span class="num">£238</span></span></div>
+        </div>
+      </div>
+      <div class="card preview">
+        <div><h3>How sellers see it</h3><h2>Labelled as paid, scored like everyone else</h2><p>Your slot shows the same score and stats as your earned listing, plus where you’d rank without paying.</p>
+          <div class="switch"><button id="slotSw" aria-pressed="true" aria-label="Sponsored slot"></button><span id="slotLab">Sponsored slot is on in BR1</span></div></div>
+        <div class="slot" id="slot"><div class="in"><div class="lab"><span>Sponsored</span>Paid to appear here · ranks #3 on performance</div>
+          <div class="r"><span class="tile" style="background:#2f4a86">Pf</span><div><b>Pennyfield</b><small>95% of valuation · 29 days · ~5h reply</small></div><span class="s num">82</span></div></div></div>
+      </div>
+      <p class="illus">Illustrative pricing for the concept — the discount curve is a negotiation with Revenue, not a design decision.</p>
+    </section>
+  </main>
+</div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+if(new URLSearchParams(location.search).has('shot')) document.body.classList.add('shot');
+const OTHERS=[['Elm & Mason',98,27,2],['Harlow Reed',97,31,3],['Kestrel & Co',96,42,4],['Tallow & Wren',94,45,3],['Quill Estates',92,36,9],['Juniper Row',93,44,6],['Abbot Lane',91,47,8],['Marsh & Field',89,52,12]];
+const acc=p=>Math.round(45-(100-p)*1.3), spd=d=>Math.round(30-(d-20)*0.4), rsp=h=>Math.round(25-3.5*Math.log2(h));
+const others=OTHERS.map(([n,p,d,h])=>({n,score:acc(p)+spd(d)+rsp(h)})).sort((a,b)=>b.score-a.score);
+const ME={pct:95,days:29,hrs:5};
+const mine=h=>({a:acc(ME.pct),s:spd(ME.days),r:rsp(h),total:acc(ME.pct)+spd(ME.days)+rsp(h)});
+const rankOf=t=>others.filter(o=>o.score>t).length+1;
+const BASE=mine(ME.hrs), BASERANK=rankOf(BASE.total);
+const X=v=>((v-56)/(96-56))*100;
+
+function drawGap(total){
+  const above=others.filter(o=>o.score>total).pop();
+  $('#gap').innerHTML=above?`${above.score-total} point${above.score-total>1?'s':''} behind ${above.n}`:'Top of BR1 for flats';
+}
+function drawMetrics(h){
+  const ord=n=>n+(['th','st','nd','rd'][n%10>3?0:n%10]||'th'), pos=(i,v,lowBest)=>OTHERS.filter(o=>lowBest?o[i]<v:o[i]>v).length+1;
+  const place=(i,v,lowBest)=>{const p=pos(i,v,lowBest);return p===1?'Best of 9 in BR1':`${ord(p)} of 9 in BR1`};
+  const card=(t,v,desc,rank,lever)=>`<div class="card metric"><h3>${t}${lever?'<span class="lever">Fix this first</span>':''}</h3>
+    <div class="v"><b class="num">${v}</b></div><p>${desc}</p><p class="place">${rank}</p></div>`;
+  $('#metrics').innerHTML=card('Price',ME.pct+'%','of the price you first quote',place(1,ME.pct,false))
+    +card('Speed',ME.days+' days','from listing to sale agreed',place(2,ME.days,true))
+    +card('Replies','~'+(+h)+' hrs','to answer a new seller',place(3,h,true),h>=4);
+}
+function drawResult(h){
+  const m=mine(h), rank=rankOf(m.total), up=m.total>BASE.total, r=$('#result');
+  r.classList.toggle('up',rank<BASERANK);
+  const sc=m.total!==BASE.total?`<s>${BASE.total}</s>${m.total}`:m.total, rk=rank!==BASERANK?`<s>#${BASERANK}</s>#${rank}`:'#'+rank;
+  r.innerHTML=`<div><span>Score</span><b class="num">${sc}</b></div><div><span>Rank</span><b class="num">${rk}</b></div>
+    <div class="msg">${rank<BASERANK?`You’d pass ${others.filter(o=>o.score>BASE.total&&o.score<=m.total).map(o=>o.n).join(' and ')||'the agent above'} — and show above them to every seller.`:up?`${others.filter(o=>o.score>m.total).pop().score-m.total} more point${others.filter(o=>o.score>m.total).pop().score-m.total>1?'s':''} to move up a place.`:m.total<BASE.total?'Slower replies cost you points — and eventually places.':'This is where you are today.'}</div>`;
+}
+function update(){
+  const el=$('#hrs'), h=+el.value, m=mine(h);
+  el.style.setProperty('--p',((h-1)/7*100)+'%');
+  $('#hrsLab').textContent=h+(h===1?' hr':' hrs');
+  $('#scoreBig').textContent=m.total; $('#rankBig').textContent='#'+rankOf(m.total)+' of 9';
+  $('#ringArc').style.strokeDashoffset=295.3*(1-m.total/100);
+  drawGap(m.total);drawMetrics(h);drawResult(h);
+}
+$('#hrs').addEventListener('input',update);update();
+
+// leads
+const LEADS=[
+ {who:'Alex M.',prop:'2-bed flat · Bromley BR1',t:'12 min',src:'earned',n:2,other:'Elm & Mason',rank:3,left:'4h 48m',facts:['2 bed','1 bath','Flat','Selling in 3–6 months','Prefers a call']},
+ {who:'Priya S.',prop:'3-bed terrace · Beckenham BR3',t:'2 hrs',src:'paid',n:3,other:'two other agents',rank:4,left:'2h 55m',facts:['3 bed','2 bath','Terraced','Selling now','Email first']},
+ {who:'Tom & Ana R.',prop:'1-bed flat · Bromley BR1',t:'Yesterday',src:'earned',n:1,other:null,rank:3,left:'Replied in 1h 10m',facts:['1 bed','Flat','Selling in 6+ months']},
+];
+let cur=0;
+function drawLeads(){
+  $('#inbox').innerHTML=LEADS.map((l,i)=>`<button class="lead ${i===cur?'on':''}" data-lead="${i}"><b>${l.who}</b><small>${l.prop}</small><time>${l.t}</time><span class="src ${l.src}">${l.src==='earned'?'Chose you from ranking':'Via sponsored slot'}</span></button>`).join('');
+  const l=LEADS[cur];
+  $('#detail').innerHTML=`<span class="src ${l.src}">${l.src==='earned'?'Earned · no charge':'Sponsored · £34.00'}</span>
+    <h2 style="margin-top:8px">${l.who} wants a valuation</h2><p class="sub">${l.prop} · ${l.t} ago</p>
+    <div class="banner"><div class="n num">1<small> of ${l.n}</small></div><p><b>${l.n===1?'You’re the only agent they contacted.':'They picked you and '+l.other+'.'}</b>By default, today’s flow sends the same request to all 6 sponsored agents.</p></div>
+    <div class="cols"><div><h3 style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">How they found you</h3>
+      <ol class="path"><li><b>Saw you ${l.src==='earned'?'ranked #'+l.rank+' on performance':'in the sponsored slot'}</b>Search: ${l.prop.split(' · ')[0]}s near ${l.prop.slice(-3)}</li><li><b>Opened your score breakdown</b>Spent longest on valuation accuracy</li><li><b>Chose you</b>${l.n===1?'No other agent has their details':'Alongside '+l.other}</li></ol>
+</div>
+      <div><div class="timer"><span>${l.left.startsWith('Replied')?'Done':'Reply within'}</span><b class="num">${l.left.startsWith('Replied')?'✓':l.left}</b><p>${l.left.startsWith('Replied')?l.left:'to protect your reply score'}</p></div>
+      <button class="btn primary">Call ${l.who.split(' ')[0]}</button><button class="btn ghost">Send an email</button></div></div>`;
+}
+drawLeads();
+
+document.addEventListener('click',e=>{
+  const n=e.target.closest('[data-page]'); if(n){$$('#nav button').forEach(b=>b.classList.toggle('on',b===n));$$('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+n.dataset.page));return;}
+  const l=e.target.closest('[data-lead]'); if(l){cur=+l.dataset.lead;drawLeads();return;}
+  const s=e.target.closest('#slotSw'); if(s){const on=s.getAttribute('aria-pressed')!=='true';s.setAttribute('aria-pressed',on);$('#slot').classList.toggle('off',!on);$('#slotLab').textContent=on?'Sponsored slot is on in BR1':'Sponsored slot is off — you still appear at #3';}
+  if(e.target.closest('a[href="#"]')) e.preventDefault();
+});
+</script>
+</body>
+</html>
