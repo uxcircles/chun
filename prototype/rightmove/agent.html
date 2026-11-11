@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Value Profile — agent concept prototype · Chun-Chuan Lin</title>
+<title>Value Profile · agent concept prototype · Chun-Chuan Lin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -343,7 +343,7 @@ drawLeads();
 document.addEventListener('click',e=>{
   const n=e.target.closest('[data-page]'); if(n){$$('#nav button').forEach(b=>b.classList.toggle('on',b===n));$$('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+n.dataset.page));return;}
   const l=e.target.closest('[data-lead]'); if(l){cur=+l.dataset.lead;drawLeads();return;}
-  const s=e.target.closest('#slotSw'); if(s){const on=s.getAttribute('aria-pressed')!=='true';s.setAttribute('aria-pressed',on);$('#slot').classList.toggle('off',!on);$('#slotLab').textContent=on?'Sponsored slot is on in BR1':'Sponsored slot is off — you still appear at #3';}
+  const s=e.target.closest('#slotSw'); if(s){const on=s.getAttribute('aria-pressed')!=='true';s.setAttribute('aria-pressed',on);$('#slot').classList.toggle('off',!on);$('#slotLab').textContent=on?'Sponsored slot is on in BR1':'Sponsored slot is off. You still appear at #3.';}
   if(e.target.closest('a[href="#"]')) e.preventDefault();
 });
 </script>
