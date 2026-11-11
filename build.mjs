@@ -571,6 +571,13 @@ function renderInner(blocks, base) {
       );
       continue;
     }
+    if (Array.isArray(b.cta)) {
+      const [label, href] = b.cta;
+      parts.push(
+        `<p class="cta-row reveal"><a class="btn btn-solid" href="${esc(/^https?:/.test(href) ? href : base + href)}" target="_blank" rel="noopener">${esc(label)} <span class="arrow">→</span></a></p>`
+      );
+      continue;
+    }
     if (b.cap && b.img) {
       parts.push(
         `<figure class="reveal full${b.portrait ? " portrait" : ""}"><img src="${IMG(b.img, base)}" alt="" loading="lazy"><figcaption>${esc(b.cap)}</figcaption></figure>`
