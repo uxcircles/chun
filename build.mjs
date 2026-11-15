@@ -188,6 +188,23 @@ const BOOKS = {
 const bookLength = (file) => fs.readFileSync(path.join(ROOT, "content", file), "utf8").length;
 const bookThickness = (file) => Math.round(Math.min(60, Math.max(30, 18 + bookLength(file) / 380)));
 
+function bookPages(study, base) {
+  if (study.locked) return [];
+  const { body } = splitHero(C(study.file));
+  const secs = [];
+  let cur = null;
+  for (const b of body) {
+    if (isH(b, "H1")) { cur = { t: b.text, text: "", points: [], img: "" }; secs.push(cur); continue; }
+    if (!cur) continue;
+    const txt = b.tag === "text" || isH(b, "H5", "H3") ? b.text : Array.isArray(b.p) ? b.p[0] : b.dd || (!b.tag && typeof b.text === "string" ? b.text : "");
+    if (txt && !cur.text) cur.text = txt;
+    if (Array.isArray(b.item) && cur.points.length < 3) cur.points.push(stripEmojiIcon(b.item[0]).text);
+    const im = b.img || (Array.isArray(b.compare) ? b.compare[3] || b.compare[2] : "") || (Array.isArray(b.duo) ? b.duo[0] : "") || b.poster || "";
+    if (im && !cur.img && !/\.(mp4|webm|mov)$/i.test(im)) cur.img = IMG(im, base);
+  }
+  return secs.filter((x) => x.text).slice(0, 5).map((x) => ({ ...x, text: x.text.length > 300 ? x.text.slice(0, 297).replace(/\s+\S*$/, "") + "…" : x.text }));
+}
+
 function coverHtml(b, chapter, year, img) {
   const pic = img ? `<span class="cv-pic"><img src="${img}" alt="" loading="lazy" style="object-position:${b.pos}"></span>` : "";
   const top = `<span class="cv-top"><span>Chun-Chuan Lin</span><span>${esc(year)}</span></span>`;
@@ -327,7 +344,7 @@ function buildHome() {
   const bookData = JSON.stringify(
     shelfItems.map(({ p, st, b, year, ch }) => ({
       ch, short: b.short, title: p.title, desc: p.desc, meta: p.meta, year, outcome: b.outcome,
-      cover: coverHtml(b, ch, year, IMG(p.img, base)), img: IMG(p.img, base), href: `work/${p.slug}.html`, locked: !!st.locked, bg: b.bg, ink: b.ink, acc: b.acc,
+      cover: coverHtml(b, ch, year, IMG(p.img, base)), pages: bookPages(st, base), img: IMG(p.img, base), href: `work/${p.slug}.html`, locked: !!st.locked, bg: b.bg, ink: b.ink, acc: b.acc,
     }))
   ).replace(/</g, "\\u003c");
 
@@ -438,12 +455,12 @@ function buildHome() {
 </div>
 
 <dialog class="reader" id="reader" aria-label="Chapter preview">
-  <button class="rd-btn rd-close" type="button" aria-label="Close">&times;</button>
-  <button class="rd-btn rd-prev" type="button" aria-label="Previous chapter">&lsaquo;</button>
-  <button class="rd-btn rd-next" type="button" aria-label="Next chapter">&rsaquo;</button>
-  <div class="ob" id="ob">
-    <div class="ob-page" id="ob-page"></div>
-    <div class="ob-cover"><div class="ob-front cover" id="ob-front"></div><div class="ob-back" id="ob-back"></div></div>
+  <button class="rd-btn rd-close" type="button" aria-label="Back to the shelf">&times;</button>
+  <div class="ob" id="ob"></div>
+  <div class="rd-bar">
+    <button class="rd-btn rd-prev" type="button" aria-label="Previous page">&lsaquo;</button>
+    <span class="rd-count" id="rd-count" aria-live="polite"></span>
+    <button class="rd-btn rd-next" type="button" aria-label="Next page">&rsaquo;</button>
   </div>
 </dialog>
 <script type="application/json" id="books-data">${bookData}</script>`;
