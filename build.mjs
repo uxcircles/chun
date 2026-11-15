@@ -17,6 +17,8 @@ const fileHash = (relPath) => {
 };
 const CSS_V = fileHash("assets/css/style.css");
 const JS_V = fileHash("assets/js/main.js");
+const BOOK_CSS_V = fileHash("assets/css/book.css");
+const SHELF_JS_V = fileHash("assets/js/shelf.js");
 
 const esc = (s = "") =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -172,13 +174,35 @@ const STUDIES = [
   { slug: "rightmove-partners",       file: "cs8-rightmove-partners.json",       card: "Designed a trust layer for a two-sided marketplace", img: "cs8-hero.webp" },
 ];
 
+/* ---------- the shelf: each case study is a book ---------- */
+const BOOKS = {
+  "provider-redesign":        { short: "The £9B Platform",           outcome: "£9B in client assets",        bg: "#1f3b33", ink: "#ead9ae", acc: "#c9a868", h: 312 },
+  "save-journey-redesign":    { short: "One Tap to Save",            outcome: "5–6× Autosave volume",        bg: "#3a2470", ink: "#efe6ff", acc: "#b99bff", h: 296 },
+  "rightmove-partners":       { short: "The Trust Layer",            outcome: "Self-directed concept",       bg: "#0b1640", ink: "#eef3ff", acc: "#00deb6", h: 304 },
+  "home-redesign":            { short: "What Happened to My Money?", outcome: "89% mobile app CSAT",         bg: "#8b3a26", ink: "#f8e8dc", acc: "#f2b48c", h: 318 },
+  "client-portal":            { short: "The Client Portal",          outcome: "40% less onboarding effort",  bg: "#d29a3a", ink: "#23180a", acc: "#23180a", h: 288 },
+  "wealth-management-system": { short: "The Governed Rebalance",     outcome: "AI suggests, advisors decide", bg: "#2c4366", ink: "#e9eef7", acc: "#9fc1ff", h: 308 },
+  "portfolio-health":         { short: "Portfolio Health",           outcome: "Risk explained, no advice",   bg: "#5d6a33", ink: "#f2f1dc", acc: "#dfe39a", h: 292 },
+  "trip-memories":            { short: "Trip Memories",              outcome: "Revolut concept",             bg: "#e6e1d3", ink: "#1d1d24", acc: "#c4572d", h: 300 },
+};
+const bookLength = (file) => fs.readFileSync(path.join(ROOT, "content", file), "utf8").length;
+const bookThickness = (file) => Math.round(Math.min(60, Math.max(30, 18 + bookLength(file) / 380)));
+
+function coverHtml(b, chapter, year) {
+  return `<span class="cv"><span class="cv-top"><span>Chun-Chuan Lin</span><span>${esc(year)}</span></span>
+      <span class="cv-num">${chapter}</span>
+      <span class="cv-title">${esc(b.short)}</span>
+      <span class="cv-rule"></span>
+      <span class="cv-out">${esc(b.outcome)}</span></span>`;
+}
+
 /* =================================================================
    PAGE SHELL
 ================================================================= */
 const GATE_KEY = "cc_portfolio_unlocked";
 const GATE_PASS = "Chun";
 
-function shell({ title, desc, body, base, extraClass = "", progress = false, gated = false, cursorBadges = "", ogImage = OG_IMAGE }) {
+function shell({ title, desc, body, base, extraClass = "", progress = false, gated = false, cursorBadges = "", ogImage = OG_IMAGE, running = "", shelfJs = false }) {
   const bodyClass = gated ? `${extraClass} locked`.trim() : extraClass;
   return `<!doctype html>
 <html lang="en">
@@ -196,8 +220,9 @@ function shell({ title, desc, body, base, extraClass = "", progress = false, gat
 <link rel="apple-touch-icon" href="${base}assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${base}assets/css/style.css?v=${CSS_V}">
+<link rel="stylesheet" href="${base}assets/css/book.css?v=${BOOK_CSS_V}">
 </head>
 <body class="${bodyClass}">
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -216,28 +241,30 @@ ${gated ? `<script>try{if(localStorage.getItem(${JSON.stringify(GATE_KEY)})==="1
 ${progress ? `<div class="scroll-progress" aria-hidden="true"><span></span></div>` : ""}
 <div class="cursor-dot" aria-hidden="true"></div>
 ${cursorBadges}
-${nav(base)}
+${nav(base, running)}
 <main id="main-content">
 ${body}
 </main>
 ${footer(base)}
 <script src="${base}assets/js/main.js?v=${JS_V}" defer></script>
+${shelfJs ? `<script src="${base}assets/js/shelf.js?v=${SHELF_JS_V}" defer></script>` : ""}
 </body>
 </html>`;
 }
 
-function nav(base) {
+function nav(base, running = "") {
   return `<header class="nav" id="nav">
   <div class="nav-in">
     <a class="brand" href="${base}index.html">
       <img src="${base}assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.webp" alt="">
       <span>Chun-Chuan&nbsp;Lin</span>
     </a>
+    ${running ? `<span class="nav-run">${running}</span>` : ""}
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
       <span class="bar"></span><span class="bar"></span><span class="bar"></span>
     </button>
     <nav class="nav-links">
-      <a href="${base}index.html#work">Work</a>
+      <a href="${base}index.html#work">Shelf</a>
       <a href="https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing" target="_blank" rel="noopener">CV</a>
       <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
@@ -292,22 +319,40 @@ function buildHome() {
     )
     .join("");
 
-  const projects = d.featured.projects
-    .map((p) => {
-      const size = p.size === "lg" ? "lg" : "sm";
-      const locked = STUDIES.find((s) => s.slug === p.slug)?.locked;
-      const badgeId = locked ? "cursor-badge-locked" : "cursor-badge-view";
-      return `<a class="project ${size}${p.reverse ? " reverse" : ""} reveal" href="work/${p.slug}.html" data-cursor-badge="${badgeId}">
-      <div class="shot"><img src="${IMG(p.img, base)}" alt="${esc(p.title)}" loading="lazy"></div>
-      <div class="body">
-        <span class="tag">${esc(p.meta)}</span>
-        <h3 class="serif">${esc(p.title)}</h3>
-        <p>${esc(p.desc)}</p>
-        <span class="more">View case study ${ARROW}</span>
-      </div>
-    </a>`;
-    })
+  const LOCK = `<svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="7" width="10" height="7.5" rx="1.6" fill="currentColor"/></svg>`;
+  const shelfItems = d.featured.projects.map((p, i) => {
+    const st = STUDIES.find((x) => x.slug === p.slug);
+    const b = BOOKS[p.slug];
+    const year = (p.meta.split("·").pop() || "").trim();
+    const ch = String(i + 1).padStart(2, "0");
+    return { p, st, b, year, ch, t: bookThickness(st.file), w: Math.round(b.h * 0.7) };
+  });
+  const books = shelfItems
+    .map(({ p, st, b, year, ch, t, w }, i) => `<button class="book" type="button" data-i="${i}" style="--h:${b.h}px;--t:${t}px;--w:${w}px;--bb:${b.bg};--bi:${b.ink};--ba:${b.acc}" aria-label="Chapter ${i + 1}, ${esc(p.title)}. Open preview">
+        <span class="b3d">
+          <span class="spine"><span class="sp-num">${ch}</span><span class="sp-title">${esc(b.short)}</span><span class="sp-mark">${st.locked ? LOCK : "&#9679;"}</span></span>
+          <span class="cover">${coverHtml(b, ch, year)}</span>
+        </span>
+      </button>`)
     .join("");
+  const LIE = ["#4b4558", "#6e5a40", "#2f4b4a"];
+  const stack = d.writing.items
+    .map((a, i) => `<a class="lie" href="${a.url}" target="_blank" rel="noopener" style="--bb:${LIE[i % 3]};--len:${236 - i * 14}px;--off:${[6, -10, 2][i % 3]}px" title="${esc(a.title)}"><span>${esc(a.title)}</span></a>`)
+    .join("");
+  const contents = shelfItems
+    .map(({ p, st, b, ch }) => `<li class="reveal"><a href="work/${p.slug}.html">
+        <span class="c-num">${ch}</span>
+        <span class="c-title"><b>${esc(p.title)}</b><small>${esc(p.meta)}</small></span>
+        <span class="c-dots" aria-hidden="true"></span>
+        <span class="c-out">${st.locked ? LOCK + " " : ""}${esc(b.outcome)}</span>
+      </a></li>`)
+    .join("");
+  const bookData = JSON.stringify(
+    shelfItems.map(({ p, st, b, year, ch }) => ({
+      ch, short: b.short, title: p.title, desc: p.desc, meta: p.meta, year, outcome: b.outcome,
+      img: IMG(p.img, base), href: `work/${p.slug}.html`, locked: !!st.locked, bg: b.bg, ink: b.ink, acc: b.acc,
+    }))
+  ).replace(/</g, "\\u003c");
 
   const quotes = d.testimonials.items
     .map(
@@ -349,34 +394,50 @@ function buildHome() {
     </div>`;
 
   const body = `
-<section class="hero" style="padding:0">
-  <div class="hero-glow" aria-hidden="true"></div>
-  <div class="hero-in">
+<section class="library" id="work">
+  <div class="wrap lib-intro">
+    <p class="eyebrow hero-gate">${esc(h.kicker)}</p>
     <h1 class="serif split hero-title">${heroHead}</h1>
     <p class="lede hero-gate">${esc(h.sub)}</p>
-    <p class="facts hero-gate">${esc(h.kicker)}</p>
-    <div class="cta hero-gate">
-      <a class="btn btn-hero" href="#work">Explore case studies ${ARROW}</a>
-      <a class="btn btn-line" href="mailto:${EMAIL}">Get in touch</a>
+  </div>
+  <div class="shelf hero-gate">
+    <div class="shelf-row" id="shelf">
+      <span class="bookend" aria-hidden="true"></span>
+      ${books}
+      <span class="shelf-gap" aria-hidden="true"></span>
+      <div class="stack">${stack}</div>
+      <figure class="frame"><img src="${IMG(d.beyond.photos[1], base)}" alt="Chun-Chuan running past Tower Bridge" loading="lazy"></figure>
     </div>
+    <div class="plank" aria-hidden="true"></div>
   </div>
   <div class="hero-marquee" aria-label="Selected clients">${logos}</div>
 </section>
 
+<section class="contents-sec" id="contents">
+  <div class="wrap">
+    ${secHead("01", "Contents", "")}
+    <ol class="contents">${contents}</ol>
+    <p class="earlier reveal">${esc(d.featured.earlierNote).replace("→ Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`)}</p>
+  </div>
+</section>
+
 <section class="alt" id="track">
   <div class="wrap">
-    ${secHead("01", d.track.title, d.track.intro)}
+    ${secHead("02", d.track.title, d.track.intro)}
     <div class="stats">${stats}</div>
   </div>
 </section>
 
-<section id="work">
-  <div class="wrap">
-    ${secHead("02", d.featured.title, "")}
-    <div class="projects">${projects}</div>
-    <p class="earlier reveal">${esc(d.featured.earlierNote).replace("&rarr; Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`).replace("→ Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`)}</p>
+<dialog class="reader" id="reader" aria-label="Chapter preview">
+  <button class="rd-btn rd-close" type="button" aria-label="Close">&times;</button>
+  <button class="rd-btn rd-prev" type="button" aria-label="Previous chapter">&lsaquo;</button>
+  <button class="rd-btn rd-next" type="button" aria-label="Next chapter">&rsaquo;</button>
+  <div class="ob" id="ob">
+    <div class="ob-page" id="ob-page"></div>
+    <div class="ob-cover"><div class="ob-front cover" id="ob-front"></div><div class="ob-back" id="ob-back"></div></div>
   </div>
-</section>
+</dialog>
+<script type="application/json" id="books-data">${bookData}</script>
 
 <section class="alt" id="praise">
   <div class="wrap">
@@ -406,17 +467,13 @@ function buildHome() {
   </div>
 </section>`;
 
-  const cursorBadges =
-    spinBadge("cursor-badge-locked", "Password protected | Private content", "lock") +
-    spinBadge("cursor-badge-view", "CLICK TO VIEW", null);
-
   return shell({
     title: "Chun-Chuan Lin — Product designer for complex, regulated financial products",
     desc: h.sub,
     body,
     base,
-    extraClass: "theme-dark",
-    cursorBadges,
+    extraClass: "theme-dark home-shelf",
+    shelfJs: true,
   });
 }
 
@@ -696,52 +753,53 @@ function buildStudy(study, idx) {
   const { title, sub, meta, heroImg, body } = splitHero(blocks);
   const { html, toc } = renderBlocks(body, base);
 
-  const prev = STUDIES[(idx - 1 + STUDIES.length) % STUDIES.length];
-  const next = STUDIES[(idx + 1) % STUDIES.length];
+  const order = C("home.json").featured.projects;
+  const pos = order.findIndex((p) => p.slug === study.slug);
+  const chNum = String(pos + 1).padStart(2, "0");
+  const book = BOOKS[study.slug];
+  const nextP = order[(pos + 1) % order.length];
+  const prevP = order[(pos - 1 + order.length) % order.length];
+  const nb = BOOKS[nextP.slug];
+  const nextCh = String(((pos + 1) % order.length) + 1).padStart(2, "0");
+  const nextYear = (nextP.meta.split("·").pop() || "").trim();
 
   const tocHtml = toc
     .map((t) => `<li><a href="#${t.id}">${esc(t.title)}</a></li>`)
     .join("");
 
   const pageBody = `
-<section class="cs-hero">
-  <div class="wrap">
-    <a class="back hero-gate" href="${base}index.html#work">${"&larr;"} All work</a>
-    <h1 class="serif split hero-title">${splitWords(title)}</h1>
-    ${sub ? `<p class="sub hero-gate">${esc(sub)}</p>` : ""}
-    ${meta ? `<p class="meta hero-gate">${esc(meta)}</p>` : ""}
-  </div>
-</section>
-${heroImg ? `<div class="cs-hero-img reveal"><img src="${IMG(heroImg, base)}" alt=""></div>` : ""}
+<article class="chapter" style="--bb:${book.bg};--bi:${book.ink};--ba:${book.acc}">
+  <header class="ch-open">
+    <div class="ch-band" aria-hidden="true"></div>
+    ${heroImg ? `<figure class="ch-plate hero-gate"><img src="${IMG(heroImg, base)}" alt=""></figure>` : ""}
+    <div class="ch-title">
+      <p class="ch-num hero-gate"><span>Chapter ${chNum}</span><span>${esc(book.short)}</span></p>
+      <h1 class="serif split hero-title">${splitWords(title)}</h1>
+      ${sub ? `<p class="sub hero-gate">${esc(sub)}</p>` : ""}
+      ${meta ? `<p class="meta hero-gate">${esc(meta)}</p>` : ""}
+    </div>
+  </header>
 
-<div class="cs-body">
-  <aside class="toc"><nav aria-label="Sections"><ol>${tocHtml}</ol></nav></aside>
-  <div class="cs-content">
-    ${html}
-  </div>
-</div>
-
-<section class="cs-next">
-  <div class="wrap">
-    <p class="eyebrow">Keep exploring</p>
-    <div class="cs-next-grid">
-      <a class="cs-next-card" href="${prev.slug}.html">
-        <img class="thumb" src="${IMG(prev.img, base)}" alt="" loading="lazy">
-        <span class="txt">
-          <span class="dir">&larr; Previous</span>
-          <h3 class="serif">${esc(prev.card)}</h3>
-        </span>
-      </a>
-      <a class="cs-next-card next" href="${next.slug}.html">
-        <span class="txt">
-          <span class="dir">Next &rarr;</span>
-          <h3 class="serif">${esc(next.card)}</h3>
-        </span>
-        <img class="thumb" src="${IMG(next.img, base)}" alt="" loading="lazy">
-      </a>
+  <div class="cs-body">
+    <aside class="toc"><nav aria-label="Sections"><ol>${tocHtml}</ol></nav></aside>
+    <div class="cs-content">
+      ${html}
     </div>
   </div>
-</section>`;
+
+  <footer class="ch-end">
+    <p class="ch-fin" aria-hidden="true">&#10086;</p>
+    <a class="ch-next" href="${nextP.slug}.html" style="--h:300px;--w:210px;--bb:${nb.bg};--bi:${nb.ink};--ba:${nb.acc}">
+      <span class="ch-next-book"><span class="cover">${coverHtml(nb, nextCh, nextYear)}</span></span>
+      <span class="ch-next-txt">
+        <span class="dir">Next chapter</span>
+        <span class="serif t">${esc(nextP.title)}</span>
+        <span class="o">${esc(nb.outcome)}</span>
+      </span>
+    </a>
+    <p class="ch-links"><a href="${prevP.slug}.html">&larr; Previous chapter</a><a href="${base}index.html#work">Back to the shelf</a></p>
+  </footer>
+</article>`;
 
   return shell({
     title: `${title} — Chun-Chuan Lin`,
@@ -750,6 +808,7 @@ ${heroImg ? `<div class="cs-hero-img reveal"><img src="${IMG(heroImg, base)}" al
     base,
     extraClass: "cs-page",
     progress: true,
+    running: `Chapter ${chNum} &middot; ${esc(book.short)}`,
     gated: !!study.locked,
     ogImage: study.img,
   });

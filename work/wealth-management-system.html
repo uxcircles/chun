@@ -14,8 +14,9 @@
 <link rel="apple-touch-icon" href="../assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/style.css?v=5820707c">
+<link rel="stylesheet" href="../assets/css/book.css?v=012e8e1f">
 </head>
 <body class="cs-page">
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -29,11 +30,12 @@
       <img src="../assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.webp" alt="">
       <span>Chun-Chuan&nbsp;Lin</span>
     </a>
+    <span class="nav-run">Chapter 06 &middot; The Governed Rebalance</span>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
       <span class="bar"></span><span class="bar"></span><span class="bar"></span>
     </button>
     <nav class="nav-links">
-      <a href="../index.html#work">Work</a>
+      <a href="../index.html#work">Shelf</a>
       <a href="https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing" target="_blank" rel="noopener">CV</a>
       <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
@@ -43,20 +45,22 @@
 </header>
 <main id="main-content">
 
-<section class="cs-hero">
-  <div class="wrap">
-    <a class="back hero-gate" href="../index.html#work">&larr; All work</a>
-    <h1 class="serif split hero-title"><span class="w">Designing</span> <span class="w">a</span> <span class="w">governed</span> <span class="w">wealth</span> <span class="w">management</span> <span class="w">system</span> <span class="w">—</span> <span class="w">portfolio</span> <span class="w">rebalancing</span> <span class="w">as</span> <span class="w">a</span> <span class="w">decision</span> <span class="w">architecture</span></h1>
-    <p class="sub hero-gate">Informed by 7 years of building governed wealth management systems at Y TREE — where I led the design of portfolio rebalancing tools managing over £9b in client assets. This case study presents a portfolio rebalancing system for advisors managing UHNW clients, where every decision must be explainable, auditable, and mandate-aligned. Specific client data and proprietary product details have been abstracted.</p>
-    <p class="meta hero-gate">Mar 2026 · Research, UX and UI design</p>
-  </div>
-</section>
-<div class="cs-hero-img reveal"><img src="../assets/img/E0ivBHq7jXSnA6J9aW9na1RmKs.webp" alt=""></div>
+<article class="chapter" style="--bb:#2c4366;--bi:#e9eef7;--ba:#9fc1ff">
+  <header class="ch-open">
+    <div class="ch-band" aria-hidden="true"></div>
+    <figure class="ch-plate hero-gate"><img src="../assets/img/E0ivBHq7jXSnA6J9aW9na1RmKs.webp" alt=""></figure>
+    <div class="ch-title">
+      <p class="ch-num hero-gate"><span>Chapter 06</span><span>The Governed Rebalance</span></p>
+      <h1 class="serif split hero-title"><span class="w">Designing</span> <span class="w">a</span> <span class="w">governed</span> <span class="w">wealth</span> <span class="w">management</span> <span class="w">system</span> <span class="w">—</span> <span class="w">portfolio</span> <span class="w">rebalancing</span> <span class="w">as</span> <span class="w">a</span> <span class="w">decision</span> <span class="w">architecture</span></h1>
+      <p class="sub hero-gate">Informed by 7 years of building governed wealth management systems at Y TREE — where I led the design of portfolio rebalancing tools managing over £9b in client assets. This case study presents a portfolio rebalancing system for advisors managing UHNW clients, where every decision must be explainable, auditable, and mandate-aligned. Specific client data and proprietary product details have been abstracted.</p>
+      <p class="meta hero-gate">Mar 2026 · Research, UX and UI design</p>
+    </div>
+  </header>
 
-<div class="cs-body">
-  <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-discovery-0">Discovery</a></li><li><a href="#sec-the-architecture-1">The architecture</a></li><li><a href="#sec-key-design-decisions-2">Key design decisions</a></li><li><a href="#sec-reflection-3">Reflection</a></li></ol></nav></aside>
-  <div class="cs-content">
-    <section class="cs-section" id="sec-discovery-0">
+  <div class="cs-body">
+    <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-discovery-0">Discovery</a></li><li><a href="#sec-the-architecture-1">The architecture</a></li><li><a href="#sec-key-design-decisions-2">Key design decisions</a></li><li><a href="#sec-reflection-3">Reflection</a></li></ol></nav></aside>
+    <div class="cs-content">
+      <section class="cs-section" id="sec-discovery-0">
   <span class="num">01</span>
   <h2 class="divider serif split"><span class="w">Discovery</span></h2>
   <h3 class="sub serif reveal">Problem framing</h3>
@@ -133,30 +137,26 @@
 <p class="text reveal">In a system this complex, the design work isn't finished when the screens look right. It's finished when every stakeholder knows exactly what they're responsible for, and the system supports that clarity without ambiguity.</p>
 <p class="text reveal">The biggest challenge was designing for a workflow where an error doesn't just mean a bad experience — it means a regulatory breach, a financial loss, or a breakdown in client trust. That constraint made every decision more deliberate, and ultimately produced a more considered system.</p>
 </section>
-  </div>
-</div>
-
-<section class="cs-next">
-  <div class="wrap">
-    <p class="eyebrow">Keep exploring</p>
-    <div class="cs-next-grid">
-      <a class="cs-next-card" href="client-portal.html">
-        <img class="thumb" src="../assets/img/cqkEi4mZ536VQZQC6X23w6QmEs.webp" alt="" loading="lazy">
-        <span class="txt">
-          <span class="dir">&larr; Previous</span>
-          <h3 class="serif">Simplified onboarding via a client portal</h3>
-        </span>
-      </a>
-      <a class="cs-next-card next" href="portfolio-health.html">
-        <span class="txt">
-          <span class="dir">Next &rarr;</span>
-          <h3 class="serif">Portfolio health for a regulated investment app</h3>
-        </span>
-        <img class="thumb" src="../assets/img/9iO2ZGM4p4TnNoXjsiRvFTovY58.webp" alt="" loading="lazy">
-      </a>
     </div>
   </div>
-</section>
+
+  <footer class="ch-end">
+    <p class="ch-fin" aria-hidden="true">&#10086;</p>
+    <a class="ch-next" href="portfolio-health.html" style="--h:300px;--w:210px;--bb:#5d6a33;--bi:#f2f1dc;--ba:#dfe39a">
+      <span class="ch-next-book"><span class="cover"><span class="cv"><span class="cv-top"><span>Chun-Chuan Lin</span><span>2025</span></span>
+      <span class="cv-num">07</span>
+      <span class="cv-title">Portfolio Health</span>
+      <span class="cv-rule"></span>
+      <span class="cv-out">Risk explained, no advice</span></span></span></span>
+      <span class="ch-next-txt">
+        <span class="dir">Next chapter</span>
+        <span class="serif t">Built investor confidence through portfolio health</span>
+        <span class="o">Risk explained, no advice</span>
+      </span>
+    </a>
+    <p class="ch-links"><a href="client-portal.html">&larr; Previous chapter</a><a href="../index.html#work">Back to the shelf</a></p>
+  </footer>
+</article>
 </main>
 <footer class="foot" id="contact">
   <div class="foot-in">
@@ -174,5 +174,6 @@
   </div>
 </footer>
 <script src="../assets/js/main.js?v=11b02167" defer></script>
+
 </body>
 </html>
