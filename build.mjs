@@ -201,7 +201,7 @@ function coverHtml(b, chapter, year, img) {
 const GATE_KEY = "cc_portfolio_unlocked";
 const GATE_PASS = "Chun";
 
-function shell({ title, desc, body, base, extraClass = "", progress = false, gated = false, cursorBadges = "", ogImage = OG_IMAGE, running = "", shelfJs = false }) {
+function shell({ title, desc, body, base, extraClass = "", progress = false, gated = false, cursorBadges = "", ogImage = OG_IMAGE, running = "", shelfJs = false, noNav = false }) {
   const bodyClass = gated ? `${extraClass} locked`.trim() : extraClass;
   return `<!doctype html>
 <html lang="en">
@@ -240,7 +240,7 @@ ${gated ? `<script>try{if(localStorage.getItem(${JSON.stringify(GATE_KEY)})==="1
 ${progress ? `<div class="scroll-progress" aria-hidden="true"><span></span></div>` : ""}
 <div class="cursor-dot" aria-hidden="true"></div>
 ${cursorBadges}
-${nav(base, running)}
+${noNav ? "" : nav(base, running)}
 <main id="main-content">
 ${body}
 </main>
@@ -324,14 +324,6 @@ function buildHome() {
         </span>
       </button>`)
     .join("");
-  const contents = shelfItems
-    .map(({ p, st, b, ch }) => `<li class="reveal"><a href="work/${p.slug}.html">
-        <span class="c-num">${ch}</span>
-        <span class="c-title"><b>${esc(p.title)}</b><small>${esc(p.meta)}</small></span>
-        <span class="c-dots" aria-hidden="true"></span>
-        <span class="c-out">${st.locked ? LOCK + " " : ""}${esc(b.outcome)}</span>
-      </a></li>`)
-    .join("");
   const bookData = JSON.stringify(
     shelfItems.map(({ p, st, b, year, ch }) => ({
       ch, short: b.short, title: p.title, desc: p.desc, meta: p.meta, year, outcome: b.outcome,
@@ -339,22 +331,22 @@ function buildHome() {
     }))
   ).replace(/</g, "\\u003c");
 
-  const NOTE = ["#f6e27a", "#f4b9b2", "#b9e3c6", "#bcd5f2", "#f6e27a", "#f2c9e6"];
-  const TILT = [-2.2, 1.6, -1, 2.4, -1.8, 1.1];
+  const NOTE = ["#fbe36a", "#ff9fb5", "#9fe0c2", "#a9d4ff", "#ffc56b", "#e3b8ff"];
+  const TILT = [-3, 2.2, -1.2, 2.8, -2, 1.4];
   const notes = d.testimonials.items
-    .map(([t, name, role, short], i) => `<details class="note reveal" style="--note:${NOTE[i % NOTE.length]};--tilt:${TILT[i % TILT.length]}deg">
-      <summary><span class="pin" aria-hidden="true"></span><q>${esc(short || t)}</q><span class="who"><b>${esc(name)}</b><span>${esc(role)}</span></span><span class="more">Read the full note</span></summary>
+    .map(([t, name, role, short], i) => `<details class="note reveal" style="--note:${NOTE[i % NOTE.length]};--tilt:${TILT[i % TILT.length]}deg;--dy:${[0, 26, 8, 30, 4, 22][i % 6]}px">
+      <summary><q>${esc(short || t)}</q><span class="who"><b>${esc(name)}</b><span>${esc(role)}</span></span><span class="more">tap to read it all</span></summary>
       <p class="full">&ldquo;${esc(t)}&rdquo;</p>
     </details>`)
     .join("");
 
   const drafts = d.writing.items
-    .map((a, i) => `<a class="draft reveal" href="${a.url}" target="_blank" rel="noopener" style="--tilt:${[-1.4, 0.8, -0.6][i % 3]}deg">
-      <span class="clip" aria-hidden="true"></span>
-      <span class="d-meta">${esc(a.meta)}</span>
+    .map((a, i) => `<a class="draft reveal" href="${a.url}" target="_blank" rel="noopener" style="--tilt:${[-1.6, 1, -0.7][i % 3]}deg">
+      <span class="tape ta" aria-hidden="true"></span><span class="tape tb" aria-hidden="true"></span>
+      <span class="d-head"><span>Lin / draft ${i + 1}</span><span class="d-meta">${esc(a.meta)}</span></span>
       <span class="d-title">${esc(a.title)}</span>
       <span class="d-desc">${esc(a.desc)}</span>
-      <span class="d-go">Read on Medium <span aria-hidden="true">&rarr;</span></span>
+      <span class="d-go">read the final version &rarr;</span>
     </a>`)
     .join("");
 
@@ -363,13 +355,21 @@ function buildHome() {
     .map((ph, i) => `<figure class="polaroid reveal" style="--tilt:${[-3, 2.2, -1.4][i % 3]}deg"><span class="tape" aria-hidden="true"></span><img src="${IMG(ph, base)}" alt="${esc(caps[i] || "")}" loading="lazy"><figcaption>${esc(caps[i] || "")}</figcaption></figure>`)
     .join("");
 
-  const POST = ["#e8c78c", "#9fc1ff", "#f2b48c", "#b9e3c6"];
+  const POST = ["#1f6f5c", "#2f4a86", "#b4532f", "#5b2a6e"];
   const cards = d.track.stats
-    .map((st, i) => `<div class="postcard reveal" style="--tilt:${[2.2, -1.6, 1.4, -2.4][i % 4]}deg;--stamp:${POST[i % 4]}">
-      <span class="stamp" aria-hidden="true"></span>
-      <b>${esc(st.value)}</b><span>${esc(st.label)}</span>
+    .map((st, i) => `<div class="postcard reveal" style="--tilt:${[2.4, -1.8, -2.2, 1.6][i % 4]}deg;--stamp:${POST[i % 4]}">
+      <div class="pc-msg"><b>${esc(st.value)}</b><span>${esc(st.label)}</span></div>
+      <div class="pc-side" aria-hidden="true"><span class="stamp">${icon(st.icon, "stamp-ic")}<small>${["1st", "2nd", "1st", "Air"][i % 4]}</small></span><span class="postmark"></span><i></i><i></i><i></i></div>
     </div>`)
     .join("");
+
+  const faceOut = shelfItems
+    .map(({ p, st, b, year, ch }) => `<a class="fitem reveal" href="work/${p.slug}.html" style="--bb:${b.bg};--bi:${b.ink};--ba:${b.acc}">
+      <span class="cover">${coverHtml(b, ch, year, IMG(p.img, base))}</span>
+      <span class="lab"><b>${esc(p.title)}</b><span>${st.locked ? LOCK + " " : ""}${esc(b.outcome)}</span></span>
+    </a>`)
+    .join("");
+  const facts = h.kicker.split("·").map((f) => `<span>${esc(f.trim())}</span>`).join("");
 
   const logoRow = h.clientLogos
     .map(([name, file]) => `<span class="logo logo--${slugify(name)}"><img src="${IMG(file, base)}" alt="${esc(name)}" decoding="async"></span>`)
@@ -381,17 +381,18 @@ function buildHome() {
     <div class="wall-in">
       <div class="poster hero-gate">
         <span class="tape t1" aria-hidden="true"></span><span class="tape t2" aria-hidden="true"></span>
-        <p class="p-kicker">Chun-Chuan Lin &middot; Product designer &middot; London</p>
+        <div class="p-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
         <h1 class="serif split hero-title">${heroHead}</h1>
         <p class="p-sub">${esc(h.sub)}</p>
-        <p class="p-facts">${esc(h.kicker)}</p>
+        <p class="p-facts"><span>Chun-Chuan Lin</span>${facts}</p>
       </div>
       <div class="postcards">${cards}</div>
       <div class="card-biz reveal">
         <span class="pin" aria-hidden="true"></span>
-        <b>Say hello</b>
+        <img class="biz-logo" src="${IMG(d.nav.logo, base)}" alt="">
+        <b>Chun-Chuan Lin</b>
         <a href="mailto:${EMAIL}">${EMAIL}</a>
-        <span class="biz-links"><a href="${d.nav.links[0][1]}" target="_blank" rel="noopener">CV</a><a href="${d.nav.links[1][1]}" target="_blank" rel="noopener">LinkedIn</a></span>
+        <span class="biz-links"><a href="${d.nav.links[0][1]}" target="_blank" rel="noopener">CV</a><a href="${d.nav.links[1][1]}" target="_blank" rel="noopener">LinkedIn</a><a href="${d.nav.links[2][1]}" target="_blank" rel="noopener">Medium</a></span>
       </div>
     </div>
     <div class="logo-strip reveal" aria-label="Selected clients"><span class="ls-k">Worked with</span>${logoRow}</div>
@@ -406,12 +407,8 @@ function buildHome() {
       </div>
       <div class="plank" aria-hidden="true"></div>
     </div>
-    <div class="index-card reveal" id="contents">
-      <span class="pin" aria-hidden="true"></span>
-      <h2 class="serif">Index</h2>
-      <ol class="contents">${contents}</ol>
-      <p class="earlier">${esc(d.featured.earlierNote).replace("→ Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`)}</p>
-    </div>
+    <div class="faceout" id="contents">${faceOut}</div>
+    <p class="earlier-w reveal">${esc(d.featured.earlierNote).replace("→ Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`)}</p>
   </section>
 
   <section class="wall-sec" id="praise">
@@ -423,7 +420,7 @@ function buildHome() {
 
   <section class="wall-sec" id="writing">
     <div class="wall-in">
-      <h2 class="wall-h serif reveal">Drafts on the desk</h2>
+      <h2 class="wall-h serif reveal">Drafts, taped up</h2>
       <p class="wall-p reveal">${esc(d.writing.intro)}</p>
       <div class="drafts">${drafts}</div>
     </div>
@@ -458,6 +455,7 @@ function buildHome() {
     base,
     extraClass: "theme-dark home-shelf",
     shelfJs: true,
+    noNav: true,
   });
 }
 

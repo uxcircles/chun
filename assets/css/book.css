@@ -437,3 +437,116 @@ body.home-shelf .foot{background:#121117}
 .cv--plate{padding-bottom:10cqw}
 .cv--plate .cv-top{order:-2}
 .cv--plate .cv-words{margin-top:10cqw}
+
+/* ================================================================
+   WALL v2 — each object designed as the real thing
+   ================================================================ */
+/* poster: two-ink print, "clarity" coming into focus */
+.wall-top .wall-in{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
+.poster{
+  container-type:inline-size;padding:9cqw 8cqw 6cqw;background:#efe6d3;--ink2:#0c6c7e;
+  background-image:
+    linear-gradient(90deg,transparent calc(50% - .5px),rgba(0,0,0,.07) 50%,rgba(255,255,255,.5) calc(50% + 1px),transparent calc(50% + 2px)),
+    linear-gradient(180deg,transparent calc(50% - .5px),rgba(0,0,0,.06) 50%,rgba(255,255,255,.45) calc(50% + 1px),transparent calc(50% + 2px));
+}
+.p-art{display:flex;justify-content:space-between;align-items:center;margin-bottom:8cqw}
+.p-art i{width:12cqw;height:12cqw;border-radius:50%;background:var(--ink2)}
+.p-art i:nth-child(1){filter:blur(2.6cqw);opacity:.55}
+.p-art i:nth-child(2){filter:blur(1.9cqw);opacity:.65}
+.p-art i:nth-child(3){filter:blur(1.2cqw);opacity:.78}
+.p-art i:nth-child(4){filter:blur(.6cqw);opacity:.9}
+.p-art i:nth-child(5){filter:blur(.2cqw)}
+.p-art i:nth-child(6){background:#1b1a1f;box-shadow:0 0 0 1.2cqw #efe6d3,0 0 0 1.6cqw #1b1a1f}
+.poster h1{font-size:6.4cqw;line-height:1.12;letter-spacing:-.02em;margin:0;max-width:none;text-wrap:wrap}
+.poster h1 .w:has(em){display:block}
+.poster h1 em{display:block;font-size:26.5cqw;line-height:.86;letter-spacing:-.05em;color:var(--ink2);margin:.02em 0 .1em -.04em}
+.p-sub{margin-top:5cqw;font-size:max(15px,3cqw);max-width:34ch}
+.p-facts{margin-top:7cqw;padding-top:2.4cqw;border-top:3px solid #1b1a1f;display:grid;grid-template-columns:repeat(3,1fr);gap:6px 14px;
+  font:500 max(10px,1.75cqw)/1.4 var(--mono);text-transform:uppercase;letter-spacing:.04em;color:#1b1a1f}
+
+/* postcards: the back of a card — message, stamp, postmark, address lines */
+.postcard{
+  display:grid;grid-template-columns:1fr 34%;min-height:0;aspect-ratio:3/2;padding:0;background:#f8f3e7;background-image:none;
+}
+.pc-msg{display:flex;flex-direction:column;justify-content:center;padding:8% 6% 8% 9%;border-right:1px solid #cfc5b0;min-width:0}
+.postcard .pc-msg b{font:700 clamp(1.5rem,2.5vw,2.1rem)/1 var(--serif);letter-spacing:-.03em}
+.postcard .pc-msg span{margin-top:8px;font:500 clamp(15px,1.25vw,17.5px)/1.15 var(--hand);color:#2c3a5a}
+.pc-side{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:11%;padding:0 12% 16% 12%}
+.pc-side i{display:block;height:1px;background:#b9ae98}
+.postcard .stamp{
+  position:absolute;top:9%;right:10%;left:auto;width:58%;aspect-ratio:5/6;height:auto;background:var(--stamp);color:#fff;opacity:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  -webkit-mask:radial-gradient(circle 2.6px at 50% 50%,transparent 97%,#000) -3.5px -3.5px/7px 7px;mask:radial-gradient(circle 2.6px at 50% 50%,transparent 97%,#000) -3.5px -3.5px/7px 7px;
+}
+.stamp-ic{width:46%;height:auto;margin:0;color:#fff;display:block}
+.stamp small{font:700 8px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.postmark{position:absolute;top:22%;right:44%;width:46%;aspect-ratio:1;border:1.5px solid rgba(40,40,60,.5);border-radius:50%;transform:rotate(-14deg);
+  background:repeating-linear-gradient(180deg,transparent 0 5px,rgba(40,40,60,.4) 5px 6.5px) 120% 50%/60% 44% no-repeat}
+
+/* face-out shelves replace the index */
+.faceout{max-width:var(--maxw);margin:84px auto 0;padding:0 48px;display:grid;grid-template-columns:repeat(4,1fr);gap:64px 40px}
+.fitem{display:flex;flex-direction:column;color:#f4f1ea}
+.fitem .cover{width:100%;aspect-ratio:.7;transform-origin:50% 100%;transition:transform .45s var(--ease);box-shadow:0 0 0 1px rgba(0,0,0,.2),10px 0 18px -10px rgba(0,0,0,.6)}
+.fitem:hover .cover{transform:translateY(-10px) rotate(-1.2deg)}
+.fitem .lab{position:relative;padding-top:38px;display:flex;flex-direction:column;gap:6px}
+.fitem .lab::before{content:"";position:absolute;top:0;left:-20px;right:-20px;height:18px;
+  background:linear-gradient(180deg,#4a382a 0,var(--wood) 45%,var(--wood-dk) 100%);box-shadow:0 22px 26px -12px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.1)}
+.fitem .lab b{font:400 15.5px/1.35 var(--serif)}
+.fitem .lab span{display:flex;align-items:center;gap:6px;font-size:12.5px;color:rgba(255,255,255,.55)}
+.earlier-w{max-width:var(--maxw);margin:44px auto 0;padding:0 28px;font-size:14px;color:rgba(255,255,255,.5)}
+.earlier-w a{color:#e8c78c;font-weight:600}
+
+/* sticky notes: square, marker handwriting, glue strip, lifted corner */
+.notes{gap:20px 30px;justify-items:center}
+.note{width:min(100%,290px);margin-top:var(--dy);filter:drop-shadow(0 16px 12px rgba(0,0,0,.5))}
+.note summary{
+  aspect-ratio:1;min-height:0;padding:34px 24px 20px;gap:10px;box-shadow:none;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--note) 86%,#000) 0,var(--note) 30px),var(--note);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 30px),calc(100% - 30px) 100%,0 100%);position:relative;
+}
+.note summary::after{content:"";position:absolute;right:0;bottom:0;width:30px;height:30px;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--note) 70%,#000) 0 50%,transparent 50%);border-top-left-radius:4px}
+.note q{font:600 26px/1.12 var(--hand);color:#22201a}
+.note .who{font-size:12px}
+.note .more{font:500 15px/1 var(--hand);letter-spacing:0;text-transform:none}
+.note[open] summary{aspect-ratio:auto;clip-path:none}
+.note[open] summary::after,.note[open] q{display:none}
+.note .full{box-shadow:none;font-size:14.5px;padding-top:0}
+
+/* drafts: typed manuscript pages taped to the wall, red-pencil notes */
+.draft{padding:34px 30px 26px 44px;min-height:340px;background:#fdfbf6;box-shadow:0 26px 34px -22px rgba(0,0,0,.85);
+  background-image:linear-gradient(90deg,transparent 0 30px,rgba(196,64,47,.3) 30px 31px,transparent 31px)}
+.draft .ta{top:-11px;left:18px;transform:rotate(-7deg);width:74px;height:22px;background:rgba(232,199,140,.7)}
+.draft .tb{top:-11px;right:18px;transform:rotate(6deg);width:74px;height:22px;background:rgba(232,199,140,.7)}
+.d-head{display:flex;justify-content:space-between;gap:10px;font:400 11.5px/1.4 var(--mono);color:#8a8273;text-transform:uppercase}
+.d-head .d-meta{font:inherit;color:inherit;text-align:right}
+.d-title{font:500 19px/1.4 var(--mono);letter-spacing:-.01em;margin-top:14px;text-decoration:underline;text-decoration-color:#c4402f;text-decoration-thickness:2px;text-underline-offset:5px;text-decoration-style:wavy}
+.d-desc{font:400 14px/2 var(--mono);color:#3c382f}
+.d-go{font:600 23px/1 var(--hand);color:#c4402f;transform:rotate(-2deg);transform-origin:left}
+
+@media (max-width:980px){
+  .faceout{grid-template-columns:repeat(2,1fr);padding:0 36px}
+}
+@media (max-width:640px){
+  .faceout{margin-top:60px;gap:48px 28px;padding:0 30px}
+  .fitem .lab::before{left:-14px;right:-14px}
+  .fitem .lab b{font-size:14px}
+  .p-facts{grid-template-columns:repeat(2,1fr)}
+  .note{margin-top:0}
+  .postcard .pc-msg span{font-size:14px}
+}
+
+/* no nav on the wall; stamps with a proper perforated edge */
+body.home-shelf .wall-top{padding-top:64px}
+.biz-logo{width:28px;height:28px;margin-bottom:6px}
+.card-biz b{font-size:20px}
+.postcard .stamp{-webkit-mask:none;mask:none;outline:4px dotted #f8f3e7;outline-offset:-2px;box-shadow:inset 0 0 0 5px var(--stamp),inset 0 0 0 6px rgba(255,255,255,.55)}
+.postmark{right:46%;top:26%}
+@media (max-width:980px){
+  .wall-top .wall-in{grid-template-columns:minmax(0,1fr)}
+  .poster{grid-row:auto}
+}
+@media (max-width:640px){
+  body.home-shelf .wall-top{padding-top:34px}
+  .poster{padding:9cqw 8cqw 7cqw}
+}
