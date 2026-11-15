@@ -22,9 +22,7 @@
     ob.style.setProperty("--bb", b.bg);
     ob.style.setProperty("--bi", b.ink);
     ob.style.setProperty("--ba", b.acc);
-    front.innerHTML = `<span class="cv"><span class="cv-top"><span>Chun-Chuan Lin</span><span>${esc(b.year)}</span></span>
-      <span class="cv-num">${b.ch}</span><span class="cv-title">${esc(b.short)}</span>
-      <span class="cv-rule"></span><span class="cv-out">${esc(b.outcome)}</span></span>`;
+    front.innerHTML = b.cover;
     back.innerHTML = `<p class="lp-k">Chapter</p><p class="lp-n">${b.ch}</p>
       <p class="lp-t">${esc(b.short)}</p><p class="lp-o">${esc(b.outcome)}</p><p class="lp-sig">Chun-Chuan Lin</p>`;
     page.innerHTML = `<img class="pg-img" src="${esc(b.img)}" alt="">

@@ -389,3 +389,51 @@ body.home-shelf .foot{background:#121117}
 .logo-strip .logo img{max-width:120px;object-fit:contain;filter:brightness(0) invert(1);opacity:.6}
 .logo-strip .logo--acer img{max-height:18px}
 .logo-strip .logo--y-tree img{max-height:18px}
+
+/* ================================================================
+   COVERS — four jacket layouts, each built around the project image
+   ================================================================ */
+.cv-pic{display:block;overflow:hidden;position:relative}
+.cv-pic img{width:100%;height:100%;object-fit:cover;display:block}
+.cv-words{display:flex;flex-direction:column}
+.cv-num,.cv-title,.cv-rule,.cv-out{position:relative}
+
+/* bleed: the image fills the jacket, type sits on a dark wash at the foot */
+.cv--bleed{padding:0}
+.cv--bleed .cv-pic{position:absolute;inset:0}
+.cv--bleed .cv-pic::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 42%,color-mix(in srgb,var(--bb) 92%,#000) 78%)}
+.cv--bleed .cv-top{position:relative;z-index:1;padding:8cqw 8cqw 0;color:#fff}
+.cv--bleed .cv-words{position:relative;z-index:1;margin-top:auto;padding:0 8cqw 8cqw}
+.cv--bleed .cv-num{font-size:20cqw;margin-top:0}
+
+/* window: solid cloth, the image seen through an arched window */
+.cv--window .cv-pic{margin:7cqw auto 0;width:74cqw;height:58cqw;border-radius:40cqw 40cqw 3cqw 3cqw;
+  box-shadow:0 0 0 1.4cqw var(--bb),0 0 0 1.8cqw var(--ba);background:#000}
+.cv--window .cv-words{margin-top:auto;align-items:center;text-align:center}
+.cv--window .cv-num{font-size:9cqw;letter-spacing:.06em;margin-top:0}
+.cv--window .cv-title{font-size:11.5cqw;margin-top:2cqw}
+.cv--window .cv-rule{margin:4cqw auto 3cqw}
+
+/* band: image on the top half, a heavy number on the band below */
+.cv--band{padding:0}
+.cv--band .cv-top{position:absolute;z-index:1;left:0;right:0;padding:7cqw 8cqw 0;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.cv--band .cv-pic{height:56%;border-bottom:1.6cqw solid var(--ba)}
+.cv--band .cv-words{flex:1;padding:6cqw 8cqw 8cqw}
+.cv--band .cv-num{font-size:24cqw;margin-top:-1cqw;line-height:.8}
+.cv--band .cv-title{margin-top:auto}
+
+/* plate: classic hardback, image tipped in as a framed plate */
+.cv--plate{text-align:center;align-items:center}
+.cv--plate .cv-top{width:100%}
+.cv--plate .cv-words{order:-1;align-items:center;margin-top:9cqw}
+.cv--plate .cv-num{display:none}
+.cv--plate .cv-title{font-size:12cqw;margin-top:0;font-style:italic}
+.cv--plate .cv-rule{margin:4cqw auto}
+.cv--plate .cv-pic{margin-top:auto;width:70cqw;aspect-ratio:1;padding:2.4cqw;background:#fff;box-shadow:0 2cqw 5cqw -2cqw rgba(0,0,0,.45)}
+.cv--plate .cv-pic img{background:#ddd}
+.cv--plate .cv-out{margin-top:2cqw}
+.cv--plate::after{content:"";position:absolute;inset:4cqw;border:.5cqw solid var(--ba);opacity:.45;pointer-events:none}
+.cv--plate{padding-bottom:10cqw}
+.cv--plate .cv-top{order:-2}
+.cv--plate .cv-words{margin-top:10cqw}

@@ -176,24 +176,23 @@ const STUDIES = [
 
 /* ---------- the shelf: each case study is a book ---------- */
 const BOOKS = {
-  "provider-redesign":        { short: "The £9B Platform",           outcome: "£9B in client assets",        bg: "#1f3b33", ink: "#ead9ae", acc: "#c9a868", h: 312 },
-  "save-journey-redesign":    { short: "One Tap to Save",            outcome: "5–6× Autosave volume",        bg: "#3a2470", ink: "#efe6ff", acc: "#b99bff", h: 296 },
-  "rightmove-partners":       { short: "The Trust Layer",            outcome: "Self-directed concept",       bg: "#0b1640", ink: "#eef3ff", acc: "#00deb6", h: 304 },
-  "home-redesign":            { short: "What Happened to My Money?", outcome: "89% mobile app CSAT",         bg: "#8b3a26", ink: "#f8e8dc", acc: "#f2b48c", h: 318 },
-  "client-portal":            { short: "The Client Portal",          outcome: "40% less onboarding effort",  bg: "#d29a3a", ink: "#23180a", acc: "#23180a", h: 288 },
-  "wealth-management-system": { short: "The Governed Rebalance",     outcome: "AI suggests, advisors decide", bg: "#2c4366", ink: "#e9eef7", acc: "#9fc1ff", h: 308 },
-  "portfolio-health":         { short: "Portfolio Health",           outcome: "Risk explained, no advice",   bg: "#5d6a33", ink: "#f2f1dc", acc: "#dfe39a", h: 292 },
-  "trip-memories":            { short: "Trip Memories",              outcome: "Revolut concept",             bg: "#e6e1d3", ink: "#1d1d24", acc: "#c4572d", h: 300 },
+  "provider-redesign":        { short: "The £9B Platform",           outcome: "£9B in client assets",        bg: "#1f3b33", ink: "#ead9ae", acc: "#c9a868", style: "window", pos: "50% 45%", h: 312 },
+  "save-journey-redesign":    { short: "One Tap to Save",            outcome: "5–6× Autosave volume",        bg: "#3a2470", ink: "#efe6ff", acc: "#b99bff", style: "bleed", pos: "50% 40%", h: 296 },
+  "rightmove-partners":       { short: "The Trust Layer",            outcome: "Self-directed concept",       bg: "#0b1640", ink: "#eef3ff", acc: "#00deb6", style: "band", pos: "22% 50%", h: 304 },
+  "home-redesign":            { short: "What Happened to My Money?", outcome: "89% mobile app CSAT",         bg: "#8b3a26", ink: "#f8e8dc", acc: "#f2b48c", style: "bleed", pos: "72% 50%", h: 318 },
+  "client-portal":            { short: "The Client Portal",          outcome: "40% less onboarding effort",  bg: "#d29a3a", ink: "#23180a", acc: "#23180a", style: "band", pos: "35% 50%", h: 288 },
+  "wealth-management-system": { short: "The Governed Rebalance",     outcome: "AI suggests, advisors decide", bg: "#2c4366", ink: "#e9eef7", acc: "#9fc1ff", style: "window", pos: "50% 55%", h: 308 },
+  "portfolio-health":         { short: "Portfolio Health",           outcome: "Risk explained, no advice",   bg: "#5d6a33", ink: "#f2f1dc", acc: "#dfe39a", style: "bleed", pos: "58% 45%", h: 292 },
+  "trip-memories":            { short: "Trip Memories",              outcome: "Revolut concept",             bg: "#e6e1d3", ink: "#1d1d24", acc: "#c4572d", style: "plate", pos: "50% 45%", h: 300 },
 };
 const bookLength = (file) => fs.readFileSync(path.join(ROOT, "content", file), "utf8").length;
 const bookThickness = (file) => Math.round(Math.min(60, Math.max(30, 18 + bookLength(file) / 380)));
 
-function coverHtml(b, chapter, year) {
-  return `<span class="cv"><span class="cv-top"><span>Chun-Chuan Lin</span><span>${esc(year)}</span></span>
-      <span class="cv-num">${chapter}</span>
-      <span class="cv-title">${esc(b.short)}</span>
-      <span class="cv-rule"></span>
-      <span class="cv-out">${esc(b.outcome)}</span></span>`;
+function coverHtml(b, chapter, year, img) {
+  const pic = img ? `<span class="cv-pic"><img src="${img}" alt="" loading="lazy" style="object-position:${b.pos}"></span>` : "";
+  const top = `<span class="cv-top"><span>Chun-Chuan Lin</span><span>${esc(year)}</span></span>`;
+  const words = `<span class="cv-num">${chapter}</span><span class="cv-title">${esc(b.short)}</span><span class="cv-rule"></span><span class="cv-out">${esc(b.outcome)}</span>`;
+  return `<span class="cv cv--${b.style}">${top}${pic}<span class="cv-words">${words}</span></span>`;
 }
 
 /* =================================================================
@@ -321,7 +320,7 @@ function buildHome() {
     .map(({ p, st, b, year, ch, t, w }, i) => `<button class="book" type="button" data-i="${i}" style="--h:${b.h}px;--t:${t}px;--w:${w}px;--bb:${b.bg};--bi:${b.ink};--ba:${b.acc}" aria-label="Chapter ${i + 1}, ${esc(p.title)}. Open preview">
         <span class="b3d">
           <span class="spine"><span class="sp-num">${ch}</span><span class="sp-title">${esc(b.short)}</span><span class="sp-mark">${st.locked ? LOCK : "&#9679;"}</span></span>
-          <span class="cover">${coverHtml(b, ch, year)}</span>
+          <span class="cover">${coverHtml(b, ch, year, IMG(p.img, base))}</span>
         </span>
       </button>`)
     .join("");
@@ -336,7 +335,7 @@ function buildHome() {
   const bookData = JSON.stringify(
     shelfItems.map(({ p, st, b, year, ch }) => ({
       ch, short: b.short, title: p.title, desc: p.desc, meta: p.meta, year, outcome: b.outcome,
-      img: IMG(p.img, base), href: `work/${p.slug}.html`, locked: !!st.locked, bg: b.bg, ink: b.ink, acc: b.acc,
+      cover: coverHtml(b, ch, year, IMG(p.img, base)), img: IMG(p.img, base), href: `work/${p.slug}.html`, locked: !!st.locked, bg: b.bg, ink: b.ink, acc: b.acc,
     }))
   ).replace(/</g, "\\u003c");
 
@@ -775,7 +774,7 @@ function buildStudy(study, idx) {
   <footer class="ch-end">
     <p class="ch-fin" aria-hidden="true">&#10086;</p>
     <a class="ch-next" href="${nextP.slug}.html" style="--h:300px;--w:210px;--bb:${nb.bg};--bi:${nb.ink};--ba:${nb.acc}">
-      <span class="ch-next-book"><span class="cover">${coverHtml(nb, nextCh, nextYear)}</span></span>
+      <span class="ch-next-book"><span class="cover">${coverHtml(nb, nextCh, nextYear, IMG(nextP.img, base))}</span></span>
       <span class="ch-next-txt">
         <span class="dir">Next chapter</span>
         <span class="serif t">${esc(nextP.title)}</span>
