@@ -380,7 +380,7 @@ function buildHome() {
   const cards = d.track.stats
     .map((st, i) => `<div class="postcard reveal" style="--tilt:${[2.4, -1.8, -2.2, 1.6][i % 4]}deg;--stamp:${POST[i % 4]}">
       <div class="pc-msg"><b>${esc(st.value)}</b><span>${esc(st.label)}</span></div>
-      <div class="pc-side" aria-hidden="true"><span class="stamp">${icon(st.icon, "stamp-ic")}<small>${["1st", "2nd", "1st", "Air"][i % 4]}</small></span><span class="postmark"></span><i></i><i></i><i></i></div>
+      <div class="pc-side" aria-hidden="true"><span class="stamp">${icon(st.icon, "stamp-ic")}<small>${["1st", "2nd", "1st", "Air"][i % 4]}</small></span><svg class="postmark" viewBox="0 0 120 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="30" cy="30" r="26"/><circle cx="30" cy="30" r="17"/><path d="M62 16c6-5 10 5 16 0s10 5 16 0 10 5 16 0 6 3 9 0M62 30c6-5 10 5 16 0s10 5 16 0 10 5 16 0 6 3 9 0M62 44c6-5 10 5 16 0s10 5 16 0 10 5 16 0 6 3 9 0"/></g><text x="30" y="28" text-anchor="middle" font-size="8.500" font-weight="700" fill="currentColor" font-family="Inter,sans-serif">LONDON</text><text x="30" y="38" text-anchor="middle" font-size="7" fill="currentColor" font-family="Inter,sans-serif">${["2025", "2024", "2025", "2026"][i % 4]}</text></svg><i></i><i></i><i></i></div>
     </div>`)
     .join("");
 

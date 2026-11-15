@@ -702,3 +702,60 @@ body.home-shelf .wall-top{padding-top:64px}
   .ob{justify-self:start}
   .ob,.reader.is-in .ob,.reader.is-in.is-open .ob{transform:translateX(calc((100vw - var(--W)) / 2 - var(--W)))}
 }
+
+/* ================================================================
+   WALL polish — finer grain, real postmarks, looser pinning
+   ================================================================ */
+:root{
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.poster::after,.postcard::after,.draft::after,.polaroid::after,.card-biz::after{opacity:.16}
+.lf::after{opacity:.14}
+.wall::before{opacity:.35}
+
+.postcards{grid-template-columns:repeat(2,minmax(0,1fr))}
+.postcard{background:#fbfaf5;min-width:0}
+.postcard:nth-child(2){background:#f1f3f2}
+.postcard:nth-child(3){background:#f8f1e6}
+.postcard:nth-child(4){background:#f6f6f1;
+  border:5px solid transparent;border-image:repeating-linear-gradient(135deg,#b4402f 0 9px,#fbfaf5 9px 18px,#2f4a86 18px 27px,#fbfaf5 27px 36px) 5}
+.pc-msg{border-right-color:color-mix(in srgb,var(--stamp) 35%,#cfc5b0)}
+.pc-side i{background:color-mix(in srgb,var(--stamp) 30%,#b9ae98)}
+.postcard .pc-msg span{color:#27324d}
+.postmark{position:absolute;top:26%;right:30%;width:86%;height:auto;aspect-ratio:2;border:0;border-radius:0;background:none;
+  color:rgba(35,38,60,.5);transform:rotate(-9deg);pointer-events:none}
+.card-biz{transform:rotate(-2.4deg)}
+
+@media (max-width:640px){
+  .postcards{gap:0;margin:6px -6px 0;padding:0 4px}
+  .postcard{width:112%}
+  .postcard:nth-child(1){margin:0 0 0 -4%;--tilt:-3deg;z-index:1}
+  .postcard:nth-child(2){margin:22px 0 0 -8%;--tilt:2.6deg;z-index:2}
+  .postcard:nth-child(3){margin:-8px 0 0 -2%;--tilt:1.8deg;z-index:3}
+  .postcard:nth-child(4){margin:6px 0 0 -9%;--tilt:-2.4deg;z-index:2}
+  .postcard .pc-msg b{font-size:1.45rem}
+  .postcard .pc-msg span{font-size:13.500px;margin-top:5px}
+  .card-biz{width:196px;margin:-14px 6px 0 auto;justify-self:end;padding:16px 18px 14px;transform:rotate(3.2deg);z-index:4}
+  .card-biz b{font-size:16px}.card-biz > a{font-size:12.500px}.biz-links{font-size:12px;gap:12px}
+  .biz-logo{width:22px;height:22px}
+  .view-switch{right:10px;bottom:10px;padding:7px 12px;font-size:12px;opacity:.9}
+}
+.postmark{width:150%;right:22%;top:20%}
+@media (max-width:640px){
+  .postcard{width:104%}
+  .postcard:nth-child(1){margin:0 0 0 -3%}
+  .postcard:nth-child(2){margin:20px 0 0 -1%}
+  .postcard:nth-child(3){margin:-4px 0 0 -2%;z-index:2}
+  .postcard:nth-child(4){margin:10px 0 0 -2%;z-index:3}
+}
+/* tilt via `rotate` so the reveal animation can't flatten it */
+.postcard,.note,.draft,.polaroid{rotate:var(--tilt)}
+.note:hover,.note[open],.draft:hover{rotate:0deg}
+.card-biz{rotate:-2.4deg}
+.poster{rotate:-.8deg}
+@media (max-width:640px){
+  .postmark{width:118%;right:6%;top:30%}
+  .postcard:nth-child(1){rotate:-3deg}.postcard:nth-child(2){rotate:2.6deg}
+  .postcard:nth-child(3){rotate:1.8deg}.postcard:nth-child(4){rotate:-2.4deg}
+  .card-biz{rotate:3.2deg}
+}
