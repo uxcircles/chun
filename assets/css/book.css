@@ -689,3 +689,16 @@ body.home-shelf .wall-top{padding-top:64px}
   .leaf.flipped{transform:rotateY(-105deg)}
   .lf.front{box-shadow:inset 16px 0 22px -16px rgba(0,0,0,.32),0 24px 40px -18px rgba(0,0,0,.7)}
 }
+
+/* phones: turned pages stay on the left, peeking past the edge of the screen */
+@media (max-width:720px){
+  .ob{--W:min(84vw,380px);width:calc(var(--W) * 2)}
+  .reader.is-in .ob,.reader.is-in.is-open .ob{transform:translateX(calc(var(--W) * -.5))}
+  .leaf{left:50%}
+  .leaf.flipped{transform:rotateY(-180deg);opacity:1;pointer-events:auto;transition:transform .95s cubic-bezier(.5,.05,.2,1)}
+  .lf.back{box-shadow:inset -22px 0 26px -16px rgba(0,0,0,.45)}
+}
+@media (max-width:720px){
+  .ob{justify-self:start}
+  .ob,.reader.is-in .ob,.reader.is-in.is-open .ob{transform:translateX(calc((100vw - var(--W)) / 2 - var(--W)))}
+}
