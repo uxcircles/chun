@@ -220,7 +220,7 @@ function shell({ title, desc, body, base, extraClass = "", progress = false, gat
 <link rel="apple-touch-icon" href="${base}assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Caveat:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${base}assets/css/style.css?v=${CSS_V}">
 <link rel="stylesheet" href="${base}assets/css/book.css?v=${BOOK_CSS_V}">
 </head>
@@ -309,16 +309,6 @@ function buildHome() {
     })
     .join("");
 
-  const stats = d.track.stats
-    .map(
-      (st) => `<div class="stat reveal">
-      ${icon(st.icon)}
-      <b data-count="${esc(st.value)}">${esc(st.value)}</b>
-      <span>${esc(st.label)}</span>
-    </div>`
-    )
-    .join("");
-
   const LOCK = `<svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="7" width="10" height="7.5" rx="1.6" fill="currentColor"/></svg>`;
   const shelfItems = d.featured.projects.map((p, i) => {
     const st = STUDIES.find((x) => x.slug === p.slug);
@@ -335,10 +325,6 @@ function buildHome() {
         </span>
       </button>`)
     .join("");
-  const LIE = ["#4b4558", "#6e5a40", "#2f4b4a"];
-  const stack = d.writing.items
-    .map((a, i) => `<a class="lie" href="${a.url}" target="_blank" rel="noopener" style="--bb:${LIE[i % 3]};--len:${236 - i * 14}px;--off:${[6, -10, 2][i % 3]}px" title="${esc(a.title)}"><span>${esc(a.title)}</span></a>`)
-    .join("");
   const contents = shelfItems
     .map(({ p, st, b, ch }) => `<li class="reveal"><a href="work/${p.slug}.html">
         <span class="c-num">${ch}</span>
@@ -354,79 +340,106 @@ function buildHome() {
     }))
   ).replace(/</g, "\\u003c");
 
-  const quotes = d.testimonials.items
-    .map(
-      ([t, name, role]) => `<figure class="quote-card reveal">
-      <p>&ldquo;${esc(t)}&rdquo;</p>
-      <figcaption class="who"><b>${esc(name)}</b> &middot; <span>${esc(role)}</span></figcaption>
-    </figure>`
-    )
+  const NOTE = ["#f6e27a", "#f4b9b2", "#b9e3c6", "#bcd5f2", "#f6e27a", "#f2c9e6"];
+  const TILT = [-2.2, 1.6, -1, 2.4, -1.8, 1.1];
+  const notes = d.testimonials.items
+    .map(([t, name, role, short], i) => `<details class="note reveal" style="--note:${NOTE[i % NOTE.length]};--tilt:${TILT[i % TILT.length]}deg">
+      <summary><span class="pin" aria-hidden="true"></span><q>${esc(short || t)}</q><span class="who"><b>${esc(name)}</b><span>${esc(role)}</span></span><span class="more">Read the full note</span></summary>
+      <p class="full">&ldquo;${esc(t)}&rdquo;</p>
+    </details>`)
     .join("");
 
-  const articles = d.writing.items
-    .map(
-      (a) => `<a class="article reveal" href="${a.url}" target="_blank" rel="noopener">
-      <div class="thumb"><img src="${IMG(a.img, base)}" alt="" loading="lazy"></div>
-      <div class="txt">
-        <h3 class="serif">${esc(a.title)}</h3>
-        <p>${esc(a.desc)}</p>
-        <div class="meta">${esc(a.meta)}</div>
-      </div>
-    </a>`
-    )
+  const drafts = d.writing.items
+    .map((a, i) => `<a class="draft reveal" href="${a.url}" target="_blank" rel="noopener" style="--tilt:${[-1.4, 0.8, -0.6][i % 3]}deg">
+      <span class="clip" aria-hidden="true"></span>
+      <span class="d-meta">${esc(a.meta)}</span>
+      <span class="d-title">${esc(a.title)}</span>
+      <span class="d-desc">${esc(a.desc)}</span>
+      <span class="d-go">Read on Medium <span aria-hidden="true">&rarr;</span></span>
+    </a>`)
     .join("");
 
-  const logoSet = h.clientLogos
-    .map(
-      ([name, file]) =>
-        `<span class="logo logo--${slugify(name)}"><img src="${IMG(file, base)}" alt="${esc(name)}" decoding="async"></span>`
-    )
+  const caps = d.beyond.captions || [];
+  const polaroids = d.beyond.photos
+    .map((ph, i) => `<figure class="polaroid reveal" style="--tilt:${[-3, 2.2, -1.4][i % 3]}deg"><span class="tape" aria-hidden="true"></span><img src="${IMG(ph, base)}" alt="${esc(caps[i] || "")}" loading="lazy"><figcaption>${esc(caps[i] || "")}</figcaption></figure>`)
     .join("");
-  // repeat the set enough times that half the track always exceeds the widest viewport
-  const logos =
-    `<div class="logo-track"><span class="logo-set">${logoSet}</span>` +
-    `<span class="logo-set" aria-hidden="true">${logoSet}</span>`.repeat(7) +
-    `</div>`;
 
-  const secHead = (n, title, intro) => `<div class="section-head reveal">
-      <h2 class="serif split">${splitWords(title)}</h2>
-      ${intro ? `<p>${esc(intro)}</p>` : ""}
-    </div>`;
+  const POST = ["#e8c78c", "#9fc1ff", "#f2b48c", "#b9e3c6"];
+  const cards = d.track.stats
+    .map((st, i) => `<div class="postcard reveal" style="--tilt:${[2.2, -1.6, 1.4, -2.4][i % 4]}deg;--stamp:${POST[i % 4]}">
+      <span class="stamp" aria-hidden="true"></span>
+      <b>${esc(st.value)}</b><span>${esc(st.label)}</span>
+    </div>`)
+    .join("");
+
+  const logoRow = h.clientLogos
+    .map(([name, file]) => `<span class="logo logo--${slugify(name)}"><img src="${IMG(file, base)}" alt="${esc(name)}" decoding="async"></span>`)
+    .join("");
 
   const body = `
-<section class="library" id="work">
-  <div class="wrap lib-intro">
-    <p class="eyebrow hero-gate">${esc(h.kicker)}</p>
-    <h1 class="serif split hero-title">${heroHead}</h1>
-    <p class="lede hero-gate">${esc(h.sub)}</p>
-  </div>
-  <div class="shelf hero-gate">
-    <div class="shelf-row" id="shelf">
-      <span class="bookend" aria-hidden="true"></span>
-      ${books}
-      <span class="shelf-gap" aria-hidden="true"></span>
-      <div class="stack">${stack}</div>
-      <figure class="frame"><img src="${IMG(d.beyond.photos[1], base)}" alt="Chun-Chuan running past Tower Bridge" loading="lazy"></figure>
+<div class="wall">
+  <section class="wall-top" aria-label="Introduction">
+    <div class="wall-in">
+      <div class="poster hero-gate">
+        <span class="tape t1" aria-hidden="true"></span><span class="tape t2" aria-hidden="true"></span>
+        <p class="p-kicker">Chun-Chuan Lin &middot; Product designer &middot; London</p>
+        <h1 class="serif split hero-title">${heroHead}</h1>
+        <p class="p-sub">${esc(h.sub)}</p>
+        <p class="p-facts">${esc(h.kicker)}</p>
+      </div>
+      <div class="postcards">${cards}</div>
+      <div class="card-biz reveal">
+        <span class="pin" aria-hidden="true"></span>
+        <b>Say hello</b>
+        <a href="mailto:${EMAIL}">${EMAIL}</a>
+        <span class="biz-links"><a href="${d.nav.links[0][1]}" target="_blank" rel="noopener">CV</a><a href="${d.nav.links[1][1]}" target="_blank" rel="noopener">LinkedIn</a></span>
+      </div>
     </div>
-    <div class="plank" aria-hidden="true"></div>
-  </div>
-  <div class="hero-marquee" aria-label="Selected clients">${logos}</div>
-</section>
+    <div class="logo-strip reveal" aria-label="Selected clients"><span class="ls-k">Worked with</span>${logoRow}</div>
+  </section>
 
-<section class="contents-sec" id="contents">
-  <div class="wrap">
-    ${secHead("01", "Contents", "")}
-    <ol class="contents">${contents}</ol>
-    <p class="earlier reveal">${esc(d.featured.earlierNote).replace("→ Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`)}</p>
-  </div>
-</section>
+  <section class="library" id="work" aria-label="Case studies">
+    <div class="shelf">
+      <div class="shelf-row" id="shelf">
+        <span class="bookend" aria-hidden="true"></span>
+        ${books}
+        <span class="bookend r" aria-hidden="true"></span>
+      </div>
+      <div class="plank" aria-hidden="true"></div>
+    </div>
+    <div class="index-card reveal" id="contents">
+      <span class="pin" aria-hidden="true"></span>
+      <h2 class="serif">Index</h2>
+      <ol class="contents">${contents}</ol>
+      <p class="earlier">${esc(d.featured.earlierNote).replace("→ Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`)}</p>
+    </div>
+  </section>
 
-<section class="alt" id="track">
-  <div class="wrap">
-    ${secHead("02", d.track.title, d.track.intro)}
-    <div class="stats">${stats}</div>
-  </div>
-</section>
+  <section class="wall-sec" id="praise">
+    <div class="wall-in">
+      <h2 class="wall-h serif reveal">Notes left by people I&rsquo;ve worked with</h2>
+      <div class="notes">${notes}</div>
+    </div>
+  </section>
+
+  <section class="wall-sec" id="writing">
+    <div class="wall-in">
+      <h2 class="wall-h serif reveal">Drafts on the desk</h2>
+      <p class="wall-p reveal">${esc(d.writing.intro)}</p>
+      <div class="drafts">${drafts}</div>
+    </div>
+  </section>
+
+  <section class="wall-sec" id="about">
+    <div class="wall-in photos">
+      <div class="photo-note reveal">
+        <h2 class="wall-h serif">${esc(d.beyond.title)}</h2>
+        <p>${esc(d.beyond.body)}</p>
+      </div>
+      <div class="polaroids">${polaroids}</div>
+    </div>
+  </section>
+</div>
 
 <dialog class="reader" id="reader" aria-label="Chapter preview">
   <button class="rd-btn rd-close" type="button" aria-label="Close">&times;</button>
@@ -437,35 +450,7 @@ function buildHome() {
     <div class="ob-cover"><div class="ob-front cover" id="ob-front"></div><div class="ob-back" id="ob-back"></div></div>
   </div>
 </dialog>
-<script type="application/json" id="books-data">${bookData}</script>
-
-<section class="alt" id="praise">
-  <div class="wrap">
-    ${secHead("03", d.testimonials.title, d.testimonials.intro)}
-    <div class="quotes">${quotes}</div>
-  </div>
-</section>
-
-<section id="writing">
-  <div class="wrap">
-    ${secHead("04", d.writing.title, d.writing.intro)}
-    <div class="articles">${articles}</div>
-  </div>
-</section>
-
-<section class="alt" id="about">
-  <div class="wrap beyond reveal">
-    <div class="txt">
-      <h2 class="serif split">${splitWords(d.beyond.title)}</h2>
-      <p>${esc(d.beyond.body)}</p>
-    </div>
-    <div class="grid">
-      <img src="${IMG(d.beyond.photos[0], base)}" alt="" loading="lazy">
-      <img src="${IMG(d.beyond.photos[1], base)}" alt="" loading="lazy">
-      <img src="${IMG(d.beyond.photos[2], base)}" alt="" loading="lazy">
-    </div>
-  </div>
-</section>`;
+<script type="application/json" id="books-data">${bookData}</script>`;
 
   return shell({
     title: "Chun-Chuan Lin — Product designer for complex, regulated financial products",
