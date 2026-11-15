@@ -218,7 +218,7 @@ function coverHtml(b, chapter, year, img) {
 const GATE_KEY = "cc_portfolio_unlocked";
 const GATE_PASS = "Chun";
 
-function shell({ title, desc, body, base, extraClass = "", progress = false, gated = false, cursorBadges = "", ogImage = OG_IMAGE, running = "", shelfJs = false, noNav = false }) {
+function shell({ title, desc, body, base, extraClass = "", progress = false, gated = false, cursorBadges = "", ogImage = OG_IMAGE, running = "", shelfJs = false, noNav = false, classic = false }) {
   const bodyClass = gated ? `${extraClass} locked`.trim() : extraClass;
   return `<!doctype html>
 <html lang="en">
@@ -241,6 +241,7 @@ function shell({ title, desc, body, base, extraClass = "", progress = false, gat
 <link rel="stylesheet" href="${base}assets/css/book.css?v=${BOOK_CSS_V}">
 </head>
 <body class="${bodyClass}">
+${shelfJs ? `<script>try{if(localStorage.getItem("cc_view")==="classic"&&!/[?&]wall\b/.test(location.search))location.replace("classic.html"+location.hash)}catch(e){}</script>` : ""}
 <a class="skip-link" href="#main-content">Skip to content</a>
 ${gated ? `<script>try{if(localStorage.getItem(${JSON.stringify(GATE_KEY)})==="1")document.currentScript.parentElement.classList.remove("locked")}catch(e){}</script>
 <div class="gate" id="gate">
@@ -257,21 +258,24 @@ ${gated ? `<script>try{if(localStorage.getItem(${JSON.stringify(GATE_KEY)})==="1
 ${progress ? `<div class="scroll-progress" aria-hidden="true"><span></span></div>` : ""}
 <div class="cursor-dot" aria-hidden="true"></div>
 ${cursorBadges}
-${noNav ? "" : nav(base, running)}
+${noNav ? "" : nav(base, running, classic)}
 <main id="main-content">
 ${body}
 </main>
 ${footer(base)}
+${shelfJs ? `<a class="view-switch" href="classic.html" data-view="classic"><span>Prefer a plain list?</span><b>Classic view</b></a>` : ""}
+${classic ? `<a class="view-switch" href="index.html?wall" data-view="wall"><span>There&rsquo;s a more playful version.</span><b>See the studio wall</b></a>` : ""}
+${shelfJs || classic ? `<script>document.querySelector(".view-switch").addEventListener("click",function(){try{localStorage.setItem("cc_view",this.dataset.view)}catch(e){}})</script>` : ""}
 <script src="${base}assets/js/main.js?v=${JS_V}" defer></script>
 ${shelfJs ? `<script src="${base}assets/js/shelf.js?v=${SHELF_JS_V}" defer></script>` : ""}
 </body>
 </html>`;
 }
 
-function nav(base, running = "") {
+function nav(base, running = "", classic = false) {
   return `<header class="nav" id="nav">
   <div class="nav-in">
-    <a class="brand" href="${base}index.html">
+    <a class="brand" href="${base}${classic ? "classic.html" : "index.html"}">
       <img src="${base}assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.webp" alt="">
       <span>Chun-Chuan&nbsp;Lin</span>
     </a>
@@ -280,7 +284,7 @@ function nav(base, running = "") {
       <span class="bar"></span><span class="bar"></span><span class="bar"></span>
     </button>
     <nav class="nav-links">
-      <a href="${base}index.html#work">Shelf</a>
+      <a href="${base}${classic ? "classic.html" : "index.html"}#work">${classic ? "Work" : "Shelf"}</a>
       <a href="https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing" target="_blank" rel="noopener">CV</a>
       <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
@@ -473,6 +477,159 @@ function buildHome() {
     extraClass: "theme-dark home-shelf",
     shelfJs: true,
     noNav: true,
+  });
+}
+
+function buildClassic() {
+  const d = C("home.json");
+  const base = "";
+  const h = d.hero;
+  // split hero heading into animatable words, italicising the emphasis word
+  const heroHead = esc(h.heading)
+    .split(/(\s+)/)
+    .map((w) => {
+      if (/^\s+$/.test(w)) return w;
+      const inner = w === esc(h.emphasisWord) ? `<em>${w}</em>` : w;
+      return `<span class="w">${inner}</span>`;
+    })
+    .join("");
+
+  const stats = d.track.stats
+    .map(
+      (st) => `<div class="stat reveal">
+      ${icon(st.icon)}
+      <b data-count="${esc(st.value)}">${esc(st.value)}</b>
+      <span>${esc(st.label)}</span>
+    </div>`
+    )
+    .join("");
+
+  const projects = d.featured.projects
+    .map((p) => {
+      const size = p.size === "lg" ? "lg" : "sm";
+      const locked = STUDIES.find((s) => s.slug === p.slug)?.locked;
+      const badgeId = locked ? "cursor-badge-locked" : "cursor-badge-view";
+      return `<a class="project ${size}${p.reverse ? " reverse" : ""} reveal" href="work/${p.slug}.html" data-cursor-badge="${badgeId}">
+      <div class="shot"><img src="${IMG(p.img, base)}" alt="${esc(p.title)}" loading="lazy"></div>
+      <div class="body">
+        <span class="tag">${esc(p.meta)}</span>
+        <h3 class="serif">${esc(p.title)}</h3>
+        <p>${esc(p.desc)}</p>
+        <span class="more">View case study ${ARROW}</span>
+      </div>
+    </a>`;
+    })
+    .join("");
+
+  const quotes = d.testimonials.items
+    .map(
+      ([t, name, role]) => `<figure class="quote-card reveal">
+      <p>&ldquo;${esc(t)}&rdquo;</p>
+      <figcaption class="who"><b>${esc(name)}</b> &middot; <span>${esc(role)}</span></figcaption>
+    </figure>`
+    )
+    .join("");
+
+  const articles = d.writing.items
+    .map(
+      (a) => `<a class="article reveal" href="${a.url}" target="_blank" rel="noopener">
+      <div class="thumb"><img src="${IMG(a.img, base)}" alt="" loading="lazy"></div>
+      <div class="txt">
+        <h3 class="serif">${esc(a.title)}</h3>
+        <p>${esc(a.desc)}</p>
+        <div class="meta">${esc(a.meta)}</div>
+      </div>
+    </a>`
+    )
+    .join("");
+
+  const logoSet = h.clientLogos
+    .map(
+      ([name, file]) =>
+        `<span class="logo logo--${slugify(name)}"><img src="${IMG(file, base)}" alt="${esc(name)}" decoding="async"></span>`
+    )
+    .join("");
+  // repeat the set enough times that half the track always exceeds the widest viewport
+  const logos =
+    `<div class="logo-track"><span class="logo-set">${logoSet}</span>` +
+    `<span class="logo-set" aria-hidden="true">${logoSet}</span>`.repeat(7) +
+    `</div>`;
+
+  const secHead = (n, title, intro) => `<div class="section-head reveal">
+      <h2 class="serif split">${splitWords(title)}</h2>
+      ${intro ? `<p>${esc(intro)}</p>` : ""}
+    </div>`;
+
+  const body = `
+<section class="hero" style="padding:0">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-in">
+    <h1 class="serif split hero-title">${heroHead}</h1>
+    <p class="lede hero-gate">${esc(h.sub)}</p>
+    <p class="facts hero-gate">${esc(h.kicker)}</p>
+    <div class="cta hero-gate">
+      <a class="btn btn-hero" href="#work">Explore case studies ${ARROW}</a>
+      <a class="btn btn-line" href="mailto:${EMAIL}">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-marquee" aria-label="Selected clients">${logos}</div>
+</section>
+
+<section class="alt" id="track">
+  <div class="wrap">
+    ${secHead("01", d.track.title, d.track.intro)}
+    <div class="stats">${stats}</div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    ${secHead("02", d.featured.title, "")}
+    <div class="projects">${projects}</div>
+    <p class="earlier reveal">${esc(d.featured.earlierNote).replace("&rarr; Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`).replace("→ Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`)}</p>
+  </div>
+</section>
+
+<section class="alt" id="praise">
+  <div class="wrap">
+    ${secHead("03", d.testimonials.title, d.testimonials.intro)}
+    <div class="quotes">${quotes}</div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="wrap">
+    ${secHead("04", d.writing.title, d.writing.intro)}
+    <div class="articles">${articles}</div>
+  </div>
+</section>
+
+<section class="alt" id="about">
+  <div class="wrap beyond reveal">
+    <div class="txt">
+      <h2 class="serif split">${splitWords(d.beyond.title)}</h2>
+      <p>${esc(d.beyond.body)}</p>
+    </div>
+    <div class="grid">
+      <img src="${IMG(d.beyond.photos[0], base)}" alt="" loading="lazy">
+      <img src="${IMG(d.beyond.photos[1], base)}" alt="" loading="lazy">
+      <img src="${IMG(d.beyond.photos[2], base)}" alt="" loading="lazy">
+    </div>
+  </div>
+</section>`;
+
+  const cursorBadges =
+    spinBadge("cursor-badge-locked", "Password protected | Private content", "lock") +
+    spinBadge("cursor-badge-view", "CLICK TO VIEW", null);
+
+  return shell({
+    title: "Chun-Chuan Lin — Product designer for complex, regulated financial products",
+    desc: h.sub,
+    body,
+    base,
+    extraClass: "theme-dark classic",
+    cursorBadges,
+    classic: true,
   });
 }
 
@@ -817,6 +974,7 @@ function buildStudy(study, idx) {
    WRITE
 ================================================================= */
 fs.writeFileSync(path.join(ROOT, "index.html"), buildHome());
+fs.writeFileSync(path.join(ROOT, "classic.html"), buildClassic());
 console.log("✓ index.html");
 
 const workDir = path.join(ROOT, "work");

@@ -668,3 +668,11 @@ body.home-shelf .wall-top{padding-top:64px}
 .poster h1 em{font-size:29cqw}
 .note q{font-size:20.500px}
 .note summary{gap:8px;padding-bottom:14px}
+
+/* switch between the studio wall and the classic list */
+.view-switch{position:fixed;right:18px;bottom:18px;z-index:70;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;
+  background:rgba(20,19,26,.86);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.66);font:400 13px/1 var(--sans);
+  box-shadow:0 10px 24px -10px rgba(0,0,0,.7);transition:border-color .2s,transform .2s}
+.view-switch b{color:#fff;font-weight:600}
+.view-switch:hover{border-color:rgba(255,255,255,.45);transform:translateY(-2px)}
+@media (max-width:640px){.view-switch{right:12px;bottom:12px;padding:9px 13px}.view-switch span{display:none}}
