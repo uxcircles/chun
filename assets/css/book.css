@@ -676,3 +676,16 @@ body.home-shelf .wall-top{padding-top:64px}
 .view-switch b{color:#fff;font-weight:600}
 .view-switch:hover{border-color:rgba(255,255,255,.45);transform:translateY(-2px)}
 @media (max-width:640px){.view-switch{right:12px;bottom:12px;padding:9px 13px}.view-switch span{display:none}}
+
+/* iOS Safari: keep the shadow behind the pages, round focus rings on reader buttons */
+.ob::before{transform:translateZ(-2px);pointer-events:none}
+.leaf{transform:translateZ(0)}
+.leaf.flipped{transform:rotateY(-180deg) translateZ(0)}
+.rd-btn,.rd-btn:focus-visible{border-radius:50%}
+.rd-btn:focus-visible{outline:2px solid #e8c78c;outline-offset:3px}
+.ob:focus{outline:none}
+@media (max-width:720px){
+  .ob::before{display:none}
+  .leaf.flipped{transform:rotateY(-105deg)}
+  .lf.front{box-shadow:inset 16px 0 22px -16px rgba(0,0,0,.32),0 24px 40px -18px rgba(0,0,0,.7)}
+}
