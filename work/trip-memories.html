@@ -14,10 +14,12 @@
 <link rel="apple-touch-icon" href="../assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Caveat:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/style.css?v=5820707c">
+<link rel="stylesheet" href="../assets/css/book.css?v=6ba6de74">
 </head>
 <body class="cs-page">
+
 <a class="skip-link" href="#main-content">Skip to content</a>
 
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
@@ -29,11 +31,12 @@
       <img src="../assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.webp" alt="">
       <span>Chun-Chuan&nbsp;Lin</span>
     </a>
+    <span class="nav-run">Chapter 08 &middot; Trip Memories</span>
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
       <span class="bar"></span><span class="bar"></span><span class="bar"></span>
     </button>
     <nav class="nav-links">
-      <a href="../index.html#work">Work</a>
+      <a href="../index.html#work">Shelf</a>
       <a href="https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing" target="_blank" rel="noopener">CV</a>
       <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
@@ -43,20 +46,22 @@
 </header>
 <main id="main-content">
 
-<section class="cs-hero">
-  <div class="wrap">
-    <a class="back hero-gate" href="../index.html#work">&larr; All work</a>
-    <h1 class="serif split hero-title"><span class="w">Redesigning</span> <span class="w">Revolut’s</span> <span class="w">home</span> <span class="w">experience</span></h1>
-    <p class="sub hero-gate">A concept exploration into financial clarity, emotional engagement, and the future of travel-centred money management.</p>
-    <p class="meta hero-gate">Oct 2025 · Research (Heuristic review, desk research, 5 user interviews), UX and UI design</p>
-  </div>
-</section>
-<div class="cs-hero-img reveal"><img src="../assets/img/Zd6YJ8oDITVZUEIJeXDYrRijMY.webp" alt=""></div>
+<article class="chapter" style="--bb:#e6e1d3;--bi:#1d1d24;--ba:#c4572d">
+  <header class="ch-open">
+    <div class="ch-band" aria-hidden="true"></div>
+    <figure class="ch-plate hero-gate"><img src="../assets/img/Zd6YJ8oDITVZUEIJeXDYrRijMY.webp" alt=""></figure>
+    <div class="ch-title">
+      <p class="ch-num hero-gate"><span>Chapter 08</span><span>Trip Memories</span></p>
+      <h1 class="serif split hero-title"><span class="w">Redesigning</span> <span class="w">Revolut’s</span> <span class="w">home</span> <span class="w">experience</span></h1>
+      <p class="sub hero-gate">A concept exploration into financial clarity, emotional engagement, and the future of travel-centred money management.</p>
+      <p class="meta hero-gate">Oct 2025 · Research (Heuristic review, desk research, 5 user interviews), UX and UI design</p>
+    </div>
+  </header>
 
-<div class="cs-body">
-  <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-overview-0">Overview</a></li><li><a href="#sec-discovery-1">Discovery</a></li><li><a href="#sec-insight-2">Insight</a></li><li><a href="#sec-design-approach-3">Design approach</a></li><li><a href="#sec-version-3-travel-as-a-life-layer-4">Version 3 - Travel as a life layer</a></li><li><a href="#sec-user-journey-5">User journey</a></li><li><a href="#sec-strategic-value-6">Strategic value</a></li><li><a href="#sec-reflection-7">Reflection</a></li></ol></nav></aside>
-  <div class="cs-content">
-    <section class="cs-section" id="sec-overview-0">
+  <div class="cs-body">
+    <aside class="toc"><nav aria-label="Sections"><ol><li><a href="#sec-overview-0">Overview</a></li><li><a href="#sec-discovery-1">Discovery</a></li><li><a href="#sec-insight-2">Insight</a></li><li><a href="#sec-design-approach-3">Design approach</a></li><li><a href="#sec-version-3-travel-as-a-life-layer-4">Version 3 - Travel as a life layer</a></li><li><a href="#sec-user-journey-5">User journey</a></li><li><a href="#sec-strategic-value-6">Strategic value</a></li><li><a href="#sec-reflection-7">Reflection</a></li></ol></nav></aside>
+    <div class="cs-content">
+      <section class="cs-section" id="sec-overview-0">
   <span class="num">01</span>
   <h2 class="divider serif split"><span class="w">Overview</span></h2>
   <h3 class="sub serif reveal">This started as a brief. It became a question.</h3>
@@ -203,30 +208,22 @@
 <ul class="bullets reveal"><li>Usability test V1 &amp; V2 changes with Revolut users to validate hierarchy decisions</li><li>Prototype the V3 goal-setting flow and test discoverability of travel features</li><li>Validate the Memory Moments concept — is it compelling enough to sustain engagement, or a novelty?</li><li>Explore the tension between Revolut's dark, premium brand and the warmer, lighter tone this concept suggests</li></ul>
 <p class="lead reveal">Good UX doesn't just guide — it empowers and connects.</p>
 </section>
-  </div>
-</div>
-
-<section class="cs-next">
-  <div class="wrap">
-    <p class="eyebrow">Keep exploring</p>
-    <div class="cs-next-grid">
-      <a class="cs-next-card" href="portfolio-health.html">
-        <img class="thumb" src="../assets/img/9iO2ZGM4p4TnNoXjsiRvFTovY58.webp" alt="" loading="lazy">
-        <span class="txt">
-          <span class="dir">&larr; Previous</span>
-          <h3 class="serif">Portfolio health for a regulated investment app</h3>
-        </span>
-      </a>
-      <a class="cs-next-card next" href="save-journey-redesign.html">
-        <span class="txt">
-          <span class="dir">Next &rarr;</span>
-          <h3 class="serif">Redesigned the Save journey, boosting Autosave volume 5–6×</h3>
-        </span>
-        <img class="thumb" src="../assets/img/cs7-hero.webp" alt="" loading="lazy">
-      </a>
     </div>
   </div>
-</section>
+
+  <footer class="ch-end">
+    <p class="ch-fin" aria-hidden="true">&#10086;</p>
+    <a class="ch-next" href="provider-redesign.html" style="--h:300px;--w:210px;--bb:#1f3b33;--bi:#ead9ae;--ba:#c9a868">
+      <span class="ch-next-book"><span class="cover"><span class="cv cv--window"><span class="cv-top"><span>Chun-Chuan Lin</span><span>2025</span></span><span class="cv-pic"><img src="../assets/img/VFbImBTynQh7F0MmkZp4YDalEAE.webp" alt="" loading="lazy" style="object-position:50% 45%"></span><span class="cv-words"><span class="cv-num">01</span><span class="cv-title">The £9B Platform</span><span class="cv-rule"></span><span class="cv-out">£9B in client assets</span></span></span></span></span>
+      <span class="ch-next-txt">
+        <span class="dir">Next chapter</span>
+        <span class="serif t">Redesigned a £9B platform for UHNW clients</span>
+        <span class="o">£9B in client assets</span>
+      </span>
+    </a>
+    <p class="ch-links"><a href="portfolio-health.html">&larr; Previous chapter</a><a href="../index.html#work">Back to the shelf</a></p>
+  </footer>
+</article>
 </main>
 <footer class="foot" id="contact">
   <div class="foot-in">
@@ -243,6 +240,10 @@
     </div>
   </div>
 </footer>
+
+
+
 <script src="../assets/js/main.js?v=11b02167" defer></script>
+
 </body>
 </html>

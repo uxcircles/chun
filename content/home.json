@@ -45,12 +45,12 @@
     "title": "People love working with me",
     "intro": "Known for making complexity simple — calm, structured, collaborative, and fast in high-stakes environments.",
     "items": [
-      ["Working with Chun was a pleasure. He played a key role in shaping several of our most important internal tools and the client-facing app. His ability to translate abstract problems into elegant, user-focused designs made a real difference to our product delivery.","Arik Peretz","Founder, Y TREE"],
-      ["Our product had a lot of moving parts, different user types, evolving requirements, and high expectations. Chun brought calm, clarity, and fast execution. His ability to translate messy ideas into intuitive experiences was exactly what we needed.","Paul Smith","CEO, Global Gains"],
-      ["Chun was a fantastic UX partner – quickly grasping complex data challenges and translating them into clear, interactive design concepts. He played a key role in developing a UX proof of concept that brought our product vision to life, and helped turn dense, technical content into user-friendly visuals to enhance both client engagement and thought leadership. A pleasure to work with.","Ciaran McCale","Chief Marketing & Communications Officer, ESG Book"],
-      ["It's been a pleasure collaborating with Chun for nearly four years. He transformed our design system, bridged Figma with Android APIs, and elevated both iOS and Android experiences. His work enabled a small team to maintain a 100-screen app efficiently. Beyond his skills, he's collaborative, respectful, and positive. Any team would be lucky to have him.","Mykyta Sizyntsev","Principal Android Engineer, Y TREE"],
-      ["I worked with Chun at Y TREE for over 4 years. He's an exceptional UX/UI designer who built design systems for complex financial apps and delivered intuitive web and mobile experiences under tight deadlines. Efficient, detail-oriented, and highly collaborative, Chun is a huge asset to any team.","Isobel Raeside","Head of Product"],
-      ["Chun delivered high-quality, polished design work with a strong sense of aesthetics and interface refinement. His visual direction for PowderSpark aligned seamlessly with our premium brand positioning, and his professionalism and responsiveness made a real impact on the final result.","Alel Fahd","Founder, PowderSpark"]
+      ["Working with Chun was a pleasure. He played a key role in shaping several of our most important internal tools and the client-facing app. His ability to translate abstract problems into elegant, user-focused designs made a real difference to our product delivery.","Arik Peretz","Founder, Y TREE","His ability to translate abstract problems into elegant, user-focused designs made a real difference to our product delivery."],
+      ["Our product had a lot of moving parts, different user types, evolving requirements, and high expectations. Chun brought calm, clarity, and fast execution. His ability to translate messy ideas into intuitive experiences was exactly what we needed.","Paul Smith","CEO, Global Gains","Chun brought calm, clarity, and fast execution."],
+      ["Chun was a fantastic UX partner – quickly grasping complex data challenges and translating them into clear, interactive design concepts. He played a key role in developing a UX proof of concept that brought our product vision to life, and helped turn dense, technical content into user-friendly visuals to enhance both client engagement and thought leadership. A pleasure to work with.","Ciaran McCale","Chief Marketing & Communications Officer, ESG Book","Quickly grasping complex data challenges and translating them into clear, interactive design concepts."],
+      ["It's been a pleasure collaborating with Chun for nearly four years. He transformed our design system, bridged Figma with Android APIs, and elevated both iOS and Android experiences. His work enabled a small team to maintain a 100-screen app efficiently. Beyond his skills, he's collaborative, respectful, and positive. Any team would be lucky to have him.","Mykyta Sizyntsev","Principal Android Engineer, Y TREE","His work enabled a small team to maintain a 100-screen app efficiently."],
+      ["I worked with Chun at Y TREE for over 4 years. He's an exceptional UX/UI designer who built design systems for complex financial apps and delivered intuitive web and mobile experiences under tight deadlines. Efficient, detail-oriented, and highly collaborative, Chun is a huge asset to any team.","Isobel Raeside","Head of Product","Efficient, detail-oriented, and highly collaborative, Chun is a huge asset to any team."],
+      ["Chun delivered high-quality, polished design work with a strong sense of aesthetics and interface refinement. His visual direction for PowderSpark aligned seamlessly with our premium brand positioning, and his professionalism and responsiveness made a real impact on the final result.","Alel Fahd","Founder, PowderSpark","His visual direction for PowderSpark aligned seamlessly with our premium brand positioning."]
     ]
   },
   "writing": {
@@ -65,7 +65,8 @@
   "beyond": {
     "title": "Beyond Design",
     "body": "Away from the screen, I run, organise small communities, and make things by hand. It keeps my thinking sharp, my empathy grounded — and reminds me to slow down, especially when my little one is winning the negotiation.",
-    "photos": ["pubfSbG1jti3bcDO1lPi5CjZF64.webp","sYfxENBCH0JeVRIsdHM3iYg3I.webp","0NGZxLJCJaQSqLhbFrQrbKQVUU.webp"]
+    "photos": ["pubfSbG1jti3bcDO1lPi5CjZF64.webp","sYfxENBCH0JeVRIsdHM3iYg3I.webp","0NGZxLJCJaQSqLhbFrQrbKQVUU.webp"],
+    "captions": ["Made by hand","Running past Tower Bridge","Hosting a community talk"]
   },
   "footer": {
     "name": "Chun-Chuan Lin",

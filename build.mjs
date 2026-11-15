@@ -17,6 +17,8 @@ const fileHash = (relPath) => {
 };
 const CSS_V = fileHash("assets/css/style.css");
 const JS_V = fileHash("assets/js/main.js");
+const BOOK_CSS_V = fileHash("assets/css/book.css");
+const SHELF_JS_V = fileHash("assets/js/shelf.js");
 
 const esc = (s = "") =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -172,13 +174,51 @@ const STUDIES = [
   { slug: "rightmove-partners",       file: "cs8-rightmove-partners.json",       card: "Designed a trust layer for a two-sided marketplace", img: "cs8-hero.webp" },
 ];
 
+/* ---------- the shelf: each case study is a book ---------- */
+const BOOKS = {
+  "provider-redesign":        { short: "The £9B Platform",           outcome: "£9B in client assets",        bg: "#1f3b33", ink: "#ead9ae", acc: "#c9a868", style: "window", pos: "50% 45%", h: 312 },
+  "save-journey-redesign":    { short: "One Tap to Save",            outcome: "5–6× Autosave volume",        bg: "#3a2470", ink: "#efe6ff", acc: "#b99bff", style: "bleed", pos: "50% 40%", h: 296 },
+  "rightmove-partners":       { short: "The Trust Layer",            outcome: "Self-directed concept",       bg: "#0b1640", ink: "#eef3ff", acc: "#00deb6", style: "band", pos: "22% 50%", h: 304 },
+  "home-redesign":            { short: "What Happened to My Money?", outcome: "89% mobile app CSAT",         bg: "#8b3a26", ink: "#f8e8dc", acc: "#f2b48c", style: "bleed", pos: "72% 50%", h: 318 },
+  "client-portal":            { short: "The Client Portal",          outcome: "40% less onboarding effort",  bg: "#d29a3a", ink: "#23180a", acc: "#23180a", style: "band", pos: "35% 50%", h: 288 },
+  "wealth-management-system": { short: "The Governed Rebalance",     outcome: "AI suggests, advisors decide", bg: "#2c4366", ink: "#e9eef7", acc: "#9fc1ff", style: "window", pos: "50% 55%", h: 308 },
+  "portfolio-health":         { short: "Portfolio Health",           outcome: "Risk explained, no advice",   bg: "#5d6a33", ink: "#f2f1dc", acc: "#dfe39a", style: "bleed", pos: "58% 45%", h: 292 },
+  "trip-memories":            { short: "Trip Memories",              outcome: "Revolut concept",             bg: "#e6e1d3", ink: "#1d1d24", acc: "#c4572d", style: "plate", pos: "50% 45%", h: 300 },
+};
+const bookLength = (file) => fs.readFileSync(path.join(ROOT, "content", file), "utf8").length;
+const bookThickness = (file) => Math.round(Math.min(60, Math.max(30, 18 + bookLength(file) / 380)));
+
+function bookPages(study, base) {
+  if (study.locked) return [];
+  const { body } = splitHero(C(study.file));
+  const secs = [];
+  let cur = null;
+  for (const b of body) {
+    if (isH(b, "H1")) { cur = { t: b.text, text: "", points: [], img: "" }; secs.push(cur); continue; }
+    if (!cur) continue;
+    const txt = b.tag === "text" || isH(b, "H5", "H3") ? b.text : Array.isArray(b.p) ? b.p[0] : b.dd || (!b.tag && typeof b.text === "string" ? b.text : "");
+    if (txt && !cur.text) cur.text = txt;
+    if (Array.isArray(b.item) && cur.points.length < 3) cur.points.push(stripEmojiIcon(b.item[0]).text);
+    const im = b.img || (Array.isArray(b.compare) ? b.compare[3] || b.compare[2] : "") || (Array.isArray(b.duo) ? b.duo[0] : "") || b.poster || "";
+    if (im && !cur.img && !/\.(mp4|webm|mov)$/i.test(im)) cur.img = IMG(im, base);
+  }
+  return secs.filter((x) => x.text).slice(0, 5).map((x) => ({ ...x, text: x.text.length > 300 ? x.text.slice(0, 297).replace(/\s+\S*$/, "") + "…" : x.text }));
+}
+
+function coverHtml(b, chapter, year, img) {
+  const pic = img ? `<span class="cv-pic"><img src="${img}" alt="" loading="lazy" style="object-position:${b.pos}"></span>` : "";
+  const top = `<span class="cv-top"><span>Chun-Chuan Lin</span><span>${esc(year)}</span></span>`;
+  const words = `<span class="cv-num">${chapter}</span><span class="cv-title">${esc(b.short)}</span><span class="cv-rule"></span><span class="cv-out">${esc(b.outcome)}</span>`;
+  return `<span class="cv cv--${b.style}">${top}${pic}<span class="cv-words">${words}</span></span>`;
+}
+
 /* =================================================================
    PAGE SHELL
 ================================================================= */
 const GATE_KEY = "cc_portfolio_unlocked";
 const GATE_PASS = "Chun";
 
-function shell({ title, desc, body, base, extraClass = "", progress = false, gated = false, cursorBadges = "", ogImage = OG_IMAGE }) {
+function shell({ title, desc, body, base, extraClass = "", progress = false, gated = false, cursorBadges = "", ogImage = OG_IMAGE, running = "", shelfJs = false, noNav = false, classic = false }) {
   const bodyClass = gated ? `${extraClass} locked`.trim() : extraClass;
   return `<!doctype html>
 <html lang="en">
@@ -196,10 +236,12 @@ function shell({ title, desc, body, base, extraClass = "", progress = false, gat
 <link rel="apple-touch-icon" href="${base}assets/img/tBvzRdnmvt2RYUskQSvIiSIpaNc.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Caveat:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${base}assets/css/style.css?v=${CSS_V}">
+<link rel="stylesheet" href="${base}assets/css/book.css?v=${BOOK_CSS_V}">
 </head>
 <body class="${bodyClass}">
+${shelfJs ? `<script>try{if(localStorage.getItem("cc_view")==="classic"&&!/[?&]wall\b/.test(location.search))location.replace("classic.html"+location.hash)}catch(e){}</script>` : ""}
 <a class="skip-link" href="#main-content">Skip to content</a>
 ${gated ? `<script>try{if(localStorage.getItem(${JSON.stringify(GATE_KEY)})==="1")document.currentScript.parentElement.classList.remove("locked")}catch(e){}</script>
 <div class="gate" id="gate">
@@ -216,28 +258,33 @@ ${gated ? `<script>try{if(localStorage.getItem(${JSON.stringify(GATE_KEY)})==="1
 ${progress ? `<div class="scroll-progress" aria-hidden="true"><span></span></div>` : ""}
 <div class="cursor-dot" aria-hidden="true"></div>
 ${cursorBadges}
-${nav(base)}
+${noNav ? "" : nav(base, running, classic)}
 <main id="main-content">
 ${body}
 </main>
 ${footer(base)}
+${shelfJs ? `<a class="view-switch" href="classic.html" data-view="classic"><span>Prefer a plain list?</span><b>Classic view</b></a>` : ""}
+${classic ? `<a class="view-switch" href="index.html?wall" data-view="wall"><span>There&rsquo;s a more playful version.</span><b>See the studio wall</b></a>` : ""}
+${shelfJs || classic ? `<script>document.querySelector(".view-switch").addEventListener("click",function(){try{localStorage.setItem("cc_view",this.dataset.view)}catch(e){}})</script>` : ""}
 <script src="${base}assets/js/main.js?v=${JS_V}" defer></script>
+${shelfJs ? `<script src="${base}assets/js/shelf.js?v=${SHELF_JS_V}" defer></script>` : ""}
 </body>
 </html>`;
 }
 
-function nav(base) {
+function nav(base, running = "", classic = false) {
   return `<header class="nav" id="nav">
   <div class="nav-in">
-    <a class="brand" href="${base}index.html">
+    <a class="brand" href="${base}${classic ? "classic.html" : "index.html"}">
       <img src="${base}assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.webp" alt="">
       <span>Chun-Chuan&nbsp;Lin</span>
     </a>
+    ${running ? `<span class="nav-run">${running}</span>` : ""}
     <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
       <span class="bar"></span><span class="bar"></span><span class="bar"></span>
     </button>
     <nav class="nav-links">
-      <a href="${base}index.html#work">Work</a>
+      <a href="${base}${classic ? "classic.html" : "index.html"}#work">${classic ? "Work" : "Shelf"}</a>
       <a href="https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing" target="_blank" rel="noopener">CV</a>
       <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
@@ -269,6 +316,171 @@ function footer(base) {
    HOME
 ================================================================= */
 function buildHome() {
+  const d = C("home.json");
+  const base = "";
+  const h = d.hero;
+  // split hero heading into animatable words, italicising the emphasis word
+  const heroHead = esc(h.heading)
+    .split(/(\s+)/)
+    .map((w) => {
+      if (/^\s+$/.test(w)) return w;
+      const inner = w === esc(h.emphasisWord) ? `<em>${w}</em>` : w;
+      return `<span class="w">${inner}</span>`;
+    })
+    .join("");
+
+  const LOCK = `<svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="7" width="10" height="7.5" rx="1.6" fill="currentColor"/></svg>`;
+  const shelfItems = d.featured.projects.map((p, i) => {
+    const st = STUDIES.find((x) => x.slug === p.slug);
+    const b = BOOKS[p.slug];
+    const year = (p.meta.split("·").pop() || "").trim();
+    const ch = String(i + 1).padStart(2, "0");
+    return { p, st, b, year, ch, t: bookThickness(st.file), w: Math.round(b.h * 0.7) };
+  });
+  const books = shelfItems
+    .map(({ p, st, b, year, ch, t, w }, i) => `<button class="book" type="button" data-i="${i}" style="--h:${b.h}px;--t:${t}px;--w:${w}px;--bb:${b.bg};--bi:${b.ink};--ba:${b.acc}" aria-label="Chapter ${i + 1}, ${esc(p.title)}. Open preview">
+        <span class="b3d">
+          <span class="spine"><span class="sp-num">${ch}</span><span class="sp-title">${esc(b.short)}</span><span class="sp-mark">${st.locked ? LOCK : "&#9679;"}</span></span>
+          <span class="cover">${coverHtml(b, ch, year, IMG(p.img, base))}</span>
+        </span>
+      </button>`)
+    .join("");
+  const bookData = JSON.stringify(
+    shelfItems.map(({ p, st, b, year, ch }) => ({
+      ch, short: b.short, title: p.title, desc: p.desc, meta: p.meta, year, outcome: b.outcome,
+      cover: coverHtml(b, ch, year, IMG(p.img, base)), pages: bookPages(st, base), img: IMG(p.img, base), href: `work/${p.slug}.html`, locked: !!st.locked, bg: b.bg, ink: b.ink, acc: b.acc,
+    }))
+  ).replace(/</g, "\\u003c");
+
+  const NOTE = ["#fbe36a", "#ff9fb5", "#9fe0c2", "#a9d4ff", "#ffc56b", "#e3b8ff"];
+  const TILT = [-3, 2.2, -1.2, 2.8, -2, 1.4];
+  const notes = d.testimonials.items
+    .map(([t, name, role, short], i) => `<details class="note reveal" style="--note:${NOTE[i % NOTE.length]};--tilt:${TILT[i % TILT.length]}deg;--dy:${[0, 26, 8, 30, 4, 22][i % 6]}px">
+      <summary><q>${esc(short || t)}</q><span class="who"><b>${esc(name)}</b><span>${esc(role)}</span></span><span class="more">tap to read it all</span></summary>
+      <p class="full">&ldquo;${esc(t)}&rdquo;</p>
+    </details>`)
+    .join("");
+
+  const drafts = d.writing.items
+    .map((a, i) => `<a class="draft reveal" href="${a.url}" target="_blank" rel="noopener" style="--tilt:${[-1.6, 1, -0.7][i % 3]}deg">
+      <span class="tape ta" aria-hidden="true"></span><span class="tape tb" aria-hidden="true"></span>
+      <span class="d-head"><span>Lin / draft ${i + 1}</span><span class="d-meta">${esc(a.meta)}</span></span>
+      <span class="d-title">${esc(a.title)}</span>
+      <span class="d-desc">${esc(a.desc)}</span>
+      <span class="d-go">read the final version &rarr;</span>
+    </a>`)
+    .join("");
+
+  const caps = d.beyond.captions || [];
+  const polaroids = d.beyond.photos
+    .map((ph, i) => `<figure class="polaroid reveal" style="--tilt:${[-3, 2.2, -1.4][i % 3]}deg"><span class="tape" aria-hidden="true"></span><img src="${IMG(ph, base)}" alt="${esc(caps[i] || "")}" loading="lazy"><figcaption>${esc(caps[i] || "")}</figcaption></figure>`)
+    .join("");
+
+  const POST = ["#1f6f5c", "#2f4a86", "#b4532f", "#5b2a6e"];
+  const cards = d.track.stats
+    .map((st, i) => `<div class="postcard reveal" style="--tilt:${[2.4, -1.8, -2.2, 1.6][i % 4]}deg;--stamp:${POST[i % 4]}">
+      <div class="pc-msg"><b>${esc(st.value)}</b><span>${esc(st.label)}</span></div>
+      <div class="pc-side" aria-hidden="true"><span class="stamp">${icon(st.icon, "stamp-ic")}<small>${["1st", "2nd", "1st", "Air"][i % 4]}</small></span><span class="postmark"></span><i></i><i></i><i></i></div>
+    </div>`)
+    .join("");
+
+  const faceOut = shelfItems
+    .map(({ p, st, b, year, ch }) => `<a class="fitem reveal" href="work/${p.slug}.html" style="--bb:${b.bg};--bi:${b.ink};--ba:${b.acc}">
+      <span class="cover">${coverHtml(b, ch, year, IMG(p.img, base))}</span>
+      <span class="lab"><b>${esc(p.title)}</b><span>${st.locked ? LOCK + " " : ""}${esc(b.outcome)}</span></span>
+    </a>`)
+    .join("");
+  const facts = h.kicker.split("·").map((f) => `<span>${esc(f.trim())}</span>`).join("");
+
+  const logoRow = h.clientLogos
+    .map(([name, file]) => `<span class="logo logo--${slugify(name)}"><img src="${IMG(file, base)}" alt="${esc(name)}" decoding="async"></span>`)
+    .join("");
+
+  const body = `
+<div class="wall">
+  <section class="wall-top" aria-label="Introduction">
+    <div class="wall-in">
+      <div class="poster hero-gate">
+        <span class="tape t1" aria-hidden="true"></span><span class="tape t2" aria-hidden="true"></span>
+        <div class="p-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <h1 class="serif split hero-title">${heroHead}</h1>
+        <p class="p-sub">${esc(h.sub)}</p>
+        <p class="p-facts"><span>Chun-Chuan Lin</span>${facts}</p>
+      </div>
+      <div class="postcards">${cards}</div>
+      <div class="card-biz reveal">
+        <span class="pin" aria-hidden="true"></span>
+        <img class="biz-logo" src="${IMG(d.nav.logo, base)}" alt="">
+        <b>Chun-Chuan Lin</b>
+        <a href="mailto:${EMAIL}">${EMAIL}</a>
+        <span class="biz-links"><a href="${d.nav.links[0][1]}" target="_blank" rel="noopener">CV</a><a href="${d.nav.links[1][1]}" target="_blank" rel="noopener">LinkedIn</a><a href="${d.nav.links[2][1]}" target="_blank" rel="noopener">Medium</a></span>
+      </div>
+    </div>
+    <div class="logo-strip reveal" aria-label="Selected clients"><span class="ls-k">Worked with</span>${logoRow}</div>
+  </section>
+
+  <section class="library" id="work" aria-label="Case studies">
+    <div class="shelf">
+      <div class="shelf-row" id="shelf">
+        <span class="bookend" aria-hidden="true"></span>
+        ${books}
+        <span class="bookend r" aria-hidden="true"></span>
+      </div>
+      <div class="plank" aria-hidden="true"></div>
+    </div>
+    <div class="faceout" id="contents">${faceOut}</div>
+    <p class="earlier-w reveal">${esc(d.featured.earlierNote).replace("→ Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`)}</p>
+  </section>
+
+  <section class="wall-sec" id="praise">
+    <div class="wall-in">
+      <h2 class="wall-h serif reveal">Notes left by people I&rsquo;ve worked with</h2>
+      <div class="notes">${notes}</div>
+    </div>
+  </section>
+
+  <section class="wall-sec" id="writing">
+    <div class="wall-in">
+      <h2 class="wall-h serif reveal">Drafts, taped up</h2>
+      <p class="wall-p reveal">${esc(d.writing.intro)}</p>
+      <div class="drafts">${drafts}</div>
+    </div>
+  </section>
+
+  <section class="wall-sec" id="about">
+    <div class="wall-in photos">
+      <div class="photo-note reveal">
+        <h2 class="wall-h serif">${esc(d.beyond.title)}</h2>
+        <p>${esc(d.beyond.body)}</p>
+      </div>
+      <div class="polaroids">${polaroids}</div>
+    </div>
+  </section>
+</div>
+
+<dialog class="reader" id="reader" aria-label="Chapter preview">
+  <button class="rd-btn rd-close" type="button" aria-label="Back to the shelf">&times;</button>
+  <div class="ob" id="ob"></div>
+  <div class="rd-bar">
+    <button class="rd-btn rd-prev" type="button" aria-label="Previous page">&lsaquo;</button>
+    <span class="rd-count" id="rd-count" aria-live="polite"></span>
+    <button class="rd-btn rd-next" type="button" aria-label="Next page">&rsaquo;</button>
+  </div>
+</dialog>
+<script type="application/json" id="books-data">${bookData}</script>`;
+
+  return shell({
+    title: "Chun-Chuan Lin — Product designer for complex, regulated financial products",
+    desc: h.sub,
+    body,
+    base,
+    extraClass: "theme-dark home-shelf",
+    shelfJs: true,
+    noNav: true,
+  });
+}
+
+function buildClassic() {
   const d = C("home.json");
   const base = "";
   const h = d.hero;
@@ -415,8 +627,9 @@ function buildHome() {
     desc: h.sub,
     body,
     base,
-    extraClass: "theme-dark",
+    extraClass: "theme-dark classic",
     cursorBadges,
+    classic: true,
   });
 }
 
@@ -696,52 +909,53 @@ function buildStudy(study, idx) {
   const { title, sub, meta, heroImg, body } = splitHero(blocks);
   const { html, toc } = renderBlocks(body, base);
 
-  const prev = STUDIES[(idx - 1 + STUDIES.length) % STUDIES.length];
-  const next = STUDIES[(idx + 1) % STUDIES.length];
+  const order = C("home.json").featured.projects;
+  const pos = order.findIndex((p) => p.slug === study.slug);
+  const chNum = String(pos + 1).padStart(2, "0");
+  const book = BOOKS[study.slug];
+  const nextP = order[(pos + 1) % order.length];
+  const prevP = order[(pos - 1 + order.length) % order.length];
+  const nb = BOOKS[nextP.slug];
+  const nextCh = String(((pos + 1) % order.length) + 1).padStart(2, "0");
+  const nextYear = (nextP.meta.split("·").pop() || "").trim();
 
   const tocHtml = toc
     .map((t) => `<li><a href="#${t.id}">${esc(t.title)}</a></li>`)
     .join("");
 
   const pageBody = `
-<section class="cs-hero">
-  <div class="wrap">
-    <a class="back hero-gate" href="${base}index.html#work">${"&larr;"} All work</a>
-    <h1 class="serif split hero-title">${splitWords(title)}</h1>
-    ${sub ? `<p class="sub hero-gate">${esc(sub)}</p>` : ""}
-    ${meta ? `<p class="meta hero-gate">${esc(meta)}</p>` : ""}
-  </div>
-</section>
-${heroImg ? `<div class="cs-hero-img reveal"><img src="${IMG(heroImg, base)}" alt=""></div>` : ""}
+<article class="chapter" style="--bb:${book.bg};--bi:${book.ink};--ba:${book.acc}">
+  <header class="ch-open">
+    <div class="ch-band" aria-hidden="true"></div>
+    ${heroImg ? `<figure class="ch-plate hero-gate"><img src="${IMG(heroImg, base)}" alt=""></figure>` : ""}
+    <div class="ch-title">
+      <p class="ch-num hero-gate"><span>Chapter ${chNum}</span><span>${esc(book.short)}</span></p>
+      <h1 class="serif split hero-title">${splitWords(title)}</h1>
+      ${sub ? `<p class="sub hero-gate">${esc(sub)}</p>` : ""}
+      ${meta ? `<p class="meta hero-gate">${esc(meta)}</p>` : ""}
+    </div>
+  </header>
 
-<div class="cs-body">
-  <aside class="toc"><nav aria-label="Sections"><ol>${tocHtml}</ol></nav></aside>
-  <div class="cs-content">
-    ${html}
-  </div>
-</div>
-
-<section class="cs-next">
-  <div class="wrap">
-    <p class="eyebrow">Keep exploring</p>
-    <div class="cs-next-grid">
-      <a class="cs-next-card" href="${prev.slug}.html">
-        <img class="thumb" src="${IMG(prev.img, base)}" alt="" loading="lazy">
-        <span class="txt">
-          <span class="dir">&larr; Previous</span>
-          <h3 class="serif">${esc(prev.card)}</h3>
-        </span>
-      </a>
-      <a class="cs-next-card next" href="${next.slug}.html">
-        <span class="txt">
-          <span class="dir">Next &rarr;</span>
-          <h3 class="serif">${esc(next.card)}</h3>
-        </span>
-        <img class="thumb" src="${IMG(next.img, base)}" alt="" loading="lazy">
-      </a>
+  <div class="cs-body">
+    <aside class="toc"><nav aria-label="Sections"><ol>${tocHtml}</ol></nav></aside>
+    <div class="cs-content">
+      ${html}
     </div>
   </div>
-</section>`;
+
+  <footer class="ch-end">
+    <p class="ch-fin" aria-hidden="true">&#10086;</p>
+    <a class="ch-next" href="${nextP.slug}.html" style="--h:300px;--w:210px;--bb:${nb.bg};--bi:${nb.ink};--ba:${nb.acc}">
+      <span class="ch-next-book"><span class="cover">${coverHtml(nb, nextCh, nextYear, IMG(nextP.img, base))}</span></span>
+      <span class="ch-next-txt">
+        <span class="dir">Next chapter</span>
+        <span class="serif t">${esc(nextP.title)}</span>
+        <span class="o">${esc(nb.outcome)}</span>
+      </span>
+    </a>
+    <p class="ch-links"><a href="${prevP.slug}.html">&larr; Previous chapter</a><a href="${base}index.html#work">Back to the shelf</a></p>
+  </footer>
+</article>`;
 
   return shell({
     title: `${title} — Chun-Chuan Lin`,
@@ -750,6 +964,7 @@ ${heroImg ? `<div class="cs-hero-img reveal"><img src="${IMG(heroImg, base)}" al
     base,
     extraClass: "cs-page",
     progress: true,
+    running: `Chapter ${chNum} &middot; ${esc(book.short)}`,
     gated: !!study.locked,
     ogImage: study.img,
   });
@@ -759,6 +974,7 @@ ${heroImg ? `<div class="cs-hero-img reveal"><img src="${IMG(heroImg, base)}" al
    WRITE
 ================================================================= */
 fs.writeFileSync(path.join(ROOT, "index.html"), buildHome());
+fs.writeFileSync(path.join(ROOT, "classic.html"), buildClassic());
 console.log("✓ index.html");
 
 const workDir = path.join(ROOT, "work");
