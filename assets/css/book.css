@@ -776,3 +776,16 @@ body.home-shelf .wall-top{padding-top:64px}
   .library .shelf{display:none}
   .faceout{margin-top:56px}
 }
+
+/* covers on every screen; a book leans off the shelf when you reach for it */
+@media (min-width:861px){
+  .faceout{display:grid;margin-top:64px}
+  .earlier-w{text-align:left}
+}
+.fitem .book{perspective:900px}
+.fitem .book .cover{transform-origin:50% 100%;transition:transform .5s var(--ease),box-shadow .5s}
+@media (hover:hover){
+  .fitem .book:hover .cover,.fitem .book:focus-visible .cover{transform:translateY(-12px) rotateX(7deg) rotateY(-9deg);box-shadow:0 0 0 1px rgba(0,0,0,.2),22px 26px 34px -16px rgba(0,0,0,.75)}
+}
+.fitem a.lab b{transition:color .2s}
+.fitem a.lab:hover b{color:#e8c78c}

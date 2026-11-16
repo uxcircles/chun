@@ -337,14 +337,6 @@ function buildHome() {
     const ch = String(i + 1).padStart(2, "0");
     return { p, st, b, year, ch, t: bookThickness(st.file), w: Math.round(b.h * 0.7) };
   });
-  const books = shelfItems
-    .map(({ p, st, b, year, ch, t, w }, i) => `<button class="book" type="button" data-i="${i}" style="--h:${b.h}px;--t:${t}px;--w:${w}px;--bb:${b.bg};--bi:${b.ink};--ba:${b.acc}" aria-label="Chapter ${i + 1}, ${esc(p.title)}. Open preview">
-        <span class="b3d">
-          <span class="spine"><span class="sp-num">${ch}</span><span class="sp-title">${esc(b.short)}</span><span class="sp-mark">${st.locked ? LOCK : "&#9679;"}</span></span>
-          <span class="cover">${coverHtml(b, ch, year, IMG(p.img, base))}</span>
-        </span>
-      </button>`)
-    .join("");
   const bookData = JSON.stringify(
     shelfItems.map(({ p, st, b, year, ch }) => ({
       ch, short: b.short, title: p.title, desc: p.desc, meta: p.meta, year, outcome: b.outcome,
@@ -420,15 +412,7 @@ function buildHome() {
   </section>
 
   <section class="library" id="work" aria-label="Case studies">
-    <div class="shelf">
-      <div class="shelf-row" id="shelf">
-        <span class="bookend" aria-hidden="true"></span>
-        ${books}
-        <span class="bookend r" aria-hidden="true"></span>
-      </div>
-      <div class="plank" aria-hidden="true"></div>
-    </div>
-    <div class="faceout" id="contents">${faceOut}</div>
+    <div class="faceout" id="shelf">${faceOut}</div>
     <p class="earlier-w reveal">${esc(d.featured.earlierNote).replace("→ Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`)}</p>
   </section>
 
