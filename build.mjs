@@ -176,14 +176,14 @@ const STUDIES = [
 
 /* ---------- the shelf: each case study is a book ---------- */
 const BOOKS = {
-  "provider-redesign":        { short: "The £9B Platform",           outcome: "£9B in client assets",        bg: "#1f3b33", ink: "#ead9ae", acc: "#c9a868", style: "window", pos: "50% 45%", h: 312 },
-  "save-journey-redesign":    { short: "One Tap to Save",            outcome: "5–6× Autosave volume",        bg: "#3a2470", ink: "#efe6ff", acc: "#b99bff", style: "bleed", pos: "50% 40%", h: 296 },
+  "provider-redesign":        { short: "The £9B Platform",           outcome: "£9B in client assets",        bg: "#1f3b33", ink: "#ead9ae", acc: "#c9a868", style: "band", pos: "40% 50%", h: 312 },
+  "save-journey-redesign":    { short: "One Tap to Save",            outcome: "5–6× Autosave volume",        bg: "#3a2470", ink: "#efe6ff", acc: "#b99bff", style: "band", pos: "50% 30%", h: 296 },
   "rightmove-partners":       { short: "The Trust Layer",            outcome: "Self-directed concept",       bg: "#0b1640", ink: "#eef3ff", acc: "#00deb6", style: "band", pos: "22% 50%", h: 304 },
-  "home-redesign":            { short: "What Happened to My Money?", outcome: "89% mobile app CSAT",         bg: "#8b3a26", ink: "#f8e8dc", acc: "#f2b48c", style: "bleed", pos: "72% 50%", h: 318 },
+  "home-redesign":            { short: "What Happened to My Money?", outcome: "89% mobile app CSAT",         bg: "#8b3a26", ink: "#f8e8dc", acc: "#f2b48c", style: "band", pos: "70% 35%", h: 318 },
   "client-portal":            { short: "The Client Portal",          outcome: "40% less onboarding effort",  bg: "#d29a3a", ink: "#23180a", acc: "#23180a", style: "band", pos: "35% 50%", h: 288 },
-  "wealth-management-system": { short: "The Governed Rebalance",     outcome: "AI suggests, advisors decide", bg: "#2c4366", ink: "#e9eef7", acc: "#9fc1ff", style: "window", pos: "50% 55%", h: 308 },
-  "portfolio-health":         { short: "Portfolio Health",           outcome: "Risk explained, no advice",   bg: "#5d6a33", ink: "#f2f1dc", acc: "#dfe39a", style: "bleed", pos: "58% 45%", h: 292 },
-  "trip-memories":            { short: "Trip Memories",              outcome: "Revolut concept",             bg: "#e6e1d3", ink: "#1d1d24", acc: "#c4572d", style: "plate", pos: "50% 45%", h: 300 },
+  "wealth-management-system": { short: "The Governed Rebalance",     outcome: "AI suggests, advisors decide", bg: "#2c4366", ink: "#e9eef7", acc: "#9fc1ff", style: "band", pos: "50% 55%", h: 308 },
+  "portfolio-health":         { short: "Portfolio Health",           outcome: "Risk explained, no advice",   bg: "#5d6a33", ink: "#f2f1dc", acc: "#dfe39a", style: "band", pos: "55% 35%", h: 292 },
+  "trip-memories":            { short: "Trip Memories",              outcome: "Revolut concept",             bg: "#e6e1d3", ink: "#1d1d24", acc: "#c4572d", style: "band", pos: "50% 45%", h: 300 },
 };
 const bookLength = (file) => fs.readFileSync(path.join(ROOT, "content", file), "utf8").length;
 const bookThickness = (file) => Math.round(Math.min(60, Math.max(30, 18 + bookLength(file) / 380)));
