@@ -789,3 +789,15 @@ body.home-shelf .wall-top{padding-top:64px}
 }
 .fitem a.lab b{transition:color .2s}
 .fitem a.lab:hover b{color:#e8c78c}
+
+/* one series: same grid on every jacket, only the colour and the picture change */
+.cv--band .cv-top{padding:6.5cqw 8cqw 0;font-size:3.4cqw}
+.cv--band .cv-top::before{content:"";position:absolute;inset:0 0 auto 0;height:26cqw;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent);z-index:-1}
+.cv--band .cv-pic{height:54%;border-bottom:1.4cqw solid var(--ba)}
+.cv--band .cv-words{flex:1;padding:6cqw 8cqw 7.5cqw;min-height:0}
+.cv--band .cv-num{font-size:19cqw;line-height:.8;margin:0;letter-spacing:-.04em}
+.cv--band .cv-title{margin-top:4.5cqw;font-size:9.6cqw;line-height:1.08;text-align:left}
+.cv--band .cv-rule{display:none}
+.cv--band .cv-out{margin-top:auto;padding-top:3cqw;border-top:.5cqw solid color-mix(in srgb,var(--ba) 55%,transparent);font-size:4.1cqw}
+.cv--band .cv-words{align-items:stretch;text-align:left}
+.cv--band .cv-num,.cv--band .cv-out{text-align:left}
