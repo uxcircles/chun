@@ -205,6 +205,10 @@ function bookPages(study, base) {
   return secs.filter((x) => x.text).slice(0, 5).map((x) => ({ ...x, text: x.text.length > 300 ? x.text.slice(0, 297).replace(/\s+\S*$/, "") + "…" : x.text }));
 }
 
+const onShelf = (list) => list.filter((p) => p.shelf !== false);
+const offShelfLinks = (list, base) =>
+  list.filter((p) => p.shelf === false).map((p) => `<a href="${base}work/${p.slug}.html">${esc(BOOKS[p.slug].short)}</a>`).join("");
+
 function coverHtml(b, chapter, year, img) {
   const pic = img ? `<span class="cv-pic"><img src="${img}" alt="" loading="lazy" style="object-position:${b.pos}"></span>` : "";
   const top = `<span class="cv-top"><span>Chun-Chuan Lin</span><span>${esc(year)}</span></span>`;
@@ -330,7 +334,7 @@ function buildHome() {
     .join("");
 
   const LOCK = `<svg viewBox="0 0 16 16" width="11" height="11" aria-hidden="true"><path d="M4.5 7V5a3.5 3.5 0 0 1 7 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="7" width="10" height="7.5" rx="1.6" fill="currentColor"/></svg>`;
-  const shelfItems = d.featured.projects.map((p, i) => {
+  const shelfItems = onShelf(d.featured.projects).map((p, i) => {
     const st = STUDIES.find((x) => x.slug === p.slug);
     const b = BOOKS[p.slug];
     const year = (p.meta.split("·").pop() || "").trim();
@@ -414,6 +418,7 @@ function buildHome() {
   <section class="library" id="work" aria-label="Case studies">
     <div class="faceout" id="shelf">${faceOut}</div>
     <p class="earlier-w reveal">${esc(d.featured.earlierNote).replace("→ Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`)}</p>
+    <p class="earlier-w more-w reveal"><span>Also on file</span>${offShelfLinks(d.featured.projects, base)}</p>
   </section>
 
   <section class="wall-sec" id="praise">
@@ -488,7 +493,7 @@ function buildClassic() {
     )
     .join("");
 
-  const projects = d.featured.projects
+  const projects = onShelf(d.featured.projects)
     .map((p) => {
       const size = p.size === "lg" ? "lg" : "sm";
       const locked = STUDIES.find((s) => s.slug === p.slug)?.locked;
@@ -571,6 +576,7 @@ function buildClassic() {
     ${secHead("02", d.featured.title, "")}
     <div class="projects">${projects}</div>
     <p class="earlier reveal">${esc(d.featured.earlierNote).replace("&rarr; Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`).replace("→ Get in touch", `<a href="mailto:${EMAIL}">Get in touch &rarr;</a>`)}</p>
+    <p class="earlier more-c reveal"><span>Also on file</span>${offShelfLinks(d.featured.projects, base)}</p>
   </div>
 </section>
 
@@ -893,12 +899,13 @@ function buildStudy(study, idx) {
   const { title, sub, meta, heroImg, body } = splitHero(blocks);
   const { html, toc } = renderBlocks(body, base);
 
-  const order = C("home.json").featured.projects;
+  const order = onShelf(C("home.json").featured.projects);
   const pos = order.findIndex((p) => p.slug === study.slug);
   const chNum = String(pos + 1).padStart(2, "0");
+  const chLabel = pos < 0 ? "From the archive" : `Chapter ${chNum}`;
   const book = BOOKS[study.slug];
   const nextP = order[(pos + 1) % order.length];
-  const prevP = order[(pos - 1 + order.length) % order.length];
+  const prevP = order[(Math.max(pos, 0) - 1 + order.length) % order.length];
   const nb = BOOKS[nextP.slug];
   const nextCh = String(((pos + 1) % order.length) + 1).padStart(2, "0");
   const nextYear = (nextP.meta.split("·").pop() || "").trim();
@@ -913,7 +920,7 @@ function buildStudy(study, idx) {
     <div class="ch-band" aria-hidden="true"></div>
     ${heroImg ? `<figure class="ch-plate hero-gate"><img src="${IMG(heroImg, base)}" alt=""></figure>` : ""}
     <div class="ch-title">
-      <p class="ch-num hero-gate"><span>Chapter ${chNum}</span><span>${esc(book.short)}</span></p>
+      <p class="ch-num hero-gate"><span>${chLabel}</span><span>${esc(book.short)}</span></p>
       <h1 class="serif split hero-title">${splitWords(title)}</h1>
       ${sub ? `<p class="sub hero-gate">${esc(sub)}</p>` : ""}
       ${meta ? `<p class="meta hero-gate">${esc(meta)}</p>` : ""}
@@ -948,7 +955,7 @@ function buildStudy(study, idx) {
     base,
     extraClass: "cs-page",
     progress: true,
-    running: `Chapter ${chNum} &middot; ${esc(book.short)}`,
+    running: `${chLabel} &middot; ${esc(book.short)}`,
     gated: !!study.locked,
     ogImage: study.img,
   });
