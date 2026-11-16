@@ -801,3 +801,11 @@ body.home-shelf .wall-top{padding-top:64px}
 .cv--band .cv-out{margin-top:auto;padding-top:3cqw;border-top:.5cqw solid color-mix(in srgb,var(--ba) 55%,transparent);font-size:4.1cqw}
 .cv--band .cv-words{align-items:stretch;text-align:left}
 .cv--band .cv-num,.cv--band .cv-out{text-align:left}
+
+/* five books: one row on desktop; archive links under the shelf */
+@media (min-width:981px){.faceout{grid-template-columns:repeat(5,1fr);gap:0 30px;padding:0 40px}}
+.more-w,.more-c{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 22px;margin-top:14px}
+.more-w span,.more-c span{font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.more-w a,.more-c a{font:400 15px/1.3 var(--serif);color:#f4f1ea;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:1px}
+.more-w a:hover,.more-c a:hover{color:#e8c78c;border-color:#e8c78c}
+@media (max-width:860px){.fitem:last-child:nth-child(odd){grid-column:1 / -1;justify-self:center;width:calc(50% - 14px)}}
