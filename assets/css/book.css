@@ -759,3 +759,20 @@ body.home-shelf .wall-top{padding-top:64px}
   .postcard:nth-child(3){rotate:1.8deg}.postcard:nth-child(4){rotate:-2.4deg}
   .card-biz{rotate:3.2deg}
 }
+
+/* one shelf per device: spines on desktop, covers on phones and tablets */
+.fitem .book{position:relative;width:100%;height:auto;aspect-ratio:.7;display:block;transform-style:flat}
+.fitem .book .cover{display:block;position:absolute;inset:0;left:0;top:0;width:100%;height:100%;transform:none;opacity:1;backface-visibility:visible;
+  box-shadow:0 0 0 1px rgba(0,0,0,.2),10px 0 18px -10px rgba(0,0,0,.6)}
+.fitem .book:focus-visible .cover{outline:2px solid #e8c78c;outline-offset:3px}
+.fitem a.lab{color:#f4f1ea}
+@media (min-width:861px){
+  .faceout{display:none}
+  .shelf-row{zoom:1.45;padding-top:40px}
+  .shelf{max-width:1060px}
+  .earlier-w{margin-top:56px;text-align:center}
+}
+@media (max-width:860px){
+  .library .shelf{display:none}
+  .faceout{margin-top:56px}
+}

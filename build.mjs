@@ -385,10 +385,10 @@ function buildHome() {
     .join("");
 
   const faceOut = shelfItems
-    .map(({ p, st, b, year, ch }) => `<a class="fitem reveal" href="work/${p.slug}.html" style="--bb:${b.bg};--bi:${b.ink};--ba:${b.acc}">
-      <span class="cover">${coverHtml(b, ch, year, IMG(p.img, base))}</span>
-      <span class="lab"><b>${esc(p.title)}</b><span>${st.locked ? LOCK + " " : ""}${esc(b.outcome)}</span></span>
-    </a>`)
+    .map(({ p, st, b, year, ch }, i) => `<div class="fitem reveal" style="--bb:${b.bg};--bi:${b.ink};--ba:${b.acc}">
+      <button class="book" type="button" data-i="${i}" aria-label="Open the book: ${esc(b.short)}"><span class="cover">${coverHtml(b, ch, year, IMG(p.img, base))}</span></button>
+      <a class="lab" href="work/${p.slug}.html"><b>${esc(p.title)}</b><span>${st.locked ? LOCK + " " : ""}${esc(b.outcome)}</span></a>
+    </div>`)
     .join("");
   const facts = h.kicker.split("·").map((f) => `<span>${esc(f.trim())}</span>`).join("");
 
