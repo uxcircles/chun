@@ -207,7 +207,7 @@ function bookPages(study, base) {
 
 const onShelf = (list) => list.filter((p) => p.shelf !== false);
 const offShelfLinks = (list, base) =>
-  list.filter((p) => p.shelf === false).map((p) => `<a href="${base}work/${p.slug}.html">${esc(BOOKS[p.slug].short)}</a>`).join("");
+  list.filter((p) => p.shelf === false && !p.hidden).map((p) => `<a href="${base}work/${p.slug}.html">${esc(BOOKS[p.slug].short)}</a>`).join("");
 
 function coverHtml(b, chapter, year, img) {
   const pic = img ? `<span class="cv-pic"><img src="${img}" alt="" loading="lazy" style="object-position:${b.pos}"></span>` : "";
