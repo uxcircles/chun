@@ -245,7 +245,7 @@ function shell({ title, desc, body, base, extraClass = "", progress = false, gat
 <link rel="stylesheet" href="${base}assets/css/book.css?v=${BOOK_CSS_V}">
 </head>
 <body class="${bodyClass}">
-${shelfJs ? `<script>try{if(localStorage.getItem("cc_view")==="classic"&&!/[?&]wall\b/.test(location.search))location.replace("classic.html"+location.hash)}catch(e){}</script>` : ""}
+${classic ? `<script>try{if(localStorage.getItem("cc_view")==="wall"&&!/[?&]classic\b/.test(location.search))location.replace("wall.html"+location.hash)}catch(e){}</script>` : ""}
 <a class="skip-link" href="#main-content">Skip to content</a>
 ${gated ? `<script>try{if(localStorage.getItem(${JSON.stringify(GATE_KEY)})==="1")document.currentScript.parentElement.classList.remove("locked")}catch(e){}</script>
 <div class="gate" id="gate">
@@ -267,8 +267,8 @@ ${noNav ? "" : nav(base, running, classic)}
 ${body}
 </main>
 ${footer(base)}
-${shelfJs ? `<a class="view-switch" href="classic.html" data-view="classic"><span>Prefer a plain list?</span><b>Classic view</b></a>` : ""}
-${classic ? `<a class="view-switch" href="index.html?wall" data-view="wall"><span>There&rsquo;s a more playful version.</span><b>See the studio wall</b></a>` : ""}
+${shelfJs ? `<a class="view-switch" href="index.html?classic" data-view="classic"><span>Prefer a plain list?</span><b>Classic view</b></a>` : ""}
+${classic ? `<a class="view-switch" href="wall.html" data-view="wall"><span>There&rsquo;s a more playful version.</span><b>See the studio wall</b></a>` : ""}
 ${shelfJs || classic ? `<script>document.querySelector(".view-switch").addEventListener("click",function(){try{localStorage.setItem("cc_view",this.dataset.view)}catch(e){}})</script>` : ""}
 <script src="${base}assets/js/main.js?v=${JS_V}" defer></script>
 ${shelfJs ? `<script src="${base}assets/js/shelf.js?v=${SHELF_JS_V}" defer></script>` : ""}
@@ -279,7 +279,7 @@ ${shelfJs ? `<script src="${base}assets/js/shelf.js?v=${SHELF_JS_V}" defer></scr
 function nav(base, running = "", classic = false) {
   return `<header class="nav" id="nav">
   <div class="nav-in">
-    <a class="brand" href="${base}${classic ? "classic.html" : "index.html"}">
+    <a class="brand" href="${base}index.html">
       <img src="${base}assets/img/ZoILuZUUzq1dYKgV54Ge7Sz8FY.webp" alt="">
       <span>Chun-Chuan&nbsp;Lin</span>
     </a>
@@ -288,7 +288,7 @@ function nav(base, running = "", classic = false) {
       <span class="bar"></span><span class="bar"></span><span class="bar"></span>
     </button>
     <nav class="nav-links">
-      <a href="${base}${classic ? "classic.html" : "index.html"}#work">${classic ? "Work" : "Shelf"}</a>
+      <a href="${base}index.html#work">Work</a>
       <a href="https://drive.google.com/file/d/1oNs0wJNy0Ehd9rT3fSROXO7B89IPfbKE/view?usp=sharing" target="_blank" rel="noopener">CV</a>
       <a href="https://www.linkedin.com/in/chun-chuan-lin/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://chunchuanlin.medium.com/" target="_blank" rel="noopener">Medium</a>
@@ -944,7 +944,7 @@ function buildStudy(study, idx) {
         <span class="o">${esc(nb.outcome)}</span>
       </span>
     </a>
-    <p class="ch-links"><a href="${prevP.slug}.html">&larr; Previous chapter</a><a href="${base}index.html#work">Back to the shelf</a></p>
+    <p class="ch-links"><a href="${prevP.slug}.html">&larr; Previous chapter</a><a href="${base}index.html#work">All work</a></p>
   </footer>
 </article>`;
 
@@ -964,8 +964,9 @@ function buildStudy(study, idx) {
 /* =================================================================
    WRITE
 ================================================================= */
-fs.writeFileSync(path.join(ROOT, "index.html"), buildHome());
-fs.writeFileSync(path.join(ROOT, "classic.html"), buildClassic());
+fs.writeFileSync(path.join(ROOT, "wall.html"), buildHome());
+fs.writeFileSync(path.join(ROOT, "index.html"), buildClassic());
+fs.writeFileSync(path.join(ROOT, "classic.html"), `<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><link rel="canonical" href="index.html"><script>location.replace("index.html?classic"+location.hash)</script><a href="index.html">Continue</a>`);
 console.log("✓ index.html");
 
 const workDir = path.join(ROOT, "work");
