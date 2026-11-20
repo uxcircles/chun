@@ -5,6 +5,7 @@
 
   const books = JSON.parse(dataEl.textContent);
   const ob = document.getElementById("ob");
+  const wrap = document.getElementById("ob-wrap");
   const count = document.getElementById("rd-count");
   const prevBtn = dlg.querySelector(".rd-prev");
   const nextBtn = dlg.querySelector(".rd-next");
@@ -84,6 +85,7 @@
     layout(moving);
   }
 
+  let hiddenSrc = null;
   function open(i, btn) {
     book = books[i];
     opener = btn || null;
@@ -93,11 +95,27 @@
     layout();
     if (!dlg.open) dlg.showModal();
     dlg.setAttribute("aria-label", `Chapter ${book.ch}: ${book.title}`);
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      dlg.classList.add("is-in");
-      setTimeout(() => turn(1), reduce ? 0 : 520);
-    }));
+    dlg.classList.add("is-in");
+    const src = btn && btn.querySelector(".cover");
+    const tgt = leaves[0] && leaves[0].querySelector(".front");
+    if (reduce || !src || !tgt || !wrap.animate) { turn(1); return; }
+    ob.style.transition = "none";
+    void ob.offsetWidth;
+    ob.style.transition = "";
+    // fly the book from its spot on the shelf to the middle of the screen, then open it
+    const s = src.getBoundingClientRect(), t = tgt.getBoundingClientRect(), w = wrap.getBoundingClientRect();
+    const k = s.width / t.width;
+    const dx = s.left - w.left - k * (t.left - w.left);
+    const dy = s.top - w.top - k * (t.top - w.top);
+    src.style.visibility = "hidden";
+    hiddenSrc = src;
+    const fly = wrap.animate(
+      [{ transform: `translate(${dx}px, ${dy}px) scale(${k})` }, { transform: "none" }],
+      { duration: 650, easing: "cubic-bezier(.3,.7,.2,1)" }
+    );
+    fly.onfinish = () => { if (dlg.open) setTimeout(() => turn(1), 120); };
   }
+
 
   document.querySelectorAll(".book").forEach((btn) => btn.addEventListener("click", () => open(+btn.dataset.i, btn)));
   dlg.querySelector(".rd-close").addEventListener("click", () => dlg.close());
@@ -116,6 +134,8 @@
   });
   dlg.addEventListener("close", () => {
     clearTimeout(timer);
+    if (hiddenSrc) { hiddenSrc.style.visibility = ""; hiddenSrc = null; }
+    wrap.getAnimations && wrap.getAnimations().forEach((x) => x.cancel());
     dlg.classList.remove("is-in", "is-open");
     ob.innerHTML = "";
     opener?.focus({ preventScroll: true });

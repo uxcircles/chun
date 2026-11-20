@@ -449,7 +449,7 @@ function buildHome() {
 
 <dialog class="reader" id="reader" aria-label="Chapter preview">
   <button class="rd-btn rd-close" type="button" aria-label="Back to the shelf">&times;</button>
-  <div class="ob" id="ob" tabindex="-1" autofocus></div>
+  <div class="ob-wrap" id="ob-wrap"><div class="ob" id="ob" tabindex="-1" autofocus></div></div>
   <div class="rd-bar">
     <button class="rd-btn rd-prev" type="button" aria-label="Previous page">&lsaquo;</button>
     <span class="rd-count" id="rd-count" aria-live="polite"></span>

@@ -813,3 +813,21 @@ body.home-shelf .wall-top{padding-top:64px}
 /* the custom cursor dot sits under the open book, so show the system cursor there */
 html.has-cursor .reader,html.has-cursor .reader *{cursor:default!important}
 html.has-cursor .reader a,html.has-cursor .reader button:not(:disabled),html.has-cursor .reader .leaf{cursor:pointer!important}
+
+/* opening: the book flies off the shelf, then the cover turns. One transform owner per layer:
+   .ob-wrap = flight (JS), .ob = spread position, .leaf = page turn */
+.ob-wrap{position:relative;transform-origin:0 0;justify-self:center}
+.ob{opacity:1!important;--shift:calc(var(--W) * -.5);transform:translateX(var(--shift))!important;transition:transform .95s cubic-bezier(.5,.05,.2,1)!important}
+.reader.is-open .ob{--shift:0px}
+@keyframes rd-fade{from{opacity:0}}
+.reader[open]::backdrop{animation:rd-fade .4s ease}
+.reader[open] .rd-close,.reader[open] .rd-bar{animation:rd-fade .4s ease .55s both}
+@media (max-width:720px){
+  .ob-wrap{justify-self:start}
+  .ob,.reader.is-open .ob{justify-self:auto;--shift:calc((100vw - var(--W)) / 2 - var(--W))}
+}
+@media (prefers-reduced-motion:reduce){.ob{transition:none!important}.reader[open]::backdrop,.reader[open] .rd-close,.reader[open] .rd-bar{animation:none}}
+/* same transform function list in both states so the turn interpolates as a real rotation */
+.leaf{transform:rotateY(0deg) translateZ(0)}
+.leaf.flipped{transform:rotateY(-180deg) translateZ(0)}
+@media (max-width:720px){.leaf{transform:rotateY(0deg) translateZ(0)}.leaf.flipped{transform:rotateY(-180deg) translateZ(0)}}
